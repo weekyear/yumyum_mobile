@@ -1,59 +1,55 @@
 # 👨‍👩‍👦팀원 소개 (R&R)
 
-![image-20210214173817990](README.assets/image-20210214173817990.png)
+![image-20210413204614988](README.assets/image-20210413204614988.png)
 
 ### <img src="README.assets/image-20210214215803089.png" alt="image-20210214215803089" width="37" height="45" /> 정준현
 
  - PM(Project Manager)
     - 프론트엔드와 백엔드를 포함하는 프로젝트 전체를 리드
     - 프로젝트에 대한 모든 책임
- - 백엔드 개발자
-    - 백엔드 파트 구현
-    - 백엔드 코드 취합
-    - 서버 관리
-- [README](./doc/JUNHYEON.md)
+ - 안드로이드 개발자
+    - 안드로이드 파트 구현
+    - 안드로이드 코드 취합
 
 ### <img src="README.assets/image-20210214220255220.png" alt="image-20210214220255220" width="37" height="45" /> 김재유
 
-- 프론트엔드 PL(Proejct Leader)
-  - 프론트엔드 파트 를 리드하고 백엔드와의 협업을 위한 소통을 담당
-  - 프론트엔드 파트의 업무 조율
+- 안드로이드 PL(Proejct Leader)
+  - 안드로이드 파트를 리드하고 백엔드와의 협업을 위한 소통을 담당
+  - 안드로이드 파트의 업무 조율
 
-- 프론트 개발자
+- 안드로이드 개발자
   - 프론트엔드 파트 구현
   - UI/UX 고안 후 구현
-- [README](./doc/JAEYU.md)
 
 ### <img src="README.assets/image-20210214220127535.png" alt="image-20210214220127535" width="37" height="45" /> 길아현
 
-- CTO (Chief Technology Officer)
-  - API, 외부 라이브러리 도입 등을 결정
-  - 새롭게 도입된 정보와 지식을 다른 팀원들에게 전파
-- 프론트 개발자
-  - 프론트엔드 파트 구현
+- iOSPL(Proejct Leader)
+  - iOS 파트를 리드하고 백엔드와의 협업을 위한 소통을 담당
+  - iOS 파트의 업무 조율
+
+- iOS 개발자
+  - iOS파트 구현
   - UI/UX 고안 후 구현
 - [README](./doc/AHYEON.md) 
 
 ### <img src="README.assets/image-20210214220501394.png" alt="image-20210214220501394" width="37" height="45" /> 염성훈
 
-- 마스코트
-  - YUM? YUM! 쿼카 이미지 모티브 제공
-- 프론트 개발자
-  - 프론트엔드 파트 구현
+- iOS 개발자
+  - iOS파트 구현
   - 외부 API(카카오지도)
   - UI/UX 고안 후 구현
-- [README](./doc/SUNGHUN.md)
+- 마스코트
+  - YUM? YUM! 쿼카 이미지 모티브 제공
 
-### <img src="README.assets/image-20210214220202651.png" alt="image-20210214220202651" width="37" height="45" /> 이수민
+### <img src="README.assets/image-20210214220202651.png" alt="image-20210214220202651" width="37" height="45" /> 노천명
 
 - 백엔드 PL(Proejct Leader)
   - 백엔드 파트를 리드하고 프론트엔드와의 협업을 위한 소통을 담당
   - 백엔드 파트의 업무 조율
-- 백엔드 개발자
-   - 백엔드 파트 구현
-   - DB 스키마 설계
 
-- [README](./doc/SUMIN.md)
+- CTO (Chief Technology Officer)
+  - API, 외부 라이브러리 도입 등을 결정
+  - 새롭게 도입된 정보와 지식을 다른 팀원들에게 전파
 
 # ✨ 프로젝트 개요
 
