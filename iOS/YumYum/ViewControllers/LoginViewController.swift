@@ -24,7 +24,19 @@ class LoginViewController : UIViewController {
         let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .black)
         
         button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
         LoginView.addSubview(button)
+        button.centerXAnchor.constraint(equalTo:LoginView.centerXAnchor)
+                .isActive = true
+        button.centerYAnchor.constraint(equalTo:LoginView.centerYAnchor)
+                .isActive = true
+        button.heightAnchor.constraint(equalTo: LoginView.heightAnchor)
+                    .isActive = true
+        button.widthAnchor.constraint(equalTo: LoginView.widthAnchor)
+                    .isActive = true
+        
     }
     
     @objc
