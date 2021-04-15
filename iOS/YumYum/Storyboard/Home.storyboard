@@ -11,27 +11,34 @@
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-Pd-VCI">
-                                <rect key="frame" x="137" y="243" width="46" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQK-F9-n9d">
+                                <rect key="frame" x="0.0" y="44" width="414" height="824"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="4mo-5Y-ECG"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="dJX-t8-cpV"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eQK-F9-n9d" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1Lq-wt-iOv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eQK-F9-n9d" secondAttribute="bottom" id="gb3-Yg-SmV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eQK-F9-n9d" secondAttribute="trailing" id="rqB-tP-sen"/>
+                            <constraint firstItem="eQK-F9-n9d" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zTB-84-5Xn"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="71B-Ce-VOh"/>
+                    <connections>
+                        <outlet property="scrollView" destination="eQK-F9-n9d" id="m1e-5x-RGY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1014.4927536231885" y="1070.7589285714284"/>
+            <point key="canvasLocation" x="-1014.4927536231885" y="1069.4196428571429"/>
         </scene>
     </scenes>
     <resources>
