@@ -19,6 +19,7 @@
 		E5920A1C2627C2D800836123 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A1B2627C2D800836123 /* Home.storyboard */; };
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
 		E5920A2A2627C30B00836123 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A292627C30B00836123 /* MyPage.storyboard */; };
+		E5920A352627C47600836123 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A342627C47600836123 /* Accounts.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E5920A1B2627C2D800836123 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
 		E5920A292627C30B00836123 /* MyPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = SOURCE_ROOT; };
+		E5920A342627C47600836123 /* Accounts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Accounts.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				E52F58012625B746002C2637 /* LaunchScreen.storyboard */,
 				E52F57F92625B746002C2637 /* Main.storyboard */,
 				E5920A1B2627C2D800836123 /* Home.storyboard */,
+				E5920A342627C47600836123 /* Accounts.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
+				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
