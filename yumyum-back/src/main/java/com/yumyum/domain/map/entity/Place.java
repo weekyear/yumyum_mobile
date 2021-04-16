@@ -22,17 +22,17 @@ public class Place {
     private Long id;
 
     @Column(name = "address")
-    private String addressName;
+    private String address;
 
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "name")
-    private String placeName;
+    private String name;
 
-    @Column(name = "y")
-    private Double y;
+    @Column(name = "location_y")
+    private Double locationY;
 
-    @Column(name = "x")
-    private Double x;
+    @Column(name = "location_x")
+    private Double locationX;
 }

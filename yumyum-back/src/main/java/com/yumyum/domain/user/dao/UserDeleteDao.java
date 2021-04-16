@@ -1,6 +1,5 @@
 package com.yumyum.domain.user.dao;
 
-import com.yumyum.domain.user.dto.SignUpRequest;
 import com.yumyum.domain.user.entity.User;
 import com.yumyum.global.common.response.HttpUtils;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +16,13 @@ public class UserDeleteDao {
 
     private final UserDao userDao;
 
-    public Object deleteByUser(final SignUpRequest dto){
-        final Optional<User> user = userDao.findByEmail(dto.getEmail());
+    public Object deleteById(final Long id){
+        final Optional<User> user = userDao.findById(id);
         if (!user.isPresent()) {
             return HttpUtils.makeResponse("404", null, "user not found", HttpStatus.NOT_FOUND);
         }
+
         userDao.delete(user.get());
-        return HttpUtils.makeResponse("200", dto.getEmail(), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 }

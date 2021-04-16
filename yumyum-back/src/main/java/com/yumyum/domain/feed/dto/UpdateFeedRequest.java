@@ -8,7 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UpdateFeedRequest {
+
     private Long id;
+
     private String content;
+
     private Long score;
 }

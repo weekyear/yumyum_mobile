@@ -2,6 +2,7 @@ package com.yumyum.domain.user.application;
 
 import com.yumyum.domain.user.dao.UserDao;
 import com.yumyum.domain.user.dto.SignUpRequest;
+import com.yumyum.domain.user.dto.UserResponse;
 import com.yumyum.domain.user.entity.User;
 import com.yumyum.global.common.response.HttpUtils;
 import lombok.RequiredArgsConstructor;
@@ -33,13 +34,9 @@ public class UserSignUpService {
         if ("".equals(email) || "".equals(nickname) || "".equals(password))
             return HttpUtils.makeResponse("400", null, "data is blank", HttpStatus.BAD_REQUEST);
 
-        // 별명 체크
-        if (userDao.getUserByNickname(nickname) != null)
-            return HttpUtils.makeResponse("400", null, "this nickname already exists", HttpStatus.BAD_REQUEST);
-
         final String encodePassword = passwordEncoder.encode(password);
         final LocalDateTime nowTime = LocalDateTime.now();
         final User user = userDao.save(dto.toEntity(encodePassword, nowTime));
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(user), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", new UserResponse(user), "success", HttpStatus.OK);
     }
 }

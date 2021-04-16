@@ -24,14 +24,13 @@ public class FeedCreateService {
     private final FeedDao feedDao;
     private final UserDao userDao;
     private final PlaceDao placeDao;
-    private final FeedService feedService;
     private final FileService fileService;
 
-    public Object createFeed(final CreateFeedRequest dto, final MultipartFile mFile){
+    public Object createFeed(final CreateFeedRequest dto, final MultipartFile file){
         final String title = dto.getTitle().trim();
         final String content = dto.getContent().trim();
         final Long score = dto.getScore();
-        final Optional<User> user = userDao.findByEmail(dto.getUserEmail().trim());
+        final Optional<User> user = userDao.findById(dto.getUserId());
         final Optional<Place> place = placeDao.findById(dto.getPlaceId());
 
         if (!user.isPresent()) {
@@ -42,15 +41,14 @@ public class FeedCreateService {
             return HttpUtils.makeResponse("400", null, "Place Not found", HttpStatus.BAD_REQUEST);
         }
 
-        if ("".equals(title) || "".equals(place.get().getAddressName()) || "".equals(place.get().getPlaceName())
+        if ("".equals(title) || "".equals(place.get().getAddress()) || "".equals(place.get().getName())
                 || score == null || "".equals(content)) {
             return HttpUtils.makeResponse("400", null, "data is blank", HttpStatus.BAD_REQUEST);
         }
 
-        final String videoPath = fileService.upload(mFile);
-
+        final String videoPath = fileService.upload(file);
         final Feed feed = feedDao.save(dto.toEntity(user.get(), place.get(), videoPath));
 
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 }

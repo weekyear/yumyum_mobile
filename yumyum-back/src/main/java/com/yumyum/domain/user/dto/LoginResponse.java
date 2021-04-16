@@ -1,6 +1,5 @@
 package com.yumyum.domain.user.dto;
 
-import com.yumyum.domain.user.entity.User;
 import lombok.*;
 
 @Data
@@ -8,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationResponse {
-    User user;
+public class LoginResponse {
+    UserResponse userResponse;
     String token;
 }

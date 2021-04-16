@@ -1,5 +1,6 @@
 package com.yumyum.domain.feed.dao;
 
+import com.yumyum.domain.feed.dto.FeedResponse;
 import com.yumyum.domain.feed.entity.Feed;
 import com.yumyum.domain.feed.entity.Like;
 import com.yumyum.domain.user.dao.UserDao;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,51 +23,58 @@ public class FeedFindDao {
     private final FeedDao feedDao;
     private final LikeDao likeDao;
     private final UserDao userDao;
+    private final FeedFindDao feedFindDao;
 
-    public Object findById(final Long feedId){
-        final Optional<Feed> feed = feedDao.findById(feedId);
+    public Object findAll(final Long userId){
+        final List<FeedResponse> list = new ArrayList<>();
+        final List<Feed> fList = feedDao.findAll();
+        for(Feed feed : fList){
+            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
+        }
+        return HttpUtils.makeResponse("200", list, "success", HttpStatus.OK);
+    }
 
-        if (!feed.isPresent()) {
-            return HttpUtils.makeResponse("404", null, "No searchResult", HttpStatus.NOT_FOUND);
+    public Object findByAuthor(final Long authorId, final Long userId){
+        final Optional<User> user = userDao.findById(authorId);
+        if (!user.isPresent()) {
+            return HttpUtils.makeResponse("404", null, "user not found", HttpStatus.NOT_FOUND);
         }
 
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed.get()), "success", HttpStatus.OK);
+        final List<FeedResponse> list = new ArrayList<>();
+        final List<Feed> fList = feedDao.findByUser(user.get());
+        for(Feed feed : fList){
+            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
+        }
+        return HttpUtils.makeResponse("200", list, "success", HttpStatus.OK);
+    }
+
+    public Object findByLike(final Long userId){
+        final List<Like> lList = likeDao.findByUserId(userId);
+        final List<FeedResponse> list = new ArrayList<>();
+        for(Like like : lList){
+            Feed feed = like.getFeed();
+            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), true));
+        }
+        return HttpUtils.makeResponse("200", list, "success", HttpStatus.OK);
     }
 
     public Object findById(final Long feedId, final Long userId){
         final Optional<Feed> feed = feedDao.findById(feedId);
-
         if (!feed.isPresent()) {
-            return HttpUtils.makeResponse("404", null, "No searchResult", HttpStatus.NOT_FOUND);
+            return HttpUtils.makeResponse("404", null, "feed not found", HttpStatus.NOT_FOUND);
         }
 
-        boolean isLikeFeedOfUser = isLikeFeedOfUser(feedId, userId);
-        feed.get().setIsLikeUser(isLikeFeedOfUser);
-
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed.get()), "success", HttpStatus.OK);
+        final FeedResponse response = new FeedResponse(feed.get(), getLikeCount(feed.get().getId()), checkIsLike(feed.get().getId(), userId));
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
-    public Object findAll(final Long userId){
-        final List<Feed> list = feedDao.findAll();
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(list), "success" + list.size(), HttpStatus.OK);
+    public Long getLikeCount(final Long feedId){
+        final Long likeCount = likeDao.countById(feedId);
+        return likeCount;
     }
 
-    public Object findByUserId(final Long userId){
-        final Optional<User> user = userDao.findById(userId);
-
-        if (!user.isPresent()) {
-            return HttpUtils.makeResponse("404", null, "User Not Found", HttpStatus.NOT_FOUND);
-        }
-
-        List<Feed> list = feedDao.findAllByUserOrderByIdDesc(user.get());
-        for (Feed feed : list) {
-            feed.setIsLikeUser(isLikeFeedOfUser(feed.getId(), userId));
-        }
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(list), "success" + list.size(), HttpStatus.OK);
-    }
-
-    public boolean isLikeFeedOfUser(final Long feedId, final Long userId) {
-        final List<Like> list = likeDao.findByFeedIdAndUserId(feedId, userId);
-        return !list.isEmpty();
+    public boolean checkIsLike(final Long feedId, final Long userId) {
+        final Optional<Like> like = likeDao.findByFeedIdAndUserId(feedId, userId);
+        return like.isPresent();
     }
 }
