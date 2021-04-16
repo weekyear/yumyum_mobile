@@ -29,6 +29,6 @@ public class UserLikeFeedsService {
             feeds.add(curFeed);
         }
 
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feeds), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", feeds, "success", HttpStatus.OK);
     }
 }

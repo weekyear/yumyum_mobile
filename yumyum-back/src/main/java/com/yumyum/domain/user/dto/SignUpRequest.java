@@ -1,12 +1,10 @@
 package com.yumyum.domain.user.dto;
 
 import com.yumyum.domain.user.entity.User;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -15,23 +13,20 @@ import java.util.Collections;
 @Valid
 @ToString
 public class SignUpRequest {
-    @ApiModelProperty(required = true)
-    @NotNull
-    String email;
-    @ApiModelProperty(required = true)
-    @NotNull
+
+    private String email;
+
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d$@$!%*#?&]{8,}$")
-    String password;
+    private String password;
 
-    @ApiModelProperty(required = true)
-    @NotNull
-    String nickname;
+    private String nickname;
 
-    public User toEntity(String encodePassword, LocalDateTime nowTime){
+    public User toEntity(final String encodePassword, final LocalDateTime nowTime){
         return User.builder()
                 .email(email)
                 .password(encodePassword)
                 .nickname(nickname)
+                .introduction("한줄로 자신을 소개해주세요.")
                 .createdDate(nowTime)
                 .modifiedDate(nowTime)
                 .roles(Collections.singletonList("ROLE_USER"))

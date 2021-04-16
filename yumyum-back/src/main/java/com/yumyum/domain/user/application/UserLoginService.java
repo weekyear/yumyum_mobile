@@ -1,8 +1,9 @@
 package com.yumyum.domain.user.application;
 
 import com.yumyum.domain.user.dao.UserDao;
-import com.yumyum.domain.user.dto.AuthenticationRequest;
-import com.yumyum.domain.user.dto.AuthenticationResponse;
+import com.yumyum.domain.user.dto.LoginRequest;
+import com.yumyum.domain.user.dto.LoginResponse;
+import com.yumyum.domain.user.dto.UserResponse;
 import com.yumyum.domain.user.entity.User;
 import com.yumyum.global.common.response.HttpUtils;
 import com.yumyum.global.config.JwtTokenProvider;
@@ -23,7 +24,7 @@ public class UserLoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
-    public Object doLogin(final AuthenticationRequest dto){
+    public Object doLogin(final LoginRequest dto){
         final String email = dto.getEmail();
         final String password = dto.getPassword();
         final Optional<User> user = userDao.findByEmail(email);
@@ -33,7 +34,7 @@ public class UserLoginService {
         }
 
         final String token = jwtTokenProvider.createToken(String.valueOf(user.get().getId()), user.get().getRoles());
-        AuthenticationResponse response = new AuthenticationResponse(user.get(), token);
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(response), "success", HttpStatus.OK);
+        LoginResponse response = new LoginResponse(new UserResponse(user.get()), token);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 }

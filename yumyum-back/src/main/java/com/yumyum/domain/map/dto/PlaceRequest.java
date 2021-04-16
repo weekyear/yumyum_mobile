@@ -10,21 +10,23 @@ import lombok.*;
 @Builder
 public class PlaceRequest {
 
-    private Long id;
-    private String addressName;
+    private String address;
+
     private String phone;
-    private String placeName;
-    private Double y;
-    private Double x;
+
+    private String name;
+
+    private Double locationY;
+
+    private Double locationX;
 
     public Place toEntity(){
         return Place.builder()
-                .id(id)
-                .addressName(addressName.trim())
+                .address(address.trim())
                 .phone(phone.trim())
-                .placeName(placeName)
-                .x(x)
-                .y(y)
+                .name(name)
+                .locationY(locationY)
+                .locationX(locationX)
                 .build();
     }
 }
