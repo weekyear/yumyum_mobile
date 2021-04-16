@@ -1,30 +1,34 @@
 package com.yumyum.domain.user.application;
 
+import com.yumyum.global.error.exception.InvalidParameterException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RegexChecker {
 
     // 이메일 형식이 맞는지 확인
-    public boolean emailCheck(String email) {
+    public void emailCheck(String email) {
 
-        if(email == null) return false;
         String EMAIL_REGEX = "^[_a-z0-9-]+(._a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
-        Boolean b = email.matches(EMAIL_REGEX);
-        return b;
+        if(email == null || !email.matches(EMAIL_REGEX)){ // 유효한 값이 아니라면
+            throw new InvalidParameterException("Email is Invalid");
+        }
     }
 
     // 전화번호 형식이 맞는지 확인
-    public boolean phoneCheck(String phoneNum){
+    public void phoneCheck(String phoneNum){
 
         String regExp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$";
-        return phoneNum.matches(regExp);
+        if(phoneNum == null || !phoneNum.matches(regExp)){ // 유효한 값이 아니라면
+            throw new InvalidParameterException("Phone Number is Invalid");
+        }
     }
 
     // String 값이 유효한 값인지 확인 (Null이거나 ""이 아니어야 함)
-    public boolean stringCheck(String str){
+    public void stringCheck(String type, String str){
 
-        if(str != null && !str.equals("")) return true;
-        else return false;
+        if(str == null || str.equals("")) { // 유효한 값이 아니라면
+            throw new InvalidParameterException(type + " is Invalid");
+        }
     }
 }

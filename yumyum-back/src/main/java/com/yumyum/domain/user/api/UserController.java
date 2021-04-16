@@ -5,9 +5,13 @@ import com.yumyum.domain.user.dao.FollowFindDao;
 import com.yumyum.domain.user.dao.UserDeleteDao;
 import com.yumyum.domain.user.dao.UserFindDao;
 import com.yumyum.domain.user.dto.*;
+import com.yumyum.domain.user.entity.User;
+import com.yumyum.global.common.response.Existence;
+import com.yumyum.global.common.response.HttpUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = { "*" })
@@ -29,25 +33,29 @@ public class UserController {
     @ApiOperation(value = "회원가입", notes = "이메일, 비밀번호, 닉네임을 받아 회원가입한다.")
     @PostMapping("/signup")
     public Object signUp(@RequestBody final SignUpRequest dto) {
-        return userSignUpService.doSignUp(dto);
+        final UserResponse response = userSignUpService.doSignUp(dto);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiOperation(value = "이메일 중복 확인", notes = "해당 이메일로 가입한 계정이 있는지 확인한다.")
     @GetMapping("/email/{email}")
     public Object getFollowerList(@PathVariable final String email) {
-        return emailExistService.checkEmailExist(email);
+        final Existence response =  emailExistService.checkEmailExist(email);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiOperation(value = "로그인", notes = "아이디와 비밀번호를 받아 로그인한다.")
     @PostMapping("/login")
     public Object login(@RequestBody final LoginRequest dto) {
-        return userLoginService.doLogin(dto);
+        final LoginResponse response = userLoginService.doLogin(dto);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiOperation(value = "비밀번호 변경", notes = "이메일과 새 비밀번호로 비밀번호를 변경한다.")
     @PutMapping("/password")
     public Object changePassword(@RequestBody final ChangePasswordRequest dto) {
-        return userChangePasswordService.doChangePassword(dto);
+        userChangePasswordService.doChangePassword(dto);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
@@ -61,7 +69,8 @@ public class UserController {
     @ApiOperation(value = "회원 조회", notes = "회원 번호로 회원 조회를 한다.")
     @GetMapping("/{userId}")
     public Object getUserInfo(@PathVariable final Long userId) {
-        return userFindDao.findById(userId);
+        final User user = userFindDao.findById(userId);
+        return HttpUtils.makeResponse("200", new UserResponse(user), "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")

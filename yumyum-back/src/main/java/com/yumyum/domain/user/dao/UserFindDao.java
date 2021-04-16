@@ -1,10 +1,8 @@
 package com.yumyum.domain.user.dao;
 
-import com.yumyum.domain.user.dto.UserResponse;
 import com.yumyum.domain.user.entity.User;
-import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +15,17 @@ public class UserFindDao {
 
     private final UserDao userDao;
 
-    public Object findById(final Long id){
+    public User findById(final Long id){
         final Optional<User> user = userDao.findById(id);
-        if (!user.isPresent()) {
-            return HttpUtils.makeResponse("404", null, "user not found", HttpStatus.NOT_FOUND);
+        user.orElseThrow(() -> new UserNotFoundException(id));
+        return user.get();
+    }
+
+    public User findByEmail(final String email){
+        final Optional<User> user = userDao.findByEmail(email);
+        if(!user.isPresent()){
+            throw new UserNotFoundException(email);
         }
-        return HttpUtils.makeResponse("200", new UserResponse(user.get()), "success", HttpStatus.OK);
+        return user.get();
     }
 }

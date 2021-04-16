@@ -23,7 +23,6 @@ public class FeedFindDao {
     private final FeedDao feedDao;
     private final LikeDao likeDao;
     private final UserDao userDao;
-    private final FeedFindDao feedFindDao;
 
     public Object findAll(final Long userId){
         final List<FeedResponse> list = new ArrayList<>();

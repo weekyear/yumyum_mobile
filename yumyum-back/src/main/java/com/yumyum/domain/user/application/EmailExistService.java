@@ -1,9 +1,8 @@
 package com.yumyum.domain.user.application;
 
 import com.yumyum.domain.user.dao.UserDao;
-import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.global.common.response.Existence;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmailExistService {
 
     private final UserDao userDao;
+    private final RegexChecker regexChecker;
 
-    public Object checkEmailExist(final String email){
-        final Boolean exist = userDao.existsByEmail(email);
-        return HttpUtils.makeResponse("200", exist, "success", HttpStatus.OK);
+    public Existence checkEmailExist(final String email){
+        regexChecker.emailCheck(email);
+        final Boolean isExists = userDao.existsByEmail(email);
+        return new Existence(isExists);
     }
 }
