@@ -32,7 +32,7 @@ class LoginViewController : UIViewController {
                 .isActive = true
         button.centerYAnchor.constraint(equalTo:LoginView.centerYAnchor)
                 .isActive = true
-        button.heightAnchor.constraint(equalTo: LoginView.heightAnchor)
+        button.heightAnchor.constraint(equalTo: LoginView.heightAnchor, multiplier: 0.6)
                     .isActive = true
         button.widthAnchor.constraint(equalTo: LoginView.widthAnchor)
                     .isActive = true
