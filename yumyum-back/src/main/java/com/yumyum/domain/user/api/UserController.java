@@ -1,7 +1,6 @@
 package com.yumyum.domain.user.api;
 
 import com.yumyum.domain.user.application.*;
-import com.yumyum.domain.user.dao.FollowFindDao;
 import com.yumyum.domain.user.dao.UserDeleteDao;
 import com.yumyum.domain.user.dao.UserFindDao;
 import com.yumyum.domain.user.dto.*;
@@ -14,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/user")
@@ -22,13 +23,13 @@ public class UserController {
 
     private final UserFindDao userFindDao;
     private final UserDeleteDao userDeleteDao;
-    private final FollowFindDao followFindDao;
     private final UserSignUpService userSignUpService;
     private final EmailExistService emailExistService;
     private final UserLoginService userLoginService;
     private final UserChangePasswordService userChangePasswordService;
     private final UserUpdateService userUpdateService;
     private final UserFollowService userFollowService;
+    private final FollowSearchService followSearchService;
 
     @ApiOperation(value = "회원가입", notes = "이메일, 비밀번호, 닉네임을 받아 회원가입한다.")
     @PostMapping("/signup")
@@ -62,7 +63,8 @@ public class UserController {
     @ApiOperation(value = "회원 수정", notes = "회원 번호로 닉네임과 한줄 소개를 수정한다.")
     @PutMapping("")
     public Object updateUser(@RequestBody final UpdateRequest dto) {
-        return userUpdateService.updateUser(dto);
+        final UserResponse response = userUpdateService.updateUser(dto);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
@@ -77,34 +79,39 @@ public class UserController {
     @ApiOperation(value = "회원 삭제", notes = "회원 번호로 회원 탈퇴를 한다.")
     @DeleteMapping("/{userId}")
     public Object deleteUser(@PathVariable final Long userId) {
-        return userDeleteDao.deleteById(userId);
+        userDeleteDao.deleteById(userId);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     @ApiOperation(value = "팔로우 목록 조회", notes = "유저가 팔로우하고 있는 회원 목록을 불러온다.")
     @GetMapping("/follow/list/{userId}")
     public Object getFollowList(@PathVariable final Long userId) {
-        return followFindDao.getFollowList(userId, "host");
+        final List<UserResponse> response = followSearchService.getFollowList(userId, "host");
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     @ApiOperation(value = "팔로워 목록 조회", notes = "유저를 팔로우하고 있는 회원 목록을 불러온다.")
     @GetMapping("/follow/follower/{userId}")
     public Object getFollowerList(@PathVariable final Long userId) {
-        return followFindDao.getFollowList(userId, "follower");
+        final List<UserResponse> response = followSearchService.getFollowList(userId, "follower");
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     @ApiOperation(value = "팔로우", notes = "유저를 팔로우한다.")
     @PostMapping("/follow/follower")
     public Object followUser(@PathVariable final FollowRequest dto) {
-        return userFollowService.doFollowUser(dto);
+        userFollowService.doFollowUser(dto);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     @ApiOperation(value = "팔로우 취소", notes = "유저 팔로우를 취소한다.")
     @DeleteMapping("/follow/follower/{hostId}/{followerId}")
     public Object cancelFollowUser(@PathVariable final Long hostId, @PathVariable final Long followerId) {
-        return userFollowService.doCancelFollowUser(hostId, followerId);
+        userFollowService.doCancelFollowUser(hostId, followerId);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 }
