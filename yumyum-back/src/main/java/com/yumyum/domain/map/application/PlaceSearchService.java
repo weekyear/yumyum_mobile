@@ -3,9 +3,9 @@ package com.yumyum.domain.map.application;
 import com.yumyum.domain.map.dao.PlaceDao;
 import com.yumyum.domain.map.dto.PlaceResponse;
 import com.yumyum.domain.map.entity.Place;
-import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.domain.user.application.RegexChecker;
+import com.yumyum.global.error.exception.InvalidParameterException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,17 +18,24 @@ import java.util.List;
 public class PlaceSearchService {
 
     private final PlaceDao placeDao;
+    private final RegexChecker regexChecker;
 
-    public Object findByKeyword(final String type, final String keyword){
-        if(!type.equals("address") && !type.equals("name")){
-            return HttpUtils.makeResponse("400", null, "type is invalid", HttpStatus.NOT_FOUND);
+    public List<PlaceResponse> findAll(){
+        List<PlaceResponse> list = new ArrayList<>();
+        final List<Place> pList = placeDao.findAll();
+        for(Place place : pList){
+            list.add(new PlaceResponse(place));
         }
-
-        final List<PlaceResponse> list = entityToDto(type, keyword);
-        return HttpUtils.makeResponse("200", list, "success", HttpStatus.OK);
+        return list;
     }
 
-    public List<PlaceResponse> entityToDto(final String type, final String keyword){
+    public List<PlaceResponse> findByKeyword(final String type, final String keyword){
+        regexChecker.stringCheck("Type", type);
+        regexChecker.stringCheck("Keyword", type);
+        if(!type.equals("address") && !type.equals("name")){
+            throw new InvalidParameterException("Type is Invalid");
+        }
+
         List<PlaceResponse> list = new ArrayList<>();
 
         switch (type){
