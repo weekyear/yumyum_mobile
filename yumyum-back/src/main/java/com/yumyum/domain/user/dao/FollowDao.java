@@ -1,6 +1,7 @@
 package com.yumyum.domain.user.dao;
 
 import com.yumyum.domain.user.entity.Follow;
+import com.yumyum.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -8,9 +9,9 @@ import java.util.Optional;
 
 public interface FollowDao extends JpaRepository<Follow, Long> {
 
-    List<Follow> findByHostId(Long hostId);
+    List<Follow> findByHost(User host);
 
-    List<Follow> findByFollowerId(Long followerId);
+    List<Follow> findByFollower(User follower);
 
-    Optional<Follow> findByHostIdAndFollowerId(Long hostId, Long followerId);
+    Optional<Follow> findByHostAndFollower(User host, User follower);
 }

@@ -8,7 +8,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-// http://localhost:8080/swagger-ui.html#/
+// http://localhost:8080/yumyum/swagger-ui.html#/
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

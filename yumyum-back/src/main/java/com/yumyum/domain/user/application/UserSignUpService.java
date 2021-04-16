@@ -23,17 +23,16 @@ public class UserSignUpService {
 
     public UserResponse doSignUp(final SignUpRequest dto) {
         final String email = dto.getEmail();
-        final String nickname = dto.getEmail();
         final String password = dto.getPassword();
 
-        // 이메일 중복 체크
-        if (userDao.findByEmail(email).isPresent()) {
-            throw new EmailDuplicateException();
-        }
         // 이메일, 별명, 패스워드 비어있는지 확인
         regexChecker.stringCheck("Email", email);
-        regexChecker.stringCheck("Nickname", nickname);
+        regexChecker.stringCheck("Nickname", dto.getNickname());
         regexChecker.stringCheck("Password", password);
+        // 이메일 중복 체크
+        if (userDao.existsByEmail(email)) {
+            throw new EmailDuplicateException();
+        }
 
         final String encodePassword = passwordEncoder.encode(password);
         final LocalDateTime nowTime = LocalDateTime.now();
