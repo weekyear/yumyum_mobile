@@ -2,6 +2,7 @@ package com.yumyum.domain.user.application;
 
 import com.yumyum.domain.user.dao.UserDao;
 import com.yumyum.domain.user.dto.UpdateRequest;
+import com.yumyum.domain.user.dto.UserResponse;
 import com.yumyum.domain.user.entity.User;
 import com.yumyum.global.common.response.HttpUtils;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,6 @@ public class UserUpdateService {
 
         user.get().updateUser(dto);
 
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(user.get()), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", new UserResponse(user.get()), "success", HttpStatus.OK);
     }
 }

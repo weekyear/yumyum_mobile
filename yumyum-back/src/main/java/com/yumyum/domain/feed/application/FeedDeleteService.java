@@ -33,6 +33,6 @@ public class FeedDeleteService {
             likeDao.delete(like);
         }
         feedDao.delete(feed.get());
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed.get()), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", feed.get(), "success", HttpStatus.OK);
     }
 }

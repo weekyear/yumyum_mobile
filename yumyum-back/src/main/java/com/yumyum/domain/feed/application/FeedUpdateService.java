@@ -27,6 +27,6 @@ public class FeedUpdateService {
 
         feed.get().updateFeed(dto);
 
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed.get()), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", feed.get(), "success", HttpStatus.OK);
     }
 }

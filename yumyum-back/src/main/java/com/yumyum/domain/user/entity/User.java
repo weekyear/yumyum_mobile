@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "user_email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @JsonIgnore
@@ -48,12 +48,6 @@ public class User implements UserDetails {
 
     @Column(name = "introduction", length=50)
     private String introduction;
-
-    @Column(name = "recent_y")
-    private Double recentY;
-
-    @Column(name = "recent_x")
-    private Double recentX;
 
     @CreationTimestamp
     @Column(name = "created_date", nullable = false, updatable = false)

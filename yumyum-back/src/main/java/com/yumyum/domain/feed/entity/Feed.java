@@ -31,11 +31,11 @@ public class Feed {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "score")
-    private Long score;
-
     @Column(name = "content", length = 200)
     private String content;
+
+    @Column(name = "score")
+    private Long score;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -51,13 +51,6 @@ public class Feed {
     @Column(name = "thumbnail_path")
     private String thumbnailPath;
 
-    @Column(name = "like_count", columnDefinition = "integer default 0")
-    private Long likeCount;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private Boolean isLikeUser;
-
     @CreationTimestamp
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime createdDate;
@@ -69,12 +62,6 @@ public class Feed {
     public void updateFeed(final UpdateFeedRequest dto){
         this.content = dto.getContent();
         this.score = dto.getScore();
-        this.modifiedDate = LocalDateTime.now();
-    }
-
-    public void likeFeed(final Long likeCount, final boolean isLikeUser){
-        this.likeCount = likeCount;
-        this.isLikeUser = isLikeUser;
         this.modifiedDate = LocalDateTime.now();
     }
 }

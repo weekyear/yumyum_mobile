@@ -26,11 +26,11 @@ public class PlaceFindDao {
             return HttpUtils.makeResponse("404", null, "No searchResult", HttpStatus.NOT_FOUND);
         }
         List<Feed> searchList = feedDao.findByPlace(place.get());
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(searchList), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", searchList, "success", HttpStatus.OK);
     }
 
     public Object findAll(){
         final List<Place> places = placeDao.findAll();
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(places), "success", HttpStatus.OK);
+        return HttpUtils.makeResponse("200", places, "success", HttpStatus.OK);
     }
 }
