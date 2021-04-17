@@ -17,9 +17,15 @@
         android:label="@string/title_search"
         tools:layout="@layout/fragment_search" />
 
-    <fragment
+    <activity
         android:id="@+id/navigation_profile"
-        android:name="com.omnyom.yumyum.ui.profile.ProfileFragment"
+        android:name="com.omnyom.yumyum.ui.camera.CameraActivity"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/activity_camera" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_profile"-->
+<!--        android:name="com.omnyom.yumyum.ui.share.ShareFragment"-->
+<!--        android:label="@string/title_profile"-->
+<!--        tools:layout="@layout/fragment_share" />-->
 </navigation>
