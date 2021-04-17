@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		548AB7E12629FDBB0093215D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 548AB7E02629FDBB0093215D /* video.mp4 */; };
+		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginViewController.swift */; };
 		54E0EEE9262875120006D49D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE8262875120006D49D /* HomeViewController.swift */; };
-		54E0EEF62629614D0006D49D /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEF52629614D0006D49D /* VideoCollectionViewCell.swift */; };
 		E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F32625B746002C2637 /* AppDelegate.swift */; };
 		E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F52625B746002C2637 /* SceneDelegate.swift */; };
 		E52F57F82625B746002C2637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F72625B746002C2637 /* ViewController.swift */; };
@@ -43,10 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		548AB7E02629FDBB0093215D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = SOURCE_ROOT; };
+		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		54E0EEE8262875120006D49D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		54E0EEF52629614D0006D49D /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		E52F57F02625B746002C2637 /* YumYum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumYum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52F57F32625B746002C2637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E52F57F52625B746002C2637 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		E52F57F22625B746002C2637 /* YumYum */ = {
 			isa = PBXGroup;
 			children = (
+				548AB7E02629FDBB0093215D /* video.mp4 */,
 				54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */,
 				E5920A172627C1A800836123 /* SupportingFiles */,
 				E5920A162627C19F00836123 /* Storyboard */,
@@ -164,7 +167,7 @@
 				E52F57F72625B746002C2637 /* ViewController.swift */,
 				54E0EEE3262835950006D49D /* LoginViewController.swift */,
 				54E0EEE8262875120006D49D /* HomeViewController.swift */,
-				54E0EEF52629614D0006D49D /* VideoCollectionViewCell.swift */,
+				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
 				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
+				548AB7E12629FDBB0093215D /* video.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,13 +332,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54E0EEF62629614D0006D49D /* VideoCollectionViewCell.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
 				54E0EEE9262875120006D49D /* HomeViewController.swift in Sources */,
+				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
