@@ -10,7 +10,6 @@
 		548AB7E12629FDBB0093215D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 548AB7E02629FDBB0093215D /* video.mp4 */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginViewController.swift */; };
-		54E0EEE9262875120006D49D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE8262875120006D49D /* HomeViewController.swift */; };
 		E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F32625B746002C2637 /* AppDelegate.swift */; };
 		E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F52625B746002C2637 /* SceneDelegate.swift */; };
 		E52F57F82625B746002C2637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F72625B746002C2637 /* ViewController.swift */; };
@@ -48,7 +47,6 @@
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		54E0EEE8262875120006D49D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E52F57F02625B746002C2637 /* YumYum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumYum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52F57F32625B746002C2637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E52F57F52625B746002C2637 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 			children = (
 				E52F57F72625B746002C2637 /* ViewController.swift */,
 				54E0EEE3262835950006D49D /* LoginViewController.swift */,
-				54E0EEE8262875120006D49D /* HomeViewController.swift */,
 				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
 			);
 			path = ViewControllers;
@@ -337,7 +334,6 @@
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
-				54E0EEE9262875120006D49D /* HomeViewController.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
