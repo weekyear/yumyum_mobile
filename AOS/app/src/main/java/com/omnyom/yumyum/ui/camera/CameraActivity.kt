@@ -60,7 +60,6 @@ class CameraActivity : BaseActivity() {
     fun openCamera() {
         var intent : Intent =  Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3);
-        intent.putExtra(MediaStore.EXTRA_FULL_SCREEN)
         intent.also { takeVideoIntent ->
             takeVideoIntent.resolveActivity(packageManager)?.also {
                 startActivityForResult(takeVideoIntent, REQ_CAMERA)
