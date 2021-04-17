@@ -9,12 +9,12 @@ import UIKit
 
 class SignUpButton: UIButton {
 
-// 스토리보드에서 참고
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
-        self.layer.cornerRadius = 5.0;
-        self.backgroundColor = UIColor(red: 255/255, green: 132/255, blue: 102/255, alpha: 1)
-        self.tintColor = UIColor.white
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
     }
-    
+    */
+
 }
