@@ -17,6 +17,8 @@ import com.omnyom.yumyum.ui.login.LoginActivity
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
+import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignOut
 
 
 class ProfileFragment : Fragment() {
@@ -51,11 +53,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOut() {
-        val firebaseAuth = FirebaseAuth.getInstance()
         firebaseAuth?.signOut()
-        googleSignInClient.signOut().addOnCompleteListener{
-            startLoginActivity()
-        }
+        googleSignOut{startLoginActivity()}
     }
 
     private fun startLoginActivity() {
