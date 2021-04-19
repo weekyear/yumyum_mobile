@@ -1,10 +1,7 @@
 package com.yumyum.domain.feed.api;
 
 import com.yumyum.domain.feed.application.*;
-import com.yumyum.domain.feed.dto.CreateFeedRequest;
-import com.yumyum.domain.feed.dto.FeedResponse;
-import com.yumyum.domain.feed.dto.LikeFeedRequest;
-import com.yumyum.domain.feed.dto.UpdateFeedRequest;
+import com.yumyum.domain.feed.dto.*;
 import com.yumyum.global.common.response.HttpUtils;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeedController {
 
-    private final FileService fileService;
     private final FeedCreateService feedCreateService;
     private final FeedUpdateService feedUpdateService;
     private final FeedDeleteService feedDeleteService;
@@ -39,19 +35,11 @@ public class FeedController {
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
-    @ApiOperation(value = "동영상 등록")
-    @PostMapping(value = "/video", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public Object uploadVideo(@RequestParam(value = "file", required = false) MultipartFile multipartFile) {
-        String url = fileService.upload(multipartFile);
-        return HttpUtils.makeResponse("200", url, "success", HttpStatus.OK);
-    }
-
-    @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
-    @ApiOperation(value = "이미지 등록 테스트")
-    @PostMapping("/image/test")
-    public Object uploadVideoTest(@RequestParam MultipartFile multipartFile) {
-        String url = fileServiceTest.upload(multipartFile);
-        return HttpUtils.makeResponse("200", url, "success", HttpStatus.OK);
+    @ApiOperation(value = "동영상 및 썸네일 등록 테스트", notes = "동영상에서 썸네일을 추출하여 동영상과 함꼐 저장한다.")
+    @PostMapping("/video/test")
+    public Object uploadVideoTest(@RequestParam MultipartFile file) {
+        FileDto response = fileServiceTest.uploadFeedMedia(file);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")

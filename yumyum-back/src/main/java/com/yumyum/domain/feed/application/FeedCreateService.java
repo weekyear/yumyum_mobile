@@ -21,7 +21,8 @@ public class FeedCreateService {
     private final FeedDao feedDao;
     private final UserFindDao userFindDao;
     private final PlaceFindDao placeFindDao;
-    private final FileService fileService;
+    private final FileUploadService fileUploadService;
+    private final FileThumbnailService fileThumbnailService;
     private final RegexChecker regexChecker;
 
     public void createFeed(final CreateFeedRequest dto, final MultipartFile file){
@@ -31,8 +32,9 @@ public class FeedCreateService {
         regexChecker.stringCheck("Title", dto.getTitle());
         regexChecker.stringCheck("Content", dto.getContent());
 
-        final String videoPath = fileService.upload(file);
-        final Feed feed = feedDao.save(dto.toEntity(user, place, videoPath));
+        final String videoPath = fileUploadService.upload(file);
+        final String thumbnailPath = fileThumbnailService.createThumbnail(videoPath);
+        final Feed feed = feedDao.save(dto.toEntity(user, place, videoPath, thumbnailPath));
         feedDao.save(feed);
     }
 }

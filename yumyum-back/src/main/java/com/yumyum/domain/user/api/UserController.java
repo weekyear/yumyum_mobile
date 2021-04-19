@@ -101,8 +101,8 @@ public class UserController {
 
     @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header")
     @ApiOperation(value = "팔로우", notes = "유저를 팔로우한다.")
-    @PostMapping("/follow/follower")
-    public Object followUser(@PathVariable final FollowRequest dto) {
+    @PostMapping("/follow")
+    public Object followUser(@RequestBody final FollowRequest dto) {
         userFollowService.doFollowUser(dto);
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
