@@ -1,10 +1,10 @@
 package com.omnyom.yumyum.interfaces
 
+import com.omnyom.yumyum.model.login.LoginResponse
+import com.omnyom.yumyum.model.myinfo.UserModel
+//import com.omnyom.yumyum.model.myinfo.UserSampleModel
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RetrofitService {
 //    예시
@@ -20,6 +20,8 @@ interface RetrofitService {
 //    @GET("o/oauth2/auth/oauthchooseaccount?")
 //    fun getUser(@Query("client_id") client_id: String, @Query("redirect_uri") redirect_uri: String, @Query("response_type") response_type: String, @Query("scope") scope: String): Call<UserModel>
 //
-//    @POST("login/kakao")
-//    fun loginKakao(@Body parameters: HashMap<String, String>): Call<MemberModel>
+    @POST("user/login")
+    fun login(@Body parameters: HashMap<String, String>): Call<LoginResponse>
+
+
 }

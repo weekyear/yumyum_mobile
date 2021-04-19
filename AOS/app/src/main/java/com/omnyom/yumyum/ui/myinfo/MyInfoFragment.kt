@@ -1,4 +1,4 @@
-package com.omnyom.yumyum.ui.profile
+package com.omnyom.yumyum.ui.myinfo
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,34 +8,30 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
-import com.omnyom.yumyum.databinding.FragmentHomeBinding
-import com.omnyom.yumyum.databinding.FragmentProfileBinding
+import com.omnyom.yumyum.databinding.FragmentMyInfoBinding
 import com.omnyom.yumyum.ui.login.LoginActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignOut
 
 
-class ProfileFragment : Fragment() {
-    private var _binding: FragmentProfileBinding? = null
+class MyInfoFragment : Fragment() {
+    private var _binding: FragmentMyInfoBinding? = null
     private val binding get() = _binding!!
-    private lateinit var profileViewModel: ProfileViewModel
+    private lateinit var myInfoViewModel: MyInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentMyInfoBinding.inflate(inflater, container, false)
         val root = binding.root
         // Inflate the layout for this fragment
-        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        profileViewModel.text.observe(viewLifecycleOwner, Observer {
+        myInfoViewModel = ViewModelProvider(this).get(MyInfoViewModel::class.java)
+        myInfoViewModel.text.observe(viewLifecycleOwner, Observer {
             binding.textProfile.text = it
         })
 

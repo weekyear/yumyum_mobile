@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.YumYum">
+        android:theme="@style/Theme.YumYum"
+        android:usesCleartextTraffic="true">
 
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
