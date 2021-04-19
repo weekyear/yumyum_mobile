@@ -11,13 +11,14 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class CreateFeedRequest {
+
     private String title;
 
     private String content;
 
     private Long score;
 
-    private String userEmail;
+    private Long userId;
 
     private Long placeId;
 
@@ -29,7 +30,6 @@ public class CreateFeedRequest {
                 .user(user)
                 .place(place)
                 .videoPath(videoPath)
-                .likeCount(0L)
                 .build();
     }
 }

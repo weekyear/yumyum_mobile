@@ -6,8 +6,32 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.R
+import com.omnyom.yumyum.RetrofitBuilder
+import com.omnyom.yumyum.interfaces.RetrofitService
+import com.omnyom.yumyum.model.login.LoginRequest
+import com.omnyom.yumyum.model.login.LoginResponse
+import retrofit2.*
 
 class HomeViewModel : ViewModel() {
+    private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
+
+    init {
+        var call = retrofitService.login(LoginRequest("jwnsgus@gmail.com", "wnsgus123").get())
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.isSuccessful) {
+                    response
+                    response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                t
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

@@ -1,32 +1,25 @@
 package com.yumyum.domain.feed.application;
 
-import com.yumyum.domain.feed.dao.FeedDao;
+import com.yumyum.domain.feed.dao.FeedFindDao;
 import com.yumyum.domain.feed.dto.UpdateFeedRequest;
 import com.yumyum.domain.feed.entity.Feed;
-import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.domain.user.application.RegexChecker;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class FeedUpdateService {
 
-    private final FeedDao feedDao;
+    private final FeedFindDao feedFindDao;
+    private final RegexChecker regexChecker;
 
-    public Object updateFeed(final UpdateFeedRequest dto){
-        final Optional<Feed> feed = feedDao.findById(dto.getId());
+    public void updateFeed(final UpdateFeedRequest dto){
+        regexChecker.stringCheck("Content", dto.getContent());
 
-        if (!feed.isPresent()) {
-            return HttpUtils.makeResponse("404", null, "Feed Not Found", HttpStatus.NOT_FOUND);
-        }
-
-        feed.get().updateFeed(dto);
-
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(feed.get()), "success", HttpStatus.OK);
+        final Feed feed = feedFindDao.findById(dto.getId());
+        feed.updateFeed(dto);
     }
 }

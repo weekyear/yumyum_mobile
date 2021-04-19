@@ -1,4 +1,4 @@
-package com.omnyom.yumyum.model
+package com.omnyom.yumyum.model.feed
 
 import android.net.Uri
 import androidx.room.Entity

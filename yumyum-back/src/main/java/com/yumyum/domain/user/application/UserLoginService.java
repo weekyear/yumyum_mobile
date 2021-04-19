@@ -1,39 +1,36 @@
 package com.yumyum.domain.user.application;
 
-import com.yumyum.domain.user.dao.UserDao;
-import com.yumyum.domain.user.dto.AuthenticationRequest;
-import com.yumyum.domain.user.dto.AuthenticationResponse;
+import com.yumyum.domain.user.dao.UserFindDao;
+import com.yumyum.domain.user.dto.LoginRequest;
+import com.yumyum.domain.user.dto.LoginResponse;
+import com.yumyum.domain.user.dto.UserResponse;
 import com.yumyum.domain.user.entity.User;
-import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.domain.user.exception.PasswordWrongException;
 import com.yumyum.global.config.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class UserLoginService {
 
-    private final UserDao userDao;
+    private final UserFindDao userFindDao;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
+    private final RegexChecker regexChecker;
 
-    public Object doLogin(final AuthenticationRequest dto){
-        final String email = dto.getEmail();
-        final String password = dto.getPassword();
-        final Optional<User> user = userDao.findByEmail(email);
+    public LoginResponse doLogin(final LoginRequest dto){
+        final User user = userFindDao.findByEmail(dto.getEmail());
 
-        if (!passwordEncoder.matches(password, user.get().getPassword())) {
-            return HttpUtils.makeResponse("400", null, "mismatch", HttpStatus.BAD_REQUEST);
+        regexChecker.stringCheck("Password", dto.getPassword());
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new PasswordWrongException();
         }
 
-        final String token = jwtTokenProvider.createToken(String.valueOf(user.get().getId()), user.get().getRoles());
-        AuthenticationResponse response = new AuthenticationResponse(user.get(), token);
-        return HttpUtils.makeResponse("200", HttpUtils.convertObjToJson(response), "success", HttpStatus.OK);
+        final String token = jwtTokenProvider.createToken(String.valueOf(user.getId()), user.getRoles());
+        return new LoginResponse(new UserResponse(user), token);
     }
 }
