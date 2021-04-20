@@ -3,8 +3,10 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,18 +17,59 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-Ql-GTB">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGt-Wz-2he">
+                                    <size key="itemSize" width="129" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="rpI-ek-Zzn" customClass="VideoCollectionViewCell" customModule="YumYum" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="129" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iL8-tJ-cmi">
+                                            <rect key="frame" x="0.0" y="0.0" width="129" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                        <size key="customSize" width="129" height="128"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="onq-RD-eeV"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="L0J-Yf-eoO"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6GJ-p3-kS8"/>
+                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GH1-xD-SGf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7QI-Ql-GTB" secondAttribute="bottom" id="YEZ-a4-BN0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7QI-Ql-GTB" secondAttribute="trailing" id="m9Z-0J-x2E"/>
+                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="z2F-8b-8tS"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="71B-Ce-VOh"/>
+                    <connections>
+                        <outlet property="collectionView" destination="7QI-Ql-GTB" id="Tdj-ej-ozr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1014.4927536231885" y="1069.4196428571429"/>
+            <point key="canvasLocation" x="-1020.2898550724639" y="1072.7678571428571"/>
         </scene>
     </scenes>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
