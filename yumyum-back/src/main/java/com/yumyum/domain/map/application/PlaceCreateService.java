@@ -1,7 +1,6 @@
 package com.yumyum.domain.map.application;
 
 import com.yumyum.domain.map.dao.PlaceDao;
-import com.yumyum.domain.map.dao.PlaceFindDao;
 import com.yumyum.domain.map.dto.PlaceRequest;
 import com.yumyum.domain.user.application.RegexChecker;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class PlaceCreateService {
 
     private final PlaceDao placeDao;
-    private final PlaceFindDao placeFindDao;
     private final RegexChecker regexChecker;
 
     public void createPlace(final PlaceRequest dto) {
@@ -22,7 +20,8 @@ public class PlaceCreateService {
         regexChecker.phoneCheck(dto.getPhone());
         regexChecker.stringCheck("Name", dto.getName());
 
-        placeFindDao.checkByAddressAndName(dto.getAddress(), dto.getName());
-        placeDao.save(dto.toEntity());
+        if(placeDao.existsByAddressAndName(dto.getAddress(), dto.getName())){
+            placeDao.save(dto.toEntity());
+        }
     }
 }

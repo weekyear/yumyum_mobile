@@ -8,7 +8,12 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UpdateRequest {
+
     private String email;
+
     private String introduction;
+
     private String nickname;
+
+    private String profilePath;
 }
