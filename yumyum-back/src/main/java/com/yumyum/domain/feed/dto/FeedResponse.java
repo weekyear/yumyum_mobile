@@ -22,7 +22,7 @@ public class FeedResponse {
 
     private String videoPath;
 
-    private String thumnailPath;
+    private String thumbnailPath;
 
     private Long likeCount;
 
@@ -35,7 +35,7 @@ public class FeedResponse {
         this.userId = feed.getUser().getId();
         this.placeId = feed.getPlace().getId();
         this.videoPath = feed.getVideoPath();
-        this.thumnailPath = feed.getThumbnailPath();
+        this.thumbnailPath = feed.getThumbnailPath();
         this.likeCount = likeCount;
         this.isLike = isLike;
     }

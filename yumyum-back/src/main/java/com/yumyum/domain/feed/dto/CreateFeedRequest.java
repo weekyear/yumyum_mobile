@@ -1,6 +1,7 @@
 package com.yumyum.domain.feed.dto;
 
 import com.yumyum.domain.feed.entity.Feed;
+import com.yumyum.domain.map.dto.PlaceRequest;
 import com.yumyum.domain.map.entity.Place;
 import com.yumyum.domain.user.entity.User;
 import lombok.*;
@@ -20,7 +21,7 @@ public class CreateFeedRequest {
 
     private Long userId;
 
-    private Long placeId;
+    private PlaceRequest placeRequest;
 
     public Feed toEntity(final User user, final Place place, final String videoPath, final String thumbnailPath){
         return Feed.builder()
