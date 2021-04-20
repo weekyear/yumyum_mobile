@@ -23,6 +23,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var userLabel: UILabel!
     
+    @IBOutlet weak var placeStackView : UIStackView!
+    
     var player : AVPlayer?
     
     private var model : VideoVO?
@@ -32,6 +34,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
     // 외부에서 configure 함수를 참조할 수 있게 구성한다. HomeViewController에서 참조하게 된다.
     public func configure(with model:VideoVO){
         // 현재 위에서 지정한 모델 변수를 viewController에서 보내준 model에는 데이터가 담겨 있다.
@@ -42,7 +45,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
         reviewLabel.text = model.review
         userLabel.text = model.userName
         configuareVideo()
-        
     }
     
     
@@ -54,6 +56,7 @@ class VideoCollectionViewCell: UICollectionViewCell {
                     print("파일을 찾지 못했어요!")
                     return
                 }
+        
         player = AVPlayer(url: URL(fileURLWithPath: path))
         
         let playerView = AVPlayerLayer()
@@ -63,6 +66,13 @@ class VideoCollectionViewCell: UICollectionViewCell {
         videoLayout.layer.addSublayer(playerView)
         player?.volume = 0
         player?.play()
+        videoLayout.bringSubviewToFront(foodLabel)
+        videoLayout.bringSubviewToFront(placeLabel)
+        videoLayout.bringSubviewToFront(addressLabel)
+        videoLayout.bringSubviewToFront(reviewLabel)
+        videoLayout.bringSubviewToFront(userLabel)
+        videoLayout.bringSubviewToFront(placeStackView)
     }
 
 }
+

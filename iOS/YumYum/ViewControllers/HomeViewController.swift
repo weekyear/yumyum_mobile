@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let cellIdentifier: String = "cell"
     @IBOutlet var collectionView: UICollectionView!
@@ -34,25 +34,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return datalist
      }()
     
-//    func addVideoData() {
-//        for _ in 0..<5 {
-//            let model = VideoVO()
-//            model.foodTitle =  "라면"
-//            model.userName = "Yeom"
-//            model.review = "맜있었습니다"
-//            model.addressName = "대전 유성구 계룡로 84"
-//            model.placeName = "김밥천국"
-//            model.videoFileFormat = "mp4"
-//            model.videoFileName = "video"
-//            data.append(model)
-//        }
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "VideoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        collectionView.isPagingEnabled = true
+//        collectionView.register(UINib(nibName: "VideoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
     }
     
     // 해당 row에 이벤트가 발생했을때 출력되는 함수
@@ -75,10 +62,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
     
-}
-// 콜렉션뷰의 레이아웃 결정
-extension HomeViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+        return CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
     }
+    
+    
 }
+
