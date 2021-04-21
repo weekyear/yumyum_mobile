@@ -38,7 +38,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="407" height="812"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig6-dI-2UN">
-                                                            <rect key="frame" x="26" y="548" width="68" height="33.5"/>
+                                                            <rect key="frame" x="26" y="548" width="97" height="33.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -75,7 +75,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="ig6-dI-2UN" secondAttribute="trailing" constant="313" id="6AL-ib-2fH"/>
+                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ig6-dI-2UN" secondAttribute="trailing" constant="313" id="6AL-ib-2fH"/>
                                                         <constraint firstItem="3bU-hd-RGH" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="ACB-go-PBp"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="BNG-OC-C1h"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="top" secondItem="lQR-Jy-oBF" secondAttribute="top" constant="548" id="Nkp-jE-NaK"/>

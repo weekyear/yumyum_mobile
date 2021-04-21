@@ -6,6 +6,10 @@ target 'YumYum' do
   use_frameworks!
 
   # Pods for YumYum
+  pod 'Alamofire', '~> 5.2'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'  
+  pod 'GoogleSignIn'
 
   target 'YumYumTests' do
     inherit! :search_paths

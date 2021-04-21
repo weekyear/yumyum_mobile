@@ -7,16 +7,74 @@
 
 import UIKit
 import CoreData
+import Firebase
+import GoogleSignIn
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        GIDSignIn.sharedInstance().clientID = "334733871859-a18ggn5k6tnkh038dcocvmj2nnceemlv.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance()?.delegate = self
         return true
     }
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
+    }
+    
+    // 로그인을 했을떄 불러오는 메서드이다.
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+          if let error = error {
+            if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
+              print("The user has not signed in before or they have since signed out.")
+            } else {
+              print("\(error.localizedDescription)")
+            }
+            return
+          }
+    // 로그인 완료 했을때 firebase에 저장하기
+        guard let authentication = user.authentication else {return}
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        
+        Auth.auth().signIn(with: credential, completion: {(user, error) in
+            if let error = error {
+                           
+                }
+            }
+        )
+        // 사용자 정보 가져오기
+        if let userId = user.userID,                  // For client-side use only!
+            let idToken = user.authentication.idToken, // Safe to send to the server
+            let fullName = user.profile.name,
+            let givenName = user.profile.givenName,
+            let familyName = user.profile.familyName,
+            let email = user.profile.email {
+                
+            print("Token : \(idToken)")
+            print("User ID : \(userId)")
+            print("User Email : \(email)")
+            print("User Name : \((fullName))")
+            print("familyName : \(givenName)")
+            print("email : \(familyName)")
+     
+        } else {
+            print("Error : User Data Not Found")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
+              withError error: Error!) {
+      // Perform any operations when the user disconnects from app here.
+      // ...
+    }
+
 
     // MARK: UISceneSession Lifecycle
 
