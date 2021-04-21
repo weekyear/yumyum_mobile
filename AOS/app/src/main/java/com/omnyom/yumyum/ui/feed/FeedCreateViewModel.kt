@@ -1,13 +1,12 @@
-package com.omnyom.yumyum.ui.share
+package com.omnyom.yumyum.ui.feed
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class FeedCreateViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = " here is SharePage"
+        value = "음식 이름을 적어주세요"
     }
-
-    val text : LiveData<String> = _text
+    val text: LiveData<String> = _text
 }
