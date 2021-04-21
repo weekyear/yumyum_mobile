@@ -1,7 +1,6 @@
 package com.yumyum.domain.map.dao;
 
 import com.yumyum.domain.map.entity.Place;
-import com.yumyum.domain.map.exception.PlaceDuplicateException;
 import com.yumyum.domain.map.exception.PlaceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,11 +19,5 @@ public class PlaceFindDao {
         final Optional<Place> place = placeDao.findById(id);
         place.orElseThrow(() -> new PlaceNotFoundException(id));
         return place.get();
-    }
-
-    public void checkByAddressAndName(final String address, final String name){
-        if(placeDao.existsByAddressAndName(address, name)){
-            throw new PlaceDuplicateException();
-        }
     }
 }

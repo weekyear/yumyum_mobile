@@ -14,8 +14,19 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserUpdateService {
 
     private final UserFindDao userFindDao;
+    private final RegexChecker regexChecker;
 
     public UserResponse updateUser(final UpdateRequest dto){
+        // 이메일, 별명, 패스워드 비어있는지 확인
+        regexChecker.stringCheck("Email", dto.getEmail());
+        regexChecker.stringCheck("Nickname", dto.getNickname());
+        regexChecker.stringCheck("Introduction", dto.getIntroduction());
+
+        // 기본 경로로 전환
+        if(dto.getProfilePath() == null){
+            dto.setProfilePath("");
+        }
+
         final User user = userFindDao.findByEmail(dto.getEmail());
         user.updateUser(dto);
         return new UserResponse(user);
