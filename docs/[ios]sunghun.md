@@ -486,74 +486,26 @@ class VideoCollectionViewCell: UICollectionViewCell {
 
 - VideoCollectionViewCell
 
+
+
+#### 문법
+
+- let 과 var : let은 불편 프로퍼티, var는 가변 프로퍼티를 말한다.
+- static이 붙게 되면 그 변수가 타입 프로퍼티라는 말이 되는데, 타입 프로퍼티는 그 구조체, 및 클래스 내부에서 사용되는 메서드를 사용할때 적용된다.
+- 가끔 보다보면 클래스인데 인스턴스를 안만들고 함수를 사용하는 경우가 있는데 클래스(타입)안의 메소드가 `static func ~~` 로 되어 있으면 클래스를 그대로 가져와서 함수를 사용할 수 있다.
+- 
+
+
+
+### extension 
+
+> 말 그대로 확장의 의미로 뒤에 오는 컨트롤러를 상속받는 모든 클래스는 extension 아래에 지정된 메서드를 사용할 수 있다.
+
 ```swift
-//
-//  VideoCollectionViewCell.swift
-//  YumYum
-//
-//  Created by 염성훈 on 2021/04/20.
-//
-
-import UIKit
-import AVFoundation
-
-class VideoCollectionViewCell: UICollectionViewCell {
-
+// UIViewContoller를 사용하는 모든 클래스에서 아래에 작성된 메서드를 호출해서 사용할 수 있다.
+extension UIViewController {
     
-    @IBOutlet weak var videoLayout: UIView!
-    
-    @IBOutlet weak var foodLabel: UILabel!
-    
-    @IBOutlet weak var placeLabel: UILabel!
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    
-    @IBOutlet weak var reviewLabel: UILabel!
-    
-    @IBOutlet weak var userLabel: UILabel!
-    
-    var player : AVPlayer?
-    
-    private var model : VideoVO?
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    // 외부에서 configure 함수를 참조할 수 있게 구성한다. HomeViewController에서 참조하게 된다.
-    public func configure(with model:VideoVO){
-        // 현재 위에서 지정한 모델 변수를 viewController에서 보내준 model에는 데이터가 담겨 있다.
-        self.model = model
-        foodLabel.text = model.foodTitle
-        placeLabel.text = model.placeName
-        addressLabel.text = model.addressName
-        reviewLabel.text = model.review
-        userLabel.text = model.userName
-        configuareVideo()
-        
-    }
-    
-    
-    private func configuareVideo(){
-        guard let model = model else {
-                  return
-        }
-        guard let path = Bundle.main.path(forResource: model.videoFileName, ofType: model.videoFileFormat) else {
-                    print("파일을 찾지 못했어요!")
-                    return
-                }
-        player = AVPlayer(url: URL(fileURLWithPath: path))
-        
-        let playerView = AVPlayerLayer()
-        playerView.player = player
-        playerView.frame = videoLayout.bounds
-        playerView.videoGravity = .resize
-        videoLayout.layer.addSublayer(playerView)
-        player?.volume = 0
-        player?.play()
-    }
-
 }
 
 ```
+

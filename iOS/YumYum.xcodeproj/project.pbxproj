@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A0BF9262E8E97006C9582 /* VideoVO.swift */; };
 		541A0BFF262EAD0F006C9582 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 541A0BFE262EAD0F006C9582 /* video2.mp4 */; };
-		541A0C04262EAD32006C9582 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 541A0C03262EAD32006C9582 /* video3.mp4 */; };
 		548AB7E12629FDBB0093215D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 548AB7E02629FDBB0093215D /* video.mp4 */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeViewController.swift */; };
+		54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48C5262F1FD400AC4863 /* video3.mp4 */; };
+		54DA48CE262F249700AC4863 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48CD262F249700AC4863 /* video4.mp4 */; };
 		54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginViewController.swift */; };
 		E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F32625B746002C2637 /* AppDelegate.swift */; };
 		E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F52625B746002C2637 /* SceneDelegate.swift */; };
@@ -50,12 +51,13 @@
 /* Begin PBXFileReference section */
 		541A0BF9262E8E97006C9582 /* VideoVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoVO.swift; sourceTree = "<group>"; };
 		541A0BFE262EAD0F006C9582 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
-		541A0C03262EAD32006C9582 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
 		548AB7E02629FDBB0093215D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = SOURCE_ROOT; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/Storyboard/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		54DA48C5262F1FD400AC4863 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
+		54DA48CD262F249700AC4863 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E52F57F02625B746002C2637 /* YumYum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumYum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52F57F32625B746002C2637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,7 +130,8 @@
 			children = (
 				548AB7E02629FDBB0093215D /* video.mp4 */,
 				541A0BFE262EAD0F006C9582 /* video2.mp4 */,
-				541A0C03262EAD32006C9582 /* video3.mp4 */,
+				54DA48C5262F1FD400AC4863 /* video3.mp4 */,
+				54DA48CD262F249700AC4863 /* video4.mp4 */,
 				54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */,
 				E5920A172627C1A800836123 /* SupportingFiles */,
 				E5920A162627C19F00836123 /* Storyboard */,
@@ -312,12 +315,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				541A0C04262EAD32006C9582 /* video3.mp4 in Resources */,
 				E52F58032625B746002C2637 /* LaunchScreen.storyboard in Resources */,
 				E5920A2A2627C30B00836123 /* MyPage.storyboard in Resources */,
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
+				54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
+				54DA48CE262F249700AC4863 /* video4.mp4 in Resources */,
 				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 				541A0BFF262EAD0F006C9582 /* video2.mp4 in Resources */,

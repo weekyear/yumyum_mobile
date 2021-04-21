@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7QI-Ql-GTB">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oGt-Wz-2he">
                                     <size key="itemSize" width="407" height="812"/>
@@ -119,10 +119,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="7QI-Ql-GTB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6GJ-p3-kS8"/>
-                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GH1-xD-SGf"/>
+                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GH1-xD-SGf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7QI-Ql-GTB" secondAttribute="bottom" id="YEZ-a4-BN0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7QI-Ql-GTB" secondAttribute="trailing" id="m9Z-0J-x2E"/>
-                            <constraint firstItem="7QI-Ql-GTB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="z2F-8b-8tS"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="71B-Ce-VOh"/>

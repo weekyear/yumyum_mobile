@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         ("돈까스", "WeekYear", "맛없었어요", "대전 유성구 계룡로 11", "경양카츠", "mp4", "video2"),
         ("김밥", "JEYU", "별로였어요", "대전 유성구 계룡로 20", "김밥천국", "mp4", "video3"),
         ("샐러드", "Ahyeon", "존맛탱", "대전 유성구 계룡로 80", "샐러디", "mp4", "video"),
+        ("소고기", "YEOMYEOM", "그냥그랬어요", "대전 유성구 계룡로 30", "고깃집", "mp4", "video4")
     ]
     
     lazy var list:[VideoVO] = {
@@ -39,7 +40,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
-//        collectionView.register(UINib(nibName: "VideoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
+        
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumInteritemSpacing = 0
+        
+        self.collectionView.collectionViewLayout = flowLayout
+        
     }
     
     // 해당 row에 이벤트가 발생했을때 출력되는 함수
@@ -62,10 +69,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
     
+    // 콜렉션 뷰
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
+        let cvRect = collectionView.frame
+        return CGSize(width: cvRect.width, height: cvRect.height)
     }
-    
     
 }
 
