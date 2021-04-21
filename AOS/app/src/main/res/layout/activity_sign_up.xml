@@ -25,69 +25,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
+        android:background="@color/white"
         android:src="@drawable/ic_add_profile"/>
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="@dimen/text_input_height"
-        android:layout_height="@dimen/text_input_height"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_add_profile"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="12dp"
-        android:gravity="center"
+        android:gravity="bottom|center_horizontal"
+        android:textSize="@dimen/sign_up_font_size"
         android:text="@string/name"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout_name"
         android:layout_width="0dp"
-        android:layout_height="@dimen/text_input_height"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/tv_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_name"
-        android:hint="@string/please_write_name">
+        android:layout_marginRight="24dp"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_introduction"
         android:layout_width="@dimen/text_input_height"
-        android:layout_height="@dimen/text_input_height"
+        android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_name"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="12dp"
-        android:gravity="center"
+        android:textSize="@dimen/sign_up_font_size"
+        android:gravity="bottom|center_horizontal"
         android:text="@string/introduction"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout_introduction"
         android:layout_width="0dp"
-        android:layout_height="@dimen/text_input_height"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/tv_introduction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_introduction"
-        android:hint="@string/please_write_introduction">
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        app:errorEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_text_introduction"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_complete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_introduction"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="48dp"
+        android:layout_marginHorizontal="24dp"
+        android:background="@drawable/disabled_btn"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_size"
         android:text="@string/complete"
+        android:enabled="false"
         android:onClick="startMainActivity"/>
 
 
