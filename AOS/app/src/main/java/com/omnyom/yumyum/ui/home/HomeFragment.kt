@@ -15,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FoodListItemBinding
 import com.omnyom.yumyum.databinding.FragmentHomeBinding
-import com.omnyom.yumyum.ui.share.ShareFragment
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null

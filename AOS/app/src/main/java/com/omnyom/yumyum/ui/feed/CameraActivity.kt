@@ -1,28 +1,21 @@
-package com.omnyom.yumyum.ui.camera
+package com.omnyom.yumyum.ui.feed
 
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.omnyom.yumyum.BaseActivity
 import com.omnyom.yumyum.databinding.ActivityCameraBinding
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 class CameraActivity : BaseActivity() {
     val PERM_STORAGE = 99 // 외부 저장소 권한 처리
     val PERM_CAMERA = 100 // 카메라 권한처리
     val REQ_CAMERA = 101 // 카메라 촬영 요청
+    lateinit var videoUri: String
 
     val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +23,15 @@ class CameraActivity : BaseActivity() {
         setContentView(binding.root)
 
         requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERM_STORAGE)
+
+        binding.btnNext.setOnClickListener { goNext() }
+    }
+
+    fun goNext() {
+        val intent = Intent(this, FeedCreateActivity::class.java)
+        intent.putExtra("videoUri", videoUri)
+        intent.putExtra("testText", "오닝?")
+        startActivity(intent)
     }
 
     override fun permissionGranted(requestCode: Int) {
@@ -68,21 +70,19 @@ class CameraActivity : BaseActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intent)
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 REQ_CAMERA -> {
-                    binding.videoPreview.setVideoURI(data?.data)
+                    videoUri = data?.data.toString()
+                    binding.videoPreview.setVideoURI(Uri.parse(videoUri))
                     binding.btnCamera.visibility = View.GONE
                     binding.videoPreview.visibility = View.VISIBLE
                     binding.btnNext.visibility = View.VISIBLE
                     binding.videoPreview.setOnPreparedListener {mp ->
                         binding.videoPreview.start()
                         mp!!.isLooping = true
-
                     }
-
-
 
                 }
             }

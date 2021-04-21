@@ -38,7 +38,19 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    // kakao map
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
+            universalApk false
+        }
+    }
 }
+
+
 
 dependencies {
     def room_version = "2.2.6"
@@ -61,6 +73,16 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+    // TextInputEditText
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // kakao maps
+    compile files('libs/libDaumMapAndroid.jar')
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/libDaumMapAndroid.jar')
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
