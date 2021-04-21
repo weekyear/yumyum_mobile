@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,24 +12,56 @@
         <!--Review-->
         <scene sceneID="W6e-ZH-S9M">
             <objects>
-                <viewController id="4r9-9L-Eci" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="4r9-9L-Eci" customClass="CameraVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rZw-FG-23O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-9I-XNC">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-ON-CqT">
+                                <rect key="frame" x="182" y="423" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="MBF-XO-AcG"/>
+                                    <constraint firstAttribute="height" constant="50" id="nv9-Dx-gvb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="camera.circle.fill" catalog="system" renderingMode="original"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BbK-DW-A7N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RaT-9I-XNC" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" id="Bug-3V-GIZ"/>
+                            <constraint firstItem="BbK-DW-A7N" firstAttribute="trailing" secondItem="RaT-9I-XNC" secondAttribute="trailing" id="JNV-O6-sUP"/>
+                            <constraint firstItem="LrG-ON-CqT" firstAttribute="centerX" secondItem="rZw-FG-23O" secondAttribute="centerX" id="PAY-lf-OQt"/>
+                            <constraint firstAttribute="bottom" secondItem="RaT-9I-XNC" secondAttribute="bottom" id="Q6d-Eb-7Gv"/>
+                            <constraint firstItem="LrG-ON-CqT" firstAttribute="centerY" secondItem="rZw-FG-23O" secondAttribute="centerY" id="aJy-wt-zp3"/>
+                            <constraint firstItem="RaT-9I-XNC" firstAttribute="top" secondItem="rZw-FG-23O" secondAttribute="top" id="w7u-92-hl2"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Review" image="plus" catalog="system" id="HvN-Vx-kaX"/>
+                    <connections>
+                        <outlet property="cameraView" destination="RaT-9I-XNC" id="2Ut-5a-w2h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQH-uB-Wjd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66.666666666666671" y="1070.7589285714284"/>
+            <point key="canvasLocation" x="66.666666666666671" y="1070.0892857142856"/>
         </scene>
     </scenes>
     <resources>
+        <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
