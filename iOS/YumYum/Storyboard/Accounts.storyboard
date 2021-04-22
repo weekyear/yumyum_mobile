@@ -96,8 +96,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LoginView" destination="Nd0-on-6Im" id="mDq-f7-Nrx"/>
-                        <outlet property="signInButton" destination="0dJ-z6-4Yz" id="WSC-hR-AVa"/>
+                        <outlet property="appleLoginView" destination="Nd0-on-6Im" id="mDq-f7-Nrx"/>
+                        <outlet property="googleLoginView" destination="0dJ-z6-4Yz" id="WSC-hR-AVa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jy-5o-mEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -107,7 +107,7 @@
         <!--View Controller-->
         <scene sceneID="yWs-vn-gLI">
             <objects>
-                <viewController id="d0X-vC-QzQ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="d0X-vC-QzQ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S6G-Sj-2es">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,7 +122,7 @@
                                 <rect key="frame" x="30" y="508.5" width="354" height="30"/>
                                 <state key="normal" title="회원가입 완료"/>
                                 <connections>
-                                    <segue destination="gPl-Kc-JW4" kind="show" id="JUC-fO-uJg"/>
+                                    <segue destination="gPl-Kc-JW4" kind="show" id="8gt-La-xvK"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quokka" translatesAutoresizingMaskIntoConstraints="NO" id="BCz-kZ-zYk">
