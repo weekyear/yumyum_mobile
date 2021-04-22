@@ -19,14 +19,15 @@
 
     <ImageButton
         android:id="@+id/btn_add_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_up_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
-        android:background="@color/white"
-        android:src="@drawable/ic_add_profile"/>
+        android:background="@drawable/border_line_black"
+        android:src="@drawable/ic_user_gray"/>
 
     <TextView
         android:id="@+id/tv_name"
@@ -98,7 +99,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="48dp"
         android:layout_marginHorizontal="24dp"
-        android:background="@drawable/disabled_btn"
+        android:background="@drawable/btn_disabled"
         android:textColor="@color/white"
         android:textSize="@dimen/btn_size"
         android:text="@string/complete"

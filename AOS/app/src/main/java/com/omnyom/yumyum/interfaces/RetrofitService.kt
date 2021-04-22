@@ -23,5 +23,6 @@ interface RetrofitService {
     @POST("user/login")
     fun login(@Body parameters: HashMap<String, String>): Call<LoginResponse>
 
-
+    @GET("user/login/{email}")
+    fun loginEmail(@Path("email") email: String): Call<LoginResponse>
 }
