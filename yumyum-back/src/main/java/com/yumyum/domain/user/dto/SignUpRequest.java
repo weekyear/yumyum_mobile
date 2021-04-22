@@ -24,7 +24,7 @@ public class SignUpRequest {
         return User.builder()
                 .email(email)
                 .nickname(nickname)
-                .introduction("한줄로 자신을 소개해주세요.")
+                .introduction(introduction)
                 .profilePath(profilePath)
                 .createdDate(nowTime)
                 .modifiedDate(nowTime)
