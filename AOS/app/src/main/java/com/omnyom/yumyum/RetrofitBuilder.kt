@@ -8,10 +8,11 @@ object RetrofitBuilder {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://k4b206.p.ssafy.io/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
+            .baseUrl("http://10.0.2.2:8080/yumyum/")
+//                .baseUrl("http://k4b206.p.ssafy.io:8000
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
 
     fun<T> buildService(service: Class<T>): T{
         return retrofit.create(service)

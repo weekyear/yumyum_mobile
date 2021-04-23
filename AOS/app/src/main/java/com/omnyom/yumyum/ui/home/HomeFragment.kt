@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FoodListItemBinding
 import com.omnyom.yumyum.databinding.FragmentHomeBinding
 
@@ -71,9 +73,23 @@ class HomeFragment : Fragment() {
         }
 
         class Holder(private val innerBinding: FoodListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
+            init {
+                innerBinding.root.setOnClickListener {
+                    Toast.makeText(innerBinding.root.context, "클릭된 아이템 = ${innerBinding.textName.text}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
 
         }
     }
+
+//    fun goToShare() {
+//        val shareFragment = ShareFragment()
+//        val transaction =  childFragmentManager.beginTransaction()
+//        transaction.add(R.id.btn_share, shareFragment)
+//        transaction.addToBackStack("share")
+//        transaction.commit()
+//    }
 }
