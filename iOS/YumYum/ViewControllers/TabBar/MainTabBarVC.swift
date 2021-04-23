@@ -33,18 +33,5 @@ extension MainTabBarVC: UITabBarControllerDelegate {
         return true
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        switch tabBarController.selectedIndex {
-        case 0:
-            print("0입니다")
-        case 1:
-            print("1입니다")
-            
-        case 2:
-            print("2다")
-        default:
-            print("gg")
-        }
-    }
 }
 
