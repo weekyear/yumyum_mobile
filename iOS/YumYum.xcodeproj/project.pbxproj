@@ -140,6 +140,13 @@
 			path = YumYumUITests;
 			sourceTree = "<group>";
 		};
+		E56663E9263347E2003A503F /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		E5747F14262AA10F00DD0672 /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +172,7 @@
 		E5920A152627C19400836123 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E56663E9263347E2003A503F /* MyPage */,
 				E5B11317262F430300ACB7C8 /* TabBar */,
 				E5747F14262AA10F00DD0672 /* Review */,
 				E52F57F72625B746002C2637 /* ViewController.swift */,

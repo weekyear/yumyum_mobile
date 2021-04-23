@@ -12,15 +12,31 @@
         <!--Review-->
         <scene sceneID="W6e-ZH-S9M">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="4r9-9L-Eci" customClass="CameraVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraVC" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4r9-9L-Eci" customClass="CameraVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rZw-FG-23O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-9I-XNC">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="hihi?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cfk-7F-wfo">
+                                        <rect key="frame" x="139" y="273" width="35" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JT-Bv-MWd" userLabel="닫을거야야야">
+                                <rect key="frame" x="10" y="54" width="54" height="22"/>
+                                <state key="normal" title="닫자" image="xmark.seal.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="closeCamera:" destination="4r9-9L-Eci" eventType="touchUpInside" id="CI2-uK-c9Z"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-ON-CqT">
                                 <rect key="frame" x="182" y="423" width="50" height="50"/>
                                 <constraints>
@@ -36,6 +52,8 @@
                         <viewLayoutGuide key="safeArea" id="BbK-DW-A7N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="top" secondItem="BbK-DW-A7N" secondAttribute="top" constant="10" id="6mz-pD-5M4"/>
+                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" constant="10" id="7Zs-qd-a1r"/>
                             <constraint firstItem="RaT-9I-XNC" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" id="Bug-3V-GIZ"/>
                             <constraint firstItem="BbK-DW-A7N" firstAttribute="trailing" secondItem="RaT-9I-XNC" secondAttribute="trailing" id="JNV-O6-sUP"/>
                             <constraint firstItem="LrG-ON-CqT" firstAttribute="centerX" secondItem="rZw-FG-23O" secondAttribute="centerX" id="PAY-lf-OQt"/>
@@ -46,17 +64,42 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Review" image="plus" catalog="system" id="HvN-Vx-kaX"/>
                     <connections>
-                        <outlet property="cameraView" destination="RaT-9I-XNC" id="2Ut-5a-w2h"/>
+                        <outlet property="cameraView" destination="RaT-9I-XNC" id="d7f-6i-aOz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQH-uB-Wjd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="66.666666666666671" y="1070.0892857142856"/>
+            <point key="canvasLocation" x="66.666666666666671" y="1069.4196428571429"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zWk-L0-Mxv">
+            <objects>
+                <viewController id="xw1-m5-Egb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J7D-mr-oj4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="camera test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGf-Sf-trs">
+                                <rect key="frame" x="186" y="371" width="91" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yWH-fH-nF1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NOG-Kp-qrX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="959" y="1276"/>
         </scene>
     </scenes>
     <resources>
         <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="xmark.seal.fill" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

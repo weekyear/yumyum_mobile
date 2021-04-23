@@ -39,10 +39,10 @@
         <!--Review-->
         <scene sceneID="yOo-5Q-w3Y">
             <objects>
-                <viewControllerPlaceholder storyboardName="Review" id="e6U-0F-zhe" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ymd-c9-DVm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="Review" storyboardName="Review" id="e6U-0F-zhe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Hbr-SX-7jd"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ymd-c9-DVm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="67" y="1071"/>
         </scene>

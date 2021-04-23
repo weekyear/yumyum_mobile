@@ -16,25 +16,26 @@ class CameraVC: UIViewController {
 
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoDevice: AVCaptureDevice!
-    
     var videoInput: AVCaptureDeviceInput!
-    
     var audioInput: AVCaptureDeviceInput!
-    
     var videoOutput: AVCaptureMovieFileOutput!
     
-
-
     @IBOutlet weak var cameraView: UIView!
+    @IBAction func closeCamera(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // tabbar 가리기
+//        tabBarController?.tabBar.isHidden = true
+
         
-        
-        cameraView.layer.addSublayer(previewLayer)
+//        cameraView.layer.addSublayer(previewLayer)
+        view.backgroundColor = .red
         requestCameraPermission()
         requestGalleryPermission()
         
