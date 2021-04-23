@@ -46,10 +46,10 @@ public class User {
     @Column(name = "modified_date", nullable = false)
     private LocalDateTime modifiedDate;
 
-    public void updateUser(final UpdateRequest dto){
+    public void updateUser(final UpdateRequest dto, final String profilePath){
         this.nickname = dto.getNickname();
         this.introduction = dto.getIntroduction();
-        this.profilePath = dto.getProfilePath();
+        this.profilePath = profilePath;
         this.modifiedDate = LocalDateTime.now();
     }
 }
