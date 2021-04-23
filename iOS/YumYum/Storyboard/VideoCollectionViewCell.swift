@@ -7,9 +7,9 @@
 
 import UIKit
 import AVFoundation
+import GoogleSignIn
 
-class VideoCollectionViewCell: UICollectionViewCell {
-
+class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var videoLayout: UIView!
     
@@ -24,6 +24,20 @@ class VideoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userLabel: UILabel!
     
     @IBOutlet weak var placeStackView : UIStackView!
+    
+    @IBOutlet weak var logOutBtn: UIButton!
+    
+    @IBAction func logout(_ sender: Any) {
+        // 구글로그인 해제하고
+        GIDSignIn.sharedInstance()?.signOut()
+        UserDefaults.standard.removeObject(forKey: "userInfo")
+        
+        // 아래 코드를 통해 현재 로그인이 됬는지 안됬는지 확인할 수 있음.
+//        GIDSignIn.sharedInstance()?.currentUser != nil)
+        
+        let storyboard: UIStoryboard? = UIStoryboard(name: "Accounts", bundle: Bundle.main)
+        print("로그아웃 성공")
+    }
     
     var player : AVPlayer?
     
@@ -72,7 +86,11 @@ class VideoCollectionViewCell: UICollectionViewCell {
         videoLayout.bringSubviewToFront(reviewLabel)
         videoLayout.bringSubviewToFront(userLabel)
         videoLayout.bringSubviewToFront(placeStackView)
+        videoLayout.bringSubviewToFront(logOutBtn)
+        
     }
+    
+    
 
 }
 

@@ -72,6 +72,14 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiE-ON-1Ca">
+                                                            <rect key="frame" x="329" y="22" width="52" height="30"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <state key="normal" title="로그아웃"/>
+                                                            <connections>
+                                                                <action selector="logout:" destination="rpI-ek-Zzn" eventType="touchUpInside" id="VZC-0G-Nks"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -83,8 +91,10 @@
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="QmU-RZ-Xqn"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="WoY-Nr-Mh6"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="top" secondItem="3bU-hd-RGH" secondAttribute="bottom" constant="8" id="ZOK-Gh-ZbC"/>
+                                                        <constraint firstItem="HiE-ON-1Ca" firstAttribute="top" secondItem="lQR-Jy-oBF" secondAttribute="top" constant="22" id="hgE-hr-aYT"/>
                                                         <constraint firstAttribute="trailing" secondItem="1eg-vj-KMi" secondAttribute="trailing" constant="26" id="lCi-SX-WtT"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ctm-Jv-q22" secondAttribute="trailing" constant="30" id="qRZ-lN-ofE"/>
+                                                        <constraint firstAttribute="trailing" secondItem="HiE-ON-1Ca" secondAttribute="trailing" constant="26" id="wo8-pd-eT0"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3bU-hd-RGH" secondAttribute="trailing" constant="30" id="xSc-3K-4L9"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="top" secondItem="ig6-dI-2UN" secondAttribute="bottom" constant="8" id="y0W-48-qhE"/>
                                                     </constraints>
@@ -101,6 +111,7 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="Bq1-T9-SLb" id="aZZ-3R-ZSM"/>
                                             <outlet property="foodLabel" destination="ctm-Jv-q22" id="iHl-oG-ln3"/>
+                                            <outlet property="logOutBtn" destination="HiE-ON-1Ca" id="x53-LG-wo6"/>
                                             <outlet property="placeLabel" destination="ljz-OA-fhk" id="fzi-bV-dau"/>
                                             <outlet property="placeStackView" destination="3bU-hd-RGH" id="bwF-B8-qDW"/>
                                             <outlet property="reviewLabel" destination="1eg-vj-KMi" id="rsb-LO-ygl"/>

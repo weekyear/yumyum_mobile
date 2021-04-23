@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import GoogleSignIn
+
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let cellIdentifier: String = "cell"

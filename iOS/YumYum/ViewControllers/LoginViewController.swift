@@ -27,30 +27,32 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
         googleLoginView.style = .wide
         addButton()
         checkLogin()
-        // view클릭하면 이동시키도록 지정
-//        clickView()
+        print(GIDSignIn.sharedInstance()?.currentUser != nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("화면이 표시될때 실행됩니다.")
     }
     
     func checkLogin(){
-        if let userId = plist.string(forKey: "userInfo"){
-            
+        print("들어오나요?")
+        print(plist.string(forKey: "userInfo") as! Any)
+        if plist.string(forKey: "userInfo") != nil {
+            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+            if let tabbarvc = storyboard?.instantiateViewController(identifier: "TabBarContoller") as? UITabBarController {
+                
+                tabbarvc.modalPresentationStyle = .fullScreen
+                self.present(tabbarvc, animated: true, completion: nil)
+            } else {
+                print("로그인이 안되어있어요!")
+            }
         }
     }
     // 클릭했을때 회원가입 화면으로 넘어가도록 지정 근대 이렇게하니까 바로 넘어가버리네..
 //    func clickView() {
 //        self.googleLoginView.addTarget(self, action: #selector(moveSignUp(_:)), for: UIControl.Event.touchDown)
 //    }
-    
-    @objc func moveSignUp(_ sender: Any) {
-        let storyboard: UIStoryboard? = UIStoryboard(name: "Accounts", bundle: Bundle.main)
-        
-        guard let signupvc = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") else {
-            return
-        }
-        
-        signupvc.modalPresentationStyle = .fullScreen
-        self.present(signupvc, animated: true)
-    }
     
     // 애플 로그인 버튼을 구현할 메서드 추가
     func addButton() {
@@ -65,7 +67,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                 .isActive = true
         button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
                 .isActive = true
-        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor, multiplier: 0.6)
+        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor, multiplier: 0.9)
                     .isActive = true
         button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
                     .isActive = true
@@ -156,8 +158,6 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             let plist = UserDefaults.standard
             plist.set(email, forKey: "userInfo")
             plist.synchronize()
-            
-//            moveSignUp()
             
         } else {
             print("Error : User Data Not Found")

@@ -493,7 +493,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
 - let 과 var : let은 불편 프로퍼티, var는 가변 프로퍼티를 말한다.
 - static이 붙게 되면 그 변수가 타입 프로퍼티라는 말이 되는데, 타입 프로퍼티는 그 구조체, 및 클래스 내부에서 사용되는 메서드를 사용할때 적용된다.
 - 가끔 보다보면 클래스인데 인스턴스를 안만들고 함수를 사용하는 경우가 있는데 클래스(타입)안의 메소드가 `static func ~~` 로 되어 있으면 클래스를 그대로 가져와서 함수를 사용할 수 있다.
-- 
 
 
 
@@ -509,3 +508,38 @@ extension UIViewController {
 
 ```
 
+
+
+## 동기와(sync)와 비동기(async)
+
+```swift
+     DispatchQueue.main.async {
+            // Main 큐에서 비동기 방식으로 실행할 코드
+        }
+        DispatchQueue.global().async {
+            // Background 큐에서 비동기 방식으로 실행할 코드
+        }
+        DispatchQueue.main.sync {
+            // Main 큐에서 동기 방식으로 실행할 코드인데 이거 쓰면 오류가 발생할 확률이 있음.
+        }
+        DispatchQueue.global().sync {
+            // Background 큐에서 동기방식으로 실행할 코드
+        }
+```
+
+- `DispatchQuque.main.async` 으로 실행하는 동안 UI가 멈춰져 있게된다. (= UI상호 작용이 불가하다)  단, UI를 변경하는 코드는 Main 스레드에서 실행하도록 해야한다.
+
+```swift
+var str = ""
+DispatchQueue.global().async {
+  Thread.sleep(forTimeInterval: 3)
+  str = "finished"
+  DispatchQueue.main.async {
+    self.label.text = str // UI가 변경되는 부분은 여기서 실행시켜줘야하는데, 이부분은 짦기 떄문에 오래걸리는 부분의 코드는 위에 작성하고 조금 걸리는 코드는 여기에 작성하면된다. DispatchQueue.global().async는 백그라운드에서 실행되기 떄문이다.
+  }
+}
+```
+
+### 구글 로그인
+
+- 앱델리게이트 말고 viewcontroller에서 화면 전환 시키는 방법 : https://stackoverflow.com/questions/36520067/google-login-in-login-view-controller-instead-of-appdelegate-ios-swift
