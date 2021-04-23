@@ -18,13 +18,11 @@ public class SignUpRequest {
 
     private String introduction;
 
-    private String profilePath;
-
-    public User toEntity(final LocalDateTime nowTime){
+    public User toEntity(final String profilePath, final LocalDateTime nowTime){
         return User.builder()
                 .email(email)
                 .nickname(nickname)
-                .introduction("한줄로 자신을 소개해주세요.")
+                .introduction(introduction)
                 .profilePath(profilePath)
                 .createdDate(nowTime)
                 .modifiedDate(nowTime)
