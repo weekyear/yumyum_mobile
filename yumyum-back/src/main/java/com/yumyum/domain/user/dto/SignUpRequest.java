@@ -18,9 +18,7 @@ public class SignUpRequest {
 
     private String introduction;
 
-    private String profilePath;
-
-    public User toEntity(final LocalDateTime nowTime){
+    public User toEntity(final String profilePath, final LocalDateTime nowTime){
         return User.builder()
                 .email(email)
                 .nickname(nickname)

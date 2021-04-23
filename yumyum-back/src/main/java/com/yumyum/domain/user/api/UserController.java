@@ -36,8 +36,8 @@ public class UserController {
 
     @ApiOperation(value = "회원가입", notes = "이메일, 닉네임, 한줄 소개, 프로필 사진(필수x)을 받아 회원가입한다.")
     @PostMapping("/signup")
-    public Object signUp(@RequestBody final SignUpRequest dto) {
-        final UserResponse response = userSignUpService.doSignUp(dto);
+    public Object signUp(@RequestBody final SignUpRequest dto, @RequestParam(required = false) final MultipartFile file) {
+        final UserResponse response = userSignUpService.doSignUp(dto, file);
         return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
@@ -55,17 +55,17 @@ public class UserController {
         return HttpUtils.makeResponse("200", new UserResponse(user), "success", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "프로필 이미지 업로드", notes = "프로필 이미지를 업로드 후 경로를 반환한다.")
-    @PostMapping("/profile")
-    public Object profileUpload(@RequestParam MultipartFile file) {
-        final String profilePath = fileUploadService.upload(file);
-        return HttpUtils.makeResponse("200", profilePath, "success", HttpStatus.OK);
-    }
+//    @ApiOperation(value = "프로필 이미지 업로드", notes = "프로필 이미지를 업로드 후 경로를 반환한다.")
+//    @PostMapping("/profile")
+//    public Object profileUpload(@RequestParam final MultipartFile file) {
+//        final String profilePath = fileUploadService.upload(file);
+//        return HttpUtils.makeResponse("200", profilePath, "success", HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "회원 수정", notes = "회원 번호로 닉네임과 한줄 소개를 수정한다.")
     @PutMapping("")
-    public Object updateUser(@RequestBody final UpdateRequest dto) {
-        final UserResponse response = userUpdateService.updateUser(dto);
+    public Object updateUser(@RequestBody final UpdateRequest dto, @RequestParam(required = false) final MultipartFile file) {
+        final UserResponse response = userUpdateService.updateUser(dto, file);
         return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
