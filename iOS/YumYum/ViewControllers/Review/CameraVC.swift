@@ -20,32 +20,31 @@ class CameraVC: UIViewController {
     var audioInput: AVCaptureDeviceInput!
     var videoOutput: AVCaptureMovieFileOutput!
     
-    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var cameraView: PreviewView!
+    
     @IBAction func closeCamera(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    lazy var previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+    var previewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // tabbar 가리기
-//        tabBarController?.tabBar.isHidden = true
-
-        
-//        cameraView.layer.addSublayer(previewLayer)
-        view.backgroundColor = .red
+    
+        // 권한 설정
         requestCameraPermission()
         requestGalleryPermission()
         
+        if !captureSession.isRunning {
+            captureSession.startRunning()
+        }
+        
+        cameraView.session = captureSession
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !captureSession.isRunning {
-            captureSession.startRunning()
-        }
+
     }
     
     
@@ -69,6 +68,7 @@ class CameraVC: UIViewController {
                 AVCaptureDevice.requestAccess(for: .video) { granted in
                     if granted {
                         print("Camera: 권한 허용")
+                        self.setupCaptureSession()
                     } else {
                         print("Camera: 권한 거부")
                     }

@@ -21,6 +21,7 @@
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
 		E5920A2A2627C30B00836123 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A292627C30B00836123 /* MyPage.storyboard */; };
 		E5920A352627C47600836123 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A342627C47600836123 /* Accounts.storyboard */; };
+		E5B071302634761E0094E880 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0712F2634761E0094E880 /* PreviewView.swift */; };
 		E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
 		E5920A292627C30B00836123 /* MyPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = SOURCE_ROOT; };
 		E5920A342627C47600836123 /* Accounts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Accounts.storyboard; sourceTree = "<group>"; };
+		E5B0712F2634761E0094E880 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E5747F0F262AA0F300DD0672 /* CameraVC.swift */,
+				E5B0712F2634761E0094E880 /* PreviewView.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			files = (
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
+				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,

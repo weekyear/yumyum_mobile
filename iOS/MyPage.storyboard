@@ -48,13 +48,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="121" translatesAutoresizingMaskIntoConstraints="NO" id="lHM-cF-Ezj">
                                         <rect key="frame" x="50" y="14" width="314" height="22"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uic-uI-cAp">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uic-uI-cAp">
                                                 <rect key="frame" x="0.0" y="0.0" width="96.5" height="22"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" image="square.grid.3x3" catalog="system"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85x-62-a5L">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="85x-62-a5L">
                                                 <rect key="frame" x="217.5" y="0.0" width="96.5" height="22"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" image="suit.heart" catalog="system"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="C5V-TV-hyP">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="JNs-ZJ-yTe">
+                        <barButtonItem key="rightBarButtonItem" title="설정" id="JNs-ZJ-yTe">
                             <connections>
                                 <segue destination="qfF-xF-Q9e" kind="push" id="cxs-Sn-93L"/>
                             </connections>
@@ -189,6 +189,8 @@
     </scenes>
     <resources>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="square.grid.3x3" catalog="system" width="128" height="112"/>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
