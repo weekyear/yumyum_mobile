@@ -68,7 +68,7 @@
 		54552441262FF0A100BFFD54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		548AB7E02629FDBB0093215D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = SOURCE_ROOT; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
-		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/Storyboard/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/ViewControllers/Home/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +143,25 @@
 				452F8AFF9E6F936F5A82F3E2 /* Pods-YumYumTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		54D5B2DC26366AA3004F0BBB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				540CAAF326314F7D0045917B /* SignUpViewController.swift */,
+				54E0EEE3262835950006D49D /* LoginViewController.swift */,
+				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		54D5B2DD26366AD5004F0BBB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
+				54C6DA5B262B1965006C8D96 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		E52F57E72625B746002C2637 = {
@@ -237,15 +256,12 @@
 		E5920A152627C19400836123 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
+				54D5B2DD26366AD5004F0BBB /* Home */,
+				54D5B2DC26366AA3004F0BBB /* Login */,
 				E56663E9263347E2003A503F /* MyPage */,
 				E5B11317262F430300ACB7C8 /* TabBar */,
 				E5747F14262AA10F00DD0672 /* Review */,
 				E52F57F72625B746002C2637 /* ViewController.swift */,
-				54C6DA5B262B1965006C8D96 /* HomeViewController.swift */,
-				54E0EEE3262835950006D49D /* LoginViewController.swift */,
-				540CAAF326314F7D0045917B /* SignUpViewController.swift */,
-				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -777,13 +793,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.duaduadua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -798,13 +814,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.duaduadua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
