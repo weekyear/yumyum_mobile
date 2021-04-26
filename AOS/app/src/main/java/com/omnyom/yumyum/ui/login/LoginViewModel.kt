@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.login
 
+import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,11 +31,13 @@ class LoginViewModel : ViewModel() {
         val call = retrofitService.login(email)
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                response
-                if (response.code() == 404) {
-                    onFailure()
-                } else if (response.code() in 200..299) {
+                if(response.isSuccessful) {
                     onSuccess()
+                }
+                else {
+                    when (response.code()) {
+                        404 -> onFailure()
+                    }
                 }
             }
 

@@ -3,8 +3,8 @@ package com.omnyom.yumyum.model.login
 data class LoginResponse (val status: String,
                           val error: String?,
                           val code: String?,
-                          val message: String?,
-                          val data: Data)
+                          val message: String,
+                          val data: Data?)
 
 data class Data(
         val id : Long,
