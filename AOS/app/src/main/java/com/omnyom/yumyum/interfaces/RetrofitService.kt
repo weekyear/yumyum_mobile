@@ -2,6 +2,7 @@ package com.omnyom.yumyum.interfaces
 
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.model.myinfo.UserModel
+import com.omnyom.yumyum.model.signup.SignUpResponse
 //import com.omnyom.yumyum.model.myinfo.UserSampleModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -21,8 +22,11 @@ interface RetrofitService {
 //    fun getUser(@Query("client_id") client_id: String, @Query("redirect_uri") redirect_uri: String, @Query("response_type") response_type: String, @Query("scope") scope: String): Call<UserModel>
 //
     @POST("user/login")
-    fun login(@Body parameters: HashMap<String, String>): Call<LoginResponse>
+    fun loginSample(@Body parameters: HashMap<String, String>): Call<LoginResponse>
 
     @GET("user/login/{email}")
-    fun loginEmail(@Path("email") email: String): Call<LoginResponse>
+    fun login(@Path("email") email: String): Call<LoginResponse>
+
+    @POST("user/signup")
+    fun signup(@Body parameters: HashMap<String, String>): Call<SignUpResponse>
 }

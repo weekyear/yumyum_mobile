@@ -1,6 +1,8 @@
 package com.omnyom.yumyum.ui.signup
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -8,34 +10,47 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySignUpBinding
-import java.io.InputStream
+import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private companion object {
         const val IMAGE_CODE = 10
     }
 
-    private lateinit var binding : ActivitySignUpBinding
+    private val signUpVM: SignUpViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        val view = binding.root
-        super.onCreate(savedInstanceState)
-        setContentView(view)
-        supportActionBar?.hide()
+    override fun extraSetupBinding() {
+        binding.vm = signUpVM
+        binding.lifecycleOwner = this
+    }
+
+    override fun setup() { }
+
+    override fun setupViews() {
         textWatcher()
+        binding.btnAddProfile.setOnClickListener { getImageFromGrallery() }
+        supportActionBar?.hide()
+    }
 
-        binding.btnAddProfile.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v: View?) {
-                getImageFromGrallery()
-            }
+    override fun onSubscribe() {
+        signUpVM.complete.observe(this, {
+            PreferencesManager.getString(this, getString(R.string.saved_google_email))?.let { it1 -> signUpVM.signUp(it1) }
+//            signUpVM.signUp(sharedPref.getString(getString(R.string.saved_google_email), "")?: "")
+            startMainActivity(binding.btnComplete)
         })
     }
+
+    override fun release() { }
 
     fun startMainActivity(v: View) {
         val intent = Intent(application, MainActivity::class.java)

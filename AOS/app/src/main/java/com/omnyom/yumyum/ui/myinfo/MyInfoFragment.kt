@@ -13,6 +13,7 @@ import com.omnyom.yumyum.databinding.FragmentMyInfoBinding
 import com.omnyom.yumyum.ui.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignOut
 
@@ -42,15 +43,9 @@ class MyInfoFragment : Fragment() {
         return root
     }
 
-    private val googleSignInClient by lazy {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build()
-        GoogleSignIn.getClient(requireActivity().parent, gso)
-    }
-
     private fun signOut() {
         firebaseAuth?.signOut()
-        googleSignOut{startLoginActivity()}
+        googleSignOut(activity as MainActivity, {startLoginActivity()})
     }
 
     private fun startLoginActivity() {

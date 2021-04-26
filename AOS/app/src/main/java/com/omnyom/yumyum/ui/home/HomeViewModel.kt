@@ -15,24 +15,6 @@ import retrofit2.*
 class HomeViewModel : ViewModel() {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
-    init {
-        var call = retrofitService.loginEmail("jwnsgus@gmail.com")
-        call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    response
-                    response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                t
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }
