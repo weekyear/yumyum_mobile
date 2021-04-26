@@ -10,6 +10,7 @@ import UIKit
 import AuthenticationServices
 import GoogleSignIn
 import Firebase
+import Alamofire
 
 class LoginViewController : UIViewController, GIDSignInDelegate {
     @IBOutlet weak var googleLoginView : GIDSignInButton!
@@ -27,10 +28,17 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
         googleLoginView.style = .wide
         addButton()
         checkLogin()
+        // 구글 로그인되어있는지 안되어 있는지 확인
         print(GIDSignIn.sharedInstance()?.currentUser != nil)
+        
+        let url = "http://swiftapi.rubypaper.co.kr:2029/practice/currentTime"
+        AF.request(url).responseString() { response in
+            print("으어??")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print("화면이 표시될때 실행됩니다.")
     }
     
