@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--Main Tab BarVC-->
         <scene sceneID="qyT-DZ-Ohf">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarContoller" automaticallyAdjustsScrollViewInsets="NO" id="1Lx-nR-53r" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Lx-nR-53r" customClass="MainTabBarVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4oV-A1-fOR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -39,7 +39,7 @@
         <!--Review-->
         <scene sceneID="yOo-5Q-w3Y">
             <objects>
-                <viewControllerPlaceholder storyboardName="Review" id="e6U-0F-zhe" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="Review" storyboardName="Review" id="e6U-0F-zhe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Hbr-SX-7jd"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ymd-c9-DVm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -48,7 +48,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
         if plist.string(forKey: "userInfo") != nil {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
-            if let tabbarvc = storyboard?.instantiateViewController(identifier: "TabBarContoller") as? UITabBarController {
+            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
                 
                 tabbarvc.modalPresentationStyle = .fullScreen
                 self.present(tabbarvc, animated: true, completion: nil)

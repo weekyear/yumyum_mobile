@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
         let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
-        if let tabbarvc = storyboard?.instantiateViewController(identifier: "TabBarContoller") as? UITabBarController {
+        if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
             
             tabbarvc.modalPresentationStyle = .fullScreen
             self.present(tabbarvc, animated: true, completion: nil)
