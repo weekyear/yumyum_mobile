@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import android.util.Log
 import androidx.activity.viewModels
+import com.google.android.gms.auth.api.Auth
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityLoginBinding
@@ -36,10 +38,7 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
             firebaseAuth!!.currentUser.email
-            val loggedEmail = sharedPref.getString(getString(R.string.saved_google_email), "")
-            if (loggedEmail!!.isNotEmpty()) {
-                startMainActivity()
-            }
+            startMainActivity()
         }
     }
 
@@ -57,6 +56,9 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+        Log.e("RESULT", result?.status.toString())
 
         if (resultCode == Activity.RESULT_OK && requestCode == RESULT_CODE) {
             val loginEmail = googleSignIn(data)
