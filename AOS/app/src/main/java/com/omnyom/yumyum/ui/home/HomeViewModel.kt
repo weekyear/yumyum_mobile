@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.AllFeedResponse
-import com.omnyom.yumyum.model.feed.Data
+import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
 
 import retrofit2.*
@@ -32,9 +32,9 @@ class HomeViewModel : ViewModel() {
     }
 
     // FoodList를 LiveData 객채로 생성
-    private val _foodData = MutableLiveData<List<Data>>().apply {
+    private val _foodData = MutableLiveData<List<FeedData>>().apply {
     }
-    val foodData : LiveData<List<Data>> = _foodData
+    val foodData : LiveData<List<FeedData>> = _foodData
 
 
     // 장소 불러오기

@@ -1,12 +1,12 @@
 package com.omnyom.yumyum.model.feed
 
 data class AllFeedResponse(
-    val data: List<Data>,
-    val message: String,
-    val status: String
+        val `data`: List<FeedData>,
+        val message: String,
+        val status: String
 )
 
-data class Data(
+data class FeedData(
         val content: String,
         val feedId: Int,
         val isLike: Boolean,

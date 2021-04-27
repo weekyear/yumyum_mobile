@@ -1,7 +1,5 @@
 package com.omnyom.yumyum.ui.home
 
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.omnyom.yumyum.databinding.FoodListItemBinding
 import com.omnyom.yumyum.databinding.FragmentHomeBinding
-import com.omnyom.yumyum.model.feed.Data
+import com.omnyom.yumyum.model.feed.FeedData
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -49,7 +47,7 @@ class HomeFragment : Fragment() {
 
 
     // 어탭터 형성
-    class FeedPagesAdapter(foodList: List<Data>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
+    class FeedPagesAdapter(foodList: List<FeedData>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
         var item = foodList
 
 

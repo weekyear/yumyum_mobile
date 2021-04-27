@@ -1,12 +1,12 @@
 package com.omnyom.yumyum.model.signup
 
 data class SignUpResponse(
-    val `data`: Data,
+    val `data`: SignUpData,
     val message: String,
     val status: String
 )
 
-data class Data(
+data class SignUpData(
         val email: String,
         val id: Int,
         val introduction: String,

@@ -138,10 +138,6 @@ class FeedCreateActivity : AppCompatActivity() {
 
         })
     }
-
-
-
-
 }
 
 

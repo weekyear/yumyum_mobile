@@ -6,7 +6,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.omnyom.yumyum.model.login.LoginResponse
-import com.omnyom.yumyum.model.login.Data
+import com.omnyom.yumyum.model.login.LoginData
 import java.lang.reflect.Type
 
 class LoginJsonAdapter : JsonDeserializer<LoginResponse> {
@@ -25,7 +25,7 @@ class LoginJsonAdapter : JsonDeserializer<LoginResponse> {
                     null,
                     null,
                     jsonObject.get("message").asString,
-                    gson.fromJson(jsonObject.get("data").asJsonObject.toString(), object : TypeToken<Data>(){}.type)
+                    gson.fromJson(jsonObject.get("data").asJsonObject.toString(), object : TypeToken<LoginData>(){}.type)
             )
         } else { // status code가 http status Error code 일 경우, body가 String형식으로 반환 된다.
             response = LoginResponse(

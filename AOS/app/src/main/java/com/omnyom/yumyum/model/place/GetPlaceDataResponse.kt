@@ -1,7 +1,7 @@
 package com.omnyom.yumyum.model.place
 
 data class GetPlaceDataResponse(
-    val data: PlaceData,
+    val `data`: PlaceData,
     val message: String,
     val status: String
 )

@@ -4,9 +4,9 @@ data class LoginResponse (val status: String,
                           val error: String?,
                           val code: String?,
                           val message: String,
-                          val data: Data?)
+                          val `data`: LoginData?)
 
-data class Data(
+data class LoginData(
         val id : Long,
         val email : String,
         val nickname : String,
