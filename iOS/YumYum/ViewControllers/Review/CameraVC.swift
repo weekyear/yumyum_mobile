@@ -24,16 +24,7 @@ class CameraVC: UIViewController {
     private var backgroundRecordingID: UIBackgroundTaskIdentifier?
     
     @IBOutlet weak var cameraView: PreviewView!
-    
-    
-    
-    private let shutterButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        button.layer.cornerRadius = 50
-        button.layer.borderWidth = 10
-        button.layer.borderColor = UIColor.white.cgColor
-        return button
-    }()
+    @IBOutlet weak var recordButton: UIButton!
     
     @IBAction func closeCamera(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -43,15 +34,19 @@ class CameraVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // layout
+        setupLayout()
     
         // 권한 설정
         requestCameraPermission()
         requestGalleryPermission()
         
-        shutterButton.center = CGPoint(x: view.frame.size.width/2, y: view.frame.size.height - 200)
-        view.addSubview(shutterButton)
-        shutterButton.addTarget(self, action: #selector(didTapRecordVideo), for: .touchUpInside)
+        resetTimer()
+
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,9 +59,17 @@ class CameraVC: UIViewController {
         
         // 세션 클로징
         captureSession.stopRunning()
+        // 타이머 해제
+        timer?.invalidate()
+        timer = nil
         
     }
     
+    func setupLayout() {
+        recordButton.layer.cornerRadius = 50
+        recordButton.layer.borderWidth = 10
+        recordButton.layer.borderColor = UIColor.yellow.cgColor
+    }
     
     private func requestCameraPermission() {
         // camera 권한 설정
@@ -215,17 +218,21 @@ class CameraVC: UIViewController {
         })
     }
     
-    
-    // 녹화
-    @objc private func didTapRecordVideo() {
-        print("까꿍 녹화할거에요?")
+    // Mark: Record Video
+    @IBAction func didTapRecordVideo(_ sender: Any) {
+        
+        print("녹화중")
         guard let movieFileOutput = self.videoOutput else {
             return
         }
         
+        // 타이머
+        guard timer == nil else { return }
+        resetTimer()
+        
         let videoPreviewLayerOrientation = cameraView.videoPreviewLayer.connection?.videoOrientation
         
-        sessionQueue.async {
+        sessionQueue.async { [self] in
             if !movieFileOutput.isRecording {
                 if UIDevice.current.isMultitaskingSupported {
                     self.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
@@ -244,12 +251,50 @@ class CameraVC: UIViewController {
                 // Start recording video to a temporary file.
                 let outputFileName = NSUUID().uuidString
                 let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+                
                 movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+                
+                DispatchQueue.main.async {
+                    // 타이머 생성
+                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                            guard timer.isValid else { return }
+                        self.updateTimer(timer: timer, videoOutput: movieFileOutput)
+                    })
+                    timer?.tolerance = 0.2
+                }
+                
+                
             } else {
                 movieFileOutput.stopRecording()
             }
+            
+        }
+        
+    }
+    
+    
+    // Mark: Timer
+    
+    var timer: Timer?
+    var leftTime: Int = 3
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
+    func resetTimer() {
+        leftTime = 3
+        timeLabel.text = "3"
+    }
+    
+    func updateTimer(timer: Timer, videoOutput: AVCaptureMovieFileOutput) {
+        print(#function)
+        leftTime -= 1
+        timeLabel.text = "\(leftTime)"
+        if leftTime <= 0 {
+            timer.invalidate()
+            videoOutput.stopRecording()
         }
     }
+    
     
 }
 
