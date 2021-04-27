@@ -270,12 +270,6 @@ class CameraVC: UIViewController {
             
         }
         
-//        // 타이머 생성
-//        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
-//                guard timer.isValid else { return }
-//                self.updateTimer(timer)
-//        })
-//        timer?.tolerance = 0.2
     }
     
     
