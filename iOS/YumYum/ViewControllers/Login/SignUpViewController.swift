@@ -6,27 +6,71 @@
 //
 
 import UIKit
+import Alamofire
 
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet var profileImgView: UIImageView!
     
+    @IBOutlet weak var nickName: UITextField!
+    
+    @IBOutlet weak var introduction: UITextField!
+    
+    
+    // 회원가입 완료 후 동작하는 메서드
     @IBAction func completeSignUp(_ sender: UIButton) {
-        print("출력!")
-        // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
-        let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-
-        if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+        
+        let param : Parameters = [
+//            "email" : UserDefaults.standard.string(forKey: "userEmail")!,
+            "email" : "ssafy10@a.com",
+            "nickname" : self.nickName.text!,
+            "introduction" : self.introduction.text!,
+            "profilePath" : ""        ]
+        
+        // API 호출하고
+        let url = URLs.signUp
+        let call = AF.request(url, method: HTTPMethod.post, parameters: param, encoding: JSONEncoding.default)
+        
+        // 서버 응답 값을 처리해준다.
+        print("버튼을 클릭했습니다!")
+        call.responseJSON { res in
+            let result = try! res.result.get()
             
-            tabbarvc.modalPresentationStyle = .fullScreen
-            self.present(tabbarvc, animated: true, completion: nil)
-        } else {
-            print("탭바가 없는데요?")
+            guard let jsonObject = result as? NSDictionary else {
+                print("서버 호출 과정중에 오류!!")
+                return
+            }
+            
+            if let status = jsonObject["status"] as? String {
+                if status == "200" {
+                    print("성공했습니다!")
+                    let userData = jsonObject["data"] as! NSDictionary
+                    UserDefaults.standard.set(userData, forKey: "userData")
+                    // 내용 뽑아쓸때 아래와 같이 뽑으면 서버에서 넘겨준거 그대로 쓸수있음!
+                    UserDefaults.standard.dictionary(forKey: "userData")
+                    
+                    // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
+                    let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+                    if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+                        
+                        tabbarvc.modalPresentationStyle = .fullScreen
+                        self.present(tabbarvc, animated: true, completion: nil)
+                    } else {
+                        print("탭바가 없는데요?")
+                    }
+                }
+            } else {
+                self.alert("안됩니다!")
+                print("되면안되는데?")
+            }
+            // 로그인이 성공했으면 userData에 스웨거에서 data 딕셔너리를 넣어주는 것
         }
+        
     }
     
+    // 회원가입 둥글게 만들기!
     func makeRounded() {
-
         profileImgView.layer.borderWidth = 2
         profileImgView.layer.masksToBounds = false
         profileImgView.layer.borderColor = UIColor.systemYellow.cgColor
@@ -42,6 +86,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
         makeRounded()
+        
     }
     
     @objc func touchToPickPhoto(){
@@ -77,8 +122,37 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImgView.image = img
+            getPicturePath(img)
         }
         
         picker.dismiss(animated: true)
+    }
+    
+    func getPicturePath(_ image: UIImage) {
+        let url = URLs.profile
+        let imgData = image.jpegData(compressionQuality: 0.2)!
+        let headers: HTTPHeaders = [
+            "Content-type": "multipart/form-data"
+        ]
+    
+        let parameters = ["name": "name"]
+        
+        let call = AF.upload(multipartFormData:{ MultipartFormData in
+            for (key, value) in parameters {
+                MultipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                } //Optional for extra parameters
+
+            MultipartFormData.append(imgData, withName: "key", fileName: "ab.jpeg",mimeType: "image/jpeg")
+        }, to: url, headers: headers)
+        
+        call.responseJSON{ res in
+            switch res.result {
+            case .success(let resut):
+                print("사진업로드에 성공했습니다.: \(resut)")
+            case .failure(let err):
+                print("사진업로드 에러에러! \(err)")
+            }
+            
+        }
     }
 }

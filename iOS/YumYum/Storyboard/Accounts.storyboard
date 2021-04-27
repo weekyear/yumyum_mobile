@@ -189,6 +189,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="4rJ-Br-9iQ"/>
                     <connections>
+                        <outlet property="introduction" destination="0xh-ZD-1Oi" id="DO8-Al-0iP"/>
+                        <outlet property="nickName" destination="WQq-eU-phu" id="Z0O-In-FbN"/>
                         <outlet property="profileImgView" destination="BCz-kZ-zYk" id="rJb-YU-l06"/>
                     </connections>
                 </viewController>

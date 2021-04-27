@@ -30,7 +30,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBAction func logout(_ sender: Any) {
         // 구글로그인 해제하고
         GIDSignIn.sharedInstance()?.signOut()
-        UserDefaults.standard.removeObject(forKey: "userInfo")
+        UserDefaults.standard.removeObject(forKey: "userEamil")
         
         // 아래 코드를 통해 현재 로그인이 됬는지 안됬는지 확인할 수 있음.
 //        GIDSignIn.sharedInstance()?.currentUser != nil)
