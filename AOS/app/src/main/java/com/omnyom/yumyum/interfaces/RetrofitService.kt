@@ -1,10 +1,16 @@
 package com.omnyom.yumyum.interfaces
 
+import com.omnyom.yumyum.model.feed.*
 import com.omnyom.yumyum.model.login.LoginResponse
+import com.omnyom.yumyum.model.maps.KeywordSearchResponse
 import com.omnyom.yumyum.model.myinfo.UserModel
+import com.omnyom.yumyum.model.place.GetPlaceDataResponse
+import okhttp3.MultipartBody
 //import com.omnyom.yumyum.model.myinfo.UserSampleModel
 import retrofit2.Call
 import retrofit2.http.*
+
+
 
 interface RetrofitService {
 //    예시
@@ -23,5 +29,33 @@ interface RetrofitService {
     @POST("user/login")
     fun login(@Body parameters: HashMap<String, String>): Call<LoginResponse>
 
+    // 모든 피드 불러오기
+    @GET("feed/list/{userId}")
+    fun getAllFeeds(@Path("userId") userId: Long): Call<AllFeedResponse>
 
+    // 비디오 데이터 보내기
+    @Multipart
+    @POST("feed/video")
+    fun sendVideo(@Part file: MultipartBody.Part ): Call<SendVideoResponse>
+
+    // 피드 작성하기
+    @POST("feed/")
+    fun createFeed(@Body parameters: HashMap<String, Any>): Call<CreateFeedResponse>
+
+    // 식당ID로 정보 불러오기
+    @GET("place/{placeId}")
+    fun getPlaceData(@Path("placeId") placeId: Long) : Call<GetPlaceDataResponse>
 }
+
+interface KakaoApiService {
+    @GET("/v2/local/search/keyword.json")
+    fun placeSearch(
+            @Header("Authorization") key: String,
+            @Query("query") query: String,
+            @Query("x")x: Double,
+            @Query("y")y: Double,
+            @Query("page")page: Int,
+            @Query("size")size: Int,
+    ) : Call<KeywordSearchResponse>
+}
+
