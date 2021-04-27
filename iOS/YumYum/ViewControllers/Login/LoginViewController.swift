@@ -107,7 +107,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             print("User ID : \(userIdentifier)")
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-
+            
         default:
             break
         }
@@ -129,8 +129,8 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             return
             // 로그인 완료됬을때 아래 실행
           } else {
-            
-            guard let userEmail = user.profile.email as? String else {
+            print("로그인이 완료되었습니다.")
+            guard let userEmail = user.profile.email else {
                 return
             }
              
@@ -154,6 +154,8 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                         
                         self.compareEmail(userEmail, serverEmail)
                     }
+                } else {
+                    self.moveStoryBoard("Accounts", "SignUpViewController")
                 }
                 
             }
@@ -182,7 +184,10 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
         
     }
     
+    // 구글 로그인 이메일과 서버에 저장되어 있는 이메일을 비교하는 함수
     private func compareEmail(_ userEmail: String, _ serverEmail: String) {
+        print(userEmail)
+        print(serverEmail)
         if userEmail == serverEmail {
             print("현재 로그인 정보와 서버 로그인 이메일이 같아요!")
             // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
@@ -194,9 +199,9 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                 self.present(tabbarvc, animated: true, completion: nil)
             } else {
                 print("탭바가 없는데요?")
-            }            
+            }
         } else {
-            
+            print("들어오나요?")
             moveStoryBoard("Accounts", "SignUpViewController")
         }
     }
@@ -208,7 +213,4 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
       // ...
         print("로그아웃되었어요!")
     }
-
-
-
 }

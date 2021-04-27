@@ -21,11 +21,11 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBAction func completeSignUp(_ sender: UIButton) {
         
         let param : Parameters = [
-//            "email" : UserDefaults.standard.string(forKey: "userEmail")!,
-            "email" : "ssafy10@a.com",
+            "email" : UserDefaults.standard.string(forKey: "userEmail")!,
             "nickname" : self.nickName.text!,
             "introduction" : self.introduction.text!,
-            "profilePath" : ""        ]
+            "profilePath" : "http://k4b206.p.ssafy.io/resources/1619505379797image1.jpeg"
+        ]
         
         // API 호출하고
         let url = URLs.signUp
@@ -60,9 +60,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                         print("탭바가 없는데요?")
                     }
                 }
+                // status가 잘못됬을떄 호출한다.
             } else {
-                self.alert("안됩니다!")
-                print("되면안되는데?")
+                self.alert("실패했습니다!")
             }
             // 로그인이 성공했으면 userData에 스웨거에서 data 딕셔너리를 넣어주는 것
         }
@@ -85,6 +85,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
+        self.introduction.placeholder = "한줄 소개를 입력해주세요"
+        self.nickName.placeholder = "별명을 입력해주세요."
         makeRounded()
         
     }
