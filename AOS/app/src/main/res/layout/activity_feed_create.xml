@@ -94,23 +94,24 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <VideoView
-        android:id="@+id/video_test"
-        android:layout_width="134dp"
-        android:layout_height="155dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="250dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/text_test"
         android:layout_width="63dp"
         android:layout_height="15dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="100dp"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/video_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_content" />
+
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="70dp"
+        android:text="식당정보 불러오기"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_content" />
 
 

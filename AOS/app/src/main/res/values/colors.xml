@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#e6666e</color>
+    <color name="colorPrimary">#F6D705</color>
+    <color name="colorPrimaryDark">#F1C40F</color>
     <color name="colorAccent">#F9F9F9</color>
 
     <color name="colorSecondary">#000000</color>
@@ -12,7 +12,6 @@
     <color name="mainText">#333333</color> <!--임시-->
     <color name="colorGray">#DDDDDD</color>
     <color name="colorLightGray">#F9F9F9</color>
-    <color name="colorGray1">#999999</color>
     <color name="blue">#296DEE</color>
 
     <color name="white">#FFFFFF</color>

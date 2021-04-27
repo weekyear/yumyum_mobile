@@ -19,28 +19,25 @@ class GoogleLoginHelper {
 
         lateinit var googleSignClient: GoogleSignInClient
 
-        fun initGoogleSignInIntent(activity: Activity) {
+        fun getGoogleSignInIntent(activity: Activity): GoogleSignInClient {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id)).requestEmail().build()
-            googleSignClient = GoogleSignIn.getClient(activity, gso)
+            return GoogleSignIn.getClient(activity, gso)
         }
 
         private fun getGoogleSignInResult(data: Intent?): GoogleSignInResult? {
             return Auth.GoogleSignInApi.getSignInResultFromIntent(data)
         }
 
-        fun googleSignIn(data: Intent?): Boolean {
-            var isSuccess = false
+        fun googleSignIn(data: Intent?): String {
+            var loginEmail = ""
             val result = getGoogleSignInResult(data)
             result?.let {
                 if (it.isSuccess) {
-                    if (it!!.isSuccess) {
-                        isSuccess = true
-                        firebaseLogin(result.signInAccount!!)
-                    }
+                    firebaseLogin(result.signInAccount!!)
 
                     it.signInAccount?.displayName //이름
-                    it.signInAccount?.email //이메일
+                    loginEmail = it.signInAccount?.email?: "" //이메일
 //                    Log.e("Value", it.signInAccount?.email!!)
 
                     // 기타 등등
@@ -49,7 +46,7 @@ class GoogleLoginHelper {
                     // 에러 처리
                 }
             }
-            return isSuccess
+            return loginEmail
         }
 
         private fun firebaseLogin(googleAccount: GoogleSignInAccount) {
@@ -66,8 +63,8 @@ class GoogleLoginHelper {
             }
         }
 
-        fun googleSignOut(logoutAction: (() -> Unit)? = null) {
-            googleSignClient.signOut().addOnCompleteListener{
+        fun googleSignOut(activity:Activity, logoutAction: (() -> Unit)? = null) {
+            getGoogleSignInIntent(activity).signOut().addOnCompleteListener{
                 logoutAction?.invoke()
             }
         }
