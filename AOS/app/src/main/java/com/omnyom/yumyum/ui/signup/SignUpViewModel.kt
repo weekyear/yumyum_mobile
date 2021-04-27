@@ -7,6 +7,8 @@ import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
+import com.omnyom.yumyum.model.signup.UploadProfileResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.*
@@ -31,7 +33,27 @@ class SignUpViewModel : ViewModel() {
         _complete.value = true
     }
 
-    fun signUp(email: String) {
+    fun uploadProfileImage(image: MultipartBody.Part?, email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        val call = retrofitService.uploadProfile(image)
+        call.enqueue(object : Callback<UploadProfileResponse> {
+            override fun onResponse(call: Call<UploadProfileResponse>, response: Response<UploadProfileResponse>) {
+                if(response.isSuccessful) {
+                    signUp(email, onSuccess, onFailure)
+                }
+                else {
+                    when (response.code()) {
+                        404 -> onFailure()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UploadProfileResponse>, t: Throwable) {
+                onFailure()
+            }
+        })
+    }
+
+    fun signUp(email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         val call = retrofitService.signup(SignUpRequest(email,
                 name.value?:"",
                 introduction.value?:"").get())

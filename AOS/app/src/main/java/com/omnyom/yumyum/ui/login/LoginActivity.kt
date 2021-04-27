@@ -37,7 +37,6 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
         if (firebaseAuth!!.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
-            firebaseAuth!!.currentUser.email
             startMainActivity()
         }
     }

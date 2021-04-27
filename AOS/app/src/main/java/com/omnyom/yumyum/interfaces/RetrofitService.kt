@@ -3,6 +3,8 @@ package com.omnyom.yumyum.interfaces
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.model.myinfo.UserModel
 import com.omnyom.yumyum.model.signup.SignUpResponse
+import com.omnyom.yumyum.model.signup.UploadProfileResponse
+import okhttp3.MultipartBody
 //import com.omnyom.yumyum.model.myinfo.UserSampleModel
 import retrofit2.Call
 import retrofit2.http.*
@@ -29,4 +31,8 @@ interface RetrofitService {
 
     @POST("user/signup")
     fun signup(@Body parameters: HashMap<String, String>): Call<SignUpResponse>
+
+    @Multipart
+    @POST("user/profile")
+    fun uploadProfile(@Part image: MultipartBody.Part?): Call<UploadProfileResponse>
 }

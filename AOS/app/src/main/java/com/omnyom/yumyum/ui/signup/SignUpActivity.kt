@@ -1,26 +1,28 @@
 package com.omnyom.yumyum.ui.signup
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Bundle
+import android.net.Uri
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySignUpBinding
+import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+
 
 class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private companion object {
@@ -28,10 +30,13 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     private val signUpVM: SignUpViewModel by viewModels()
+    private lateinit var googleEmail : String
+    private var body : MultipartBody.Part? = null
 
     override fun extraSetupBinding() {
         binding.vm = signUpVM
         binding.lifecycleOwner = this
+        googleEmail = firebaseAuth!!.currentUser.email
     }
 
     override fun setup() { }
@@ -44,9 +49,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
 
     override fun onSubscribe() {
         signUpVM.complete.observe(this, {
-            PreferencesManager.getString(this, getString(R.string.saved_google_email))?.let { it1 -> signUpVM.signUp(it1) }
-//            signUpVM.signUp(sharedPref.getString(getString(R.string.saved_google_email), "")?: "")
-            startMainActivity(binding.btnComplete)
+            signUpVM.uploadProfileImage(body, googleEmail, { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed")})
         })
     }
 
@@ -59,10 +62,10 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     private fun textWatcher() {
-        binding.editTextName.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+        binding.editTextName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
                 if (binding.editTextName.text!!.isEmpty()) {
@@ -77,10 +80,10 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
             }
         })
 
-        binding.editTextIntroduction.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+        binding.editTextIntroduction.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
                 if (binding.editTextIntroduction.text!!.isEmpty()) {
@@ -103,7 +106,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
         startActivityForResult(intent, IMAGE_CODE)
     }
 
-    private fun setBtnCompleteEnabled (isEnabled: Boolean) {
+    private fun setBtnCompleteEnabled(isEnabled: Boolean) {
         if (isEnabled) {
             binding.btnComplete.isEnabled = true
             binding.btnComplete.background = ContextCompat.getDrawable(baseContext, R.drawable.btn_enabled)
@@ -118,12 +121,21 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
 
         if (requestCode == IMAGE_CODE) {
             if (resultCode == RESULT_OK) {
-                val inputStream = data!!.data?.let { contentResolver.openInputStream(it) }
+                val imageUri = data?.data
+                binding.btnAddProfile.setImageURI(imageUri)
 
-                val img = BitmapFactory.decodeStream(inputStream)
-                inputStream?.close()
-                val dp = baseContext.resources.displayMetrics.density
-                binding.btnAddProfile.setImageBitmap(Bitmap.createScaledBitmap(img, 100 * dp.toInt(), 100 * dp.toInt(), false))
+                //pass it like this
+                val file = File(imageUri.toString())
+                val requestFile: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+                // MultipartBody.Part is used to send also the actual file name
+                body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+//                val inputStream = data!!.data?.let { contentResolver.openInputStream(it) }
+//
+//                val img = BitmapFactory.decodeStream(inputStream)
+//                inputStream?.close()
+//                val dp = baseContext.resources.displayMetrics.density
+//                binding.btnAddProfile.setImageBitmap(Bitmap.createScaledBitmap(img, 100 * dp.toInt(), 100 * dp.toInt(), false))
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "사진 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
             }
