@@ -4,6 +4,8 @@ import com.omnyom.yumyum.model.feed.*
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.model.maps.KeywordSearchResponse
 import com.omnyom.yumyum.model.myinfo.UserModel
+import com.omnyom.yumyum.model.signup.SignUpResponse
+import com.omnyom.yumyum.model.signup.UploadProfileResponse
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
 import okhttp3.MultipartBody
 //import com.omnyom.yumyum.model.myinfo.UserSampleModel
@@ -27,8 +29,20 @@ interface RetrofitService {
 //    fun getUser(@Query("client_id") client_id: String, @Query("redirect_uri") redirect_uri: String, @Query("response_type") response_type: String, @Query("scope") scope: String): Call<UserModel>
 //
     @POST("user/login")
-    fun login(@Body parameters: HashMap<String, String>): Call<LoginResponse>
+    fun loginSample(@Body parameters: HashMap<String, String>): Call<LoginResponse>
 
+<<<<<<< AOS/app/src/main/java/com/omnyom/yumyum/interfaces/RetrofitService.kt
+    @GET("user/login/{email}")
+    fun login(@Path("email") email: String): Call<LoginResponse>
+
+    @POST("user/signup")
+    fun signup(@Body parameters: HashMap<String, String>): Call<SignUpResponse>
+
+    @Multipart
+    @POST("user/profile")
+    fun uploadProfile(@Part image: MultipartBody.Part?): Call<UploadProfileResponse>
+}
+=======
     // 모든 피드 불러오기
     @GET("feed/list/{userId}")
     fun getAllFeeds(@Path("userId") userId: Long): Call<AllFeedResponse>
@@ -59,3 +73,4 @@ interface KakaoApiService {
     ) : Call<KeywordSearchResponse>
 }
 
+>>>>>>> AOS/app/src/main/java/com/omnyom/yumyum/interfaces/RetrofitService.kt

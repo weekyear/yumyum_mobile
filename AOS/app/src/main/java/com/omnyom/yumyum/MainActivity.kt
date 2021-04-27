@@ -1,5 +1,7 @@
 package com.omnyom.yumyum
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
+//        initGoogleSignInIntent(this)
+        supportActionBar?.hide()
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omnyom.yumyum">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,8 +14,6 @@
     <uses-feature
         android:name="android.hardware.Camera"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -37,9 +36,17 @@
                app to run.
         -->
         <activity
+            android:name=".ui.signup.SignUpActivity"
+            android:label="@string/title_activity_sign_up"></activity>
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+        <activity
             android:name=".ui.feed.CameraActivity"
             android:label="@string/title_activity_camera"
             android:theme="@style/Theme.YumYum.NoActionBar" />
+            
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
