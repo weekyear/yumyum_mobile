@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,43 +18,65 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-9I-XNC" customClass="PreviewView" customModule="YumYum" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-ON-CqT">
+                                        <rect key="frame" x="157" y="696" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="MBF-XO-AcG"/>
+                                            <constraint firstAttribute="height" constant="100" id="nv9-Dx-gvb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTapRecordVideo:" destination="4r9-9L-Eci" eventType="touchUpInside" id="ger-cD-MIm"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aw-HC-7dR">
+                                        <rect key="frame" x="284" y="667" width="100" height="29"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="nPX-Ch-95v"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="LrG-ON-CqT" firstAttribute="centerX" secondItem="RaT-9I-XNC" secondAttribute="centerX" id="Ofc-qF-ftt"/>
+                                    <constraint firstAttribute="bottom" secondItem="LrG-ON-CqT" secondAttribute="bottom" constant="100" id="R3h-ae-bdK"/>
+                                    <constraint firstAttribute="bottom" secondItem="1aw-HC-7dR" secondAttribute="bottom" constant="200" id="YCe-pU-Fwk"/>
+                                    <constraint firstAttribute="trailing" secondItem="1aw-HC-7dR" secondAttribute="trailing" constant="30" id="iL4-yb-DbS"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0JT-Bv-MWd" userLabel="Close">
-                                <rect key="frame" x="10" y="54" width="54" height="22"/>
-                                <state key="normal" title="닫자" image="xmark.seal.fill" catalog="system"/>
+                                <rect key="frame" x="20" y="64" width="17.5" height="22"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
                                 <connections>
                                     <action selector="closeCamera:" destination="4r9-9L-Eci" eventType="touchUpInside" id="CI2-uK-c9Z"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-ON-CqT">
-                                <rect key="frame" x="182" y="423" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="MBF-XO-AcG"/>
-                                    <constraint firstAttribute="height" constant="50" id="nv9-Dx-gvb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <imageReference key="image" image="camera.circle.fill" catalog="system" renderingMode="original"/>
-                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BbK-DW-A7N"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="top" secondItem="BbK-DW-A7N" secondAttribute="top" constant="10" id="6mz-pD-5M4"/>
-                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" constant="10" id="7Zs-qd-a1r"/>
+                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="top" secondItem="BbK-DW-A7N" secondAttribute="top" constant="20" id="6mz-pD-5M4"/>
+                            <constraint firstItem="0JT-Bv-MWd" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" constant="20" id="7Zs-qd-a1r"/>
                             <constraint firstItem="RaT-9I-XNC" firstAttribute="leading" secondItem="BbK-DW-A7N" secondAttribute="leading" id="Bug-3V-GIZ"/>
                             <constraint firstItem="BbK-DW-A7N" firstAttribute="trailing" secondItem="RaT-9I-XNC" secondAttribute="trailing" id="JNV-O6-sUP"/>
-                            <constraint firstItem="LrG-ON-CqT" firstAttribute="centerX" secondItem="rZw-FG-23O" secondAttribute="centerX" id="PAY-lf-OQt"/>
                             <constraint firstAttribute="bottom" secondItem="RaT-9I-XNC" secondAttribute="bottom" id="Q6d-Eb-7Gv"/>
-                            <constraint firstItem="LrG-ON-CqT" firstAttribute="centerY" secondItem="rZw-FG-23O" secondAttribute="centerY" id="aJy-wt-zp3"/>
                             <constraint firstItem="RaT-9I-XNC" firstAttribute="top" secondItem="rZw-FG-23O" secondAttribute="top" id="w7u-92-hl2"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Review" image="plus" catalog="system" id="HvN-Vx-kaX"/>
                     <connections>
                         <outlet property="cameraView" destination="RaT-9I-XNC" id="d7f-6i-aOz"/>
+                        <outlet property="recordButton" destination="LrG-ON-CqT" id="5DE-4b-PX0"/>
+                        <outlet property="timeLabel" destination="1aw-HC-7dR" id="IBu-2v-Byq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQH-uB-Wjd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -146,14 +167,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="xmark.seal.fill" catalog="system" width="128" height="128"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
