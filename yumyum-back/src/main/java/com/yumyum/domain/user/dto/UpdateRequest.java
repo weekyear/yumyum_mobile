@@ -8,7 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class UpdateRequest {
-    private String email;
+
+    private Long id;
+
     private String introduction;
+
     private String nickname;
 }

@@ -1,42 +1,23 @@
 package com.yumyum.domain.feed.application;
 
+import com.yumyum.domain.feed.dto.FileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class FileServiceTest {
 
-    public String upload(MultipartFile file){
-        Date date = new Date();
-        StringBuilder sb = new StringBuilder();
+    private final FileUploadService fileUploadService;
+    private final FileThumbnailService fileThumbnailService;
 
-        // file image 가 없을 경우
-        if (file.isEmpty()) {
-            sb.append("none");
-        } else {
-            sb.append(date.getTime());
-            sb.append(file.getOriginalFilename());
-        }
-
-        if (!file.isEmpty()) {
-            File dest = new File("D://SSAFY/rest-api-test/" + sb.toString());
-            try {
-                file.transferTo(dest);
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            // db에 파일 위치랑 번호 등록
-        }
-        return "D://SSAFY/rest-api-test/" + sb.toString();
+    public FileDto uploadFeedMedia(final MultipartFile file){
+        String videoPath = fileUploadService.upload(file);
+        String thumbnailPath = fileThumbnailService.createThumbnail(videoPath);
+        return new FileDto(videoPath, thumbnailPath);
     }
 }

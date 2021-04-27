@@ -2,6 +2,7 @@ package com.omnyom.yumyum
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
+import com.omnyom.yumyum.ui.feed.CameraActivity
+import com.omnyom.yumyum.ui.maps.MapsActivity
+import net.daum.android.map.MapActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -19,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val cameraIntent = Intent(this, CameraActivity::class.java)
+        val mapIntent = Intent(this, MapsActivity::class.java)
+        supportActionBar?.hide()
+
 
 //        initGoogleSignInIntent(this)
         supportActionBar?.hide()
@@ -29,5 +37,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_search, R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+        binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
+        binding.btnMainMap.setOnClickListener { startActivity(mapIntent) }
     }
+
+
 }

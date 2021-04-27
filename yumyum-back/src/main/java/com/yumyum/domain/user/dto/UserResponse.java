@@ -13,13 +13,13 @@ public class UserResponse {
     private String email;
     private String nickname;
     private String introduction;
-    private String role;
+    private String profilePath;
 
     public UserResponse(final User user){
         this.id = user.getId();
         this.email = user.getEmail();
         this.nickname = user.getNickname();
         this.introduction = user.getIntroduction();
-        this.role = user.getRole();
+        this.profilePath = user.getProfilePath();
     }
 }
