@@ -5,6 +5,7 @@ class LoginRequest(private val email: String, private val password: String) {
         var loginInfo = HashMap<String, String>()
         loginInfo.put("email", email)
         loginInfo.put("password", password)
+
         return loginInfo
     }
 }

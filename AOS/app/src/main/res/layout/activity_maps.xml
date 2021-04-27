@@ -10,7 +10,9 @@
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <Button
             android:id="@+id/btn_get_location"
@@ -21,6 +23,26 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
             android:text="내위치" />
+
     </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/map_view">
+
+        <EditText
+            android:id="@+id/input_place_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="text"
+            android:singleLine="true"
+            android:hint="장소를 입력하세요"
+            android:imeOptions="actionSearch" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,16 +5,16 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <uses-feature
         android:name="android.hardware.Camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-
 
     <application
         android:allowBackup="true"
@@ -24,12 +24,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.feed.LocationListActivity"></activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="a48ac35487722b760df861b584827760" />
 
-        <activity android:name=".ui.maps.MapsActivity"></activity>
+        <activity android:name=".ui.maps.MapsActivity" />
         <activity android:name=".ui.feed.FeedCreateActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
