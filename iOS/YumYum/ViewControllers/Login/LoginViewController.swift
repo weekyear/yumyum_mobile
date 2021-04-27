@@ -27,14 +27,10 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
          // 버튼 스타일지정
         googleLoginView.style = .wide
         addButton()
-        checkLogin()
+//        checkLogin()
         // 구글 로그인되어있는지 안되어 있는지 확인
         print(GIDSignIn.sharedInstance()?.currentUser != nil)
         
-        let url = "http://swiftapi.rubypaper.co.kr:2029/practice/currentTime"
-        AF.request(url).responseString() { response in
-            print("으어??")
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,8 +40,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
     
     func checkLogin(){
         print("들어오나요?")
-        print(plist.string(forKey: "userInfo") as! Any)
-        if plist.string(forKey: "userInfo") != nil {
+        if plist.string(forKey: "userEmail") != nil {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
             if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
@@ -112,7 +107,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             print("User ID : \(userIdentifier)")
             print("User Email : \(email ?? "")")
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-
+            
         default:
             break
         }
@@ -132,17 +127,39 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
               print("\(error.localizedDescription)")
             }
             return
-            // 로그인 완료됬을떄 아래 실행
+            // 로그인 완료됬을때 아래 실행
           } else {
-            let storyboard: UIStoryboard? = UIStoryboard(name: "Accounts", bundle: Bundle.main)
-            
-            guard let signupvc = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") else {
+            print("로그인이 완료되었습니다.")
+            guard let userEmail = user.profile.email else {
                 return
             }
+             
+            let url = URLs.login + userEmail
+            let call = AF.request(url, method: HTTPMethod.get,encoding: JSONEncoding.default)
             
-            signupvc.modalPresentationStyle = .fullScreen
-            self.present(signupvc, animated: true)
-          }
+            // 호출하고 결과 받기
+            call.responseJSON { res in
+                let result = try! res.result.get()
+                
+                guard let jsonObject = result as? NSDictionary else {
+                    print("서버 호출오류")
+                    return
+                }
+                if let status = jsonObject["status"] as? String {
+                    
+                    if status == "200" {
+                        let userData = jsonObject["data"] as! NSDictionary
+                        
+                        let serverEmail = userData["email"] as! String
+                        
+                        self.compareEmail(userEmail, serverEmail)
+                    }
+                } else {
+                    self.moveStoryBoard("Accounts", "SignUpViewController")
+                }
+                
+            }
+        }
         // 로그인 완료 했을때 firebase에 저장하기
         guard let authentication = user.authentication else {return}
         
@@ -155,22 +172,38 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             }
         )
         // 사용자 정보 가져오기
-        if let userId = user.userID,                  // For client-side use only!
-            let idToken = user.authentication.idToken, // Safe to send to the server
-            let fullName = user.profile.name,
-            let givenName = user.profile.givenName,
-            let familyName = user.profile.familyName,
-            let email = user.profile.email {
-            
-            // 도대체 왜!! 와이 전체 user가 안담기냐고!!!! 주길까 일단 UserId만 담자
+        if let email = user.profile.email {
+            // 도대체 왜!! 와이 전체 user가 안담기냐고!!!! 주길까 일단 userId만 담자
             let plist = UserDefaults.standard
-            plist.set(email, forKey: "userInfo")
+            plist.set(email, forKey: "userEmail")
             plist.synchronize()
             
         } else {
             print("Error : User Data Not Found")
         }
         
+    }
+    
+    // 구글 로그인 이메일과 서버에 저장되어 있는 이메일을 비교하는 함수
+    private func compareEmail(_ userEmail: String, _ serverEmail: String) {
+        print(userEmail)
+        print(serverEmail)
+        if userEmail == serverEmail {
+            print("현재 로그인 정보와 서버 로그인 이메일이 같아요!")
+            // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
+            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+
+            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+                
+                tabbarvc.modalPresentationStyle = .fullScreen
+                self.present(tabbarvc, animated: true, completion: nil)
+            } else {
+                print("탭바가 없는데요?")
+            }
+        } else {
+            print("들어오나요?")
+            moveStoryBoard("Accounts", "SignUpViewController")
+        }
     }
     
     // 로그아웃되면 실행되는 함수
@@ -180,7 +213,4 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
       // ...
         print("로그아웃되었어요!")
     }
-
-
-
 }

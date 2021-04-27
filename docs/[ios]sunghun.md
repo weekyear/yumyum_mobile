@@ -543,3 +543,25 @@ DispatchQueue.global().async {
 ### 구글 로그인
 
 - 앱델리게이트 말고 viewcontroller에서 화면 전환 시키는 방법 : https://stackoverflow.com/questions/36520067/google-login-in-login-view-controller-instead-of-appdelegate-ios-swift
+
+- 로그인 후 사용자 정보 받아올때 파라미터들
+
+```swift
+        // 사용자 정보 가져오기
+        if let userId = user.userID,                  // For client-side use only!
+//            let idToken = user.authentication.idToken, // Safe to send to the server
+//            let fullName = user.profile.name,
+//            let givenName = user.profile.givenName,
+//            let familyName = user.profile.familyName,
+            let email = user.profile.email {
+            
+            // 도대체 왜!! 와이 전체 user가 안담기냐고!!!! 주길까 일단 userId만 담자
+            let plist = UserDefaults.standard
+            plist.set(email, forKey: "userEmail")
+            plist.synchronize()
+            
+        } else {
+            print("Error : User Data Not Found")
+        }
+```
+

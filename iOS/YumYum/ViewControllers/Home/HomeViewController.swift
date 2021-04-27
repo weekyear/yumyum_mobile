@@ -48,7 +48,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         flowLayout.minimumInteritemSpacing = 0
         
         self.collectionView.collectionViewLayout = flowLayout
-        
     }
     
     // 해당 row에 이벤트가 발생했을때 출력되는 함수

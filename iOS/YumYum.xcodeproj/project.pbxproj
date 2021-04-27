@@ -16,7 +16,10 @@
 		548AB7E12629FDBB0093215D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 548AB7E02629FDBB0093215D /* video.mp4 */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
+		54B1E223263713150030C832 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* AlertUtil.swift */; };
+		54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E22A26371ECB0030C832 /* ConfigUrls.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeViewController.swift */; };
+		54CC1D672636F6BF0023963F /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 54CC1D662636F6BF0023963F /* image1.jpeg */; };
 		54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48C5262F1FD400AC4863 /* video3.mp4 */; };
 		54DA48CE262F249700AC4863 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48CD262F249700AC4863 /* video4.mp4 */; };
 		54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginViewController.swift */; };
@@ -68,10 +71,13 @@
 		54552441262FF0A100BFFD54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		548AB7E02629FDBB0093215D /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = SOURCE_ROOT; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
-		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/Storyboard/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/ViewControllers/Home/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
+		54B1E222263713150030C832 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
+		54B1E22A26371ECB0030C832 /* ConfigUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUrls.swift; sourceTree = "<group>"; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		54CC1D662636F6BF0023963F /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 		54DA48C5262F1FD400AC4863 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
 		54DA48CD262F249700AC4863 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +151,34 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		54B1E221263712C20030C832 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				54B1E222263713150030C832 /* AlertUtil.swift */,
+				54B1E22A26371ECB0030C832 /* ConfigUrls.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		54D5B2DC26366AA3004F0BBB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				540CAAF326314F7D0045917B /* SignUpViewController.swift */,
+				54E0EEE3262835950006D49D /* LoginViewController.swift */,
+				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		54D5B2DD26366AD5004F0BBB /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
+				54C6DA5B262B1965006C8D96 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		E52F57E72625B746002C2637 = {
 			isa = PBXGroup;
 			children = (
@@ -174,12 +208,14 @@
 				541A0BFE262EAD0F006C9582 /* video2.mp4 */,
 				54DA48C5262F1FD400AC4863 /* video3.mp4 */,
 				54DA48CD262F249700AC4863 /* video4.mp4 */,
+				54CC1D662636F6BF0023963F /* image1.jpeg */,
 				54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */,
 				E5920A172627C1A800836123 /* SupportingFiles */,
 				E5920A162627C19F00836123 /* Storyboard */,
 				E5920A152627C19400836123 /* ViewControllers */,
 				E5920A142627C18000836123 /* Extensions */,
 				E5920A132627C17A00836123 /* Models */,
+				54B1E221263712C20030C832 /* Utils */,
 			);
 			path = YumYum;
 			sourceTree = "<group>";
@@ -237,15 +273,12 @@
 		E5920A152627C19400836123 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
+				54D5B2DD26366AD5004F0BBB /* Home */,
+				54D5B2DC26366AA3004F0BBB /* Login */,
 				E56663E9263347E2003A503F /* MyPage */,
 				E5B11317262F430300ACB7C8 /* TabBar */,
 				E5747F14262AA10F00DD0672 /* Review */,
 				E52F57F72625B746002C2637 /* ViewController.swift */,
-				54C6DA5B262B1965006C8D96 /* HomeViewController.swift */,
-				54E0EEE3262835950006D49D /* LoginViewController.swift */,
-				540CAAF326314F7D0045917B /* SignUpViewController.swift */,
-				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -406,6 +439,7 @@
 			files = (
 				E52F58032625B746002C2637 /* LaunchScreen.storyboard in Resources */,
 				E5920A2A2627C30B00836123 /* MyPage.storyboard in Resources */,
+				54CC1D672636F6BF0023963F /* image1.jpeg in Resources */,
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
 				54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
@@ -584,12 +618,14 @@
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
+				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignUpViewController.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
 				540CAAF92631955A0045917B /* SignUpModel.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
+				54B1E223263713150030C832 /* AlertUtil.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -777,13 +813,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.duaduadua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -798,13 +834,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.duaduadua;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
