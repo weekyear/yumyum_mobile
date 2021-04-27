@@ -5,10 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.myinfo.MyFeedFragment">
 
-    <TextView
-        android:id="@+id/tv_my_feed"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="myfeed" />
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/common_google_signin_btn_icon_dark"
+            android:elevation="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"/>
+        <TextView
+            android:text="MYFeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </FrameLayout>
