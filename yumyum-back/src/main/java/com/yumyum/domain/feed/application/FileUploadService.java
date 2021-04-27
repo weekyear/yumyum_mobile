@@ -14,8 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class FileUploadService {
 
-    public String upload(MultipartFile file){ // 지정된 파일경로에 파일 저장 (동영상, 이미지)
-        final String savePath = "D://SSAFY/rest-api-test/";
+    public String upload(final MultipartFile file, final String uploadPath){ // 지정된 파일경로에 파일 저장 (동영상, 이미지)
 
         Date date = new Date();
         StringBuilder sb = new StringBuilder();
@@ -29,7 +28,7 @@ public class FileUploadService {
         }
 
         if (!file.isEmpty()) {
-            File dest = new File(savePath + sb.toString());
+            File dest = new File(uploadPath + sb.toString());
             try {
                 file.transferTo(dest);
             } catch (IllegalStateException e) {
@@ -40,7 +39,6 @@ public class FileUploadService {
             // db에 파일 위치랑 번호 등록
         }
 
-        String uploadPath = savePath + sb.toString();
-        return uploadPath;
+        return sb.toString();
     }
 }

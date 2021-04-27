@@ -13,7 +13,6 @@ import com.yumyum.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class FeedCreateService {
     private final PlaceCreateService placeCreateService;
     private final RegexChecker regexChecker;
 
-    public void createFeed(final CreateFeedRequest dto, final MultipartFile file){
+    public void createFeed(final CreateFeedRequest dto){
         final User user = userFindDao.findById(dto.getUserId());
         final PlaceRequest placeRequest = dto.getPlaceRequest();
 
@@ -40,9 +39,7 @@ public class FeedCreateService {
         placeCreateService.createPlace(placeRequest);
 
         final Optional<Place> place = placeDao.findByAddressAndName(placeRequest.getAddress(), placeRequest.getName());
-        final String videoPath = fileUploadService.upload(file);
-        final String thumbnailPath = fileThumbnailService.createThumbnail(videoPath);
-        final Feed feed = feedDao.save(dto.toEntity(user, place.get(), videoPath, thumbnailPath));
+        final Feed feed = feedDao.save(dto.toEntity(user, place.get()));
         feedDao.save(feed);
     }
 }

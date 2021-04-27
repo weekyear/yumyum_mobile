@@ -20,7 +20,7 @@ public class PlaceCreateService {
         regexChecker.phoneCheck(dto.getPhone());
         regexChecker.stringCheck("Name", dto.getName());
 
-        if(placeDao.existsByAddressAndName(dto.getAddress(), dto.getName())){
+        if(!placeDao.existsByAddressAndName(dto.getAddress(), dto.getName())){
             placeDao.save(dto.toEntity());
         }
     }

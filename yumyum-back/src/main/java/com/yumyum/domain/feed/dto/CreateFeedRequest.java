@@ -23,7 +23,11 @@ public class CreateFeedRequest {
 
     private PlaceRequest placeRequest;
 
-    public Feed toEntity(final User user, final Place place, final String videoPath, final String thumbnailPath){
+    private String videoPath;
+
+    private String thumbnailPath;
+
+    public Feed toEntity(final User user, final Place place){
         return Feed.builder()
                 .title(title)
                 .score(score)
