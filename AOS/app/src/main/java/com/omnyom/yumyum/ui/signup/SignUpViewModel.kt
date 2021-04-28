@@ -11,12 +11,13 @@ import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
 import com.omnyom.yumyum.model.signup.UploadProfileResponse
+import com.omnyom.yumyum.ui.base.BaseViewModel
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.*
 
-class SignUpViewModel(application: Application) : AndroidViewModel(application) {
+class SignUpViewModel(application: Application) : BaseViewModel(application) {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
     val name = MutableLiveData<String>().apply {

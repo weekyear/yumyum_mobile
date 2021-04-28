@@ -45,10 +45,8 @@ class GoogleLoginHelper {
                 if (it.isSuccess) {
                     firebaseLogin(it.signInAccount!!)
                     loginEmail = it.signInAccount?.email?: ""
-                    // 기타 등등
                 } else  {
                     Log.e("Value", "error")
-                    // 에러 처리
                 }
             }
             return loginEmail

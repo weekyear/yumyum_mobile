@@ -1,15 +1,12 @@
 package com.omnyom.yumyum.ui.feed
 
-import android.content.ContentResolver
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.net.toUri
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.getFileName
@@ -18,6 +15,7 @@ import com.omnyom.yumyum.model.feed.CreateFeedRequest
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.feed.SendVideoResponse
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -29,24 +27,37 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-class FeedCreateActivity : AppCompatActivity() {
+class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layout.activity_feed_create) {
     var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
-    val binding by lazy { ActivityFeedCreateBinding.inflate(layoutInflater) }
     lateinit var videoPath: String
     lateinit var thumbnailPath: String
 
-    private lateinit var feedCreateViewModel: FeedCreateViewModel
+    private val feedCreateVM: FeedCreateViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
+    override fun extraSetupBinding() {
+        binding.apply {
+            vm = feedCreateVM
+            lifecycleOwner = this@FeedCreateActivity
+        }
+    }
+
+    override fun setup() {
+    }
+
+    override fun setupViews() {
         binding.btnGoBack.setOnClickListener { finish() }
         binding.btnSubmit.setOnClickListener { sendVideo(intent.getStringExtra("videoUri")!!) }
 
         binding.btnMap.setOnClickListener { goMaps() }
 
         textWatcher()
+    }
+
+    override fun onSubscribe() {
+    }
+
+    override fun release() {
     }
 
     // 텍스트 변경을 감지합니다.
@@ -102,9 +113,6 @@ class FeedCreateActivity : AppCompatActivity() {
 
         })
     }
-
-
-
 
     // 응답으로 받은 비디오 데이터를 넣어서 피드 전체 데이터를 보냅니다!
     fun createFeed() {

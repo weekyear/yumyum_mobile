@@ -36,10 +36,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     private val signUpVM: SignUpViewModel by viewModels()
-    private var googleEmail : String? = ""
     private var body : MultipartBody.Part? = null
-
-
 
     override fun extraSetupBinding() {
         binding.apply {
@@ -48,9 +45,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
         }
     }
 
-    override fun setup() {
-        googleEmail = getCurrentUserEmail(this)
-    }
+    override fun setup() { }
 
     override fun setupViews() {
         textWatcher()
@@ -60,7 +55,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
 
     override fun onSubscribe() {
         signUpVM.isComplete.observe(this, {
-            signUpVM.uploadProfileImage(body, googleEmail, { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+            signUpVM.uploadProfileImage(body, getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
         })
     }
 

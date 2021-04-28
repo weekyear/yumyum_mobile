@@ -54,8 +54,7 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-        Log.e("RESULT", result?.status.toString())
+        Auth.GoogleSignInApi.getSignInResultFromIntent(data)
 
         if (resultCode == RESULT_OK && requestCode == RESULT_CODE) {
             val loginEmail = googleSignIn(data)
