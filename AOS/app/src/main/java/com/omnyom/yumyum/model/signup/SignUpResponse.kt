@@ -8,7 +8,7 @@ data class SignUpResponse(
 
 data class SignUpData(
         val email: String,
-        val id: Int,
+        val id: Long,
         val introduction: String,
         val nickname: String,
         val profilePath: String

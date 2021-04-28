@@ -8,6 +8,7 @@ class PreferencesManager {
     companion object {
         private const val PREFERENCES_NAME = "my_preference"
         private const val DEFAULT_VALUE_STRING = ""
+        private const val DEFAULT_VALUE_LONG = -1L
 
         private fun getPreferences(context: Context): SharedPreferences {
             return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
@@ -18,15 +19,23 @@ class PreferencesManager {
                 putString(key, value)
                 apply()
             }
-//            val prefs = getPreferences(context)
-//            val editor = prefs.edit()
-//            editor.putString(key, value)
-//            editor.apply()
         }
 
         fun getString(context:Context, key: String): String? {
             val prefs = getPreferences(context)
             return prefs.getString(key, DEFAULT_VALUE_STRING)
+        }
+
+        fun setLong(context: Context, key: String, value: Long) {
+            with(getPreferences(context).edit()) {
+                putLong(key, value)
+                apply()
+            }
+        }
+
+        fun getLong(context:Context, key: String): Long? {
+            val prefs = getPreferences(context)
+            return prefs.getLong(key, DEFAULT_VALUE_LONG)
         }
     }
 }

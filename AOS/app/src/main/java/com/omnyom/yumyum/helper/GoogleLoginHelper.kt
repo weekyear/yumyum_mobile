@@ -1,13 +1,16 @@
 package com.omnyom.yumyum.helper
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.omnyom.yumyum.R
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.getString
 
 class GoogleLoginHelper {
     companion object {
@@ -17,11 +20,18 @@ class GoogleLoginHelper {
             FirebaseAuth.getInstance()
         }
 
-        lateinit var googleSignClient: GoogleSignInClient
+        fun getCurrentUserEmail(context: Context) : String? {
+            var googleEmail = getString(context, context.getString(R.string.saved_google_email))
+            firebaseAuth.currentUser?.let {
+                googleEmail = it.email
+            }
+            return googleEmail
+        }
 
         fun getGoogleSignInIntent(activity: Activity): GoogleSignInClient {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(activity.getString(R.string.default_web_client_id)).requestEmail().build()
+
             return GoogleSignIn.getClient(activity, gso)
         }
 
@@ -31,15 +41,9 @@ class GoogleLoginHelper {
 
         fun googleSignIn(data: Intent?): String {
             var loginEmail = ""
-            val result = getGoogleSignInResult(data)
-            result?.let {
+            getGoogleSignInResult(data)?.let {
                 if (it.isSuccess) {
-                    firebaseLogin(result.signInAccount!!)
-
-                    it.signInAccount?.displayName //이름
-                    loginEmail = it.signInAccount?.email?: "" //이메일
-//                    Log.e("Value", it.signInAccount?.email!!)
-
+                    firebaseLogin(it.signInAccount!!)
                     // 기타 등등
                 } else  {
                     Log.e("Value", "error")
