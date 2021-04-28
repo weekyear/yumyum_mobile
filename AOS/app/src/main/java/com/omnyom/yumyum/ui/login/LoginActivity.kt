@@ -26,15 +26,17 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     private lateinit var sharedPref: SharedPreferences
 
     override fun extraSetupBinding() {
-        binding.vm = loginVM
-        binding.lifecycleOwner = this
+        binding.apply {
+            vm = loginVM
+            lifecycleOwner = this@LoginActivity
+        }
     }
 
     override fun setup() {
         sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
 //        initGoogleSignInIntent(this)
 
-        if (firebaseAuth!!.currentUser == null) {
+        if (firebaseAuth.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
             startMainActivity()

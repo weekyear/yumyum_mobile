@@ -12,15 +12,15 @@ class CreateFeedRequest(
 
 ) {
     fun get() : HashMap<String, Any> {
-        var createFeedInfo = HashMap<String, Any>()
-        createFeedInfo.put("content", content)
-        createFeedInfo.put("placeRequest", placeRequest)
-        createFeedInfo.put("score", score)
-        createFeedInfo.put("thumbnailPath", thumbnailPath)
-        createFeedInfo.put("title", title)
-        createFeedInfo.put("userId", userId)
-        createFeedInfo.put("videoPath", videoPath)
-        return createFeedInfo
+        return hashMapOf(
+                "content" to content,
+                "placeRequest" to placeRequest,
+                "score" to score,
+                "thumbnailPath" to thumbnailPath,
+                "title" to title,
+                "userId" to userId,
+                "videoPath" to videoPath,
+        )
     }
 }
 
