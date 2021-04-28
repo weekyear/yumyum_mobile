@@ -59,7 +59,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     override fun onSubscribe() {
-        signUpVM.complete.observe(this, {
+        signUpVM.isComplete.observe(this, {
             signUpVM.uploadProfileImage(body, googleEmail, { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
         })
     }

@@ -27,12 +27,12 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     }
     var profilePath = ""
 
-    private val _complete: MutableLiveData<Boolean> = MutableLiveData()
-    val complete: LiveData<Boolean>
-        get() = _complete
+    private val _isComplete: MutableLiveData<Boolean> = MutableLiveData()
+    val isComplete: LiveData<Boolean>
+        get() = _isComplete
 
     fun completeSignUp() {
-        _complete.value = true
+        _isComplete.value = true
     }
 
     fun uploadProfileImage(image: MultipartBody.Part?, email: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
