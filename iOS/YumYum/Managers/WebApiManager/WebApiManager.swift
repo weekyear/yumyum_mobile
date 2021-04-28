@@ -19,3 +19,4 @@ class WebApiManager: NSObject {
         super.init()
     }
 }
+

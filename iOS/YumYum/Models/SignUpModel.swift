@@ -13,3 +13,4 @@ class SingUpModel {
     var introduce : String?
     var userEmail : String?
 }
+

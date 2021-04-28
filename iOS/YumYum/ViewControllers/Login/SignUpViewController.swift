@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             "introduction" : self.introduction.text!,
             "profilePath" : self.profilePath!
         ]
-        
+   
         // API 호출하고
         let url = URLs.signUp
         let call = AF.request(url, method: HTTPMethod.post, parameters: param, encoding: JSONEncoding.default)
