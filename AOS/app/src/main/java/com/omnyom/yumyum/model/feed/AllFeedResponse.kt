@@ -13,7 +13,7 @@ data class FeedData(
         val likeCount: Int,
         val placeId: Int,
         val score: Int,
-        val thumnailPath: String,
+        val thumbnailPath: String,
         val title: String,
         val userId: Int,
         val videoPath: String
