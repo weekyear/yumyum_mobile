@@ -15,7 +15,7 @@ class WebApiManager: NSObject {
     let userUrl = "user/login/"
     
 
-    override init() {
+    override private init() {
         super.init()
     }
 }

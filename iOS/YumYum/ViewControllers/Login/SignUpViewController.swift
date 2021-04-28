@@ -12,9 +12,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet var profileImgView: UIImageView!
     
-    @IBOutlet weak var nickName: UITextField!
+    @IBOutlet weak var nickNameLabel: UITextField!
     
-    @IBOutlet weak var introduction: UITextField!
+    @IBOutlet weak var introductionLabel: UITextField!
     
     var profilePath : String? = ""
     
@@ -23,8 +23,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         let param : Parameters = [
             "email" : UserDefaults.standard.string(forKey: "userEmail")!,
-            "nickname" : self.nickName.text!,
-            "introduction" : self.introduction.text!,
+            "nickname" : self.nickNameLabel.text!,
+            "introduction" : self.introductionLabel.text!,
             "profilePath" : self.profilePath!
         ]
         
@@ -86,12 +86,12 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
-        self.introduction.placeholder = "한줄 소개를 입력해주세요."
-        self.introduction.autocorrectionType = .no
-        self.introduction.autocapitalizationType = .none
-        self.nickName.placeholder = "별명을 입력해주세요."
-        self.nickName.autocorrectionType = .no
-        self.nickName.autocapitalizationType = .none
+        self.introductionLabel.placeholder = "한줄 소개를 입력해주세요."
+        self.introductionLabel.autocorrectionType = .no
+        self.introductionLabel.autocapitalizationType = .none
+        self.nickNameLabel.placeholder = "별명을 입력해주세요."
+        self.nickNameLabel.autocorrectionType = .no
+        self.nickNameLabel.autocapitalizationType = .none
         
         makeRounded()
         
@@ -169,7 +169,6 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
                 if let data = jsonObject["data"] as? String {
                     self.profilePath = data
                 }
-                
                 
             case .failure(let err):
                 print("사진업로드 에러에러! \(err)")
