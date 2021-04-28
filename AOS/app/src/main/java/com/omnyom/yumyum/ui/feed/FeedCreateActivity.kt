@@ -12,6 +12,7 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
+import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.CreateFeedRequest
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
@@ -102,16 +103,7 @@ class FeedCreateActivity : AppCompatActivity() {
         })
     }
 
-    // 파일의 이름을 불러와서 비디오 데이터를 불러올 때 참고
-    fun ContentResolver.getFileName(uri: Uri): String {
-        var name = ""
-        val cursor = query(uri, null, null, null, null)
-        cursor?.use {
-            it.moveToFirst()
-            name = cursor.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-        }
-        return name
-    }
+
 
 
     // 응답으로 받은 비디오 데이터를 넣어서 피드 전체 데이터를 보냅니다!

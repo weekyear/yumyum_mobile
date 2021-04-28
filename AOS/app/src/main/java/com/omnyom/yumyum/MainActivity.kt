@@ -13,7 +13,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
 import com.omnyom.yumyum.ui.feed.CameraActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
-import net.daum.android.map.MapActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding

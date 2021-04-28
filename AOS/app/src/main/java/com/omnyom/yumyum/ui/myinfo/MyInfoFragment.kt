@@ -44,7 +44,7 @@ class MyInfoFragment : Fragment() {
     }
 
     private fun signOut() {
-        firebaseAuth?.signOut()
+        firebaseAuth.signOut()
         googleSignOut(activity as MainActivity, {startLoginActivity()})
     }
 

@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="@{vm.name}"/>
+                android:text="@={vm.name}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:text="@{vm.introduction}"/>
+                android:text="@={vm.introduction}"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
