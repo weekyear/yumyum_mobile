@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.myinfo.MyFeedFragment">
+    tools:context=".ui.myinfo.MyFeedFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_my_feed"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_my_feed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="myfeed" />
+        android:layout_marginTop="10dp"/>
 
-</FrameLayout>
+
+</LinearLayout>
