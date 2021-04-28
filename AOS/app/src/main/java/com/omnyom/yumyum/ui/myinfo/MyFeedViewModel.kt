@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.myinfo
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,11 +8,12 @@ import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.AllFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.ui.base.BaseViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MyFeedViewModel : ViewModel() {
+class MyFeedViewModel(application: Application) : BaseViewModel(application) {
     private var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
 
     init {

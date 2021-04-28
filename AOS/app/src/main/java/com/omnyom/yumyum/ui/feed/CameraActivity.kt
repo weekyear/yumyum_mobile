@@ -2,48 +2,38 @@ package com.omnyom.yumyum.ui.feed
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.core.net.toUri
-import com.omnyom.yumyum.BaseActivity
-import com.omnyom.yumyum.TempRetrofitBuilder
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityCameraBinding
-import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.feed.SendVideoResponse
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 
-class CameraActivity : BaseActivity() {
+class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activity_camera) {
     val PERM_STORAGE = 99 // 외부 저장소 권한 처리
     val PERM_CAMERA = 100 // 카메라 권한처리
     val REQ_CAMERA = 101 // 카메라 촬영 요청
 
     lateinit var videoUri: String
 
-    val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun extraSetupBinding() { }
 
+    override fun setup() {
         requirePermissions(arrayOf(Manifest.permission.CAMERA), PERM_CAMERA)
         requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERM_STORAGE)
+    }
 
+    override fun setupViews() {
         binding.btnNext.setOnClickListener { goNext() }
     }
+
+    override fun onSubscribe() { }
+
+    override fun release() { }
 
     fun goNext() {
         val intent = Intent(this, FeedCreateActivity::class.java)
@@ -72,7 +62,7 @@ class CameraActivity : BaseActivity() {
 
 
     fun openCamera() {
-        var intent : Intent =  Intent(MediaStore.ACTION_VIDEO_CAPTURE)
+        var intent =  Intent(MediaStore.ACTION_VIDEO_CAPTURE)
         intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3);
         intent.also { takeVideoIntent ->
             takeVideoIntent.resolveActivity(packageManager)?.also {
@@ -100,8 +90,4 @@ class CameraActivity : BaseActivity() {
                 }
             }
     }
-
-
-
-
 }

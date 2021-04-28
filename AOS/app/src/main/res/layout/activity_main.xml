@@ -44,8 +44,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_colorFilter="@color/white"
-        app:lottie_fileName="ic_youtube.json"
-        />
+        app:lottie_fileName="ic_youtube.json"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view2"

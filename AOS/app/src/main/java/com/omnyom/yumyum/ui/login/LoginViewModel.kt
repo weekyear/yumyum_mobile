@@ -1,20 +1,12 @@
 package com.omnyom.yumyum.ui.login
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.login.LoginRequest
 import com.omnyom.yumyum.model.login.LoginResponse
-import com.omnyom.yumyum.model.signup.SignUpRequest
-import com.omnyom.yumyum.model.signup.SignUpResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

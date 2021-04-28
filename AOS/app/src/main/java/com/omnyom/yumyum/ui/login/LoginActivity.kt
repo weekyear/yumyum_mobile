@@ -1,11 +1,9 @@
 package com.omnyom.yumyum.ui.login
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.auth.api.Auth
 import com.omnyom.yumyum.MainActivity
@@ -14,11 +12,10 @@ import com.omnyom.yumyum.databinding.ActivityLoginBinding
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.RESULT_CODE
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getGoogleSignInIntent
-import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignClient
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignIn
+import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
-import com.omnyom.yumyum.helper.PreferencesManager
 
 
 class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -33,13 +30,12 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     }
 
     override fun setup() {
-        sharedPref = this?.getPreferences(Context.MODE_PRIVATE) ?: return
-//        initGoogleSignInIntent(this)
+        sharedPref = this?.getPreferences(MODE_PRIVATE) ?: return
 
         if (firebaseAuth.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
-            startMainActivity()
+            loginVM.login(firebaseAuth.currentUser.email, { startMainActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
         }
     }
 
@@ -58,13 +54,12 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-        Log.e("RESULT", result?.status.toString())
+        Auth.GoogleSignInApi.getSignInResultFromIntent(data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_CODE) {
+        if (resultCode == RESULT_OK && requestCode == RESULT_CODE) {
             val loginEmail = googleSignIn(data)
             if (loginVM.isEmailValid(loginEmail)) {
-                // SharedPreferences에 이메일이 저장
+                // SharedPreferences에 이메일 저장
                 PreferencesManager.setString(this, getString(R.string.saved_google_email), loginEmail)
                 loginVM.login(loginEmail, { startMainActivity() }, { startSignUpActivity() })
             }

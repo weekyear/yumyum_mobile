@@ -11,12 +11,13 @@ import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
 import com.omnyom.yumyum.model.signup.UploadProfileResponse
+import com.omnyom.yumyum.ui.base.BaseViewModel
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.*
 
-class SignUpViewModel(application: Application) : AndroidViewModel(application) {
+class SignUpViewModel(application: Application) : BaseViewModel(application) {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
     val name = MutableLiveData<String>().apply {
@@ -27,12 +28,12 @@ class SignUpViewModel(application: Application) : AndroidViewModel(application) 
     }
     var profilePath = ""
 
-    private val _complete: MutableLiveData<Boolean> = MutableLiveData()
-    val complete: LiveData<Boolean>
-        get() = _complete
+    private val _isComplete: MutableLiveData<Boolean> = MutableLiveData()
+    val isComplete: LiveData<Boolean>
+        get() = _isComplete
 
     fun completeSignUp() {
-        _complete.value = true
+        _isComplete.value = true
     }
 
     fun uploadProfileImage(image: MultipartBody.Part?, email: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
