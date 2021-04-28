@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 extension WebApiManager {
+    
     func userCreate() {
         let url = "\(domainUrl)\(userUrl)"
         // AF.request~~
