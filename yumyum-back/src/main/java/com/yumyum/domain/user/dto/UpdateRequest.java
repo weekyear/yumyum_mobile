@@ -14,4 +14,6 @@ public class UpdateRequest {
     private String introduction;
 
     private String nickname;
+
+    private String profilePath;
 }

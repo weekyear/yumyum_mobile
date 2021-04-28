@@ -6,7 +6,6 @@ import com.yumyum.global.common.response.HttpUtils;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,19 +22,20 @@ public class FeedController {
     private final FeedDeleteService feedDeleteService;
     private final FeedSearchService feedSearchService;
     private final FeedLikeService feedLikeService;
-    private final FileServiceTest fileServiceTest;
+    private final FileService fileService;
+//    private final RegexChecker regexChecker;
 
-    @ApiOperation(value = "피드 등록", notes = "제목, 내용, 평점, 회원 번호, 장소 번호, 동영상으로 피드를 등록한다.")
-    @PostMapping(value = "", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE })
-    public Object createFeed(@RequestBody final CreateFeedRequest dto, @RequestParam final MultipartFile file) {
-        feedCreateService.createFeed(dto, file);
+    @ApiOperation(value = "피드 등록", notes = "제목, 내용, 평점, 회원 번호, 장소 번호, 동영상, 썸네일로 피드를 등록한다.")
+    @PostMapping("")
+    public Object createFeed(@RequestBody final CreateFeedRequest dto) {
+        feedCreateService.createFeed(dto);
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "동영상 및 썸네일 등록 테스트", notes = "동영상에서 썸네일을 추출하여 동영상과 함꼐 저장한다.")
-    @PostMapping("/video/test")
-    public Object uploadVideoTest(@RequestParam MultipartFile file) {
-        FileDto response = fileServiceTest.uploadFeedMedia(file);
+    @ApiOperation(value = "동영상 및 썸네일 등록", notes = "동영상에서 썸네일을 추출하여 동영상과 함께 저장 후 경로를 반환한다.")
+    @PostMapping("/video")
+    public Object uploadVideo(@RequestParam MultipartFile file) {
+        FileDto response = fileService.uploadMedia(file);
         return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
@@ -94,4 +94,11 @@ public class FeedController {
         feedLikeService.doCancelLikeFeed(feedId, userId);
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
+
+//    @ApiOperation(value = "전번 테스트")
+//    @GetMapping("/phone")
+//    public Object phoneTest() {
+//        regexChecker.phoneCheck("02-123-4124");
+//        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
+//    }
 }

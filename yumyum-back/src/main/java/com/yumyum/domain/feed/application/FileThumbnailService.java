@@ -18,20 +18,17 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class FileThumbnailService {
 
-    public String createThumbnail(String videoPath) { // 동영상에서 첫 프레임을 썸네일로 추출 및 저장
+    public String createThumbnail(String videoName, String uploadPath) { // 동영상에서 첫 프레임을 썸네일로 추출 및 저장
         int frameNumber = 0;
-
-        File video = new File(videoPath);
-        String thumbnailPath;
-        thumbnailPath = videoPath + "_thumbnail.png";
-        File thumbnail = new File(thumbnailPath);
+        final String thumbnailName = videoName.substring(0, videoName.length()-4) + "_thumbnail.png";
+        final File video = new File(uploadPath + videoName);
+        final File thumbnail = new File(uploadPath + thumbnailName);
 
         try {
-            System.out.println(video.getPath());
             Picture picture = FrameGrab.getFrameFromFile(video, frameNumber);
             BufferedImage bufferedImage = AWTUtil.toBufferedImage(picture);
             ImageIO.write(bufferedImage, "png", thumbnail);
-            return thumbnailPath;
+            return thumbnailName;
         } catch (IOException e) {
             e.printStackTrace();
             return e.getMessage();
