@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.omnyom.yumyum.databinding.LocationListActivityBinding
+import com.omnyom.yumyum.databinding.ActivityLocationListBinding
 import com.omnyom.yumyum.databinding.PlaceListItemBinding
 import com.omnyom.yumyum.model.maps.Document
 
 class LocationListActivity : AppCompatActivity() {
 
 
-    val binding by lazy { LocationListActivityBinding.inflate(layoutInflater) }
+    val binding by lazy { ActivityLocationListBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,5 +1,6 @@
 package com.omnyom.yumyum
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.Intent
@@ -39,6 +40,15 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(navController)
         binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
         binding.btnMainMap.setOnClickListener { startActivity(mapIntent) }
+
+        val animator = ValueAnimator.ofFloat(0f, 1f)
+        animator.addUpdateListener {
+            binding.animationView.setOnClickListener { binding.animationView.playAnimation() }
+        }
+
+
+
+
     }
 
 

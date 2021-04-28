@@ -35,6 +35,18 @@
         app:layout_constraintVertical_bias="0.0"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="360dp"
+        android:layout_marginTop="520dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_colorFilter="@color/white"
+        app:lottie_fileName="ic_youtube.json"
+        />
+
     <ImageButton
         android:id="@+id/btn_create_feed"
         android:layout_width="wrap_content"
