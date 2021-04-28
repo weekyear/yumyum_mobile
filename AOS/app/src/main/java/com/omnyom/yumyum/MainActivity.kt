@@ -5,6 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -15,6 +18,8 @@ import com.omnyom.yumyum.databinding.ActivityMainBinding
 import com.omnyom.yumyum.ui.feed.CameraActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
 import net.daum.android.map.MapActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -41,14 +46,37 @@ class MainActivity : AppCompatActivity() {
         binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
         binding.btnMainMap.setOnClickListener { startActivity(mapIntent) }
 
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-        animator.addUpdateListener {
-            binding.animationView.setOnClickListener { binding.animationView.playAnimation() }
+        binding.animationView.setMaxFrame(15)
+        binding.animationView2.setMinFrame(15)
+        if (!binding.animationView.isAnimating && !binding.animationView2.isAnimating) {
+            binding.animationView.setOnClickListener { icon1Click() }
+            binding.animationView2.setOnClickListener { icon2Click() }
         }
 
 
 
 
+    }
+
+    fun icon1Click() {
+        Log.d("icon", "1번마")
+        binding.animationView.playAnimation()
+        Handler().postDelayed({
+            binding.animationView.visibility = View.INVISIBLE
+            binding.animationView2.visibility = View.VISIBLE
+            binding.animationView.progress = 0.0f
+
+        }, 800)
+    }
+
+    fun icon2Click() {
+        Log.d("icon", "2번마")
+        binding.animationView2.playAnimation()
+        Handler().postDelayed({
+            binding.animationView2.visibility = View.INVISIBLE
+            binding.animationView.visibility = View.VISIBLE
+            binding.animationView2.progress = 0.5f
+        }, 800)
     }
 
 
