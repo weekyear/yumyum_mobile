@@ -565,3 +565,11 @@ DispatchQueue.global().async {
         }
 ```
 
+
+
+### enum(열거형)
+
+> case를 나눠서 enum `type` 을 갖는 것의 값을 불러서 올수 잇다. 객체에
+
+- 참고 : https://zeddios.tistory.com/12
+

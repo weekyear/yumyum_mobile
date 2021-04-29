@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIViewController {
-    // alert 메서드 정의
+    // MARK: - 알람 메서드
     func alert(_ message: String, completion: (()-> Void)? = nil) {
         // 메인 스레드에서 실행되도록한다.
         DispatchQueue.main.async {
@@ -21,9 +21,8 @@ extension UIViewController {
             self.present(alert, animated: false)
         }
     }
-    // 스토리 보드 이동시 사용할 메서드
-    // name은 스토리보드 파일명 : ex)Accounts, main
-    // identifier는 스토리보드의 ID를 넘겨주면된다.
+    
+    // MARK: - 스토리보드 이동
     func moveStoryBoard(_ name:String, _ identifier:String) {
         let storyboard: UIStoryboard? = UIStoryboard(name:name, bundle: Bundle.main)
         
@@ -34,5 +33,4 @@ extension UIViewController {
         movevc.modalPresentationStyle = .fullScreen
         self.present(movevc, animated: true)
     }
-    
 }
