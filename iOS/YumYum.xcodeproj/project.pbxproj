@@ -41,6 +41,7 @@
 		E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */; };
 		E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */; };
 		E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB0B2639ECC70049AA0B /* ReviewVC.swift */; };
+		E548AB11263A697C0049AA0B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB10263A697C0049AA0B /* UIColor.swift */; };
 		E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5747F0F262AA0F300DD0672 /* CameraVC.swift */; };
 		E5920A1C2627C2D800836123 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A1B2627C2D800836123 /* Home.storyboard */; };
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
@@ -115,6 +116,7 @@
 		E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayBackVC.swift; sourceTree = "<group>"; };
 		E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 		E548AB0B2639ECC70049AA0B /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
+		E548AB10263A697C0049AA0B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		E5747F0F262AA0F300DD0672 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		E5920A1B2627C2D800836123 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				54B1E222263713150030C832 /* UIViewControllerExtension.swift */,
 				E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */,
 				E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */,
+				E548AB10263A697C0049AA0B /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignUpViewController.swift in Sources */,
+				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,

@@ -16,10 +16,31 @@ class ReviewVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
+        
+        setLayout()
     }
     
+    
+    func setLayout() {
+        // navigationBar
+        self.navigationController?.title = "리뷰쓰기"
+        self.navigationController?.navigationBar.isHidden = false
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftHandAction))
+    }
+    
+    @objc
+    func leftHandAction() {
+        print("left bar button 클릭")
+        let viewControllers: [UIViewController] = self.navigationController?.viewControllers as [UIViewController]
+//        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+//        self.navigationController?.dismiss(animated: true, completion: nil)
+        print(viewControllers)
+        print(viewControllers[viewControllers.count - 3])
+    }
 
     /*
     // MARK: - Navigation

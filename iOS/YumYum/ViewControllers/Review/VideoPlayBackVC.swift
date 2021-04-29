@@ -23,8 +23,16 @@ class VideoPlayBackVC: UIViewController {
     @IBOutlet weak var videoView: UIView!
 
     
+    @IBAction func didTapPrevButton(_ sender: Any) {
+        print("되돌아가기")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func didTapNextButton(_ sender: Any) {
-        
+        print("녹화끝")
+        let vc = ReviewVC.instance()
+        print(vc)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     override func viewDidLoad() {
