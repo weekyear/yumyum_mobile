@@ -4,10 +4,12 @@ package com.omnyom.yumyum.interfaces
 import com.omnyom.yumyum.model.feed.AllFeedResponse
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.SendVideoResponse
+import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
 import com.omnyom.yumyum.model.signup.SignUpResponse
 import com.omnyom.yumyum.model.signup.UploadProfileResponse
+import com.omnyom.yumyum.model.userInfo.UserResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -47,4 +49,12 @@ interface RetrofitService {
     // 식당ID로 정보 불러오기
     @GET("place/{placeId}")
     fun getPlaceData(@Path("placeId") placeId: Long) : Call<GetPlaceDataResponse>
+
+    // userId로 유저정보 불러오기
+    @GET("user/{userId}")
+    fun getUserData(@Path("userId") userId: Long) : Call<UserResponse>
+
+    // 피드 좋아요!
+    @POST("feed/like")
+    fun feedLike(@Body parameters: HashMap<String, Int>) : Call<LikeResponse>
 }

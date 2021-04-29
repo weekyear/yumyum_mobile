@@ -29,6 +29,7 @@ class MyFeedFragment : Fragment() {
 
         myFeedviewModel = ViewModelProvider(this).get(MyFeedViewModel::class.java)
 
+
         myFeedviewModel.foodData.observe(viewLifecycleOwner, Observer {
             binding.rvMyFeed.adapter = FeedPagesAdapter(it)
             Log.d("HomFrag", "${it}")

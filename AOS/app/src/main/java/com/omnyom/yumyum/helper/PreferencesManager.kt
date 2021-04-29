@@ -2,6 +2,7 @@ package com.omnyom.yumyum.helper
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.fragment.app.FragmentActivity
 
 
 class PreferencesManager {
@@ -33,7 +34,7 @@ class PreferencesManager {
             }
         }
 
-        fun getLong(context:Context, key: String): Long? {
+        fun getLong(context: Context, key: String): Long? {
             val prefs = getPreferences(context)
             return prefs.getLong(key, DEFAULT_VALUE_LONG)
         }

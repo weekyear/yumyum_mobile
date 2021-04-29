@@ -82,4 +82,14 @@
         app:layout_constraintBottom_toBottomOf="@+id/food_video"
         app:layout_constraintStart_toStartOf="@+id/food_video" />
 
+    <Button
+        android:id="@+id/btn_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        android:text="Like"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
