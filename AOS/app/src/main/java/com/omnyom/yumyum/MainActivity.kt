@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     fun icon1Click() {
         Log.d("icon", "1번마")
-        val userId = PreferencesManager.getLong(this, "userId")
         binding.animationView.playAnimation()
         Handler().postDelayed({
             binding.animationView.visibility = View.INVISIBLE
@@ -66,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
     fun icon2Click() {
         Log.d("icon", "2번마")
-        val userId = PreferencesManager.getLong(this, "userId")
         binding.animationView2.playAnimation()
         Handler().postDelayed({
             binding.animationView2.visibility = View.INVISIBLE

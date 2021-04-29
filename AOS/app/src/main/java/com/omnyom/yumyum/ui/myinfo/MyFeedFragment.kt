@@ -26,14 +26,12 @@ class MyFeedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         myFeedviewModel = ViewModelProvider(this).get(MyFeedViewModel::class.java)
-
 
         myFeedviewModel.foodData.observe(viewLifecycleOwner, Observer {
             binding.rvMyFeed.adapter = FeedPagesAdapter(it)
-            Log.d("HomFrag", "${it}")
         })
+
         val context = context
         binding.rvMyFeed.layoutManager = GridLayoutManager(context, 3)
 
@@ -45,11 +43,8 @@ class MyFeedFragment : Fragment() {
     class FeedPagesAdapter(foodList: List<FeedData>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
         var item = foodList
 
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
             val innerBinding = FeedListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            Log.d("HomFrag", "${item}")
-
             return Holder(innerBinding)
         }
 
@@ -70,7 +65,6 @@ class MyFeedFragment : Fragment() {
 
             val thumbnail = innerBinding.ivThumbnail
             val foodName = innerBinding.tvFoodName
-
 
         }
     }

@@ -37,8 +37,6 @@ class MyFeedViewModel(application: Application) : BaseViewModel(application) {
 
         })
 
-        // 내 정보 불러오기
-
     }
 
     // FoodList를 LiveData 객채로 생성

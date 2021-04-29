@@ -2,6 +2,7 @@ package com.omnyom.yumyum.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +33,6 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
 
 
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -49,8 +49,11 @@ class HomeFragment : Fragment() {
 
         binding.viewPagerHome.orientation = ViewPager2.ORIENTATION_VERTICAL
 
+
         return root
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -74,6 +77,11 @@ class HomeFragment : Fragment() {
         override fun getItemCount(): Int = item.size
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
+            if (item[position].isLike) {
+                holder.thumbUp.visibility = View.INVISIBLE
+            } else {
+                holder.thumpUp2.visibility = View.INVISIBLE
+            }
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
@@ -94,6 +102,26 @@ class HomeFragment : Fragment() {
 
                 })
             }
+            holder.thumbUp.setOnClickListener {
+                holder.thumbUp.setMaxFrame(10)
+                holder.thumbUp.playAnimation()
+                Handler().postDelayed({
+                    holder.thumbUp.progress = 0.0f
+                    holder.thumbUp.visibility = View.INVISIBLE
+                    holder.thumpUp2.visibility = View.VISIBLE
+                }, 800)
+            }
+
+            holder.thumpUp2.setOnClickListener {
+                holder.thumpUp2.setMinFrame(10)
+                holder.thumpUp2.playAnimation()
+                Handler().postDelayed({
+                    holder.thumpUp2.progress = 0.5f
+                    holder.thumpUp2.visibility = View.INVISIBLE
+                    holder.thumbUp.visibility = View.VISIBLE
+                }, 800)
+            }
+
 
 
 
@@ -109,11 +137,6 @@ class HomeFragment : Fragment() {
 
         class Holder(private val innerBinding: FoodListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
 
-            init {
-                innerBinding.root.setOnClickListener {
-                    Toast.makeText(innerBinding.root.context, "클릭된 아이템 = ${innerBinding.textName.text}", Toast.LENGTH_SHORT).show()
-                }
-            }
 
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
@@ -122,6 +145,8 @@ class HomeFragment : Fragment() {
             val detail = innerBinding.textDetail
             val userName = innerBinding.textUser
             val likeButton = innerBinding.btnLike
+            val thumbUp = innerBinding.avThumbUp
+            val thumpUp2 = innerBinding.avThumbUp2
 
         }
     }
