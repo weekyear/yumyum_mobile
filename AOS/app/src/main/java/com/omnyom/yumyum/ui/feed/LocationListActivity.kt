@@ -6,26 +6,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.omnyom.yumyum.R
+import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.databinding.ActivityLocationListBinding
 import com.omnyom.yumyum.databinding.PlaceListItemBinding
 import com.omnyom.yumyum.model.maps.Document
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 
-class LocationListActivity : AppCompatActivity() {
+class LocationListActivity : BaseBindingActivity<ActivityLocationListBinding>(R.layout.activity_location_list) {
+    private val locationListVM : LocationListViewModel by viewModels()
 
+    private val documents : MutableList<Document> by lazy {
+        loadData()
+    }
 
-    val binding by lazy { ActivityLocationListBinding.inflate(layoutInflater) }
+    override fun extraSetupBinding() {
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        val data : MutableList<Document> = loadData()
-        var adapter = LocationListAdapter(data)
+    override fun setup() {
+    }
+
+    override fun setupViews() {
+        var adapter = LocationListAdapter(documents)
         binding.rvPlace.adapter = adapter
         binding.rvPlace.layoutManager = LinearLayoutManager(this)
+    }
 
+    override fun onSubscribe() {
+    }
 
+    override fun release() {
     }
 
     fun loadData(): MutableList<Document> {
@@ -70,8 +83,6 @@ class LocationListActivity : AppCompatActivity() {
 
         }
     }
-
-
 }
 
 
