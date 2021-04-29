@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -20,54 +21,30 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     // 회원가입 완료 후 동작하는 메서드
     @IBAction func completeSignUp(_ sender: UIButton) {
+        // 모델을 만들어서 여기에 내용을 담고 그걸 가져다 쓰는 로직이 좋다.
+        let userInfo = UserModel()
+        userInfo.userEmail = UserDefaults.standard.string(forKey: "USEREMAIL")!
+        userInfo.nickName = self.nickNameLabel.text!
+        userInfo.introduce = self.introductionLabel.text!
+        userInfo.profileImg = self.profilePath!
         
-        let param : Parameters = [
-            "email" : UserDefaults.standard.string(forKey: "userEmail")!,
-            "nickname" : self.nickNameLabel.text!,
-            "introduction" : self.introductionLabel.text!,
-            "profilePath" : self.profilePath!
-        ]
-        
-        // API 호출하고
-        let url = URLs.signUp
-        let call = AF.request(url, method: HTTPMethod.post, parameters: param, encoding: JSONEncoding.default)
-        
-        // 서버 응답 값을 처리해준다.
-        print("버튼을 클릭했습니다!")
-        call.responseJSON { res in
-            let result = try! res.result.get()
+        WebApiManager.shared.userSignUp(userData: userInfo, successHandler: { (data) in
+            UserDefaults.saveLoginedUserInfo(data)
             
-            guard let jsonObject = result as? NSDictionary else {
-                print("서버 호출 과정중에 오류!!")
-                return
-            }
-            
-            if let status = jsonObject["status"] as? String {
-                if status == "200" {
-                    print("성공했습니다!")
-                    let userData = jsonObject["data"] as! NSDictionary
-                    UserDefaults.standard.set(userData, forKey: "userData")
-                    // 내용 뽑아쓸때 아래와 같이 뽑으면 서버에서 넘겨준거 그대로 쓸수있음!
-                    UserDefaults.standard.dictionary(forKey: "userData")
-                    
-                    // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
-                    let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+            print(UserDefaults.getLoginedUserInfo())
+            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
-                    if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-                        
-                        tabbarvc.modalPresentationStyle = .fullScreen
-                        self.present(tabbarvc, animated: true, completion: nil)
-                    } else {
-                        print("탭바가 없는데요?")
-                    }
-                }
-                // status가 잘못됬을떄 호출한다.
+            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+
+                tabbarvc.modalPresentationStyle = .fullScreen
+                self.present(tabbarvc, animated: true, completion: nil)
             } else {
-                self.alert("실패했습니다!")
+                print("탭바가 없습니다.")
             }
-            // 로그인이 성공했으면 userData에 스웨거에서 data 딕셔너리를 넣어주는 것
-        }
-        
+            
+        }, failureHandler: {(error) in
+            print(error)
+        })
     }
     
     // 회원가입 둥글게 만들기!

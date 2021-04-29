@@ -13,6 +13,7 @@ class WebApiManager: NSObject {
     
     let domainUrl = "http://k4b206.p.ssafy.io:8081/yumyum/"
     let userUrl = "user/login/"
+    let signUpUrl = "user/signup/"
     
 
     override private init() {
