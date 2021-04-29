@@ -14,7 +14,6 @@ import com.omnyom.yumyum.databinding.ActivityLoginBinding
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.RESULT_CODE
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getGoogleSignInIntent
-import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignClient
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignIn
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
