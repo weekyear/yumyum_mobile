@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - 비디오 모델 정의
 class VideoVO {
     var foodTitle: String?
     var userName: String?
