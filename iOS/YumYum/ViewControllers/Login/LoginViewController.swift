@@ -134,7 +134,8 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             WebApiManager.shared.userLogin(userEmail, successHandler: { (data) in
                 // 서버에서 정상적으로 처리가 되면 해당 블록이 처리 됩니다.
                 if userEmail == data["email"] as? String {
-                    print("구글로그인 이메일과 서버이메일이 같습니다.")
+                    // 로그인 이메일과 서버이메일이 같으면 데이터를 UserDefaults에 저장하고 스토리보드를 이동시킨다.
+                    UserDefaults.saveLoginedUserInfo(data)
                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
                     if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
