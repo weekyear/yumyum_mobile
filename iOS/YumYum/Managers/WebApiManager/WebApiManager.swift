@@ -15,8 +15,10 @@ class WebApiManager: NSObject {
     let userUrl = "user/login/"
     let signUpUrl = "user/signup/"
     
+    let feedUrl = "feed/"
 
     override private init() {
         super.init()
     }
 }
+

@@ -12,8 +12,12 @@ import PhotosUI
 
 
 class CameraVC: UIViewController {
-
     
+    static func instance() -> CameraVC {
+        let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "CameraVC") as! CameraVC
+        return vc
+    }
+
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoDevice: AVCaptureDevice!
     var videoInput: AVCaptureDeviceInput!
@@ -56,6 +60,7 @@ class CameraVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("camera", #function)
         
         // 세션 클로징
         captureSession.stopRunning()
@@ -66,9 +71,13 @@ class CameraVC: UIViewController {
     }
     
     func setupLayout() {
+        // recordButton
         recordButton.layer.cornerRadius = 50
         recordButton.layer.borderWidth = 10
         recordButton.layer.borderColor = UIColor.yellow.cgColor
+        
+        // navbar
+        self.navigationController?.navigationBar.transparentNavigationBar()
     }
     
     private func requestCameraPermission() {
@@ -162,21 +171,6 @@ class CameraVC: UIViewController {
     }
     
     
-    
-    private func tempURL() -> URL? {
-      let directory = NSTemporaryDirectory() as NSString
-      
-      if directory != "" {
-        let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
-        return URL(fileURLWithPath: path)
-      }
-      
-      return nil
-    }
-    
-    
-
-    
     // device 별 카메라 사용 가능한 타입
     func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
         var deviceTypes: [AVCaptureDevice.DeviceType]!
@@ -245,12 +239,12 @@ class CameraVC: UIViewController {
                 let availableVideoCodecTypes = movieFileOutput.availableVideoCodecTypes
                 
                 if availableVideoCodecTypes.contains(.hevc) {
-                    movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.hevc], for: movieFileOutputConnection!)
+                    movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.h264], for: movieFileOutputConnection!)
                 }
                 
                 // Start recording video to a temporary file.
                 let outputFileName = NSUUID().uuidString
-                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mp4")!)
                 
                 movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
                 
@@ -301,6 +295,9 @@ class CameraVC: UIViewController {
 
 extension CameraVC: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        
+        print("ooutput: \(outputFileURL)")
+        
         func cleanup() {
             let path = outputFileURL.path
             if FileManager.default.fileExists(atPath: path) {
@@ -351,8 +348,26 @@ extension CameraVC: AVCaptureFileOutputRecordingDelegate {
         } else {
             cleanup()
         }
+        print("녹화끝")
+        let vc = VideoPlayBackVC.instance()
+        print(vc)
+        vc.videoURL = outputFileURL
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
     
 }
+
+
+
+//private func tempURL() -> URL? {
+//  let directory = NSTemporaryDirectory() as NSString
+//
+//  if directory != "" {
+//    let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
+//    return URL(fileURLWithPath: path)
+//  }
+//
+//  return nil
+//}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: Todo - 키이름 대문자로 수정해주세요 forKey: "USERDATA" 이런식으로
+
 extension UserDefaults {
     //MARK: - 서버 유저 정보 불러오기
     static func getLoginedUserInfo() -> NSDictionary {
@@ -35,6 +35,7 @@ extension UserDefaults {
             print(userEmail)
             print("userEmail에 값이 있을까요?")
         }
+
     }
     //MARK: - 서버에서 받은 유저 정보 저장
     static func saveLoginedUserInfo(_ userData: [String:Any]) {
@@ -42,5 +43,6 @@ extension UserDefaults {
         dump(userData)
         plist.set(userData, forKey: "USERDATA")
         plist.synchronize()
+
     }
 }

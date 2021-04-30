@@ -39,6 +39,12 @@
 		E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */; };
 		E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEA2638699E0049AA0B /* WebApiManager.swift */; };
 		E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */; };
+		E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */; };
+		E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */; };
+		E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */; };
+		E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB0B2639ECC70049AA0B /* ReviewVC.swift */; };
+		E548AB11263A697C0049AA0B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB10263A697C0049AA0B /* UIColor.swift */; };
+		E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB15263AB51B0049AA0B /* FeedModel.swift */; };
 		E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5747F0F262AA0F300DD0672 /* CameraVC.swift */; };
 		E5920A1C2627C2D800836123 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A1B2627C2D800836123 /* Home.storyboard */; };
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
@@ -111,6 +117,12 @@
 		E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		E548AAEA2638699E0049AA0B /* WebApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManager.swift; sourceTree = "<group>"; };
 		E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerUser.swift; sourceTree = "<group>"; };
+		E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerFeed.swift; sourceTree = "<group>"; };
+		E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayBackVC.swift; sourceTree = "<group>"; };
+		E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
+		E548AB0B2639ECC70049AA0B /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
+		E548AB10263A697C0049AA0B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E548AB15263AB51B0049AA0B /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		E5747F0F262AA0F300DD0672 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		E5920A1B2627C2D800836123 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
@@ -262,6 +274,7 @@
 				E548AAEA2638699E0049AA0B /* WebApiManager.swift */,
 				E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */,
 				54B9F131263ACBC700027590 /* CommenResponse.swift */,
+				E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -279,6 +292,8 @@
 			children = (
 				E5747F0F262AA0F300DD0672 /* CameraVC.swift */,
 				E5B0712F2634761E0094E880 /* PreviewView.swift */,
+				E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */,
+				E548AB0B2639ECC70049AA0B /* ReviewVC.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -288,6 +303,8 @@
 			children = (
 				541A0BF9262E8E97006C9582 /* VideoVO.swift */,
 				5488E21526394F640096C35B /* UserModel.swift */,
+				540CAAF82631955A0045917B /* SignUpModel.swift */,
+				E548AB15263AB51B0049AA0B /* FeedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -297,6 +314,8 @@
 			children = (
 				54B1E222263713150030C832 /* UIViewControllerExtension.swift */,
 				E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */,
+				E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */,
+				E548AB10263A697C0049AA0B /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -642,7 +661,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
+				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
@@ -650,10 +671,12 @@
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
+				E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignUpViewController.swift in Sources */,
+				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
@@ -662,6 +685,8 @@
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
+				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
+				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

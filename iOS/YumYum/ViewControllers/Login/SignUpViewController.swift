@@ -29,8 +29,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         userInfo.introduce = self.introductionLabel.text!
         userInfo.profileImg = self.profilePath!
         
+
         WebApiManager.shared.userSignUp(userData: userInfo, successHandler: { (data) in
             UserDefaults.saveLoginedUserInfo(data)
+
             
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 

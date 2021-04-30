@@ -14,3 +14,4 @@ class UserModel {
     var introduce : String?
     var userEmail : String?
 }
+
