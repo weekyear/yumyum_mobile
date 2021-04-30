@@ -18,6 +18,7 @@ import androidx.core.widget.addTextChangedListener
 import com.omnyom.yumyum.KakaoRetrofitBuilder
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMapsBinding
+import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.interfaces.KakaoApiService
 import com.omnyom.yumyum.kakaoApi
 import com.omnyom.yumyum.model.maps.Document
@@ -121,8 +122,7 @@ class MapsActivity : BaseBindingActivity<ActivityMapsBinding>(R.layout.activity_
 
 
     fun Search() {
-        var kakaoApiService: KakaoApiService = KakaoRetrofitBuilder.buildService(KakaoApiService::class.java)
-        var call = kakaoApiService.placeSearch(kakaoApi.API_KEY, binding.inputPlaceName.text.toString(), x.toDouble(), y.toDouble(), 1, 5)
+        var call = RetrofitManager.kakaoApiService.placeSearch(kakaoApi.API_KEY, binding.inputPlaceName.text.toString(), x.toDouble(), y.toDouble(), 1, 5)
         call.enqueue(object : Callback<KeywordSearchResponse> {
             override fun onResponse(call: Call<KeywordSearchResponse>, response: Response<KeywordSearchResponse>) {
                 if (response.isSuccessful) {

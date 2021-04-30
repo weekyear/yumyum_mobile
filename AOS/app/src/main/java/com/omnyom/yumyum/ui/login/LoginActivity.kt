@@ -15,6 +15,7 @@ import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getGoogleSignInInten
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignIn
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import com.omnyom.yumyum.ui.maps.MapsActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
 
 
@@ -35,7 +36,7 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
         if (firebaseAuth.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
-            loginVM.login(firebaseAuth.currentUser.email, { startMainActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
+            loginVM.login(firebaseAuth.currentUser.email, { startMapsActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
         }
     }
 
@@ -61,7 +62,7 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
             if (loginVM.isEmailValid(loginEmail)) {
                 // SharedPreferences에 이메일 저장
                 PreferencesManager.setString(this, getString(R.string.saved_google_email), loginEmail)
-                loginVM.login(loginEmail, { startMainActivity() }, { startSignUpActivity() })
+                loginVM.login(loginEmail, { startMapsActivity() }, { startSignUpActivity() })
             }
         }
     }
@@ -74,5 +75,11 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     private fun startSignUpActivity() {
         startActivity(Intent(application, SignUpActivity::class.java))
         finish()
+    }
+
+    // 지도 Activity로 이동해요
+    private fun startMapsActivity() {
+        val intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -54,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_name"
+            android:id="@+id/input_layout_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
@@ -69,11 +69,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_text_name"
+                android:id="@+id/edit_text_title"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="50dp"
-                tools:layout_editor_absoluteY="179dp" />
+                tools:layout_editor_absoluteY="179dp"
+                android:text="@={vm.title}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,16 +94,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_text_content"
+                android:id="@+id/edit_text_content"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="50dp"
-                tools:layout_editor_absoluteY="179dp" />
+                tools:layout_editor_absoluteY="179dp"
+                android:text="@={vm.content}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/text_test"
+            android:id="@+id/tv_test"
             android:layout_width="63dp"
             android:layout_height="15dp"
             android:layout_marginStart="100dp"

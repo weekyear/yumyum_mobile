@@ -1,11 +1,7 @@
 package com.omnyom.yumyum.ui.signup
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,21 +9,16 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySignUpBinding
-import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getCurrentUserEmail
-import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.*
-import kotlin.math.sign
 
 
 class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
@@ -49,7 +40,7 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
 
     override fun setupViews() {
         textWatcher()
-        binding.btnAddProfile.setOnClickListener { getImageFromGrallery() }
+        binding.btnAddProfile.setOnClickListener { getImageFromGallery() }
         supportActionBar?.hide()
     }
 
@@ -107,10 +98,11 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
         })
     }
 
-    private fun getImageFromGrallery() {
-        val intent = Intent()
-        intent.setType("image/*")
-        intent.setAction(Intent.ACTION_GET_CONTENT)
+    private fun getImageFromGallery() {
+        val intent = Intent().apply {
+            type = "image/*"
+            action = Intent.ACTION_GET_CONTENT
+        }
         startActivityForResult(intent, IMAGE_CODE)
     }
 
@@ -131,37 +123,24 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
             if (resultCode == RESULT_OK) {
                 val imageUri = data?.data
                 binding.btnAddProfile.setImageURI(imageUri)
+                convertImageToMultipartBody(imageUri)
 
-                val bitmap = getBitmap(imageUri)
-                val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri!!, "r", null) ?: return
-                val file = File(cacheDir, contentResolver.getFileName(imageUri!!))
-                val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-                val outputStream = FileOutputStream(file)
-                inputStream.copyTo(outputStream)
-
-                if (file.exists()) {
-                    val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                    body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                }
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "사진 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private
+    private fun convertImageToMultipartBody(imageUri: Uri?) {
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(imageUri!!, "r", null) ?: return
+        val file = File(cacheDir, contentResolver.getFileName(imageUri!!))
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
 
-    fun getBitmap(imageUri: Uri?): Bitmap? {
-        var bitmap: Bitmap? = null
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri!!))
-            } else {
-                bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
+        if (file.exists()) {
+            val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+            body = MultipartBody.Part.createFormData("file", file.name, requestFile)
         }
-        return bitmap
     }
 }
