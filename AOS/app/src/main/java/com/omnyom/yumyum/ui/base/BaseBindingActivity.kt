@@ -1,8 +1,11 @@
 package com.omnyom.yumyum.ui.base
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
@@ -43,4 +46,34 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
     }
 
     protected abstract fun release()
+
+    open fun permissionGranted(requestCode: Int) {}
+    open fun permissionDenied(requestCode: Int) {}
+
+    fun requirePermissions(permissions: Array<String>, requestCode: Int) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            permissionGranted(requestCode)
+        } else {
+            val isAllPermissionsGranted = permissions.all {
+                checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED
+            }
+            if (isAllPermissionsGranted) {
+                permissionGranted(requestCode)
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, requestCode)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+            permissionGranted(requestCode)
+        } else {
+            permissionDenied(requestCode)
+        }
+    }
 }

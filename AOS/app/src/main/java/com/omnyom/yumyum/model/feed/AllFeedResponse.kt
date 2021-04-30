@@ -8,7 +8,7 @@ data class AllFeedResponse(
 
 data class FeedData(
         val content: String,
-        val feedId: Int,
+        val id: Int,
         val isLike: Boolean,
         val likeCount: Int,
         val placeId: Int,

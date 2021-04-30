@@ -7,8 +7,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
@@ -17,22 +15,21 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import com.omnyom.yumyum.BaseActivity
 import com.omnyom.yumyum.KakaoRetrofitBuilder
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMapsBinding
 import com.omnyom.yumyum.interfaces.KakaoApiService
 import com.omnyom.yumyum.kakaoApi
 import com.omnyom.yumyum.model.maps.Document
 import com.omnyom.yumyum.model.maps.KeywordSearchResponse
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.feed.LocationListActivity
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import retrofit2.*
 import java.io.Serializable
 
-class MapsActivity : BaseActivity() {
-
-    val binding by lazy { ActivityMapsBinding.inflate(layoutInflater) }
+class MapsActivity : BaseBindingActivity<ActivityMapsBinding>(R.layout.activity_maps) {
     lateinit var x: String
     lateinit var y: String
     val PERMISSIONS_REQUEST_CODE = 110
@@ -41,22 +38,21 @@ class MapsActivity : BaseActivity() {
     val PERM_COARSE_LOCATION = 111 // 카메라 권한처리
 
 
+    override fun extraSetupBinding() {
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
-
+    override fun setup() {
         requirePermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), PERM_COARSE_LOCATION)
         requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERM_FINE_LOCATION)
+    }
 
+    override fun setupViews() {
         binding.inputPlaceName.addTextChangedListener {  }
         var mapViewInput = MapView(this)
 
         mapViewInput.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving)
         mapViewInput.setShowCurrentLocationMarker(true)
         binding.mapView.addView(mapViewInput)
-
 
         binding.inputPlaceName.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(textView: TextView, actionId: Int, event: KeyEvent?): Boolean {
@@ -66,7 +62,6 @@ class MapsActivity : BaseActivity() {
                 return false // return true to consume event and prevent keyboard from disappearing
             }
         })
-
 
         binding.btnGetLocation.setOnClickListener {
             val permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -98,7 +93,12 @@ class MapsActivity : BaseActivity() {
                 ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, PERMISSIONS_REQUEST_CODE )
             }
         }
+    }
 
+    override fun onSubscribe() {
+    }
+
+    override fun release() {
     }
 
 

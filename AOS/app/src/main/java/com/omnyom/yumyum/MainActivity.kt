@@ -1,25 +1,19 @@
 package com.omnyom.yumyum
 
-import android.animation.ValueAnimator
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
+import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
-import net.daum.android.map.MapActivity
-import java.util.*
-import kotlin.concurrent.schedule
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -33,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         val mapIntent = Intent(this, MapsActivity::class.java)
         supportActionBar?.hide()
 
+        val userId = PreferencesManager.getLong(this, "userId")
 
-//        initGoogleSignInIntent(this)
         supportActionBar?.hide()
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
