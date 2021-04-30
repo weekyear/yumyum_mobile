@@ -10,6 +10,11 @@ import GoogleSignIn
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    static func instance() -> HomeViewController {
+        let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeViewController
+        return vc
+    }
+    
     let cellIdentifier: String = "cell"
     @IBOutlet var collectionView: UICollectionView!
     
