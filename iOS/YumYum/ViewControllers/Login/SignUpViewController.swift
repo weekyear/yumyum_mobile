@@ -18,6 +18,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var introductionLabel: UITextField!
     
     var profilePath : String? = ""
+
     
     // 회원가입 완료 후 동작하는 메서드
     @IBAction func completeSignUp(_ sender: UIButton) {
@@ -31,7 +32,6 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         WebApiManager.shared.userSignUp(userData: userInfo, successHandler: { (data) in
             UserDefaults.saveLoginedUserInfo(data)
             
-            print(UserDefaults.getLoginedUserInfo())
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
             if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
@@ -46,6 +46,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             print(error)
         })
     }
+    
     
     // 회원가입 둥글게 만들기!
     func makeRounded() {
