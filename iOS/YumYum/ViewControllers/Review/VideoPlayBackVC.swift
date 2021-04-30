@@ -24,8 +24,8 @@ class VideoPlayBackVC: UIViewController {
 
     
     @IBAction func didTapPrevButton(_ sender: Any) {
-        print("되돌아가기")
-        self.navigationController?.popViewController(animated: true)
+        print("도로마무불가능")
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didTapNextButton(_ sender: Any) {
@@ -51,8 +51,17 @@ class VideoPlayBackVC: UIViewController {
         avPlayer.replaceCurrentItem(with: playerItem)
 
         avPlayer.play()
+        
+        WebApiManager.shared.createVideoPath(videoUrl: self.videoURL) { (result) in
+            print("json: \(result)")
+            
+        } failure: { (error) in
+            print("error: \(error)")
+        }
 
     }
+    
+    
     
     func setLayout() {
         

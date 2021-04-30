@@ -42,6 +42,7 @@
 		E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */; };
 		E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB0B2639ECC70049AA0B /* ReviewVC.swift */; };
 		E548AB11263A697C0049AA0B /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB10263A697C0049AA0B /* UIColor.swift */; };
+		E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AB15263AB51B0049AA0B /* FeedModel.swift */; };
 		E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5747F0F262AA0F300DD0672 /* CameraVC.swift */; };
 		E5920A1C2627C2D800836123 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A1B2627C2D800836123 /* Home.storyboard */; };
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
@@ -117,6 +118,7 @@
 		E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 		E548AB0B2639ECC70049AA0B /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
 		E548AB10263A697C0049AA0B /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E548AB15263AB51B0049AA0B /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		E5747F0F262AA0F300DD0672 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		E5920A1B2627C2D800836123 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				541A0BF9262E8E97006C9582 /* VideoVO.swift */,
 				540CAAF82631955A0045917B /* SignUpModel.swift */,
+				E548AB15263AB51B0049AA0B /* FeedModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
+				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
 			);

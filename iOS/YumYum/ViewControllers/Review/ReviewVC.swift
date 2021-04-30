@@ -34,22 +34,13 @@ class ReviewVC: UIViewController {
     
     @objc
     func leftHandAction() {
-        print("left bar button 클릭")
-        let viewControllers: [UIViewController] = self.navigationController?.viewControllers as [UIViewController]
+        print("도로마무 불가능")
+//        let viewControllers: [UIViewController] = self.navigationController?.viewControllers as [UIViewController]
 //        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
 //        self.navigationController?.dismiss(animated: true, completion: nil)
-        print(viewControllers)
-        print(viewControllers[viewControllers.count - 3])
+//        print(viewControllers)
+//        print(viewControllers[viewControllers.count - 3])
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
