@@ -12,7 +12,7 @@ import GoogleSignIn
 import Firebase
 import Alamofire
 
-class LoginViewController : UIViewController, GIDSignInDelegate {
+class LoginVC : UIViewController, GIDSignInDelegate {
     @IBOutlet weak var googleLoginView : GIDSignInButton!
     @IBOutlet var appleLoginView: UIView!
     
@@ -33,13 +33,14 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
 
         UserDefaults.standard.removeObject(forKey: "USEREMAIL")
         UserDefaults.standard.removeObject(forKey: "USERDATA")
-//        WebApiManager.shared.userLogin()
+        
+
         GIDSignIn.sharedInstance()?.signOut()
     }
     
     func checkLogin(){
         print("들어오나요?")
-        if plist.string(forKey: "userEmail") != nil {
+        if plist.string(forKey: "USEREMAIL") != nil {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
             if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
@@ -128,30 +129,43 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             guard let userEmail = user.profile.email else {
                 return
             }
-                
-            //MARK: - 리턴 받기
-            // 이부분 아래가 실행되고 응답을 받는데 아래 로직이 실행되고
-            WebApiManager.shared.userLogin(userEmail, successHandler: { (data) in
-                // 서버에서 정상적으로 처리가 되면 해당 블록이 처리 됩니다.
-                if userEmail == data["email"] as? String {
-                    // 로그인 이메일과 서버이메일이 같으면 데이터를 UserDefaults에 저장하고 스토리보드를 이동시킨다.
-                    UserDefaults.saveLoginedUserInfo(data)
-                    let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+            print("나는 이메일이다", userEmail)
+            // 이메일 가입 체크
+                WebApiManager.shared.checkUser(userEmail: userEmail) { (result) in
+                    print("emailcheck: \(result)")
+                    if result["status"] == "200" {
+                        // 회원가입된 유저라면
+                        if result["data"]["existence"] == true {
+                            // 로그인
+                            WebApiManager.shared.login(userEmail: userEmail) {(result) in
+                                print("login: \(result)")
+                                if result["status"] == "200" {
+                                    UserDefaults.setUserInfo(json: result["data"])
+                                }
+                            } failure: { (error) in
+                                print("login error: \(error)")
+                            }
+                            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+                            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
 
-                    if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-
-                        tabbarvc.modalPresentationStyle = .fullScreen
-                        self.present(tabbarvc, animated: true, completion: nil)
-                    } else {
-                        print("탭바가 없습니다.")
+                                tabbarvc.modalPresentationStyle = .fullScreen
+                                self.present(tabbarvc, animated: true, completion: nil)
+                            } else {
+                                print("탭바가 없습니다.")
+                            }
+                        // 아닐경우 회원가입
+                        } else {
+                            let vc = SignupVC.instance(userEmail: userEmail)
+//                            self.navigationController?.pushViewController(vc, animated: true)
+                            vc.modalPresentationStyle = .overFullScreen
+                            self.present(vc, animated: true, completion: nil)
+                        }
                     }
-                    
+                } failure: { (error) in
+                    print("이메일체크 error다")
                 }
-            }, failureHandler: { (error) in
-                //서버에 유저 정보가 저장되어 있지 않다는 것이기 때문에 
-                print(error)
-                self.moveStoryBoard("Accounts", "SignUpViewController")
-            })
+
+                
                 
             // 사용자 정보 가져와서 저장하기
             if let email = user.profile.email {
@@ -160,6 +174,8 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                 print("Error : User Data Not Found")
             }
         }
+        
+        
         // 로그인 완료 했을때 firebase에 저장하기
         guard let authentication = user.authentication else {return}
         

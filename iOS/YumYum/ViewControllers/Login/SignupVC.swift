@@ -9,44 +9,36 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    static func instance(userEmail: String) -> SignupVC {
+        let vc = UIStoryboard.init(name: "Accounts", bundle: nil).instantiateViewController(withIdentifier: "SignupVC") as! SignupVC
+        vc.userEmail = userEmail
+        return vc
+    }
     
     @IBOutlet var profileImgView: UIImageView!
-    
     @IBOutlet weak var nickNameLabel: UITextField!
-    
     @IBOutlet weak var introductionLabel: UITextField!
-    
-    var profilePath : String? = ""
+    var userEmail: String?
+    var profilePath: String? = ""
 
     
     // 회원가입 완료 후 동작하는 메서드
     @IBAction func completeSignUp(_ sender: UIButton) {
-        // 모델을 만들어서 여기에 내용을 담고 그걸 가져다 쓰는 로직이 좋다.
-        let userInfo = UserModel()
-        userInfo.userEmail = UserDefaults.standard.string(forKey: "USEREMAIL")!
-        userInfo.nickName = self.nickNameLabel.text!
-        userInfo.introduce = self.introductionLabel.text!
-        userInfo.profileImg = self.profilePath!
+        let user = User(profilePath: self.profilePath!, nickname: self.nickNameLabel.text!, introduction: self.introductionLabel.text!, email: userEmail!)
         
-
-        WebApiManager.shared.userSignUp(userData: userInfo, successHandler: { (data) in
-            UserDefaults.saveLoginedUserInfo(data)
-
+        WebApiManager.shared.signup(user: user) { (result) in
+            UserDefaults.setUserInfo(json: result["data"])
+            print("result: \(result)")
+            let vc = MainTabBarVC.instance()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
             
-            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+        } failure: { (error) in
+            print("회원가입에러: \(error)")
+        }
 
-            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-
-                tabbarvc.modalPresentationStyle = .fullScreen
-                self.present(tabbarvc, animated: true, completion: nil)
-            } else {
-                print("탭바가 없습니다.")
-            }
-            
-        }, failureHandler: {(error) in
-            print(error)
-        })
     }
     
     

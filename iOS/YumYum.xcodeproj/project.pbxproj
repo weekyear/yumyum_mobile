@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03A33E7516FE1D00B6A4C3EB /* Pods_YumYum_YumYumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93E4C0E82BCBDA8F90B5A0F /* Pods_YumYum_YumYumUITests.framework */; };
-		540CAAF426314F7D0045917B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CAAF326314F7D0045917B /* SignUpViewController.swift */; };
+		540CAAF426314F7D0045917B /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CAAF326314F7D0045917B /* SignupVC.swift */; };
 		541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541A0BF9262E8E97006C9582 /* VideoVO.swift */; };
 		541A0BFF262EAD0F006C9582 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 541A0BFE262EAD0F006C9582 /* video2.mp4 */; };
 		54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54552441262FF0A100BFFD54 /* GoogleService-Info.plist */; };
@@ -24,7 +24,7 @@
 		54CC1D672636F6BF0023963F /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 54CC1D662636F6BF0023963F /* image1.jpeg */; };
 		54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48C5262F1FD400AC4863 /* video3.mp4 */; };
 		54DA48CE262F249700AC4863 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48CD262F249700AC4863 /* video4.mp4 */; };
-		54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginViewController.swift */; };
+		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
 		5FE9A28FA160C665CBC61AB2 /* Pods_YumYumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E748F51A7196099FB67267 /* Pods_YumYumTests.framework */; };
 		C5A3452B51F98A7115513DBD /* Pods_YumYum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */; };
 		E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F32625B746002C2637 /* AppDelegate.swift */; };
@@ -38,6 +38,7 @@
 		E52F58192625B746002C2637 /* YumYumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F58182625B746002C2637 /* YumYumUITests.swift */; };
 		E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */; };
 		E536EBB7263BFDCD00791E7C /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E536EBB6263BFDCD00791E7C /* PlaceModel.swift */; };
+		E536EBBD263C7E2600791E7C /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E536EBBC263C7E2600791E7C /* Utils.swift */; };
 		E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */; };
 		E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEA2638699E0049AA0B /* WebApiManager.swift */; };
 		E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */; };
@@ -77,7 +78,7 @@
 		176877668411709C5ECB5223 /* Pods-YumYumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumTests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumTests/Pods-YumYumTests.debug.xcconfig"; sourceTree = "<group>"; };
 		452F8AFF9E6F936F5A82F3E2 /* Pods-YumYumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumTests.release.xcconfig"; path = "Target Support Files/Pods-YumYumTests/Pods-YumYumTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B829E1AD96BD40F54F7A6BA /* Pods-YumYum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.debug.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.debug.xcconfig"; sourceTree = "<group>"; };
-		540CAAF326314F7D0045917B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		540CAAF326314F7D0045917B /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		541A0BF9262E8E97006C9582 /* VideoVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoVO.swift; sourceTree = "<group>"; };
 		541A0BFE262EAD0F006C9582 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		54552441262FF0A100BFFD54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -95,7 +96,7 @@
 		54CC1D662636F6BF0023963F /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 		54DA48C5262F1FD400AC4863 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
 		54DA48CD262F249700AC4863 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
-		54E0EEE3262835950006D49D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumYum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		660FBCDD88D6F913501CB333 /* Pods-YumYum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.release.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.release.xcconfig"; sourceTree = "<group>"; };
 		843970AD8155E7CF31EF0110 /* Pods-YumYum-YumYumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		E52F581A2625B746002C2637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerMedia.swift; sourceTree = "<group>"; };
 		E536EBB6263BFDCD00791E7C /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
+		E536EBBC263C7E2600791E7C /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		E548AAEA2638699E0049AA0B /* WebApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManager.swift; sourceTree = "<group>"; };
 		E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerUser.swift; sourceTree = "<group>"; };
@@ -188,8 +190,8 @@
 		54D5B2DC26366AA3004F0BBB /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				540CAAF326314F7D0045917B /* SignUpViewController.swift */,
-				54E0EEE3262835950006D49D /* LoginViewController.swift */,
+				540CAAF326314F7D0045917B /* SignupVC.swift */,
+				54E0EEE3262835950006D49D /* LoginVC.swift */,
 				548AB7E5262AA1BC0093215D /* SignUpButton.swift */,
 			);
 			path = Login;
@@ -276,8 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				E548AAEA2638699E0049AA0B /* WebApiManager.swift */,
-				E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */,
 				54B9F131263ACBC700027590 /* CommenResponse.swift */,
+				E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */,
 				E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */,
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
 			);
@@ -360,6 +362,7 @@
 				E52F58042625B746002C2637 /* Info.plist */,
 				E52F57FF2625B746002C2637 /* Assets.xcassets */,
 				E52F57FC2625B746002C2637 /* YumYum.xcdatamodeld */,
+				E536EBBC263C7E2600791E7C /* Utils.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
+				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
@@ -682,10 +686,10 @@
 				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
-				540CAAF426314F7D0045917B /* SignUpViewController.swift in Sources */,
+				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
-				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
+				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
@@ -887,7 +891,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -908,7 +912,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

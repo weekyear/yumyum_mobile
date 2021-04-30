@@ -37,13 +37,20 @@ struct Feed {
         case isLike
         case place = "placeRequest"
     }
-    
 }
-
 
 extension Feed: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        userId = try container.decode(Int.self, forKey: .userId)
+        title = try container.decode(String.self, forKey: .title)
+        content = try container.decode(String.self, forKey: .content)
+        score = try container.decode(Int.self, forKey: .score)
+        thumbnailPath = try container.decode(URL.self, forKey: .thumbnailPath)
+        videoPath = try container.decode(URL.self, forKey: .videoPath)
+        id = try container.decode(Int.self, forKey: .id)
+        likeCount = try container.decode(Int.self, forKey: .likeCount)
+        isLike = try container.decode(Bool.self, forKey: .isLike)
     }
 }
 
