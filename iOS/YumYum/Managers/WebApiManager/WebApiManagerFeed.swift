@@ -16,13 +16,10 @@ extension WebApiManager {
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data"
         ]
-
-        
         AF.upload(multipartFormData: { (formData) in
             do {
                 let fileName = UUID()
                 let videoData = try Data(contentsOf: videoUrl)
-                print("hi", fileName, videoUrl, videoData)
                 dump(videoData)
                 formData.append(videoUrl, withName: "file", fileName: "\(fileName).mp4", mimeType: "video/mp4")
                 
