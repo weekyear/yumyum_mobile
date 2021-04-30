@@ -16,7 +16,7 @@
 		548AB7E12629FDBB0093215D /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 548AB7E02629FDBB0093215D /* video.mp4 */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
-		54B1E223263713150030C832 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* AlertUtil.swift */; };
+		54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* UIViewControllerExtension.swift */; };
 		54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E22A26371ECB0030C832 /* ConfigUrls.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeViewController.swift */; };
 		54CC1D672636F6BF0023963F /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 54CC1D662636F6BF0023963F /* image1.jpeg */; };
@@ -34,6 +34,9 @@
 		E52F58032625B746002C2637 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E52F58012625B746002C2637 /* LaunchScreen.storyboard */; };
 		E52F580E2625B746002C2637 /* YumYumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F580D2625B746002C2637 /* YumYumTests.swift */; };
 		E52F58192625B746002C2637 /* YumYumUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F58182625B746002C2637 /* YumYumUITests.swift */; };
+		E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */; };
+		E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEA2638699E0049AA0B /* WebApiManager.swift */; };
+		E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */; };
 		E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5747F0F262AA0F300DD0672 /* CameraVC.swift */; };
 		E5920A1C2627C2D800836123 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A1B2627C2D800836123 /* Home.storyboard */; };
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
@@ -74,7 +77,7 @@
 		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/ViewControllers/Home/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
-		54B1E222263713150030C832 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
+		54B1E222263713150030C832 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		54B1E22A26371ECB0030C832 /* ConfigUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUrls.swift; sourceTree = "<group>"; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		54CC1D662636F6BF0023963F /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
@@ -101,6 +104,9 @@
 		E52F58142625B746002C2637 /* YumYumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YumYumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52F58182625B746002C2637 /* YumYumUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YumYumUITests.swift; sourceTree = "<group>"; };
 		E52F581A2625B746002C2637 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		E548AAEA2638699E0049AA0B /* WebApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManager.swift; sourceTree = "<group>"; };
+		E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerUser.swift; sourceTree = "<group>"; };
 		E5747F0F262AA0F300DD0672 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		E5920A1B2627C2D800836123 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
@@ -154,7 +160,6 @@
 		54B1E221263712C20030C832 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				54B1E222263713150030C832 /* AlertUtil.swift */,
 				54B1E22A26371ECB0030C832 /* ConfigUrls.swift */,
 			);
 			path = Utils;
@@ -204,6 +209,7 @@
 		E52F57F22625B746002C2637 /* YumYum */ = {
 			isa = PBXGroup;
 			children = (
+				E548AAE8263869570049AA0B /* Managers */,
 				548AB7E02629FDBB0093215D /* video.mp4 */,
 				541A0BFE262EAD0F006C9582 /* video2.mp4 */,
 				54DA48C5262F1FD400AC4863 /* video3.mp4 */,
@@ -238,6 +244,23 @@
 			path = YumYumUITests;
 			sourceTree = "<group>";
 		};
+		E548AAE8263869570049AA0B /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E548AAE9263869600049AA0B /* WebApiManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E548AAE9263869600049AA0B /* WebApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				E548AAEA2638699E0049AA0B /* WebApiManager.swift */,
+				E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */,
+			);
+			path = WebApiManager;
+			sourceTree = "<group>";
+		};
 		E56663E9263347E2003A503F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +289,8 @@
 		E5920A142627C18000836123 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				54B1E222263713150030C832 /* UIViewControllerExtension.swift */,
+				E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -614,6 +639,7 @@
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
+				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
@@ -623,10 +649,12 @@
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginViewController.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
+				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
 				540CAAF92631955A0045917B /* SignUpModel.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
-				54B1E223263713150030C832 /* AlertUtil.swift in Sources */,
+				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
+				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,13 +841,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -834,13 +862,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ONN.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

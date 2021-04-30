@@ -86,7 +86,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
         videoLayout.bringSubviewToFront(reviewLabel)
         videoLayout.bringSubviewToFront(userLabel)
         videoLayout.bringSubviewToFront(placeStackView)
-        videoLayout.bringSubviewToFront(logOutBtn)
         
     }
     

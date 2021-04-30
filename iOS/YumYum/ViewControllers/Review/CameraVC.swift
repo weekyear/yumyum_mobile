@@ -13,14 +13,18 @@ import PhotosUI
 
 class CameraVC: UIViewController {
 
-
+    
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoDevice: AVCaptureDevice!
     var videoInput: AVCaptureDeviceInput!
     var audioInput: AVCaptureDeviceInput!
     var videoOutput: AVCaptureMovieFileOutput!
+    var outputUrl: URL!
+    private let sessionQueue = DispatchQueue(label: "session queue")
+    private var backgroundRecordingID: UIBackgroundTaskIdentifier?
     
     @IBOutlet weak var cameraView: PreviewView!
+    @IBOutlet weak var recordButton: UIButton!
     
     @IBAction func closeCamera(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -30,17 +34,19 @@ class CameraVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // layout
+        setupLayout()
     
         // 권한 설정
         requestCameraPermission()
         requestGalleryPermission()
         
-        if !captureSession.isRunning {
-            captureSession.startRunning()
-        }
-        
-        cameraView.session = captureSession
+        resetTimer()
+
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,22 +59,32 @@ class CameraVC: UIViewController {
         
         // 세션 클로징
         captureSession.stopRunning()
+        // 타이머 해제
+        timer?.invalidate()
+        timer = nil
         
     }
     
+    func setupLayout() {
+        recordButton.layer.cornerRadius = 50
+        recordButton.layer.borderWidth = 10
+        recordButton.layer.borderColor = UIColor.yellow.cgColor
+    }
     
     private func requestCameraPermission() {
         // camera 권한 설정
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             case .authorized: // 이전에 카메라 권한 설정 허용해놨을 경우
                 print("설정 옛날에 해쮜")
-                setupCaptureSession()
+                setupCamera()
                 
             case .notDetermined: // 카메라 권한 설정 안해놨을 경우
-                AVCaptureDevice.requestAccess(for: .video) { granted in
+                AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                     if granted {
                         print("Camera: 권한 허용")
-                        self.setupCaptureSession()
+                        DispatchQueue.main.async {
+                            self?.setupCamera()
+                        }
                     } else {
                         print("Camera: 권한 거부")
                     }
@@ -84,11 +100,18 @@ class CameraVC: UIViewController {
         }
     }
     
-    private func setupCaptureSession() {
+    private func setupCamera() {
+        if !captureSession.isRunning {
+            captureSession.startRunning()
+        }
+        
+        cameraView.session = captureSession
+        cameraView.videoPreviewLayer.videoGravity = .resizeAspectFill
         
         // 1. captureSession 생성
 //        captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
+        
         
         // 2. captureDevice 생성
         let videoDevice = bestDevice(in: .back)
@@ -117,6 +140,14 @@ class CameraVC: UIViewController {
             if captureSession.canAddOutput(videoOutput) {
                 captureSession.addOutput(videoOutput)
             }
+            
+            
+            if let connection = self.videoOutput?.connection(with: .video) {
+                if connection.isVideoStabilizationSupported {
+                    connection.preferredVideoStabilizationMode = .auto
+                }
+            }
+            
         
             // 3-5 세션 구성의 완료
             captureSession.commitConfiguration()
@@ -187,7 +218,82 @@ class CameraVC: UIViewController {
         })
     }
     
+    // Mark: Record Video
+    @IBAction func didTapRecordVideo(_ sender: Any) {
+        
+        print("녹화중")
+        guard let movieFileOutput = self.videoOutput else {
+            return
+        }
+        
+        // 타이머
+        guard timer == nil else { return }
+        resetTimer()
+        
+        let videoPreviewLayerOrientation = cameraView.videoPreviewLayer.connection?.videoOrientation
+        
+        sessionQueue.async { [self] in
+            if !movieFileOutput.isRecording {
+                if UIDevice.current.isMultitaskingSupported {
+                    self.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+                }
+                
+                // Update the orientation on the movie file output video connection before recording.
+                let movieFileOutputConnection = movieFileOutput.connection(with: .video)
+                movieFileOutputConnection?.videoOrientation = videoPreviewLayerOrientation!
+                
+                let availableVideoCodecTypes = movieFileOutput.availableVideoCodecTypes
+                
+                if availableVideoCodecTypes.contains(.hevc) {
+                    movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.hevc], for: movieFileOutputConnection!)
+                }
+                
+                // Start recording video to a temporary file.
+                let outputFileName = NSUUID().uuidString
+                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+                
+                movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+                
+                DispatchQueue.main.async {
+                    // 타이머 생성
+                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                            guard timer.isValid else { return }
+                        self.updateTimer(timer: timer, videoOutput: movieFileOutput)
+                    })
+                    timer?.tolerance = 0.2
+                }
+                
+                
+            } else {
+                movieFileOutput.stopRecording()
+            }
+            
+        }
+        
+    }
     
+    
+    // Mark: Timer
+    
+    var timer: Timer?
+    var leftTime: Int = 3
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
+    func resetTimer() {
+        leftTime = 3
+        timeLabel.text = "3"
+    }
+    
+    func updateTimer(timer: Timer, videoOutput: AVCaptureMovieFileOutput) {
+        print(#function)
+        leftTime -= 1
+        timeLabel.text = "\(leftTime)"
+        if leftTime <= 0 {
+            timer.invalidate()
+            videoOutput.stopRecording()
+        }
+    }
     
     
 }
@@ -195,6 +301,56 @@ class CameraVC: UIViewController {
 
 extension CameraVC: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        func cleanup() {
+            let path = outputFileURL.path
+            if FileManager.default.fileExists(atPath: path) {
+                do {
+                    try FileManager.default.removeItem(atPath: path)
+                } catch {
+                    print("Could not remove file at url: \(outputFileURL)")
+                }
+            }
+            
+            if let currentBackgroundRecordingID = backgroundRecordingID {
+                backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
+                
+                if currentBackgroundRecordingID != UIBackgroundTaskIdentifier.invalid {
+                    UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID)
+                }
+            }
+        }
+        
+        var success = true
+        
+        if error != nil {
+            print("Movie file finishing error: \(String(describing: error))")
+            success = (((error! as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
+        }
+        
+        if success {
+            // Check the authorization status.
+            PHPhotoLibrary.requestAuthorization { status in
+                if status == .authorized {
+                    // Save the movie file to the photo library and cleanup.
+                    PHPhotoLibrary.shared().performChanges({
+                        let options = PHAssetResourceCreationOptions()
+                        options.shouldMoveFile = true
+                        let creationRequest = PHAssetCreationRequest.forAsset()
+                        creationRequest.addResource(with: .video, fileURL: outputFileURL, options: options)
+                    }, completionHandler: { success, error in
+                        if !success {
+                            print("AVCam couldn't save the movie to your photo library: \(String(describing: error))")
+                        }
+                        cleanup()
+                    }
+                    )
+                } else {
+                    cleanup()
+                }
+            }
+        } else {
+            cleanup()
+        }
         
     }
     

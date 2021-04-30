@@ -12,19 +12,20 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBOutlet var profileImgView: UIImageView!
     
-    @IBOutlet weak var nickName: UITextField!
+    @IBOutlet weak var nickNameLabel: UITextField!
     
-    @IBOutlet weak var introduction: UITextField!
+    @IBOutlet weak var introductionLabel: UITextField!
     
+    var profilePath : String? = ""
     
     // 회원가입 완료 후 동작하는 메서드
     @IBAction func completeSignUp(_ sender: UIButton) {
         
         let param : Parameters = [
             "email" : UserDefaults.standard.string(forKey: "userEmail")!,
-            "nickname" : self.nickName.text!,
-            "introduction" : self.introduction.text!,
-            "profilePath" : "http://k4b206.p.ssafy.io/resources/1619505379797image1.jpeg"
+            "nickname" : self.nickNameLabel.text!,
+            "introduction" : self.introductionLabel.text!,
+            "profilePath" : self.profilePath!
         ]
         
         // API 호출하고
@@ -85,8 +86,13 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
-        self.introduction.placeholder = "한줄 소개를 입력해주세요"
-        self.nickName.placeholder = "별명을 입력해주세요."
+        self.introductionLabel.placeholder = "한줄 소개를 입력해주세요."
+        self.introductionLabel.autocorrectionType = .no
+        self.introductionLabel.autocapitalizationType = .none
+        self.nickNameLabel.placeholder = "별명을 입력해주세요."
+        self.nickNameLabel.autocorrectionType = .no
+        self.nickNameLabel.autocapitalizationType = .none
+        
         makeRounded()
         
     }
@@ -133,28 +139,40 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     func getPicturePath(_ image: UIImage) {
         let url = URLs.profile
         let imgData = image.jpegData(compressionQuality: 0.2)!
-        let headers: HTTPHeaders = [
-            "Content-type": "multipart/form-data"
+        let headers: HTTPHeaders
+        headers = [
+            "Content-type": "multipart/form-data",
+            "Content-Disposition" : "form-data",
         ]
     
         let parameters = ["name": "name"]
         
-        let call = AF.upload(multipartFormData:{ MultipartFormData in
+        let call = AF.upload(multipartFormData:{ multipartFormData in
             for (key, value) in parameters {
-                MultipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                multipartFormData.append(value.data(using: .utf8)!, withName: key)
                 } //Optional for extra parameters
-
-            MultipartFormData.append(imgData, withName: "key", fileName: "ab.jpeg",mimeType: "image/jpeg")
-        }, to: url, headers: headers)
+            multipartFormData.append(imgData, withName: "file", fileName: "file.jpeg",mimeType: "image/jpeg")
+        }, to: url, method: .post, headers: headers)
         
         call.responseJSON{ res in
             switch res.result {
-            case .success(let resut):
-                print("사진업로드에 성공했습니다.: \(resut)")
+            case .success(_):
+                print("성공했습니다.")
+                let result = try! res.result.get()
+                
+                guard let jsonObject = result as? NSDictionary
+                else {
+                    print("타입이 잘못되었어요!")
+                    return
+                }
+                
+                if let data = jsonObject["data"] as? String {
+                    self.profilePath = data
+                }
+                
             case .failure(let err):
                 print("사진업로드 에러에러! \(err)")
             }
-            
         }
     }
 }

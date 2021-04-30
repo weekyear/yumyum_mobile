@@ -31,6 +31,9 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
         // 구글 로그인되어있는지 안되어 있는지 확인
         print(GIDSignIn.sharedInstance()?.currentUser != nil)
         
+        UserDefaults.standard.removeObject(forKey: "userEmail")
+        UserDefaults.standard.removeObject(forKey: "userData")
+        GIDSignIn.sharedInstance()?.signOut()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,7 +130,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
               print("\(error.localizedDescription)")
             }
             return
-            // 로그인 완료됬을때 아래 실행
+            // 구글 로그인이 완료되었을떄 아래 실행
           } else {
             print("로그인이 완료되었습니다.")
             guard let userEmail = user.profile.email else {
@@ -171,7 +174,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                 }
             }
         )
-        // 사용자 정보 가져오기
+        // 사용자 정보 가져와서 저장시키기
         if let email = user.profile.email {
             // 도대체 왜!! 와이 전체 user가 안담기냐고!!!! 주길까 일단 userId만 담자
             let plist = UserDefaults.standard

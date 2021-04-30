@@ -32,8 +32,11 @@ class MyInfoFragment : Fragment() {
         val root = binding.root
         // Inflate the layout for this fragment
         myInfoViewModel = ViewModelProvider(this).get(MyInfoViewModel::class.java)
-        myInfoViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textProfile.text = it
+
+
+        myInfoViewModel.userData.observe(viewLifecycleOwner, Observer {
+            binding.tvUsername.text = it.nickname
+            binding.tvIntroduction.text = it.introduction
         })
 
         binding.logOutButton.setOnClickListener {
