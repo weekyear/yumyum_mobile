@@ -40,38 +40,9 @@ class MainActivity : AppCompatActivity() {
         binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
         binding.btnMainMap.setOnClickListener { startActivity(mapIntent) }
 
-        binding.animationView.setMaxFrame(15)
-        binding.animationView2.setMinFrame(15)
-        if (!binding.animationView.isAnimating && !binding.animationView2.isAnimating) {
-            binding.animationView.setOnClickListener { icon1Click() }
-            binding.animationView2.setOnClickListener { icon2Click() }
-        }
-
-
-
 
     }
 
-    fun icon1Click() {
-        Log.d("icon", "1번마")
-        binding.animationView.playAnimation()
-        Handler().postDelayed({
-            binding.animationView.visibility = View.INVISIBLE
-            binding.animationView2.visibility = View.VISIBLE
-            binding.animationView.progress = 0.0f
-
-        }, 800)
-    }
-
-    fun icon2Click() {
-        Log.d("icon", "2번마")
-        binding.animationView2.playAnimation()
-        Handler().postDelayed({
-            binding.animationView2.visibility = View.INVISIBLE
-            binding.animationView.visibility = View.VISIBLE
-            binding.animationView2.progress = 0.5f
-        }, 800)
-    }
 
 
 }
