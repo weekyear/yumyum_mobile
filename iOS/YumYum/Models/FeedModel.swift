@@ -15,7 +15,7 @@ struct Feed {
     var userId: Int
     var placeRequest: NSObject
     var file: URL? = nil
-    
 }
+
 
 

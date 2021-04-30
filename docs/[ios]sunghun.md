@@ -573,3 +573,25 @@ DispatchQueue.global().async {
 
 - 참고 : https://zeddios.tistory.com/12
 
+
+
+### DispatchQueue
+
+- 이미지가 클경우에 다운로드 받기 까지 잠깐의 멈춤이 있을 수가 있다.(이유: 싱글 쓰레드로 작동되기 때문이다.) 그러나 DispatchQueue를 쓰면 멀티 쓰레드로 되어 이미지가 클 경우에도 멈춤이 생기지 않는다.
+- 참고: https://zeddios.tistory.com/516 , https://m.blog.naver.com/jdub7138/220949191761
+- sync : 동기적인 처리로 sync로 지정해준 로직이 끝나기 전까지 다른 작업을 하지 않는다.
+- Async: 비동기 처리로 아래 로직의 완료 여부와 상관없이 다음 코드가 실행됩니다.
+
+```swift
+        DispatchQueue.global().async {
+          //.global()을하는 이유는 .main으로 했을 경우에 유저가 이미지를 불러오도록 지시를 받아오는 중에 유저가 화면 이동이나 클릭 등을 할 수 있게 해준다.
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                image = UIImage(data: data!)
+                self.myProfileImgView.image = image
+            }
+        }
+```
+
+- 작업의 우선순위를 정의한 QoS를 활용할 수가 있다.(4가지가 있음) 1. `userInteractive` 2) `userlnitiated` 3) `utility` 4) `background`
+
