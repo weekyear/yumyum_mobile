@@ -80,10 +80,9 @@ class ReviewVC: UIViewController {
             print("json: \(result)")
             self.feed.thumbnailPath = URL(string: result["data"]["thumbnailPath"].stringValue)
             self.feed.videoPath = URL(string: result["data"]["videoPath"].stringValue)
-            let user = UserDefaults.getLoginedUserInfo2()
+            let user = UserDefaults.getLoginedUserInfo()
             self.feed.userId = user!["id"].intValue
             let place = Place(address: "대전", locationX: 10.0, locationY: 10.0, name: "족발맛짐", phone: "02-1111-2222")
-            
             self.feed.score = self.score.rawValue
             self.feed.place = place
 

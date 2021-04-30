@@ -165,14 +165,7 @@ class LoginVC : UIViewController, GIDSignInDelegate {
                     print("이메일체크 error다")
                 }
 
-                
-                
-            // 사용자 정보 가져와서 저장하기
-            if let email = user.profile.email {
-                UserDefaults.saveLoginUserEmail(email)
-            } else {
-                print("Error : User Data Not Found")
-            }
+
         }
         
         
