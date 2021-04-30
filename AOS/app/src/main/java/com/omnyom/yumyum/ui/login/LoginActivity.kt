@@ -2,6 +2,8 @@ package com.omnyom.yumyum.ui.login
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,8 +17,10 @@ import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getGoogleSignInInten
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignIn
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import com.omnyom.yumyum.ui.feed.LocationListActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
+import java.security.MessageDigest
 
 
 class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -36,7 +40,28 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
         if (firebaseAuth.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
         } else {
-            loginVM.login(firebaseAuth.currentUser.email, { startMapsActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
+            loginVM.login(firebaseAuth.currentUser.email, { startSearchActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
+        }
+
+        try {
+            val packageInfo = packageManager.getPackageInfo(
+                    packageName, PackageManager.GET_SIGNING_CERTIFICATES
+            )
+            val signingInfo = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                packageInfo.signingInfo.apkContentsSigners
+            } else {
+                TODO("VERSION.SDK_INT < P")
+            }
+
+            for (signature in signingInfo) {
+                val messageDigest = MessageDigest.getInstance("SHA")
+                messageDigest.update(signature.toByteArray())
+                val keyHash = String(Base64.encode(messageDigest.digest(), 0))
+                Log.d("KeyHash", keyHash)
+            }
+
+        } catch (e: Exception) {
+            Log.e("Exception", e.toString())
         }
     }
 
@@ -62,24 +87,37 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
             if (loginVM.isEmailValid(loginEmail)) {
                 // SharedPreferences에 이메일 저장
                 PreferencesManager.setString(this, getString(R.string.saved_google_email), loginEmail)
-                loginVM.login(loginEmail, { startMapsActivity() }, { startSignUpActivity() })
+                loginVM.login(loginEmail, { startSearchActivity() }, { startSignUpActivity() })
             }
         }
     }
 
     private fun startMainActivity() {
-        startActivity(Intent(application, MainActivity::class.java))
-        finish()
+        Intent(this, MainActivity::class.java).let {
+            startActivity(it)
+            finish()
+        }
     }
 
     private fun startSignUpActivity() {
-        startActivity(Intent(application, SignUpActivity::class.java))
-        finish()
+        Intent(this, SignUpActivity::class.java).let {
+            startActivity(it)
+            finish()
+        }
     }
 
     // 지도 Activity로 이동해요
     private fun startMapsActivity() {
-        val intent = Intent(this, MapsActivity::class.java)
-        startActivity(intent)
+        Intent(this, MapsActivity::class.java).let {
+            startActivity(it)
+            finish()
+        }
+    }
+
+    private fun startSearchActivity() {
+        Intent(this, LocationListActivity::class.java).let {
+            startActivity(it)
+            finish()
+        }
     }
 }
