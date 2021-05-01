@@ -8,12 +8,10 @@
 import UIKit
 
 class MypageVC: UIViewController {
-    
-
-    let userModelData = UserModel()
-    
 //    var numberOfCell : Int = 10
     let cellIdentifire : String = "cell"
+    
+    let userJsonData = UserDefaults.getLoginedUserInfo()
     
     var dumyData = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Mjtp1rdyeBKKtnTzZtzDMbt6FVeoCnn4ew&usqp=CAU",
@@ -48,8 +46,6 @@ class MypageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        self.loadUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,24 +59,16 @@ class MypageVC: UIViewController {
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 15) // 폰트크기
-        nTitle.text = userModelData.nickName
+        nTitle.text = userJsonData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
         // 네비게이션 바 배경색상 선택
         let color = UIColor(red: 1, green: 0.851, blue: 0.2588, alpha: 1.0)
         self.navigationController?.navigationBar.barTintColor = color
     }
-    // UserDafaults에 담겨 있는 데이터를 로드한다.
-    func loadUserData() {
-        let userData = UserDefaults.getLoginedUserInfo2()
-        userModelData.nickName = userData["nickname"] as? String
-        userModelData.introduce = userData["introduction"] as? String
-        userModelData.profileImg = userData["profilePath"] as? String
-        userModelData.userEmail = userData["email"] as? String
-        }
     
     func presentuserData(){
-        self.myIntroduceLabel.text = userModelData.introduce
-        let url = URL(string: userModelData.profileImg!)
+        self.myIntroduceLabel.text = userJsonData!["introduction"].stringValue
+        let url = URL(string: userJsonData!["profilePath"].stringValue)
         var image: UIImage?
         
         DispatchQueue.global().async {

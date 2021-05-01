@@ -31,10 +31,3 @@ struct User: Codable {
         email = json["email"].stringValue
     }
 }
-
-class UserModel {
-    var profileImg: String?
-    var nickName: String?
-    var introduce: String?
-    var userEmail: String?
-}
