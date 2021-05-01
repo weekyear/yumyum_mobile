@@ -9,6 +9,7 @@ import UIKit
 
 class MypageVC: UIViewController {
     
+
     let userModelData = UserModel()
     
 //    var numberOfCell : Int = 10
@@ -44,7 +45,7 @@ class MypageVC: UIViewController {
     @IBOutlet weak var myProfileImgView: UIImageView!
     
     @IBOutlet weak var myIntroduceLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -70,7 +71,7 @@ class MypageVC: UIViewController {
     }
     // UserDafaults에 담겨 있는 데이터를 로드한다.
     func loadUserData() {
-        let userData = UserDefaults.getLoginedUserInfo()
+        let userData = UserDefaults.getLoginedUserInfo2()
         userModelData.nickName = userData["nickname"] as? String
         userModelData.introduce = userData["introduction"] as? String
         userModelData.profileImg = userData["profilePath"] as? String

@@ -7,77 +7,64 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 extension WebApiManager {
-    //MARK: - 로그인 API 메서드 서버에 저장된 Email을 리턴한다.
-    func userLogin(_ userEmail: String, successHandler: @escaping ([String:Any]) -> Void, failureHandler: @escaping (String) -> Void) {
-        let url = "\(domainUrl)\(userUrl)\(userEmail)"
-        
-//        // struct JSON to Struct
-//        AF.request(url).responseDecodable(of: BaseStruct<TestUserData>.self) { (response) in
-//            guard let data = response.value?.data else {
-//                failureHandler("No Data")
-//                return
-//            }
-//            successHandler(data)
-//        }
-        let call = AF.request(url, method: HTTPMethod.get, encoding: JSONEncoding.default)
-
-        call.responseJSON { res in
-            let result = try! res.result.get()
-
-            guard let jsonObject = result as? NSDictionary else {
-                print("딕셔너리 캐스팅 오류")
-                return
-
-            }
-            if let status = jsonObject["status"] as? String {
-                if status == "200" {
-                    let userData = jsonObject["data"] as! [String:Any]
-                    successHandler(userData)
-                } else {
-                    failureHandler("status 오류!")
+    func checkUser(userEmail: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        let url = "\(domainUrl)\(userUrl)email/\(userEmail)"
+        AF.request(url, method: .get)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    let json = JSON(response.value!)
+                    success(json)
+                    break
+                case .failure(_):
+                    let error: Error = response.error!
+                    failure(error)
+                    break
                 }
-            } else {
-                failureHandler("status 오류!")
-            }
         }
     }
-    //MARK: - 회원가입 API 메서드
-    func userSignUp(userData: UserModel, successHandler: @escaping ([String:Any]) -> Void, failureHandler: @escaping (String) -> Void) {
-        
-        let param : Parameters = [
-            "email" : userData.userEmail!,
-            "nickname" : userData.nickName!,
-            "introduction" : userData.introduce!,
-            "profilePath" : userData.profileImg!
-        ]
-        
-        let url = "\(domainUrl)\(signUpUrl)"
-        let call = AF.request(url, method: HTTPMethod.post,
-                              parameters: param, encoding: JSONEncoding.default)
-        
-        call.responseJSON{ res in
-            let result = try! res.result.get()
-            
-            guard let jsonObject = result as? NSDictionary else {
-                print("JSON타입 캐스팅 오류!!")
-                return
-            }
-            
-            if let status = jsonObject["status"] as? String {
-                if status == "200" {
-                    print("회원가입 포스트성공")
-                    let serverUserData = jsonObject["data"] as! [String:Any]
-                    successHandler(serverUserData)
-                } else {
-                    print("회원가입 실패")
+
+    func login(userEmail: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        let url = "\(domainUrl)\(userUrl)login/\(userEmail)"
+        AF.request(url, method: .get)
+            .responseJSON { (response) in
+                switch response.result {
+                case .success(_):
+                    let json = JSON(response.value!)
+                    success(json)
+                    break
+                case .failure(_):
+                    let error = response.error!
+                    failure(error)
+                    break
                 }
             }
+    }
+    
+    func signup(user: User, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+
+        let url = "\(domainUrl)\(signUpUrl)"
+        
+        AF.request(url, method: .post, parameters: user, encoder: JSONParameterEncoder.default)
+          .responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                let json = JSON(response.value!)
+                success(json)
+                break
+            case .failure(_):
+                let error: Error = response.error!
+                failure(error)
+                break
+            }
         }
+        
     }
     //MARK: - 프로필사진 URL을 반환하는 메서드
     func createProfilePath() {
         
-    }
+        }
 }

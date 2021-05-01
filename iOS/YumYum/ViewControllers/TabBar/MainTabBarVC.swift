@@ -10,6 +10,11 @@ import UIKit
 
 class MainTabBarVC: UITabBarController {
     
+    static func instance() -> MainTabBarVC {
+        let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarVC") as! MainTabBarVC
+        return vc
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

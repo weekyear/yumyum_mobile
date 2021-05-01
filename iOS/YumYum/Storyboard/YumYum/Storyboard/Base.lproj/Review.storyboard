@@ -223,27 +223,42 @@
                                 <rect key="frame" x="20" y="108" width="374" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="COv-Nm-OoL">
-                                        <rect key="frame" x="24" y="0.0" width="326" height="30"/>
+                                        <rect key="frame" x="64" y="0.0" width="246" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-I3-3SA">
-                                                <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="1"/>
+                                                <connections>
+                                                    <action selector="TabEmoji1:" destination="6uF-eu-xOF" eventType="touchUpInside" id="wmd-Wf-R86"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-fU-Ju4">
-                                                <rect key="frame" x="70" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                                <rect key="frame" x="54" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="2"/>
+                                                <connections>
+                                                    <action selector="TabEmoji2:" destination="6uF-eu-xOF" eventType="touchUpInside" id="9L5-CF-dYe"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aic-Yv-JFG">
-                                                <rect key="frame" x="140" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                                <rect key="frame" x="108" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="3"/>
+                                                <connections>
+                                                    <action selector="TabEmoji3:" destination="6uF-eu-xOF" eventType="touchUpInside" id="GaL-Wo-kEh"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZv-jc-BUJ">
-                                                <rect key="frame" x="210" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                                <rect key="frame" x="162" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="4"/>
+                                                <connections>
+                                                    <action selector="TabEmoji4:" destination="6uF-eu-xOF" eventType="touchUpInside" id="BDp-QZ-TMW"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1Y-hl-byI">
-                                                <rect key="frame" x="280" y="0.0" width="46" height="30"/>
-                                                <state key="normal" title="Button"/>
+                                                <rect key="frame" x="216" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="5"/>
+                                                <connections>
+                                                    <action selector="TabEmoji5:" destination="6uF-eu-xOF" eventType="touchUpInside" id="d4n-XT-b96"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -320,6 +335,11 @@
                         <barButtonItem key="leftBarButtonItem" title="취소" id="Xpc-rd-JgF"/>
                         <barButtonItem key="rightBarButtonItem" title="완료" id="iJK-HR-U80"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contentTextField" destination="6BD-EM-C1d" id="UyT-fa-EXg"/>
+                        <outlet property="emojiLabel" destination="Ztb-Xc-Liz" id="jkF-Ic-Zxx"/>
+                        <outlet property="titleTextField" destination="jEv-Ti-3rX" id="f7Q-i6-0gC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHj-as-rdq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
