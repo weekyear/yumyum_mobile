@@ -2,8 +2,7 @@ package com.omnyom.yumyum.ui.base
 
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerAdapter<VH: BaseViewHolder, T : Any> :
-    RecyclerView.Adapter<VH>() {
+abstract class BaseRecyclerAdapter<VH: BaseViewHolder, T : Any> : RecyclerView.Adapter<VH>() {
 
     protected val items: MutableList<T> = mutableListOf()
     protected var vm : BaseViewModel? = null

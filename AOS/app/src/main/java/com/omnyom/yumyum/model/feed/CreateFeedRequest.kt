@@ -7,7 +7,7 @@ class CreateFeedRequest(
         private val score : Int,
         private val thumbnailPath : String,
         private val title : String,
-        private val userId  : Int,
+        private val userId  : Long,
         private val videoPath : String
 
 ) {

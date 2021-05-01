@@ -66,7 +66,6 @@ class HomeFragment : Fragment() {
         var item = foodList
         val userId = PreferencesManager.getLong(context!!, "userId").toString().toInt()
 
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
             val innerBinding = FoodListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             Log.d("HomFrag", "${item}")

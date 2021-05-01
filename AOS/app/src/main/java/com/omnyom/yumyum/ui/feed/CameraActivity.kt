@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -28,17 +27,18 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
     }
 
     override fun setupViews() {
-        binding.btnNext.setOnClickListener { goNext() }
+        binding.btnNext.setOnClickListener { startFeedCreateActivity() }
     }
 
     override fun onSubscribe() { }
 
     override fun release() { }
 
-    fun goNext() {
-        val intent = Intent(this, FeedCreateActivity::class.java)
-        intent.putExtra("videoUri", videoUri)
-        intent.putExtra("testText", "오닝?")
+    fun startFeedCreateActivity() {
+        val intent = Intent(this, FeedCreateActivity::class.java).apply {
+            putExtra("videoUri", videoUri)
+            putExtra("testText", "오닝?")
+        }
         startActivity(intent)
     }
 
@@ -51,11 +51,11 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
     override fun permissionDenied(requestCode: Int) {
         when (requestCode) {
             PERM_STORAGE -> {
-                Toast.makeText(baseContext, "외부 저장소 권한을 승인해야 앱을 사용할 수 있습니다!?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "외부 저장소 권한을 승인해야 앱을 사용할 수 있습니다!", Toast.LENGTH_SHORT).show()
                 finish()
             }
             PERM_CAMERA -> {
-                Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다!?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다!", Toast.LENGTH_SHORT).show()
             }
         }
     }
