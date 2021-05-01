@@ -1,10 +1,8 @@
 package com.omnyom.yumyum.ui.login
 
+import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.util.Base64
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.auth.api.Auth
@@ -15,12 +13,12 @@ import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.RESULT_CODE
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getGoogleSignInIntent
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignIn
+import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_COARSE_LOCATION
+import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_FINE_LOCATION
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.feed.LocationListActivity
-import com.omnyom.yumyum.ui.maps.MapsActivity
+import com.omnyom.yumyum.ui.feed.SearchPlaceActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
-import java.security.MessageDigest
 
 
 class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -35,34 +33,8 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     }
 
     override fun setup() {
-        sharedPref = this?.getPreferences(MODE_PRIVATE) ?: return
-
-        if (firebaseAuth.currentUser == null) {
-            PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
-        } else {
-            loginVM.login(firebaseAuth.currentUser.email, { startSearchActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
-        }
-
-        try {
-            val packageInfo = packageManager.getPackageInfo(
-                    packageName, PackageManager.GET_SIGNING_CERTIFICATES
-            )
-            val signingInfo = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                packageInfo.signingInfo.apkContentsSigners
-            } else {
-                TODO("VERSION.SDK_INT < P")
-            }
-
-            for (signature in signingInfo) {
-                val messageDigest = MessageDigest.getInstance("SHA")
-                messageDigest.update(signature.toByteArray())
-                val keyHash = String(Base64.encode(messageDigest.digest(), 0))
-                Log.d("KeyHash", keyHash)
-            }
-
-        } catch (e: Exception) {
-            Log.e("Exception", e.toString())
-        }
+        // 거부 처리 해줘야 함...
+        requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERM_FINE_LOCATION)
     }
 
     override fun setupViews() {
@@ -87,7 +59,30 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
             if (loginVM.isEmailValid(loginEmail)) {
                 // SharedPreferences에 이메일 저장
                 PreferencesManager.setString(this, getString(R.string.saved_google_email), loginEmail)
-                loginVM.login(loginEmail, { startSearchActivity() }, { startSignUpActivity() })
+                loginVM.login(loginEmail, { startMainActivity() }, { startSignUpActivity() })
+            }
+        }
+    }
+
+    override fun permissionGranted(requestCode: Int) {
+        sharedPref = this?.getPreferences(MODE_PRIVATE) ?: return
+
+        if (firebaseAuth.currentUser == null) {
+            PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
+        } else {
+            loginVM.login(firebaseAuth.currentUser.email, { startMainActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
+        }
+    }
+
+    override fun permissionDenied(requestCode: Int) {
+        when (requestCode) {
+            PERM_COARSE_LOCATION -> {
+                Toast.makeText(baseContext, "위치 권한을 승인해야 지도를 사용할 수 있습니다! [COARSE_LOCATION]", Toast.LENGTH_SHORT).show()
+//                finish()
+            }
+            PERM_FINE_LOCATION -> {
+                Toast.makeText(baseContext, "위치 권한을 승인해야 지도를 사용할 수 있습니다! [FINE_LOCATION]", Toast.LENGTH_SHORT).show()
+//                finish()
             }
         }
     }
@@ -106,16 +101,8 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
         }
     }
 
-    // 지도 Activity로 이동해요
-    private fun startMapsActivity() {
-        Intent(this, MapsActivity::class.java).let {
-            startActivity(it)
-            finish()
-        }
-    }
-
     private fun startSearchActivity() {
-        Intent(this, LocationListActivity::class.java).let {
+        Intent(this, SearchPlaceActivity::class.java).let {
             startActivity(it)
             finish()
         }

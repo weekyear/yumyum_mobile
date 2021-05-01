@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
     class FeedPagesAdapter(foodList: List<FeedData>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
         var item = foodList
 
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
             val innerBinding = FoodListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             Log.d("HomFrag", "${item}")

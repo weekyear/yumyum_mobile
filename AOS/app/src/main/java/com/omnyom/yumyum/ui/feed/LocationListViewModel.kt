@@ -1,12 +1,8 @@
 package com.omnyom.yumyum.ui.feed
 
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.omnyom.yumyum.helper.RetrofitManager
-import com.omnyom.yumyum.kakaoApi
-import com.omnyom.yumyum.model.maps.Document
 import com.omnyom.yumyum.model.maps.KeywordSearchResponse
 import retrofit2.Call
 import retrofit2.Callback

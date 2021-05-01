@@ -4,7 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
 import com.omnyom.yumyum.R
@@ -12,24 +12,18 @@ import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.feed.CreateFeedRequest
-import com.omnyom.yumyum.model.feed.CreateFeedResponse
-import com.omnyom.yumyum.model.feed.PlaceRequest
-import com.omnyom.yumyum.model.feed.SendVideoResponse
+import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
+import com.omnyom.yumyum.ui.signup.SignUpActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layout.activity_feed_create) {
-    var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
 
     private val feedCreateVM: FeedCreateViewModel by viewModels()
 
@@ -50,7 +44,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
             feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
         }
 
-        binding.btnMap.setOnClickListener { startMapsActivity() }
+        binding.btnMap.setOnClickListener { startSearchPlaceActivity() }
 
         textWatcher()
     }
@@ -59,6 +53,20 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun release() {
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == SearchPlaceActivity.PLACE_CODE) {
+            if (resultCode == RESULT_OK) {
+                val placeResult = data?.getSerializableExtra("placeResult") as SearchPlaceResult
+                binding.tvPlaceName.text = placeResult.place_name
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "사진 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     // 텍스트 변경을 감지합니다.
@@ -76,6 +84,10 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         })
     }
 
+    private fun startSearchPlaceActivity() {
+        val intent = Intent(this, SearchPlaceActivity::class.java)
+        startActivityForResult(intent, SearchPlaceActivity.PLACE_CODE)
+    }
 
     // 지도 Activity로 이동해요
     private fun startMapsActivity() {

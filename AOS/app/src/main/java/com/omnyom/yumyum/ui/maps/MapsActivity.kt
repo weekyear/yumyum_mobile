@@ -15,13 +15,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import com.omnyom.yumyum.KakaoRetrofitBuilder
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMapsBinding
 import com.omnyom.yumyum.helper.RetrofitManager
-import com.omnyom.yumyum.interfaces.KakaoApiService
 import com.omnyom.yumyum.kakaoApi
-import com.omnyom.yumyum.model.maps.Document
+import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.model.maps.KeywordSearchResponse
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.feed.LocationListActivity
@@ -127,7 +125,7 @@ class MapsActivity : BaseBindingActivity<ActivityMapsBinding>(R.layout.activity_
             override fun onResponse(call: Call<KeywordSearchResponse>, response: Response<KeywordSearchResponse>) {
                 if (response.isSuccessful) {
                     val intent = Intent(this@MapsActivity, LocationListActivity::class.java)
-                    val list : List<Document> = response.body()?.documents!!
+                    val list : List<SearchPlaceResult> = response.body()?.documents!!
                     intent.putExtra("DocumentList", list as Serializable)
                     startActivity(intent)
                 }

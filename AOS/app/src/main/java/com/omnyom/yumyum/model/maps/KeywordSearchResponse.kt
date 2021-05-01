@@ -3,11 +3,11 @@ package com.omnyom.yumyum.model.maps
 import java.io.Serializable
 
 data class KeywordSearchResponse(
-    val documents: List<Document>,
-    val meta: Meta
+        val documents: List<SearchPlaceResult>,
+        val meta: Meta
 ) : Serializable
 
-data class Document(
+data class SearchPlaceResult(
         val address_name: String,
         val category_group_code: String,
         val category_group_name: String,
