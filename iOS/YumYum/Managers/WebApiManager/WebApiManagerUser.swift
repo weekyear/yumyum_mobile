@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-
-// extension지정 하면 WebApiManager를 그대로 가져와 쓸 수 있다.
 extension WebApiManager {
     //MARK: - 로그인 API 메서드 서버에 저장된 Email을 리턴한다.
     func userLogin(_ userEmail: String, successHandler: @escaping ([String:Any]) -> Void, failureHandler: @escaping (String) -> Void) {
@@ -47,6 +45,7 @@ extension WebApiManager {
     }
     //MARK: - 회원가입 API 메서드
     func userSignUp(userData: UserModel, successHandler: @escaping ([String:Any]) -> Void, failureHandler: @escaping (String) -> Void) {
+        
         let param : Parameters = [
             "email" : userData.userEmail!,
             "nickname" : userData.nickName!,
@@ -76,5 +75,9 @@ extension WebApiManager {
                 }
             }
         }
+    }
+    //MARK: - 프로필사진 URL을 반환하는 메서드
+    func createProfilePath() {
+        
     }
 }
