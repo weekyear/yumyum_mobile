@@ -6,29 +6,31 @@
     <data>
         <variable
             name="vm"
-            type="com.omnyom.yumyum.ui.feed.LocationListViewModel" />
+            type="com.omnyom.yumyum.ui.feed.SearchPlaceViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.feed.SearchPlaceActivity">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:iconifiedByDefault="false"
             app:queryHint="검색어를 입력하시오" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_place"
-            android:layout_width="0dp"
-            android:layout_height="670dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

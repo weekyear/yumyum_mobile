@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
+import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
 import com.omnyom.yumyum.ui.maps.MapsActivity
@@ -29,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         val userId = PreferencesManager.getLong(this, "userId")
 
-        supportActionBar?.hide()
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
