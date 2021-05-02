@@ -31,6 +31,8 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     private var videoPath: String = ""
     private var thumbnailPath: String = ""
 
+    var placeRequest: PlaceRequest = PlaceRequest("", 0.0, 0.0, "", "")
+
     val content = MutableLiveData<String>().apply {
         value = ""
     }
@@ -62,7 +64,6 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
 
     // 응답으로 받은 비디오 데이터를 넣어서 피드 전체 데이터를 보냅니다!
     fun createFeed() {
-        var placeRequest = PlaceRequest(address = "대전 덕명동", locationX = 36.35714736405305, locationY = 127.34172795397022, name = "염햄네 매운갈비찜", phone = "042-1234-1234")
         val userId = PreferencesManager.getLong(getApplication(), "userId")
 
         val createFeedRequest = CreateFeedRequest(content.value?:"", placeRequest, score.value?:0, thumbnailPath, title.value?:"", userId?:0, videoPath)
