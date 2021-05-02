@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_search"
-        android:name="com.omnyom.yumyum.ui.myinfo.InnerTabFragment"
+        android:name="com.omnyom.yumyum.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_inner_tab" />
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_profile"
