@@ -25,9 +25,9 @@ class CreateFeedRequest(
 }
 
 data class PlaceRequest(
-        val address: String,
-        val locationX: Double,
-        val locationY: Double,
-        val name: String,
-        val phone: String
+        var address: String,
+        var locationX: Double,
+        var locationY: Double,
+        var name: String,
+        var phone: String
 )
