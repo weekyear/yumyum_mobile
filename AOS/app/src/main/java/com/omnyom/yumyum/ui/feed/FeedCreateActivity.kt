@@ -42,6 +42,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         binding.btnGoBack.setOnClickListener { finish() }
         binding.btnSubmit.setOnClickListener {
             feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
+            finish()
         }
 
         binding.btnMap.setOnClickListener { startSearchPlaceActivity() }
@@ -61,6 +62,13 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         if (requestCode == SearchPlaceActivity.PLACE_CODE) {
             if (resultCode == RESULT_OK) {
                 val placeResult = data?.getSerializableExtra("placeResult") as SearchPlaceResult
+                feedCreateVM.placeRequest.run {
+                    address = placeResult.address_name
+                    locationX = placeResult.x.toDouble()
+                    locationY = placeResult.y.toDouble()
+                    name = placeResult.place_name
+                    phone = placeResult.phone
+                }
                 binding.tvPlaceName.text = placeResult.place_name
 
             } else if (resultCode == RESULT_CANCELED) {
