@@ -32,9 +32,7 @@ class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
             UserDefaults.setUserInfo(json: result["data"])
             print("result: \(result)")
             let vc = MainTabBarVC.instance()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-            
+            self.view.window?.rootViewController = vc
         } failure: { (error) in
             print("회원가입에러: \(error)")
         }
@@ -102,49 +100,14 @@ class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImgView.image = img
-            getPicturePath(img)
-        }
-        
-        picker.dismiss(animated: true)
-    }
-    
-    func getPicturePath(_ image: UIImage) {
-        let url = URLs.profile
-        let imgData = image.jpegData(compressionQuality: 0.2)!
-        let headers: HTTPHeaders
-        headers = [
-            "Content-type": "multipart/form-data",
-            "Content-Disposition" : "form-data",
-        ]
-    
-        let parameters = ["name": "name"]
-        
-        let call = AF.upload(multipartFormData:{ multipartFormData in
-            for (key, value) in parameters {
-                multipartFormData.append(value.data(using: .utf8)!, withName: key)
-                } //Optional for extra parameters
-            multipartFormData.append(imgData, withName: "file", fileName: "file.jpeg",mimeType: "image/jpeg")
-        }, to: url, method: .post, headers: headers)
-        
-        call.responseJSON{ res in
-            switch res.result {
-            case .success(_):
-                print("성공했습니다.")
-                let result = try! res.result.get()
-                
-                guard let jsonObject = result as? NSDictionary
-                else {
-                    print("타입이 잘못되었어요!")
-                    return
-                }
-                
-                if let data = jsonObject["data"] as? String {
-                    self.profilePath = data
-                }
-                
-            case .failure(let err):
-                print("사진업로드 에러에러! \(err)")
+            WebApiManager.shared.createProfilePath(image: img) {
+                (result) in
+                self.profilePath = result["data"].stringValue
+            } failure: { (error) in
+                print(error)
             }
         }
+
+        picker.dismiss(animated: true)
     }
 }

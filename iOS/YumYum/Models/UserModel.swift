@@ -30,4 +30,23 @@ struct User: Codable {
         introduction = json["introduction"].stringValue
         email = json["email"].stringValue
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case profilePath
+        case nickname
+        case introduction
+        case email
+    }
+    
+    init(from decoder:Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(Int.self, forKey: .id)
+        profilePath = try values.decode(String.self, forKey: .profilePath)
+        nickname = try values.decode(String.self, forKey: .nickname)
+        introduction = try values.decode(String.self, forKey: .introduction)
+        email = try values.decode(String.self, forKey: .email)
+    }
+    
 }
+

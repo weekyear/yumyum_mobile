@@ -52,6 +52,16 @@ class MypageVC: UIViewController {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
+        profileMakeRounded()
+    }
+    
+    func profileMakeRounded() {
+        myProfileImgView.layer.borderWidth = 2
+        myProfileImgView.layer.masksToBounds = false
+        myProfileImgView.layer.borderColor = UIColor.systemYellow.cgColor
+        myProfileImgView.layer.cornerRadius = myProfileImgView.frame.height/2
+        myProfileImgView.clipsToBounds = true
+        myProfileImgView.contentMode = .scaleAspectFill
     }
     
     func initTitle() {

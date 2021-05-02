@@ -16,6 +16,7 @@ extension WebApiManager {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
+                    print(JSON(response.value!))
                     let json = JSON(response.value!)
                     success(json)
                     break
@@ -35,6 +36,7 @@ extension WebApiManager {
                 case .success(_):
                     let json = JSON(response.value!)
                     success(json)
+                    print(json)
                     break
                 case .failure(_):
                     let error = response.error!
@@ -64,7 +66,38 @@ extension WebApiManager {
         
     }
     //MARK: - 프로필사진 URL을 반환하는 메서드
-    func createProfilePath() {
+    func createProfilePath(image: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        let url = "\(domainUrl)\(userUrl)profile"
+        let imgData = image.jpegData(compressionQuality: 0.2)!
+        let headers: HTTPHeaders
+        headers = [
+            "Content-type": "multipart/form-data",
+            "Content-Disposition" : "form-data",
+        ]
         
+        let parameters = ["name": "name"]
+
+        let call = AF.upload(multipartFormData:{ multipartFormData in
+            for (key, value) in parameters {
+                multipartFormData.append(value.data(using: .utf8)!, withName: key)
+                } //Optional for extra parameters
+            multipartFormData.append(imgData, withName: "file", fileName: "file.jpeg",mimeType: "image/jpeg")
+        }, to: url, method: .post, headers: headers)
+        
+        call.response{ res in
+            switch res.result {
+            case .success(_):
+                let json = JSON(res.data! as Any)
+                success(json)
+                break
+            case .failure(_):
+                let error: Error = res.error!
+                failure(error)
+                break
+            }
         }
+        
+    }
+        
+        
 }

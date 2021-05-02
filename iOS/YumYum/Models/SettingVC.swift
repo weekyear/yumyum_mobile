@@ -11,12 +11,15 @@ class SettingVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let sectionlabel: [String] = ["계정", "컨텐츠 및 활동", "정보", "로그인"]
+    let settingCellLabel : [String] = ["계정 관리", "개인정보", "푸시 알림", "다크 모드", "개인정보 보호정책", "커뮤니티 가이드라인", "로그아웃"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
     }
-
 }
 
 extension SettingVC: UITableViewDelegate{
