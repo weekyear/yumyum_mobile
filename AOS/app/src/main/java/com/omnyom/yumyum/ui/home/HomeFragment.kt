@@ -53,13 +53,10 @@ class HomeFragment : Fragment() {
         return root
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 
     // 어탭터 형성
     class FeedPagesAdapter(val context: Context?,foodList: List<FeedData>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
@@ -76,18 +73,10 @@ class HomeFragment : Fragment() {
         override fun getItemCount(): Int = item.size
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            if (item[position].isLike) {
-                holder.thumbUp.visibility = View.INVISIBLE
-            } else {
-                holder.thumpUp2.visibility = View.INVISIBLE
-            }
-            holder.food.setVideoURI(item[position].videoPath.toUri())
-            holder.foodName.text = item[position].title
-            holder.detail.text = item[position].content
-            holder.userName.text = item[position].userId.toString()
-            holder.likeButton.setOnClickListener {
-                var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
+            var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
 
+            // 좋아요!
+            fun likeFeed() {
                 var Call = myRetrofitService.feedLike(LikeRequest(item[position].id, userId).get())
                 Call.enqueue(object : Callback<LikeResponse> {
                     override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
@@ -101,27 +90,57 @@ class HomeFragment : Fragment() {
 
                 })
             }
+
+            // 안좋아요!
+            fun unlikeFeed() {
+                var Call = myRetrofitService.cancelFeedLike(item[position].id.toLong(), userId.toLong())
+                Call.enqueue(object : Callback<LikeResponse> {
+                    override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
+                        if (response.isSuccessful) {
+                        }
+                    }
+                    override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
+                        t
+                    }
+
+                })
+            }
+
+            holder.food.setVideoURI(item[position].videoPath.toUri())
+            holder.foodName.text = item[position].title
+            holder.detail.text = item[position].content
+            holder.userName.text = item[position].userId.toString()
+            holder.thumbUp.setMaxFrame(15)
+            holder.thumbUp2.setMinFrame(15)
+
+            // 버튼 구현
+            if (item[position].isLike) {
+                holder.thumbUp.visibility = View.INVISIBLE
+            } else {
+                holder.thumbUp2.visibility = View.INVISIBLE
+            }
+
             holder.thumbUp.setOnClickListener {
-                holder.thumbUp.setMaxFrame(10)
+                likeFeed()
+                Log.d("nanta", "쪼아요")
                 holder.thumbUp.playAnimation()
                 Handler().postDelayed({
                     holder.thumbUp.progress = 0.0f
                     holder.thumbUp.visibility = View.INVISIBLE
-                    holder.thumpUp2.visibility = View.VISIBLE
+                    holder.thumbUp2.visibility = View.VISIBLE
                 }, 800)
             }
 
-            holder.thumpUp2.setOnClickListener {
-                holder.thumpUp2.setMinFrame(10)
-                holder.thumpUp2.playAnimation()
+            holder.thumbUp2.setOnClickListener {
+                unlikeFeed()
+                Log.d("nanta", "씨러요")
+                holder.thumbUp2.playAnimation()
                 Handler().postDelayed({
-                    holder.thumpUp2.progress = 0.5f
-                    holder.thumpUp2.visibility = View.INVISIBLE
+                    holder.thumbUp2.progress = 0.5f
+                    holder.thumbUp2.visibility = View.INVISIBLE
                     holder.thumbUp.visibility = View.VISIBLE
                 }, 800)
             }
-
-
 
 
             // 루프 설정!
@@ -132,21 +151,19 @@ class HomeFragment : Fragment() {
                 mp!!.isLooping = true;
             };
 
+
+
         }
 
         class Holder(private val innerBinding: FoodListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
-
-
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
             val placeName = innerBinding.textPlacename
             val address = innerBinding.textAddress
             val detail = innerBinding.textDetail
             val userName = innerBinding.textUser
-            val likeButton = innerBinding.btnLike
             val thumbUp = innerBinding.avThumbUp
-            val thumpUp2 = innerBinding.avThumbUp2
-
+            val thumbUp2 = innerBinding.avThumbUp2
         }
     }
 

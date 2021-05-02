@@ -21,4 +21,6 @@
     <dimen name="login_title_size">28sp</dimen>
     <dimen name="sign_up_title_size">20sp</dimen>
     <dimen name="btn_size">20sp</dimen>
+
+    <dimen name="corner_radius">8dp</dimen>
 </resources>

@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.omnyom.yumyum.R
 
 import com.omnyom.yumyum.databinding.FragmentInnerTabBinding
 import com.omnyom.yumyum.model.myinfo.PagerAdapters
@@ -17,7 +18,6 @@ class InnerTabFragment : Fragment() {
 
     val binding by lazy { FragmentInnerTabBinding.inflate(layoutInflater) }
     lateinit var tabs: TabLayout
-    lateinit var title: TextView
     lateinit var viewPager: ViewPager
     lateinit var pagerAdapters: PagerAdapters
 
@@ -31,12 +31,17 @@ class InnerTabFragment : Fragment() {
         viewPager = binding.viewPager
         pagerAdapters = PagerAdapters(childFragmentManager)
 
-        pagerAdapters.addFragment(MyFeedFragment(), "MY Feed")
+        pagerAdapters.addFragment(MyFeedFragment(), "My Feed")
         pagerAdapters.addFragment(LikeFeedFragment(), "Liked Feed")
 
         viewPager.adapter = pagerAdapters
 
         tabs.setupWithViewPager(viewPager)
+        tabs.getTabAt(0)?.setIcon(R.drawable.ic_add_profile)
+        tabs.getTabAt(0)?.text =null
+        tabs.getTabAt(1)?.setIcon(R.drawable.ic_add_profile)
+        tabs.getTabAt(1)?.text =null
+
 
         return binding.root
     }

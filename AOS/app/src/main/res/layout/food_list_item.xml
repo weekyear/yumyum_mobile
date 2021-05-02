@@ -17,16 +17,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/text_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="2021/04/15 Wed"
-        app:layout_constraintEnd_toEndOf="@+id/food_video"
-        app:layout_constraintTop_toTopOf="@+id/food_video" />
-
-    <TextView
         android:id="@+id/text_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -83,35 +73,26 @@
         app:layout_constraintStart_toStartOf="@+id/food_video" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/av_thumb_up"
+        android:id="@+id/av_thumb_up2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginTop="564dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_colorFilter="@color/white"
         app:lottie_fileName="ic_thumb_up.json" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/av_thumb_up2"
+        android:id="@+id/av_thumb_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="484dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginTop="564dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_colorFilter="@color/white"
         app:lottie_fileName="ic_thumb_up.json" />
 
-    <Button
-        android:id="@+id/btn_like"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
-        android:text="Like"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

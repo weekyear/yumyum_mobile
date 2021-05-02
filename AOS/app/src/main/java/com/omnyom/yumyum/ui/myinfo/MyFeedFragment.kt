@@ -12,7 +12,11 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.gms.common.internal.service.Common
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FeedListItemBinding
 import com.omnyom.yumyum.databinding.FragmentMyFeedBinding
 import com.omnyom.yumyum.model.feed.FeedData
@@ -51,21 +55,12 @@ class MyFeedFragment : Fragment() {
         override fun getItemCount(): Int = item.size
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            holder.foodName.text = item[position].title
-            holder.thumbnail.setImageURI(item[position].thumbnailPath.toUri())
-
+            val radius = holder.itemView.context.resources.getDimensionPixelSize(R.dimen.corner_radius)
+            Glide.with(holder.itemView.context).load(item[position].thumbnailPath).transform(CenterCrop(), RoundedCorners(radius)).into(holder.thumbnail)
         }
 
         class Holder(private val innerBinding: FeedListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
-            init {
-                innerBinding.root.setOnClickListener {
-                    Toast.makeText(innerBinding.root.context, "클릭된 아이템 = ${innerBinding.tvFoodName.text}", Toast.LENGTH_SHORT).show()
-                }
-            }
-
             val thumbnail = innerBinding.ivThumbnail
-            val foodName = innerBinding.tvFoodName
-
         }
     }
 
