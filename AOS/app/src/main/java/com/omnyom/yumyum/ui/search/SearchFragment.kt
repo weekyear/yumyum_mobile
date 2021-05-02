@@ -11,8 +11,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
+    val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
     private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
@@ -20,17 +19,10 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        val root = binding.root
         searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-        searchViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.textSearch.text = it
-        })
-        return root
+        binding.inputLayoutName.setEndIconActivated(true)
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 }

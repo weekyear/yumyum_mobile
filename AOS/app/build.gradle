@@ -80,6 +80,10 @@ dependencies {
     // TextInputEditText
     implementation 'com.google.android.material:material:1.0.0'
 
+    //image Url
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
     // kakao maps
     compile files('libs/libDaumMapAndroid.jar')
 
