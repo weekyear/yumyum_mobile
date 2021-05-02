@@ -16,7 +16,6 @@ struct Feed {
     var thumbnailPath: URL? = nil
     var videoPath: URL? = nil
     
-    
     //Decodable
     var id: Int?
     var likeCount: Int?
@@ -82,3 +81,4 @@ extension Feed: Encodable {
         try container.encode(place, forKey: .place)
     }
 }
+

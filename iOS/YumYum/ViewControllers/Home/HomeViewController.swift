@@ -92,7 +92,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
     
-    // 콜렉션 뷰
+    // 콜렉션 뷰 레이아웃 조정 메서드
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cvRect = collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)

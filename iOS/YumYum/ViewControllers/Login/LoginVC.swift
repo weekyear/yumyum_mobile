@@ -145,11 +145,11 @@ class LoginVC : UIViewController, GIDSignInDelegate {
                             } failure: { (error) in
                                 print("login error: \(error)")
                             }
+                            
                             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                             if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-
-                                tabbarvc.modalPresentationStyle = .fullScreen
-                                self.present(tabbarvc, animated: true, completion: nil)
+                                self.view.window?.rootViewController = tabbarvc
+//                                self.present(tabbarvc, animated: true, completion: nil)
                             } else {
                                 print("탭바가 없습니다.")
                             }

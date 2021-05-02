@@ -573,3 +573,95 @@ DispatchQueue.global().async {
 
 - 참고 : https://zeddios.tistory.com/12
 
+
+
+### DispatchQueue
+
+- 이미지가 클경우에 다운로드 받기 까지 잠깐의 멈춤이 있을 수가 있다.(이유: 싱글 쓰레드로 작동되기 때문이다.) 그러나 DispatchQueue를 쓰면 멀티 쓰레드로 되어 이미지가 클 경우에도 멈춤이 생기지 않는다.
+- 참고: https://zeddios.tistory.com/516 , https://m.blog.naver.com/jdub7138/220949191761
+- sync : 동기적인 처리로 sync로 지정해준 로직이 끝나기 전까지 다른 작업을 하지 않는다.
+- Async: 비동기 처리로 아래 로직의 완료 여부와 상관없이 다음 코드가 실행됩니다.
+
+```swift
+        DispatchQueue.global().async {
+          //.global()을하는 이유는 .main으로 했을 경우에 유저가 이미지를 불러오도록 지시를 받아오는 중에 유저가 화면 이동이나 클릭 등을 할 수 있게 해준다.
+            let data = try? Data(contentsOf: url!)
+            DispatchQueue.main.async {
+                image = UIImage(data: data!)
+                self.myProfileImgView.image = image
+            }
+        }
+```
+
+- 작업의 우선순위를 정의한 QoS를 활용할 수가 있다.(4가지가 있음) 1. `userInteractive` 2) `userlnitiated` 3) `utility` 4) `background`
+
+
+
+### 클래스
+
+- 클래스는 반드시 초기값이 있어야한다.
+
+
+
+### 연산 프로퍼티(computed property)
+
+- 말그대로 값을 저장하는 것이아닌 그떄그때 특정한 연산을 통해서 값을 리턴해준다.
+
+- getter와 setter로 이뤄져 있고 연산된 값을 저장할 변수가 반드시 있어야한다.
+
+```swift
+class Point {
+    var tempX : Int = 1
+    var x: Int {
+        get {
+            return tempX
+        }
+        set {
+            tempX = newValue * 2
+        }
+    }
+}
+var p: Point = Point()
+p.x = 12
+
+```
+
+- 위처럼 하면 x에 값이 저장되는 것이 아니라 tempX에 두배를 한 24가 저장된다. 즉 x에 저장되는게 아니라 클래스 Point안의 저장 프로퍼티인 tempX에 24가 저장되는 것이다.
+- get은 값을 호출할때 현재 저장되어 있는 값을 그대로 불러오고
+- 연산 프로퍼티에 값을 넣어주면 set으로 들어가서 연산을 마치고 그 값을 구조체나, 클래스에 저장된 저장프로퍼티에 저장시켜놓는다.
+
+## codable 프로토콜
+
+- 처음에는 이걸 왜쓰나 싶었다. 그냥 alamofire로 받아온 JSON객체를 파싱해서 데이터 객체로 저장하고 예를들면 NSDictionary라든지 JSONArray라면 NSArray라든지 그런데 계속 하나씩 다 파싱하다보니까 효율성이 너무 떨어지는 걸 느꼈고 받아온 데이터를 struct로 지정해놓고 서버에서 받아온 데이터를 내가 struct에 지정한 타입으로 틀 찍어내듯이 하면 간편하다는 것을 알았다. 
+
+- 주로 서버에서 받아온 JSON을 decoder를 이용해서 디코딩하는경우가 많기 때문에 다음과 같이 하면된다.
+
+- ![image-20210501021116231]([ios]sunghun.assets/image-20210501021116231.png)
+
+- 여기서 decode 코드이 원형이 Person.self가 들어간 자리의 type: 인데 이는 우리가 JSON으로 만들고 싶은것의 타입을 넣어주면된다. 그래서 Person.self로 Person 클래스, 혹은 구조체의 타입을 넣어주면 타입을 지정해 줄 수가 있다.
+
+
+
+## Singleton(싱글톤)
+
+> 특정용도의 객체를 하나 생성해서 공용으로 사용하고 싶을떄 사용하는데, 주로 환경설정, 로그인 정보 등을 특정용도로 생성해둔 객체에 넣어두고 여러 객체에서 접근 가능하도록 하여 데이터를 사용하게 하는 것이다. 메모리를 딱 한번만 쓰기 때문에 메모리 소모가 적다.
+
+```swift
+final class ElonMusk {
+
+    static let shared = ElonMusk()
+
+    private init() {
+        // Private initialization to ensure just one instance is created.
+    }
+}
+```
+
+- 이처럼 클래스를 선정하고 타입 프로퍼티에 자기 자신의 클래스를 넣는다. 싱글톤은 딱 한번만 메모리에 올라가야하므로 접근제어자(private)를 사용해서 init()이 한번만 일어나게 한다.
+
+
+
+## 제네릭(Generic)
+
+- 참고 : https://zeddios.tistory.com/226
+
