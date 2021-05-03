@@ -12,8 +12,12 @@ import PhotosUI
 
 
 class CameraVC: UIViewController {
-
     
+    static func instance() -> CameraVC {
+        let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "CameraVC") as! CameraVC
+        return vc
+    }
+
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoDevice: AVCaptureDevice!
     var videoInput: AVCaptureDeviceInput!
@@ -56,6 +60,7 @@ class CameraVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("cameraVC", #function)
         
         // 세션 클로징
         captureSession.stopRunning()
@@ -66,9 +71,13 @@ class CameraVC: UIViewController {
     }
     
     func setupLayout() {
+        // recordButton
         recordButton.layer.cornerRadius = 50
         recordButton.layer.borderWidth = 10
         recordButton.layer.borderColor = UIColor.yellow.cgColor
+        
+        // navbar
+        self.navigationController?.navigationBar.transparentNavigationBar()
     }
     
     private func requestCameraPermission() {
@@ -162,21 +171,6 @@ class CameraVC: UIViewController {
     }
     
     
-    
-    private func tempURL() -> URL? {
-      let directory = NSTemporaryDirectory() as NSString
-      
-      if directory != "" {
-        let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
-        return URL(fileURLWithPath: path)
-      }
-      
-      return nil
-    }
-    
-    
-
-    
     // device 별 카메라 사용 가능한 타입
     func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
         var deviceTypes: [AVCaptureDevice.DeviceType]!
@@ -232,11 +226,11 @@ class CameraVC: UIViewController {
         
         let videoPreviewLayerOrientation = cameraView.videoPreviewLayer.connection?.videoOrientation
         
-        sessionQueue.async { [self] in
+//        sessionQueue.async { [self] in
             if !movieFileOutput.isRecording {
-                if UIDevice.current.isMultitaskingSupported {
-                    self.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-                }
+//                if UIDevice.current.isMultitaskingSupported {
+//                    self.backgroundRecordingID = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+//                }
                 
                 // Update the orientation on the movie file output video connection before recording.
                 let movieFileOutputConnection = movieFileOutput.connection(with: .video)
@@ -245,22 +239,22 @@ class CameraVC: UIViewController {
                 let availableVideoCodecTypes = movieFileOutput.availableVideoCodecTypes
                 
                 if availableVideoCodecTypes.contains(.hevc) {
-                    movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.hevc], for: movieFileOutputConnection!)
+                    movieFileOutput.setOutputSettings([AVVideoCodecKey: AVVideoCodecType.h264], for: movieFileOutputConnection!)
                 }
                 
                 // Start recording video to a temporary file.
                 let outputFileName = NSUUID().uuidString
-                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
+                let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mp4")!)
                 
                 movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
                 
                 DispatchQueue.main.async {
                     // 타이머 생성
-                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
                             guard timer.isValid else { return }
                         self.updateTimer(timer: timer, videoOutput: movieFileOutput)
                     })
-                    timer?.tolerance = 0.2
+                    self.timer?.tolerance = 0.2
                 }
                 
                 
@@ -268,7 +262,7 @@ class CameraVC: UIViewController {
                 movieFileOutput.stopRecording()
             }
             
-        }
+//        }
         
     }
     
@@ -301,58 +295,25 @@ class CameraVC: UIViewController {
 
 extension CameraVC: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        func cleanup() {
-            let path = outputFileURL.path
-            if FileManager.default.fileExists(atPath: path) {
-                do {
-                    try FileManager.default.removeItem(atPath: path)
-                } catch {
-                    print("Could not remove file at url: \(outputFileURL)")
-                }
-            }
-            
-            if let currentBackgroundRecordingID = backgroundRecordingID {
-                backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
-                
-                if currentBackgroundRecordingID != UIBackgroundTaskIdentifier.invalid {
-                    UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID)
-                }
-            }
-        }
         
-        var success = true
-        
-        if error != nil {
-            print("Movie file finishing error: \(String(describing: error))")
-            success = (((error! as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
-        }
-        
-        if success {
-            // Check the authorization status.
-            PHPhotoLibrary.requestAuthorization { status in
-                if status == .authorized {
-                    // Save the movie file to the photo library and cleanup.
-                    PHPhotoLibrary.shared().performChanges({
-                        let options = PHAssetResourceCreationOptions()
-                        options.shouldMoveFile = true
-                        let creationRequest = PHAssetCreationRequest.forAsset()
-                        creationRequest.addResource(with: .video, fileURL: outputFileURL, options: options)
-                    }, completionHandler: { success, error in
-                        if !success {
-                            print("AVCam couldn't save the movie to your photo library: \(String(describing: error))")
-                        }
-                        cleanup()
-                    }
-                    )
-                } else {
-                    cleanup()
-                }
-            }
-        } else {
-            cleanup()
-        }
+        print("녹화끝 outputUrl: \(outputFileURL)")
+        let vc = VideoPlayBackVC.instance(videoUrl: outputFileURL)
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
     
 }
+
+
+
+//private func tempURL() -> URL? {
+//  let directory = NSTemporaryDirectory() as NSString
+//
+//  if directory != "" {
+//    let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
+//    return URL(fileURLWithPath: path)
+//  }
+//
+//  return nil
+//}

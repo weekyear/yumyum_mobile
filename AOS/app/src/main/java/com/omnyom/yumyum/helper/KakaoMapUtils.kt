@@ -22,20 +22,20 @@ class KakaoMapUtils {
         }
 
         fun getMyPosition(context: Context): List<Double> {
-            var x = ""
-            var y = ""
+            var latitude = ""
+            var longitude = ""
             val permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
             if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
                 try {
                     val userNowLocation: Location? = locationManager!!.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-                    x = userNowLocation?.latitude.toString()
-                    y = userNowLocation?.longitude.toString()
+                    latitude = userNowLocation?.latitude.toString()
+                    longitude = userNowLocation?.longitude.toString()
                 } catch (e: java.lang.NullPointerException) {
 
                 }
             }
 
-            return listOf( y.toDouble(), x.toDouble() )
+            return listOf( longitude.toDouble(), latitude.toDouble() )
         }
     }
 }

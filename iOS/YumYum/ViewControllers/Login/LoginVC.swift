@@ -12,7 +12,7 @@ import GoogleSignIn
 import Firebase
 import Alamofire
 
-class LoginViewController : UIViewController, GIDSignInDelegate {
+class LoginVC : UIViewController, GIDSignInDelegate {
     @IBOutlet weak var googleLoginView : GIDSignInButton!
     @IBOutlet var appleLoginView: UIView!
     
@@ -30,20 +30,17 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
 //        checkLogin()
         // 구글 로그인되어있는지 안되어 있는지 확인
         print(GIDSignIn.sharedInstance()?.currentUser != nil)
+
+        UserDefaults.standard.removeObject(forKey: "USEREMAIL")
+        UserDefaults.standard.removeObject(forKey: "USERDATA")
         
-        UserDefaults.standard.removeObject(forKey: "userEmail")
-        UserDefaults.standard.removeObject(forKey: "userData")
+
         GIDSignIn.sharedInstance()?.signOut()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("화면이 표시될때 실행됩니다.")
     }
     
     func checkLogin(){
         print("들어오나요?")
-        if plist.string(forKey: "userEmail") != nil {
+        if plist.string(forKey: "USEREMAIL") != nil {
             let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
 
             if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
@@ -55,10 +52,6 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             }
         }
     }
-    // 클릭했을때 회원가입 화면으로 넘어가도록 지정 근대 이렇게하니까 바로 넘어가버리네..
-//    func clickView() {
-//        self.googleLoginView.addTarget(self, action: #selector(moveSignUp(_:)), for: UIControl.Event.touchDown)
-//    }
     
     // 애플 로그인 버튼을 구현할 메서드 추가
     func addButton() {
@@ -123,6 +116,7 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
     // 구글 로그인을 완료했을때 불려져 오는 메서드이다.
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
               withError error: Error!) {
+                  
           if let error = error {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
               print("The user has not signed in before or they have since signed out.")
@@ -131,38 +125,50 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
             }
             return
             // 구글 로그인이 완료되었을떄 아래 실행
-          } else {
-            print("로그인이 완료되었습니다.")
+            } else {
             guard let userEmail = user.profile.email else {
                 return
             }
-             
-            let url = URLs.login + userEmail
-            let call = AF.request(url, method: HTTPMethod.get,encoding: JSONEncoding.default)
-            
-            // 호출하고 결과 받기
-            call.responseJSON { res in
-                let result = try! res.result.get()
-                
-                guard let jsonObject = result as? NSDictionary else {
-                    print("서버 호출오류")
-                    return
-                }
-                if let status = jsonObject["status"] as? String {
-                    
-                    if status == "200" {
-                        let userData = jsonObject["data"] as! NSDictionary
-                        
-                        let serverEmail = userData["email"] as! String
-                        
-                        self.compareEmail(userEmail, serverEmail)
+            print("나는 이메일이다", userEmail)
+            // 이메일 가입 체크
+                WebApiManager.shared.checkUser(userEmail: userEmail) { (result) in
+                    print("emailcheck: \(result)")
+                    if result["status"] == "200" {
+                        // 회원가입된 유저라면
+                        if result["data"]["existence"] == true {
+                            // 로그인
+                            WebApiManager.shared.login(userEmail: userEmail) {(result) in
+                                print("login: \(result)")
+                                if result["status"] == "200" {
+                                    UserDefaults.setUserInfo(json: result["data"])
+                                }
+                            } failure: { (error) in
+                                print("login error: \(error)")
+                            }
+                            
+                            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+                            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+                                self.view.window?.rootViewController = tabbarvc
+//                                self.present(tabbarvc, animated: true, completion: nil)
+                            } else {
+                                print("탭바가 없습니다.")
+                            }
+                        // 아닐경우 회원가입
+                        } else {
+                            let vc = SignupVC.instance(userEmail: userEmail)
+//                            self.navigationController?.pushViewController(vc, animated: true)
+                            vc.modalPresentationStyle = .overFullScreen
+                            self.present(vc, animated: true, completion: nil)
+                        }
                     }
-                } else {
-                    self.moveStoryBoard("Accounts", "SignUpViewController")
+                } failure: { (error) in
+                    print("이메일체크 error다")
                 }
-                
-            }
+
+
         }
+        
+        
         // 로그인 완료 했을때 firebase에 저장하기
         guard let authentication = user.authentication else {return}
         
@@ -174,41 +180,8 @@ class LoginViewController : UIViewController, GIDSignInDelegate {
                 }
             }
         )
-        // 사용자 정보 가져와서 저장시키기
-        if let email = user.profile.email {
-            // 도대체 왜!! 와이 전체 user가 안담기냐고!!!! 주길까 일단 userId만 담자
-            let plist = UserDefaults.standard
-            plist.set(email, forKey: "userEmail")
-            plist.synchronize()
-            
-        } else {
-            print("Error : User Data Not Found")
-        }
+    }
         
-    }
-    
-    // 구글 로그인 이메일과 서버에 저장되어 있는 이메일을 비교하는 함수
-    private func compareEmail(_ userEmail: String, _ serverEmail: String) {
-        print(userEmail)
-        print(serverEmail)
-        if userEmail == serverEmail {
-            print("현재 로그인 정보와 서버 로그인 이메일이 같아요!")
-            // 스토리 보드가 만약 분리되어 있다면 아래와 같이 스토리보드의 경로를 가져와서 변수로 할당해줘야함.
-            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-
-            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-                
-                tabbarvc.modalPresentationStyle = .fullScreen
-                self.present(tabbarvc, animated: true, completion: nil)
-            } else {
-                print("탭바가 없는데요?")
-            }
-        } else {
-            print("들어오나요?")
-            moveStoryBoard("Accounts", "SignUpViewController")
-        }
-    }
-    
     // 로그아웃되면 실행되는 함수
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
               withError error: Error!) {
