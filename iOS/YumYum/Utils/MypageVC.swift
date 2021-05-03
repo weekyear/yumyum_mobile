@@ -46,6 +46,9 @@ class MypageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 이거 안해주면 난리남 까먹지말자.. 콜렉션뷰에 레이아웃을 적용시키는 부분
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        self.collectionView.collectionViewLayout = flowLayout
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,12 +71,10 @@ class MypageVC: UIViewController {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
-        nTitle.font = UIFont.systemFont(ofSize: 15) // 폰트크기
+        nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
         nTitle.text = userJsonData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
         // 네비게이션 바 배경색상 선택
-        let color = UIColor(red: 1, green: 0.851, blue: 0.2588, alpha: 1.0)
-        self.navigationController?.navigationBar.barTintColor = color
     }
     
     func presentuserData(){
@@ -113,7 +114,6 @@ extension MypageVC: UICollectionViewDataSource {
                 cell.foodImageView.image = image
             }
         }
-        
         return cell
         
     }
@@ -131,15 +131,18 @@ extension MypageVC: UICollectionViewDelegate {
 // 셀의 레이아웃 정하기
 extension MypageVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.size.width/3)-3,
-                      height: (view.frame.size.width/3)-3)
+        
+        let CvRect = collectionView.frame
+        
+        return CGSize(width: (CvRect.width/3)-3,
+                      height: (CvRect.width/2)-3)
     }
     // 패딩을 1로 준다.
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 5
     }
 }
