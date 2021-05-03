@@ -23,6 +23,8 @@ import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.like.LikeRequest
 import com.omnyom.yumyum.model.like.LikeResponse
+import com.omnyom.yumyum.model.place.GetPlaceDataResponse
+import com.omnyom.yumyum.model.place.PlaceData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -63,9 +65,10 @@ class HomeFragment : Fragment() {
         var item = foodList
         val userId = PreferencesManager.getLong(context!!, "userId").toString().toInt()
 
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
             val innerBinding = FoodListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            Log.d("HomFrag", "${item}")
+
 
             return Holder(innerBinding)
         }
@@ -74,6 +77,28 @@ class HomeFragment : Fragment() {
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
             var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
+            Log.d("HomFrag", "${item[position].placeId}")
+
+            // 장소 불러오기
+            fun getPlaceData(placeId : Long) {
+                var call = myRetrofitService.getPlaceData(placeId)
+                call.enqueue(object : Callback<GetPlaceDataResponse> {
+                    override fun onResponse(call: Call<GetPlaceDataResponse>, response: Response<GetPlaceDataResponse>) {
+                        if (response.isSuccessful) {
+                            Log.d("placeData", "오나?")
+                            val placeData = response.body()!!.data
+                            holder.placeName.text = placeData.name
+                            holder.address.text = placeData.address
+                        }
+                    }
+
+                    override fun onFailure(call: Call<GetPlaceDataResponse>, t: Throwable) {
+                        t
+                        Log.d("placeData", "${t}")
+                    }
+
+                })
+            }
 
             // 좋아요!
             fun likeFeed() {
@@ -106,10 +131,13 @@ class HomeFragment : Fragment() {
                 })
             }
 
+            getPlaceData(item[position].placeId.toLong())
+
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
             holder.userName.text = item[position].userId.toString()
+
             holder.thumbUp.setMaxFrame(15)
             holder.thumbUp2.setMinFrame(15)
 
