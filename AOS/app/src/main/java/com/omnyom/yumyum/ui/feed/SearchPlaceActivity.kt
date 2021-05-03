@@ -2,6 +2,7 @@ package com.omnyom.yumyum.ui.feed
 
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySearchPlaceBinding

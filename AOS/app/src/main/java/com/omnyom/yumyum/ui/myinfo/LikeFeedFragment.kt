@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.myinfo
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FeedListItemBinding
 import com.omnyom.yumyum.databinding.FragmentLikeFeedBinding
 import com.omnyom.yumyum.model.feed.FeedData
+import java.net.URL
 
 class LikeFeedFragment : Fragment() {
     private lateinit var myLikeviewModel: LikeFeedViewModel
@@ -49,8 +51,13 @@ class LikeFeedFragment : Fragment() {
 
         override fun getItemCount(): Int = item.size
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            Glide.with(holder.itemView.context).load(item[position].thumbnailPath).into(holder.thumbnail)
+            var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
+                url = URL(item[position].thumbnailPath)
+            }
+            var bitmap: Bitmap = image_task.execute().get()
+            holder.thumbnail.setImageBitmap(bitmap)
         }
+
 
         class Holder(private val innerBinding: FeedListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
             val thumbnail = innerBinding.ivThumbnail

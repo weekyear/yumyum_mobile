@@ -17,8 +17,10 @@ import com.omnyom.yumyum.ui.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.omnyom.yumyum.MainActivity
+import com.omnyom.yumyum.databinding.ActivityMyOptionBinding
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.firebaseAuth
 import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.googleSignOut
+import com.omnyom.yumyum.ui.useroption.MyOptionActivity
 
 
 class MyInfoFragment : Fragment() {
@@ -45,22 +47,17 @@ class MyInfoFragment : Fragment() {
         })
 
         binding.logOutButton.setOnClickListener {
-            signOut()
+            goMyOption()
         }
 
         return root
     }
 
-    private fun signOut() {
-        firebaseAuth.signOut()
-        googleSignOut(activity as MainActivity, {startLoginActivity()})
+    private fun goMyOption() {
+        val intent = Intent(context, MyOptionActivity::class.java)
+        startActivity(intent)
     }
 
-    private fun startLoginActivity() {
-        val intent = Intent(activity?.application, LoginActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
