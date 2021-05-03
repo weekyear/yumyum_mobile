@@ -16,7 +16,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
-import com.omnyom.yumyum.ui.maps.MapsActivity
 import net.daum.mf.map.api.MapPoint
 
 fun ContentResolver.getFileName(uri: Uri): String {

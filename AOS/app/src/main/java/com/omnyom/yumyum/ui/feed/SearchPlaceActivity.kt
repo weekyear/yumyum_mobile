@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.feed
 
+import android.Manifest
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.observe
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySearchPlaceBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
+import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_FINE_LOCATION
 import com.omnyom.yumyum.helper.recycler.SearchPlaceResultsAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 
@@ -23,6 +25,7 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
 
     override fun setup() {
         KakaoMapUtils.initLocationManager(this)
+        requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERM_FINE_LOCATION)
     }
 
     override fun setupViews() {

@@ -38,14 +38,25 @@
             app:layout_constraintTop_toBottomOf="@id/tv_place_list_item_name"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <ImageButton
+            android:id="@+id/btn_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:backgroundTint="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_place" />
+
         <TextView
             android:id="@+id/tv_place_list_item_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{data.distance}"
+            android:text="@{data.distance + 'm'}"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btn_place"
+            app:layout_constraintStart_toStartOf="@id/btn_place"
+            app:layout_constraintEnd_toEndOf="@id/btn_place" />
 
         <View
             android:layout_width="match_parent"

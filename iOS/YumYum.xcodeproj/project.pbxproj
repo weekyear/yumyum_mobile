@@ -18,6 +18,10 @@
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
 		54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* UIViewControllerExtension.swift */; };
 		54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E22A26371ECB0030C832 /* ConfigUrls.swift */; };
+		54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */; };
+		54B8246F263C0EC1001F6A17 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */; };
+		54B82474263C1037001F6A17 /* MyPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B82473263C1037001F6A17 /* MyPageModel.swift */; };
+		54B82479263C921A001F6A17 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B82478263C921A001F6A17 /* SettingVC.swift */; };
 		54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F131263ACBC700027590 /* CommenResponse.swift */; };
 		54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F139263BA87D00027590 /* MypageVC.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeViewController.swift */; };
@@ -90,6 +94,10 @@
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		54B1E222263713150030C832 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		54B1E22A26371ECB0030C832 /* ConfigUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUrls.swift; sourceTree = "<group>"; };
+		54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyCollectionViewCell.swift; path = YumYum/MyCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = YumYum/MyCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
+		54B82473263C1037001F6A17 /* MyPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageModel.swift; sourceTree = "<group>"; };
+		54B82478263C921A001F6A17 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = YumYum/Models/SettingVC.swift; sourceTree = SOURCE_ROOT; };
 		54B9F131263ACBC700027590 /* CommenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenResponse.swift; sourceTree = "<group>"; };
 		54B9F139263BA87D00027590 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MypageVC.swift; path = YumYum/Utils/MypageVC.swift; sourceTree = SOURCE_ROOT; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -290,6 +298,9 @@
 			isa = PBXGroup;
 			children = (
 				54B9F139263BA87D00027590 /* MypageVC.swift */,
+				54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */,
+				54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */,
+				54B82478263C921A001F6A17 /* SettingVC.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -311,6 +322,7 @@
 				541A0BF9262E8E97006C9582 /* VideoVO.swift */,
 				5488E21526394F640096C35B /* UserModel.swift */,
 				E548AB15263AB51B0049AA0B /* FeedModel.swift */,
+				54B82473263C1037001F6A17 /* MyPageModel.swift */,
 				E536EBB6263BFDCD00791E7C /* PlaceModel.swift */,
 			);
 			path = Models;
@@ -503,6 +515,7 @@
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
 				54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
+				54B8246F263C0EC1001F6A17 /* MyCollectionViewCell.xib in Resources */,
 				54DA48CE262F249700AC4863 /* video4.mp4 in Resources */,
 				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
@@ -670,12 +683,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
+				54B82474263C1037001F6A17 /* MyPageModel.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
+				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
@@ -694,6 +709,7 @@
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
+				54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
@@ -885,7 +901,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -906,7 +922,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 25WJPJB95F;
+				DEVELOPMENT_TEAM = M527AM6YJ5;
 				INFOPLIST_FILE = YumYum/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
