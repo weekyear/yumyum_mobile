@@ -50,6 +50,18 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
     open fun permissionGranted(requestCode: Int) {}
     open fun permissionDenied(requestCode: Int) {}
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+            permissionGranted(requestCode)
+        } else {
+            permissionDenied(requestCode)
+        }
+    }
+
     fun requirePermissions(permissions: Array<String>, requestCode: Int) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             permissionGranted(requestCode)
@@ -62,18 +74,6 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
             } else {
                 ActivityCompat.requestPermissions(this, permissions, requestCode)
             }
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
-            permissionGranted(requestCode)
-        } else {
-            permissionDenied(requestCode)
         }
     }
 }

@@ -10,6 +10,7 @@ import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
 import com.omnyom.yumyum.ui.feed.FeedCreateActivity
+import com.omnyom.yumyum.ui.feed.MapActivity
 import com.omnyom.yumyum.ui.feed.SearchPlaceActivity
 import java.io.Serializable
 
@@ -31,6 +32,17 @@ class SearchPlaceResultsAdapter(private val activity: SearchPlaceActivity) : Bas
                 setPlaceResult()
                 Toast.makeText(itemBinding.root.context, "클릭된 아이템 = ${itemBinding.tvPlaceListItemName.text}", Toast.LENGTH_SHORT).show()
             }
+
+            itemBinding.btnPlace.setOnClickListener {
+                checkPlaceByMap()
+            }
+        }
+
+        private fun checkPlaceByMap() {
+            val placeIntent = Intent(activity, MapActivity::class.java).apply {
+                putExtra("placeResult", itemBinding.data as Serializable)
+            }
+            activity.startActivity(placeIntent)
         }
 
         private fun setPlaceResult() {

@@ -14,7 +14,6 @@ import com.omnyom.yumyum.databinding.ActivityMainBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
-import com.omnyom.yumyum.ui.maps.MapsActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val cameraIntent = Intent(this, CameraActivity::class.java)
-        val mapIntent = Intent(this, MapsActivity::class.java)
         supportActionBar?.hide()
 
         val userId = PreferencesManager.getLong(this, "userId")
@@ -38,9 +36,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
         binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
-        binding.btnMainMap.setOnClickListener { startActivity(mapIntent) }
-
-
     }
 
 
