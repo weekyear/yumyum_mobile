@@ -141,17 +141,16 @@ class LoginVC : UIViewController, GIDSignInDelegate {
                                 print("login: \(result)")
                                 if result["status"] == "200" {
                                     UserDefaults.setUserInfo(json: result["data"])
+                                    let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                    if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
+                                        self.view.window?.rootViewController = tabbarvc
+        //                                self.present(tabbarvc, animated: true, completion: nil)
+                                    } else {
+                                        print("탭바가 없습니다.")
+                                    }
                                 }
                             } failure: { (error) in
                                 print("login error: \(error)")
-                            }
-                            
-                            let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
-                            if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
-                                self.view.window?.rootViewController = tabbarvc
-//                                self.present(tabbarvc, animated: true, completion: nil)
-                            } else {
-                                print("탭바가 없습니다.")
                             }
                         // 아닐경우 회원가입
                         } else {
