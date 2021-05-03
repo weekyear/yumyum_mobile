@@ -24,7 +24,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         call.enqueue(object : Callback<AllFeedResponse> {
             override fun onResponse(call: Call<AllFeedResponse>, response: Response<AllFeedResponse>) {
                 if (response.isSuccessful) {
-                    _foodData.postValue(response.body()?.data!!.toMutableList())
+                    _foodData.postValue(response.body()?.data!!.toMutableList().reversed())
                 }
             }
 
@@ -41,21 +41,6 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     val foodData : LiveData<List<FeedData>> = _foodData
 
 
-    // 장소 불러오기
-    fun getPlaceData() {
-        var call = myRetrofitService.getPlaceData(3)
-        call.enqueue(object : Callback<GetPlaceDataResponse> {
-            override fun onResponse(call: Call<GetPlaceDataResponse>, response: Response<GetPlaceDataResponse>) {
-                if (response.isSuccessful) {
-                    Log.d("placeData", "오나?")
-                }
-            }
 
-            override fun onFailure(call: Call<GetPlaceDataResponse>, t: Throwable) {
-                t
-            }
-
-        })
-    }
 }
 
