@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIViewController {
-    // MARK: - 알람 메서드
-    func alert(_ message: String, completion: (()-> Void)? = nil) {
+    // MARK: - 알람 에러 메서드
+    func alertError(_ message: String, completion: (()-> Void)? = nil) {
         // 메인 스레드에서 실행되도록한다.
         DispatchQueue.main.async {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -32,5 +32,22 @@ extension UIViewController {
         
         movevc.modalPresentationStyle = .fullScreen
         self.present(movevc, animated: true)
+    }
+    
+    func defaultalert(_ message:String, success: (() -> Void)? = nil, failure: (() -> Void)? = nil) {
+        // 메인 스레드에서 실행되도록한다. 이유는 alert를 선택하기전에 뒤의 배경 UI/UX를 통제하기 위해서이다. ]
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "확인", style: .default){(_) in
+            success?() // completion 매개 변수 값이 nil이 아닐때에만 실행되도록한다.
+            }
+            let cancleAction = UIAlertAction(title: "취소", style: .cancel){(_) in
+            failure?()
+            }
+            alert.addAction(okAction)
+            alert.addAction(cancleAction)
+            self.present(alert, animated: false)
+        }
     }
 }

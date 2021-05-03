@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftyJSON
+import GoogleSignIn
 
 extension UserDefaults {
     static func setUserInfo(json:JSON) {
@@ -30,6 +31,7 @@ extension UserDefaults {
     static func removeUserData() {
         UserDefaults.standard.removeObject(forKey: LOGINED_USERINFO_USERDEFAULT_KEY)
         UserDefaults.standard.synchronize()
+        GIDSignIn.sharedInstance().signOut()
     }
     
     

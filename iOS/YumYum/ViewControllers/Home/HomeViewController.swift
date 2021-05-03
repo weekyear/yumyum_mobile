@@ -50,6 +50,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
+        print("홈뷰컨틀롤러가 실행됩니다.")
         
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
@@ -57,12 +58,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.collectionView.collectionViewLayout = flowLayout
         
         
-        let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+     let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
         WebApiManager.shared.getFeedList(userId: userId) { (result) in
 //            print("feed list: \(result)")
             if result["status"] == "200" {
                 let results = result["data"]
-                self.feedList = results.arrayValue.compactMap({ Feed(json: $0) })
+                self.feedList = results.arrayValue.compactMap({Feed(json: $0)})
                 print(self.feedList)
             }
             

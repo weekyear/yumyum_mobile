@@ -171,6 +171,11 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ltp-Ft-lHE">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="exW-Cy-1zT">
+                                    <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="eNw-Hd-O36">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
