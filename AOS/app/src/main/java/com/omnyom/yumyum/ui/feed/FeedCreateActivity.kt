@@ -14,7 +14,6 @@ import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.maps.MapsActivity
 import com.omnyom.yumyum.ui.signup.SignUpActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -95,12 +94,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     private fun startSearchPlaceActivity() {
         val intent = Intent(this, SearchPlaceActivity::class.java)
         startActivityForResult(intent, SearchPlaceActivity.PLACE_CODE)
-    }
-
-    // 지도 Activity로 이동해요
-    private fun startMapsActivity() {
-        val intent = Intent(this, MapsActivity::class.java)
-        startActivity(intent)
     }
 
     private fun getMultipartBodyOfVideo(videoUri: Uri?): MultipartBody.Part? {
