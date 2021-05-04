@@ -11,7 +11,7 @@ class MypageVC: UIViewController {
 //    var numberOfCell : Int = 10
     let cellIdentifire : String = "cell"
     
-    let userJsonData = UserDefaults.getLoginedUserInfo()
+//    var userJsonData = UserDefaults.getLoginedUserInfo()
     
     var dumyData = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Mjtp1rdyeBKKtnTzZtzDMbt6FVeoCnn4ew&usqp=CAU",
@@ -50,26 +50,31 @@ class MypageVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
         imageMakeRouded(imageview: myProfileImgView)
+        print("s나와랏!!")
     }
+    
     func initTitle() {
+        let userData  = UserDefaults.getLoginedUserInfo()
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = userJsonData!["nickname"].stringValue
+        nTitle.text = userData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
         // 네비게이션 바 배경색상 선택
     }
     
     func presentuserData(){
-        self.myIntroduceLabel.text = userJsonData!["introduction"].stringValue
-        if let url = URL(string: userJsonData!["profilePath"].stringValue) {
+        let userData  = UserDefaults.getLoginedUserInfo()
+        print(userData!["introduction"].stringValue)
+        self.myIntroduceLabel.text = userData!["introduction"].stringValue
+        
+        if let url = URL(string: userData!["profilePath"].stringValue) {
             var image: UIImage?
             
             DispatchQueue.global().async {

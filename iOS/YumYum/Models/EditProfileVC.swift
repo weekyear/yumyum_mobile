@@ -67,7 +67,6 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         self.introduceTF.autocapitalizationType = .none
     }
     
-    
     @objc func touchToPickPhoto(){
         let alert = UIAlertController(title: nil, message: "사진가져올 곳을 선택해주세요.", preferredStyle: .actionSheet)
         
