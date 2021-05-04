@@ -83,7 +83,7 @@ extension WebApiManager {
         }
         
     
-    
+
     }
     //MARK: - 프로필사진 URL을 반환하는 메서드
     func createProfilePath(image: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
