@@ -25,10 +25,13 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         user.introduction = self.introduceTF.text
         
         WebApiManager.shared.updateProfile(user: user) { (result) in
-            print(result)
+            if result["status"] == "200" {
+                UserDefaults.setUserInfo(json: result["data"])
+            }
         } failure: { (error) in
             print(error)
         }
+        showToast(message: "변경이 완료되었습니다.")
     }
     
     override func viewDidLoad() {
@@ -58,6 +61,10 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
+        self.nickNameTF.autocorrectionType = .no
+        self.nickNameTF.autocapitalizationType = .none
+        self.introduceTF.autocorrectionType = .no
+        self.introduceTF.autocapitalizationType = .none
     }
     
     
@@ -76,12 +83,17 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             })
         }
         // 취소 버튼 추가
+        let defaultImgAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { (_) in
+            var image: UIImage?
+            image = UIImage(systemName: "person.crop.circle.badge.plus")
+            self.profileImgView.image = image
+        }
+        alert.addAction(defaultImgAction)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
         
     }
-    
     // 포토라이브러리랑 저장앨범을 구분해서 알람창을 띄우기 위해! souce를 다르게 받아온다.
     func imgPikcer (_ source : UIImagePickerController.SourceType){
         let picker = UIImagePickerController()
@@ -104,5 +116,4 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
         picker.dismiss(animated: true)
     }
-    
 }
