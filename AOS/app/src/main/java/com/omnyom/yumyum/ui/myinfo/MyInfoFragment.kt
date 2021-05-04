@@ -43,7 +43,7 @@ class MyInfoFragment : Fragment() {
         myInfoViewModel.userData.observe(viewLifecycleOwner, Observer {
             binding.tvUsername.text = it.nickname
             binding.tvIntroduction.text = it.introduction
-            Glide.with(this).load(url).into(binding.ivAvatar)
+            Glide.with(this).load(it.profilePath).into(binding.ivAvatar)
         })
 
         binding.logOutButton.setOnClickListener {

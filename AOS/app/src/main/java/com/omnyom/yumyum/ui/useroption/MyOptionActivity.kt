@@ -18,6 +18,7 @@ class MyOptionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogout.setOnClickListener { signOut() }
+        binding.btnEditProfile.setOnClickListener { goUserEdit() }
 
     }
 
@@ -30,5 +31,10 @@ class MyOptionActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         this.finish()
+    }
+
+    fun goUserEdit() {
+        val intent = Intent(this, UserInfoEditActivity::class.java)
+        startActivity(intent)
     }
 }
