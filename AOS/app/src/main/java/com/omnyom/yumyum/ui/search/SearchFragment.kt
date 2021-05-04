@@ -9,20 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class SearchFragment : Fragment() {
-    val binding by lazy { FragmentSearchBinding.inflate(layoutInflater) }
-    private lateinit var searchViewModel: SearchViewModel
+class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+    override fun extraSetupBinding() { }
+
+    override fun setup() { }
+
+    override fun setupViews() {
         binding.inputLayoutName.setEndIconActivated(true)
-        return binding.root
     }
 
+    override fun onSubscribe() { }
 
+    override fun release() { }
 }

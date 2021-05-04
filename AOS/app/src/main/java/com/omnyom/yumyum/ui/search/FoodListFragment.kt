@@ -8,17 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentFoodListBinding
+import com.omnyom.yumyum.databinding.FragmentSearchInnerTabBinding
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class FoodListFragment : Fragment() {
-    val binding by lazy { FragmentFoodListBinding.inflate(layoutInflater)}
-    private lateinit var viewModel: FoodListViewModel
+class FoodListFragment : BaseBindingFragment<FragmentFoodListBinding>(R.layout.fragment_food_list) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
-    }
+    override fun extraSetupBinding() { }
 
+    override fun setup() { }
 
+    override fun setupViews() { }
+
+    override fun onSubscribe() { }
+
+    override fun release() { }
 }

@@ -8,15 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentPlaceListBinding
+import com.omnyom.yumyum.databinding.FragmentSearchInnerTabBinding
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class PlaceListFragment : Fragment() {
-    val binding by lazy { FragmentPlaceListBinding.inflate(layoutInflater) }
-    private lateinit var viewModel: PlaceListViewModel
+class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout.fragment_place_list) {
+    override fun extraSetupBinding() { }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return binding.root
-    }
+    override fun setup() { }
+
+    override fun setupViews() { }
+
+    override fun onSubscribe() { }
+
+    override fun release() { }
+
 }
