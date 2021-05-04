@@ -31,5 +31,28 @@ struct User: Codable {
         email = json["email"].stringValue
     }
     
+    init(profilePath: String, nickname: String, introduction: String, id: Int) {
+        self.profilePath = profilePath
+        self.nickname = nickname
+        self.introduction = introduction
+        self.id = id
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case profilePath
+        case nickname
+        case introduction
+        case email
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(nickname, forKey: .nickname)
+        try container.encode(introduction, forKey: .introduction)
+        try container.encode(profilePath, forKey: .profilePath)
+    }
+    
 }
 

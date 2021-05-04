@@ -25,7 +25,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var placeStackView : UIStackView!
     
-    @IBOutlet weak var logOutBtn: UIButton!
+    @IBOutlet weak var likeImgView: UIImageView!
     
     var player : AVPlayer?
     
@@ -74,6 +74,8 @@ class VideoCollectionViewCell: UICollectionViewCell{
         videoLayout.bringSubviewToFront(reviewLabel)
         videoLayout.bringSubviewToFront(userLabel)
         videoLayout.bringSubviewToFront(placeStackView)
+        
+        videoLayout.bringSubviewToFront(likeImgView)
         
     }
     

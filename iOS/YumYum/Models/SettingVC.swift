@@ -30,7 +30,10 @@ extension SettingVC: UITableViewDelegate{
         case 0:
             switch indexPath.row {
             case 0:
-                print("계정관리를 클릭했습니다.")
+                guard let editProfileVC = self.storyboard?.instantiateViewController(identifier: "EditProfileVC") else {
+                    return
+                }
+                self.navigationController?.pushViewController(editProfileVC, animated: true)
             default:
                 break
             }
@@ -47,7 +50,7 @@ extension SettingVC: UITableViewDelegate{
                 print("로그아웃을 클릭했니다.")
                 defaultalert("정말 로그아웃 하시겠어요?") {
                     UserDefaults.removeUserData()
-                    print("실행됩니다.")
+                    self.moveRootView(name: "Accounts", identifier: "LoginVC")
                 } failure: { () in
                     // 취소 눌렀을떄 여기가 실행됨
                 }

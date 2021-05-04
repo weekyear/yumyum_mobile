@@ -25,6 +25,7 @@
 		54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F131263ACBC700027590 /* CommenResponse.swift */; };
 		54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F139263BA87D00027590 /* MypageVC.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeViewController.swift */; };
+		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
 		54CC1D672636F6BF0023963F /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 54CC1D662636F6BF0023963F /* image1.jpeg */; };
 		54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48C5262F1FD400AC4863 /* video3.mp4 */; };
 		54DA48CE262F249700AC4863 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48CD262F249700AC4863 /* video4.mp4 */; };
@@ -101,6 +102,7 @@
 		54B9F131263ACBC700027590 /* CommenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenResponse.swift; sourceTree = "<group>"; };
 		54B9F139263BA87D00027590 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MypageVC.swift; path = YumYum/Utils/MypageVC.swift; sourceTree = SOURCE_ROOT; };
 		54C6DA5B262B1965006C8D96 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYum/Models/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
 		54CC1D662636F6BF0023963F /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 		54DA48C5262F1FD400AC4863 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
 		54DA48CD262F249700AC4863 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				54B9F139263BA87D00027590 /* MypageVC.swift */,
+				54C78FB2264001C200E1F600 /* EditProfileVC.swift */,
 				54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */,
 				54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */,
 				54B82478263C921A001F6A17 /* SettingVC.swift */,
@@ -704,6 +707,7 @@
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
+				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
