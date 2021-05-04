@@ -57,6 +57,7 @@ class MypageVC: UIViewController {
         self.presentuserData()
         imageMakeRouded(imageview: myProfileImgView)
     }
+    
     func initTitle() {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1

@@ -48,6 +48,10 @@ class ReviewVC: UIViewController {
         setEmoji(value: .five)
     }
     
+    @IBAction func didTapLocationButton(_ sender: Any) {
+        let vc = MapVC.instance()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +67,7 @@ class ReviewVC: UIViewController {
     func setLayout() {
         // navigationBar
         self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.title = "리뷰쓰기"
+        self.navigationItem.title = "리뷰쓰기"
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(rightBarButtonAction))
