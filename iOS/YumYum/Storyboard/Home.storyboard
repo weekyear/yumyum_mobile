@@ -72,15 +72,24 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_thumbs_up" translatesAutoresizingMaskIntoConstraints="NO" id="pxG-Uo-vAU">
+                                                            <rect key="frame" x="342" y="548" width="39" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="28m-gc-ki3"/>
+                                                                <constraint firstAttribute="width" constant="39" id="wvD-28-jT6"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ig6-dI-2UN" secondAttribute="trailing" constant="313" id="6AL-ib-2fH"/>
                                                         <constraint firstItem="3bU-hd-RGH" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="ACB-go-PBp"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="BNG-OC-C1h"/>
+                                                        <constraint firstItem="pxG-Uo-vAU" firstAttribute="top" secondItem="ig6-dI-2UN" secondAttribute="top" id="MoN-KH-dy9"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="top" secondItem="lQR-Jy-oBF" secondAttribute="top" constant="548" id="Nkp-jE-NaK"/>
                                                         <constraint firstItem="3bU-hd-RGH" firstAttribute="top" secondItem="ctm-Jv-q22" secondAttribute="bottom" constant="8" id="PuR-Rg-HgM"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="QmU-RZ-Xqn"/>
+                                                        <constraint firstAttribute="trailing" secondItem="pxG-Uo-vAU" secondAttribute="trailing" constant="26" id="S12-SI-Oed"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="WoY-Nr-Mh6"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="top" secondItem="3bU-hd-RGH" secondAttribute="bottom" constant="8" id="ZOK-Gh-ZbC"/>
                                                         <constraint firstAttribute="trailing" secondItem="1eg-vj-KMi" secondAttribute="trailing" constant="26" id="lCi-SX-WtT"/>
@@ -101,6 +110,7 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="Bq1-T9-SLb" id="aZZ-3R-ZSM"/>
                                             <outlet property="foodLabel" destination="ctm-Jv-q22" id="iHl-oG-ln3"/>
+                                            <outlet property="likeImgView" destination="pxG-Uo-vAU" id="2yK-lQ-THh"/>
                                             <outlet property="placeLabel" destination="ljz-OA-fhk" id="fzi-bV-dau"/>
                                             <outlet property="placeStackView" destination="3bU-hd-RGH" id="bwF-B8-qDW"/>
                                             <outlet property="reviewLabel" destination="1eg-vj-KMi" id="rsb-LO-ygl"/>
@@ -136,6 +146,7 @@
     </scenes>
     <resources>
         <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="ic_thumbs_up" width="75" height="75"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

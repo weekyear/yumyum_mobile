@@ -55,18 +55,8 @@ class MypageVC: UIViewController {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
-        profileMakeRounded()
+        imageMakeRouded(imageview: myProfileImgView)
     }
-    
-    func profileMakeRounded() {
-        myProfileImgView.layer.borderWidth = 2
-        myProfileImgView.layer.masksToBounds = false
-        myProfileImgView.layer.borderColor = UIColor.systemYellow.cgColor
-        myProfileImgView.layer.cornerRadius = myProfileImgView.frame.height/2
-        myProfileImgView.clipsToBounds = true
-        myProfileImgView.contentMode = .scaleAspectFill
-    }
-    
     func initTitle() {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
@@ -79,15 +69,20 @@ class MypageVC: UIViewController {
     
     func presentuserData(){
         self.myIntroduceLabel.text = userJsonData!["introduction"].stringValue
-        let url = URL(string: userJsonData!["profilePath"].stringValue)
-        var image: UIImage?
-        
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                image = UIImage(data: data!)
-                self.myProfileImgView.image = image
+        if let url = URL(string: userJsonData!["profilePath"].stringValue) {
+            var image: UIImage?
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    image = UIImage(data: data!)
+                    self.myProfileImgView.image = image
+                }
             }
+        } else {
+            var image: UIImage?
+            image = UIImage(systemName: "person.crop.circle.badge.plus")
+            self.myProfileImgView.image = image
         }
     }
 }
