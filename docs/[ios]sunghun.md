@@ -665,3 +665,27 @@ final class ElonMusk {
 
 - 참고 : https://zeddios.tistory.com/226
 
+
+
+### 어려움을 겪었던 문제
+
+- 회원정보 수정시 프로필을 안바꾸고 별명과 소개만 바꿨을때 현재 프로필은 그래도 유지시키는 것이 어렵다.
+
+- 현재 userDefaults에 있는 profilePath를 꺼내오고 그걸 저장할떄 넣어주면되는데 두가지 조건이 생겨서 오래걸렸음
+
+```swift
+  let tempprofilePath: String = userData!["profilePath"].stringValue
+        
+        user.id = userData!["id"].intValue
+        user.nickname = self.nickNameTF.text
+        user.introduction = self.introduceTF.text
+        print(tempprofilePath.isEmpty)
+        
+        if tempprofilePath.isEmpty , user.profilePath == nil  {
+            user.profilePath = ""
+        } else if tempprofilePath.isEmpty == false, user.profilePath == "" {
+            user.profilePath = tempprofilePath
+        }
+```
+
+- 이런식으로 문제 해결
