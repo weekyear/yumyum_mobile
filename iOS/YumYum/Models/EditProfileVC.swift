@@ -17,32 +17,46 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     var user = User(profilePath: "", nickname: "", introduction: "", id: 0)
     
-    
     @IBAction func completeBtn(_ sender: Any) {
         let userData = UserDefaults.getLoginedUserInfo()
+        let tempprofilePath: String = userData!["profilePath"].stringValue
+        
         user.id = userData!["id"].intValue
         user.nickname = self.nickNameTF.text
         user.introduction = self.introduceTF.text
+        print(tempprofilePath.isEmpty)
+        
+        if tempprofilePath.isEmpty , user.profilePath == nil  {
+            user.profilePath = ""
+        } else if tempprofilePath.isEmpty == false, user.profilePath == "" {
+            user.profilePath = tempprofilePath
+        }
+        
         
         WebApiManager.shared.updateProfile(user: user) { (result) in
             if result["status"] == "200" {
                 UserDefaults.setUserInfo(json: result["data"])
+                print("저장되었습니다.")
             }
         } failure: { (error) in
-            print(error)
+            print("에러발생")
         }
         showToast(message: "변경이 완료되었습니다.")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let user = UserDefaults.getLoginedUserInfo()
         // 인전값을 그대로 가져와서 회원변경 탭에 넣어준다.
         nickNameTF.text = user!["nickname"].stringValue
         introduceTF.text = user!["introduction"].stringValue
         if let url = URL(string: user!["profilePath"].stringValue) {
             var image: UIImage?
-            
+            print("url들어오나요?")
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
@@ -55,6 +69,7 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             image = UIImage(systemName: "person.crop.circle.badge.plus")
             self.profileImgView.image = image
         }
+        
         imageMakeRouded(imageview: profileImgView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
@@ -86,6 +101,9 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             var image: UIImage?
             image = UIImage(systemName: "person.crop.circle.badge.plus")
             self.profileImgView.image = image
+            var userData = UserDefaults.getLoginedUserInfo()
+            userData!["profilePath"].stringValue = ""
+            print(userData)
         }
         alert.addAction(defaultImgAction)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
