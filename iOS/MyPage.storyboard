@@ -287,6 +287,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A74-Wv-iw8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="fM6-Ct-jsq" firstAttribute="leading" secondItem="TEd-6F-3lt" secondAttribute="leading" id="0GU-2t-vEv"/>
                             <constraint firstItem="qrU-Gq-7Jt" firstAttribute="centerX" secondItem="oqX-ZP-eK5" secondAttribute="centerX" id="5Av-lN-wg7"/>
@@ -298,6 +299,9 @@
                             <constraint firstItem="TEd-6F-3lt" firstAttribute="leading" secondItem="A74-Wv-iw8" secondAttribute="leading" constant="20" id="pes-NN-Ojb"/>
                             <constraint firstItem="fM6-Ct-jsq" firstAttribute="top" secondItem="TEd-6F-3lt" secondAttribute="bottom" constant="30" id="pod-0m-gWR"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jrM-Os-MXc" appends="YES" id="oqs-yU-DV0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="ze3-r6-VTm"/>
                     <connections>
@@ -307,6 +311,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKe-6H-Oo6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jrM-Os-MXc">
+                    <connections>
+                        <action selector="tapView:" destination="evt-06-RVW" id="BEo-NF-gPx"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3882.608695652174" y="1072.7678571428571"/>
         </scene>
@@ -317,13 +326,22 @@
                     <view key="view" contentMode="scaleToFill" id="yF3-ga-NMW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보 보호 처리 방침이 들어갈 예정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-om-Uc2">
+                                <rect key="frame" x="64" y="78" width="287" height="64"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="IEI-ti-UEd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHW-Yg-LqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4767" y="1073"/>
+            <point key="canvasLocation" x="4766.666666666667" y="1072.7678571428571"/>
         </scene>
     </scenes>
     <resources>

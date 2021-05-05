@@ -39,6 +39,10 @@ class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 
     }
     
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

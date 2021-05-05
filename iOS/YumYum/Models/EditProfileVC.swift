@@ -17,6 +17,10 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     var user = User(profilePath: "", nickname: "", introduction: "", id: 0)
     
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func completeBtn(_ sender: Any) {
         let userData = UserDefaults.getLoginedUserInfo()
         let tempprofilePath: String = userData!["profilePath"].stringValue
