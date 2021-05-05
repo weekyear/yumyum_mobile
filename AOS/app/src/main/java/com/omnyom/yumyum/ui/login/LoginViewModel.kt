@@ -5,6 +5,7 @@ import android.util.Patterns
 import androidx.lifecycle.AndroidViewModel
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.login.LoginResponse
 import retrofit2.Call
@@ -12,7 +13,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
     // A placeholder username validation check
     fun isEmailValid(username: String): Boolean {

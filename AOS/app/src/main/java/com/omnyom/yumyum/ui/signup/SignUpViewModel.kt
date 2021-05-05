@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
@@ -18,7 +19,6 @@ import retrofit2.Response
 import retrofit2.*
 
 class SignUpViewModel(application: Application) : BaseViewModel(application) {
-    private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
     val name = MutableLiveData<String>().apply {
         value = ""
