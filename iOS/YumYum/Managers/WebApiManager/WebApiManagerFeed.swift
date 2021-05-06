@@ -45,5 +45,24 @@ extension WebApiManager {
             }
         }
     }
+    
+    func getMyFeedList(userId: Int, authorId: Int, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        
+        let url = "\(domainUrl)\(feedUrl)/list/\(authorId)/\(userId)"
+        
+        AF.request(url, method: .get)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    let json = JSON(response.value!)
+                    success(json)
+                    break
+                case .failure(_):
+                let error: Error = response.error!
+                failure(error)
+                break
+                }
+            }
+    }
 }
 
