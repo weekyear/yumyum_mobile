@@ -15,11 +15,14 @@ class MapVC: UIViewController, MTMapViewDelegate {
     }
     
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        WebApiManager.shared.searchPlace(searchKey: "카카오프렌즈") { (result) in
+            print(result)
+        } failure: { (error) in
+            print(#function, "error: \(error)")
+        }
 
         
     }
