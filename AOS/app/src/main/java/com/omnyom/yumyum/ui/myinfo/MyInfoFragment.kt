@@ -37,16 +37,14 @@ class MyInfoFragment : Fragment() {
         val root = binding.root
         // Inflate the layout for this fragment
         myInfoViewModel = ViewModelProvider(this).get(MyInfoViewModel::class.java)
-        val url : String = "http://k4b206.p.ssafy.io/resources/1619420273926Mountains_thumbnail.png"
-
 
         myInfoViewModel.userData.observe(viewLifecycleOwner, Observer {
             binding.tvUsername.text = it.nickname
             binding.tvIntroduction.text = it.introduction
-            Glide.with(this).load(url).into(binding.ivAvatar)
+            Glide.with(this).load(it.profilePath).into(binding.ivAvatar)
         })
 
-        binding.logOutButton.setOnClickListener {
+        binding.btnGoOptions.setOnClickListener {
             goMyOption()
         }
 
