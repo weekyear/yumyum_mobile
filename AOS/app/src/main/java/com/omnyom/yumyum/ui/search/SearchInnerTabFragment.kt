@@ -6,27 +6,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.omnyom.yumyum.R
+import com.omnyom.yumyum.databinding.FragmentSearchBinding
 import com.omnyom.yumyum.databinding.FragmentSearchInnerTabBinding
 import com.omnyom.yumyum.model.myinfo.PagerAdapters
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class SearchInnerTabFragment : Fragment() {
+class SearchInnerTabFragment : BaseBindingFragment<FragmentSearchInnerTabBinding>(R.layout.fragment_search_inner_tab) {
+    private val searchVM: SearchViewModel by viewModels({requireParentFragment()})
 
-    val binding by lazy { FragmentSearchInnerTabBinding.inflate(layoutInflater) }
-    lateinit var tabs: TabLayout
-    lateinit var viewPager: ViewPager
-    lateinit var pagerAdapters: PagerAdapters
-    private lateinit var viewModel: SearchInnerTabViewModel
+    override fun extraSetupBinding() { }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        tabs = binding.tabsSearch
-        viewPager = binding.vpSearch
-        pagerAdapters = PagerAdapters(childFragmentManager)
+    override fun setup() { }
+
+    override fun setupViews() {
+        val tabs = binding.tabsSearch
+        val viewPager = binding.vpSearch
+        val pagerAdapters = PagerAdapters(childFragmentManager)
 
         pagerAdapters.addFragment(FoodListFragment(), "음식별")
         pagerAdapters.addFragment(PlaceListFragment(), "식당별")
@@ -34,8 +35,10 @@ class SearchInnerTabFragment : Fragment() {
         viewPager.adapter = pagerAdapters
 
         tabs.setupWithViewPager(viewPager)
-
-        return binding.root
     }
+
+    override fun onSubscribe() { }
+
+    override fun release() { }
 
 }

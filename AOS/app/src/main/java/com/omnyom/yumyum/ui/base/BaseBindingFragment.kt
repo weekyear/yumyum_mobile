@@ -33,6 +33,10 @@ abstract class BaseBindingFragment<T : ViewDataBinding>(
         onSubscribe()
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
     /** dataBinding 객체에 추가적인 작업을 할 때 사용한다 */
     protected abstract fun extraSetupBinding()
 

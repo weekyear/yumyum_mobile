@@ -2,7 +2,7 @@ package com.omnyom.yumyum.model.maps
 
 import java.io.Serializable
 
-data class KeywordSearchResponse(
+data class SearchKakaoMapResponse(
         val documents: List<SearchPlaceResult>,
         val meta: Meta
 ) : Serializable
