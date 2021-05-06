@@ -240,8 +240,8 @@
                                     <action selector="completeBtn:" destination="evt-06-RVW" eventType="touchUpInside" id="acv-SV-Soj"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="qrU-Gq-7Jt">
-                                <rect key="frame" x="102" y="85" width="208.5" height="206.5"/>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profile" translatesAutoresizingMaskIntoConstraints="NO" id="qrU-Gq-7Jt">
+                                <rect key="frame" x="103.5" y="85" width="207" height="207"/>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qrU-Gq-7Jt" secondAttribute="height" multiplier="1:1" id="I4Q-XA-Uwb"/>
@@ -345,8 +345,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_profile" width="120" height="120"/>
         <image name="person" catalog="system" width="128" height="117"/>
-        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="113"/>
         <image name="square.grid.3x3" catalog="system" width="128" height="112"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">

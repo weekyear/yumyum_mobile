@@ -125,8 +125,8 @@
                                     <action selector="completeSignUp:" destination="d0X-vC-QzQ" eventType="touchUpInside" id="gvi-v7-2UM"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BCz-kZ-zYk">
-                                <rect key="frame" x="81.5" y="125" width="249.5" height="248"/>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profile" translatesAutoresizingMaskIntoConstraints="NO" id="BCz-kZ-zYk">
+                                <rect key="frame" x="83" y="125" width="248" height="248.5"/>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BCz-kZ-zYk" secondAttribute="height" multiplier="1:1" id="H3A-4D-TEa"/>
@@ -219,7 +219,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="113"/>
+        <image name="ic_profile" width="120" height="120"/>
         <image name="quokka" width="500" height="500"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
