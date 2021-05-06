@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.CreateFeedRequest
@@ -26,7 +27,6 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class FeedCreateViewModel(application: Application) : BaseViewModel(application) {
-    private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
 
     private var videoPath: String = ""
     private var thumbnailPath: String = ""

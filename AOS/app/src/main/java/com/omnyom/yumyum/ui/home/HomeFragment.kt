@@ -12,16 +12,14 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.omnyom.yumyum.TempRetrofitBuilder
-import com.omnyom.yumyum.databinding.FoodListItemBinding
 import com.omnyom.yumyum.databinding.FragmentHomeBinding
+import com.omnyom.yumyum.databinding.ListItemFoodBinding
 import com.omnyom.yumyum.helper.PreferencesManager
-import com.omnyom.yumyum.interfaces.RetrofitService
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.like.LikeRequest
 import com.omnyom.yumyum.model.like.LikeResponse
@@ -71,7 +69,7 @@ class HomeFragment : Fragment() {
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
-            val innerBinding = FoodListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val innerBinding = ListItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
 
             return Holder(innerBinding)
@@ -80,12 +78,11 @@ class HomeFragment : Fragment() {
         override fun getItemCount(): Int = item.size
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
             Log.d("HomFrag", "${item[position].placeId}")
 
             // 장소 불러오기
             fun getPlaceData(placeId : Long) {
-                var call = myRetrofitService.getPlaceData(placeId)
+                var call = retrofitService.getPlaceData(placeId)
                 call.enqueue(object : Callback<GetPlaceDataResponse> {
                     override fun onResponse(call: Call<GetPlaceDataResponse>, response: Response<GetPlaceDataResponse>) {
                         if (response.isSuccessful) {
@@ -106,7 +103,7 @@ class HomeFragment : Fragment() {
 
             // 좋아요!
             fun likeFeed() {
-                var Call = myRetrofitService.feedLike(LikeRequest(item[position].id, userId).get())
+                var Call = retrofitService.feedLike(LikeRequest(item[position].id, userId).get())
                 Call.enqueue(object : Callback<LikeResponse> {
                     override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
                         if (response.isSuccessful) {
@@ -122,7 +119,7 @@ class HomeFragment : Fragment() {
 
             // 안좋아요!
             fun unlikeFeed() {
-                var Call = myRetrofitService.cancelFeedLike(item[position].id.toLong(), userId.toLong())
+                var Call = retrofitService.cancelFeedLike(item[position].id.toLong(), userId.toLong())
                 Call.enqueue(object : Callback<LikeResponse> {
                     override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
                         if (response.isSuccessful) {
@@ -200,7 +197,7 @@ class HomeFragment : Fragment() {
 
         }
 
-        class Holder(private val innerBinding: FoodListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
+        class Holder(private val innerBinding: ListItemFoodBinding) : RecyclerView.ViewHolder(innerBinding.root) {
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
             val placeName = innerBinding.textPlacename
