@@ -45,7 +45,7 @@ interface RetrofitService {
 
     // 특정 유저 피드 불러오기
     @GET("feed/list/{authorId}/{userId}")
-    fun getUserFeeds(@Path("userId") userId: Long, @Path("authorId")authorId: Long ) : Call<AllFeedResponse>
+    fun getUserFeeds(@Path("authorId")authorId: Long, @Path("userId") userId: Long) : Call<AllFeedResponse>
 
     // 비디오 데이터 보내기
     @Multipart
