@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.useroption.MyOptionActivity"></activity>
+        <activity android:name=".ui.useroption.UserInfoEditActivity"></activity>
+        <activity android:name=".ui.useroption.MyOptionActivity" />
         <activity android:name=".ui.feed.SearchPlaceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

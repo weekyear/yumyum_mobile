@@ -1,8 +1,12 @@
-package com.omnyom.yumyum.ui.signup
+package com.omnyom.yumyum.ui.useroption
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -10,30 +14,34 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
+import com.bumptech.glide.Glide
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
-import com.omnyom.yumyum.databinding.ActivitySignUpBinding
-import com.omnyom.yumyum.helper.GoogleLoginHelper.Companion.getCurrentUserEmail
+import com.omnyom.yumyum.databinding.ActivityUserInfoEditBinding
+import com.omnyom.yumyum.helper.GoogleLoginHelper
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import com.omnyom.yumyum.ui.myinfo.URLtoBitmapTask
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.net.URL
 
-
-class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
+class UserInfoEditActivity : BaseBindingActivity<ActivityUserInfoEditBinding>(R.layout.activity_user_info_edit) {
     private companion object {
-        const val IMAGE_CODE = 10
+        const val IMAGE_CODE = 11
     }
 
-    private val signUpVM: SignUpViewModel by viewModels()
+    private val editVM: UserInfoEditViewModel by viewModels()
     private var body : MultipartBody.Part? = null
 
     override fun extraSetupBinding() {
         binding.apply {
-            vm = signUpVM
-            lifecycleOwner = this@SignUpActivity
+            vm = editVM
+            lifecycleOwner = this@UserInfoEditActivity
         }
     }
 
@@ -46,25 +54,27 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     override fun onSubscribe() {
-        signUpVM.isComplete.observe(this) {
-            signUpVM.uploadProfileImage(body, getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+        editVM.userData.observe(this) {
+            binding.editTextName.setText(editVM.userData.value?.nickname)
+            binding.editTextIntroduction.setText(editVM.userData.value?.introduction)
+            if (editVM.userData.value?.profilePath != "") {
+                Glide.with(this).load(editVM.userData.value?.profilePath).into(binding.btnAddProfile)
+            }
+        }
+
+        editVM.isComplete.observe(this) {
+            editVM.uploadProfileImage(body, { Toast.makeText(this,"회원정보가 수정되었습니다.", Toast.LENGTH_SHORT).show() }, { Log.e("Result", "Failed") })
         }
     }
 
     override fun release() { }
-
-    fun startMainActivity(v: View) {
-        val intent = Intent(application, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 
     private fun textWatcher() {
         binding.editTextName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                signUpVM.name
+                editVM.name
             }
 
             override fun afterTextChanged(s: Editable?) {
