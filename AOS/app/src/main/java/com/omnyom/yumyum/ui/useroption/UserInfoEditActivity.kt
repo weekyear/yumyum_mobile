@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -62,18 +63,11 @@ class UserInfoEditActivity : BaseBindingActivity<ActivityUserInfoEditBinding>(R.
         }
 
         editVM.isComplete.observe(this) {
-            editVM.uploadProfileImage(body,
-                GoogleLoginHelper.getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+            editVM.uploadProfileImage(body, { Toast.makeText(this,"회원정보가 수정되었습니다.", Toast.LENGTH_SHORT).show() }, { Log.e("Result", "Failed") })
         }
     }
 
     override fun release() { }
-
-    fun startMainActivity(v: View) {
-        val intent = Intent(application, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 
     private fun textWatcher() {
         binding.editTextName.addTextChangedListener(object : TextWatcher {

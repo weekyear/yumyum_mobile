@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.useroption
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.RetrofitBuilder
@@ -10,6 +11,7 @@ import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
 import com.omnyom.yumyum.model.signup.UploadProfileResponse
 import com.omnyom.yumyum.model.userInfo.UserData
+import com.omnyom.yumyum.model.userInfo.UserEditRequest
 import com.omnyom.yumyum.model.userInfo.UserResponse
 import com.omnyom.yumyum.ui.base.BaseViewModel
 import okhttp3.MultipartBody
@@ -19,6 +21,7 @@ import retrofit2.Response
 
 class UserInfoEditViewModel(application: Application) : BaseViewModel(application)  {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
+    val userId = PreferencesManager.getLong(getApplication(), "userId")
 
     init {
         getUserData()
@@ -41,17 +44,18 @@ class UserInfoEditViewModel(application: Application) : BaseViewModel(applicatio
     val isComplete: LiveData<Boolean>
         get() = _isComplete
 
-    fun completeSignUp() {
+    fun completeEdit() {
         _isComplete.value = true
     }
 
-    fun uploadProfileImage(image: MultipartBody.Part?, email: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun uploadProfileImage(image: MultipartBody.Part?, onSuccess: () -> Unit, onFailure: () -> Unit) {
         val call = retrofitService.uploadProfile(image)
         call.enqueue(object : Callback<UploadProfileResponse> {
             override fun onResponse(call: Call<UploadProfileResponse>, response: Response<UploadProfileResponse>) {
                 if(response.isSuccessful) {
+                    Log.d("Result","성공!")
                     profilePath = response.body()!!.data
-                    signUp(email, onSuccess, onFailure)
+                    userInfoEdit(userId.toString(), onSuccess, onFailure)
                 }
                 else {
                     when (response.code()) {
@@ -62,23 +66,23 @@ class UserInfoEditViewModel(application: Application) : BaseViewModel(applicatio
 
             override fun onFailure(call: Call<UploadProfileResponse>, t: Throwable) {
                 onFailure()
+                Log.d("Result","실패!")
             }
         })
     }
 
-    fun signUp(email: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
-        val call = retrofitService.signup(
-            SignUpRequest(email?:"",
+    fun userInfoEdit(id: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        val call = retrofitService.editUser(
+            UserEditRequest(id?:"",
             name.value?:"",
             introduction.value?:"",
             profilePath).get())
-        call.enqueue(object : Callback<SignUpResponse> {
-            override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                PreferencesManager.setLong(getApplication(), "userId", response.body()?.data!!.id)
+        call.enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 onSuccess()
             }
 
-            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 onFailure()
             }
 
@@ -86,7 +90,6 @@ class UserInfoEditViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     fun getUserData() {
-        val userId = PreferencesManager.getLong(getApplication(), "userId")
         var myFeedCall = retrofitService.getUserData(userId!!)
         myFeedCall.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
@@ -94,7 +97,6 @@ class UserInfoEditViewModel(application: Application) : BaseViewModel(applicatio
                     _userData.postValue(response.body()?.data!!)
                 }
             }
-
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 t
             }

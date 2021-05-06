@@ -111,9 +111,9 @@
             android:background="@drawable/btn_disabled"
             android:textColor="@color/white"
             android:textSize="@dimen/btn_size"
-            android:text="@string/complete"
+            android:text="회원정보 수정"
             android:enabled="false"
-            android:onClick="@{() -> vm.completeSignUp()}"/>
+            android:onClick="@{() -> vm.completeEdit()}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
