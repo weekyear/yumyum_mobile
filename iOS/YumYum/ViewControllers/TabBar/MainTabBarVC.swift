@@ -21,14 +21,21 @@ class MainTabBarVC: UITabBarController {
         // delegate 설정
         self.delegate = self
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("tabbar", #function)
+    }
 }
 
 extension MainTabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController.isKind(of: CameraVC.self) {
-            let vc = CameraVC.instance()
-            vc.modalPresentationStyle = .overFullScreen
-            self.present(vc, animated: true, completion: nil)
+        print(viewController)
+        if viewController.isKind(of: ReviewNavigationVC.self) {
+            print("yes!!!")
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "Review")
+            vc?.modalPresentationStyle = .fullScreen
+            self.present(vc!, animated: true, completion: nil)
             return false
         }
         return true

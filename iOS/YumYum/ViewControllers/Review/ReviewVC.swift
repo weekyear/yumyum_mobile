@@ -48,10 +48,6 @@ class ReviewVC: UIViewController {
         setEmoji(value: .five)
     }
     
-    @IBAction func didTapLocationButton(_ sender: Any) {
-        let vc = MapVC.instance()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,12 +66,12 @@ class ReviewVC: UIViewController {
         self.navigationItem.title = "리뷰쓰기"
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(rightBarButtonAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "임시저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
     }
     
     @objc
     func leftBarButtonAction() {
-        print("도로마무 불가능")
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc
@@ -94,7 +90,7 @@ class ReviewVC: UIViewController {
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in
                 print("feed생성: \(result)")
                 if result["status"] == "200" {
-                    self.navigationController?.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
 
             } failure: { (error) in

@@ -79,6 +79,7 @@
                         <outlet property="cameraView" destination="RaT-9I-XNC" id="d7f-6i-aOz"/>
                         <outlet property="recordButton" destination="LrG-ON-CqT" id="5DE-4b-PX0"/>
                         <outlet property="timeLabel" destination="1aw-HC-7dR" id="IBu-2v-Byq"/>
+                        <segue destination="xw1-m5-Egb" kind="show" identifier="CameraToPlaySegue" id="EoC-J8-RTB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQH-uB-Wjd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -105,11 +106,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGp-i4-mNd">
-                                        <rect key="frame" x="374.5" y="774" width="19.5" height="22"/>
+                                        <rect key="frame" x="374" y="774" width="20" height="22"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="arrow.right" catalog="system"/>
                                         <connections>
-                                            <action selector="didTapNextButton:" destination="xw1-m5-Egb" eventType="touchUpInside" id="kWb-up-P0W"/>
+                                            <segue destination="6uF-eu-xOF" kind="show" id="bmX-aF-6a1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -140,7 +141,7 @@
             </objects>
             <point key="canvasLocation" x="1828.985507246377" y="1068.75"/>
         </scene>
-        <!--Title-->
+        <!--MapVC-->
         <scene sceneID="SYH-ro-x7r">
             <objects>
                 <viewController storyboardIdentifier="MapVC" id="Kdg-EE-aiH" customClass="MapVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
@@ -149,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2sT-1Y-W0l" customClass="MTMapView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -162,11 +163,13 @@
                             <constraint firstItem="2sT-1Y-W0l" firstAttribute="leading" secondItem="soa-tf-TEK" secondAttribute="leading" id="p0B-lB-h4W"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="xh7-oG-MP1"/>
+                    <navigationItem key="navigationItem" id="Cec-D1-BNy">
+                        <nil key="title"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXr-eK-d7a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4304" y="1069"/>
+            <point key="canvasLocation" x="3390" y="1069"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="oWL-VN-MCH">
@@ -211,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9K9-ak-ZLC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3455" y="1069"/>
+            <point key="canvasLocation" x="4159" y="1069"/>
         </scene>
         <!--Title-->
         <scene sceneID="tHz-q8-ScB">
@@ -222,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6T0-wx-Ks9">
-                                <rect key="frame" x="20" y="108" width="374" height="100"/>
+                                <rect key="frame" x="20" y="152" width="374" height="100"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="COv-Nm-OoL">
                                         <rect key="frame" x="64" y="0.0" width="246" height="30"/>
@@ -281,23 +284,23 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="음식 이름을 적어주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEv-Ti-3rX">
-                                <rect key="frame" x="20" y="64" width="374" height="34"/>
+                                <rect key="frame" x="20" y="108" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="리뷰를 남겨주세요" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6BD-EM-C1d">
-                                <rect key="frame" x="20" y="218" width="374" height="34"/>
+                                <rect key="frame" x="20" y="262" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oq9-Ea-STd">
-                                <rect key="frame" x="20" y="262" width="374" height="34"/>
+                                <rect key="frame" x="20" y="306" width="374" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vyU-IC-AZM">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="34"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="didTapLocationButton:" destination="6uF-eu-xOF" eventType="touchUpInside" id="xsQ-Ft-Uf2"/>
+                                            <segue destination="Kdg-EE-aiH" kind="show" id="AVv-3S-F93"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="위치" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fyf-Th-Ju1">
@@ -336,9 +339,8 @@
                             <constraint firstItem="oq9-Ea-STd" firstAttribute="leading" secondItem="HHd-1Q-Fur" secondAttribute="leading" constant="20" id="zp9-3s-VAp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="Ift-u2-f9o">
-                        <barButtonItem key="leftBarButtonItem" title="취소" id="Xpc-rd-JgF"/>
-                        <barButtonItem key="rightBarButtonItem" title="완료" id="iJK-HR-U80"/>
+                    <navigationItem key="navigationItem" title="Title" id="tCW-S0-pLP">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="7iv-az-X4H"/>
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextField" destination="6BD-EM-C1d" id="UyT-fa-EXg"/>
@@ -353,7 +355,7 @@
         <!--Review-->
         <scene sceneID="G9p-b3-lqh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ReviewNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" customClass="ReviewNavigationVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Review" image="plus" catalog="system" id="HvN-Vx-kaX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kji-5d-IY0">

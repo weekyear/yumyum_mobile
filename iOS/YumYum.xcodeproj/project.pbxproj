@@ -68,6 +68,7 @@
 		E521F3C0264132B50083957B /* map_pin_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = E521F3A4264132B50083957B /* map_pin_shadow.png */; };
 		E521F3C1264132B50083957B /* DaumMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E521F3A5264132B50083957B /* DaumMap.framework */; };
 		E521F3C92641398B0083957B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E521F3C82641398B0083957B /* MapVC.swift */; };
+		E521F3CE264375890083957B /* ReviewNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E521F3CD264375890083957B /* ReviewNavigationVC.swift */; };
 		E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F32625B746002C2637 /* AppDelegate.swift */; };
 		E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F52625B746002C2637 /* SceneDelegate.swift */; };
 		E52F57F82625B746002C2637 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52F57F72625B746002C2637 /* ViewController.swift */; };
@@ -193,6 +194,7 @@
 		E521F3A4264132B50083957B /* map_pin_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin_shadow.png; sourceTree = "<group>"; };
 		E521F3A5264132B50083957B /* DaumMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DaumMap.framework; sourceTree = "<group>"; };
 		E521F3C82641398B0083957B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		E521F3CD264375890083957B /* ReviewNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNavigationVC.swift; sourceTree = "<group>"; };
 		E52F57F02625B746002C2637 /* YumYum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YumYum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E52F57F32625B746002C2637 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E52F57F52625B746002C2637 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				E548AAF926388B6E0049AA0B /* VideoPlayBackVC.swift */,
 				E548AB0B2639ECC70049AA0B /* ReviewVC.swift */,
 				E521F3C82641398B0083957B /* MapVC.swift */,
+				E521F3CD264375890083957B /* ReviewNavigationVC.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E536EBB7263BFDCD00791E7C /* PlaceModel.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
+				E521F3CE264375890083957B /* ReviewNavigationVC.swift in Sources */,
 				E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
