@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let cellIdentifier: String = "cell"
     @IBOutlet var collectionView: UICollectionView!
     
-    var feedList: [Feed]?
+    var feedList: [Feed] = []
     
     var dataset = [
         ("라면", "YEOM", "맜있었습니다", "대전 유성구 계룡로 84", "김밥천국", "mp4", "video"),
@@ -50,26 +50,22 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isPagingEnabled = true
-        print("홈뷰컨틀롤러가 실행됩니다.")
         
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
         self.collectionView.collectionViewLayout = flowLayout
         
-        
-     let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
-        WebApiManager.shared.getFeedList(userId: userId) { (result) in
-//            print("feed list: \(result)")
-            if result["status"] == "200" {
-                let results = result["data"]
-                self.feedList = results.arrayValue.compactMap({Feed(json: $0)})
-                print(self.feedList)
+         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+            WebApiManager.shared.getFeedList(userId: userId) { (result) in
+                if result["status"] == "200" {
+                    let results = result["data"]
+                    self.feedList = results.arrayValue.compactMap({Feed(json: $0)})
+                    self.collectionView.reloadData()
+                }
+            } failure: { (error) in
+                print("feed list error: \(error)")
             }
-            
-        } failure: { (error) in
-            print("feed list error: \(error)")
-        }
 
     }
     
@@ -80,15 +76,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list.count
+        return self.feedList.count
     }
+    
     // 컬렉션 뷰의 지정된 위치에 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let feed = feedList?[indexPath.row]
+        let feed = feedList[indexPath.row]
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
         
-        cell.configure(with: list[indexPath.row])
+//        cell.configure(with: list[indexPath.row])
+        cell.configureVideo(with: feed)
         
         return cell
     }
