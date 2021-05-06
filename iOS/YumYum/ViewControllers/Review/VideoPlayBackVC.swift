@@ -24,20 +24,17 @@ class VideoPlayBackVC: UIViewController {
     @IBOutlet weak var videoView: UIView!
 
     @IBAction func didTapPrevButton(_ sender: Any) {
-        print("도로마무는 불가능합니다 고갱님")
+        print("돌아가~")
 //        self.navigationController?.popViewController(animated: true)
+//        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didTapNextButton(_ sender: Any) {
-        let vc = ReviewVC.instance(videoUrl: videoUrl)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
         playBackVideo()
-        
+        print("PlayVC URL 확인: ", videoUrl)
         
     }
     func setLayout() {
@@ -50,9 +47,20 @@ class VideoPlayBackVC: UIViewController {
         avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         videoView.layer.insertSublayer(avPlayerLayer, at: 0)
         view.layoutIfNeeded()
-        let playerItem = AVPlayerItem(url: videoUrl as URL)
+        let playerItem = AVPlayerItem(url: videoUrl as! URL)
         avPlayer.replaceCurrentItem(with: playerItem)
         avPlayer.play()
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextVC = segue.destination as? ReviewVC
+        else {
+            return
+        }
+        print("확인!!", videoUrl)
+        nextVC.videoUrl = videoUrl
+    }
+    
 
 }
