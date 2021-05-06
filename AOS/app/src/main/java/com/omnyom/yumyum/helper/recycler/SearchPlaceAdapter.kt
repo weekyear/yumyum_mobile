@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.omnyom.yumyum.databinding.ListItemSearchPlaceBinding
-import com.omnyom.yumyum.model.place.SearchPlaceData
+import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
 import com.omnyom.yumyum.ui.feed.MapActivity

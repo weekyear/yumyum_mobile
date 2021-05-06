@@ -6,7 +6,8 @@ import com.omnyom.yumyum.model.feed.SendVideoResponse
 import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
-import com.omnyom.yumyum.model.place.SearchPlaceListResponse
+import com.omnyom.yumyum.model.search.SearchFeedListResponse
+import com.omnyom.yumyum.model.search.SearchPlaceListResponse
 import com.omnyom.yumyum.model.signup.SignUpResponse
 import com.omnyom.yumyum.model.signup.UploadProfileResponse
 import com.omnyom.yumyum.model.userInfo.UserResponse
@@ -59,6 +60,10 @@ interface RetrofitService {
     // 피드 좋아요 취소!
     @DELETE("feed/like/{feedId}/{userId}")
     fun cancelFeedLike(@Path("feedId") feedId: Long, @Path("userId") userId: Long) : Call<LikeResponse>
+
+    // 키워드로 장소, 주소 검색
+    @GET("feed/list/title/{title}/{userId}")
+    fun getSearchFeedListByTitle(@Path("title") title: String, @Path("userId") userId: Long?) : Call <SearchFeedListResponse>
 
     // 좋아요 피드 불러오기
     @GET("feed/list/like/{userId}")

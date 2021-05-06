@@ -6,7 +6,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMapBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_FINE_LOCATION
-import com.omnyom.yumyum.model.place.SearchPlaceData
+import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint

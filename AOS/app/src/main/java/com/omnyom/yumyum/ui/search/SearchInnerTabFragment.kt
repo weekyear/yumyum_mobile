@@ -37,11 +37,7 @@ class SearchInnerTabFragment : BaseBindingFragment<FragmentSearchInnerTabBinding
         tabs.setupWithViewPager(viewPager)
     }
 
-    override fun onSubscribe() {
-        searchVM.searchPlaceResults.observe(viewLifecycleOwner, {
-            it
-        })
-    }
+    override fun onSubscribe() { }
 
     override fun release() { }
 

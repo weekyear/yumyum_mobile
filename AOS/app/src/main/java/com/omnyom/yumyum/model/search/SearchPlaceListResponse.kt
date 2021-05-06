@@ -1,4 +1,4 @@
-package com.omnyom.yumyum.model.place
+package com.omnyom.yumyum.model.search
 
 import java.io.Serializable
 

@@ -28,6 +28,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     override fun setupViews() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                searchVM.searchFeed(query!!)
                 searchVM.searchPlace(query!!)
                 return false
             }
@@ -38,16 +39,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
         })
     }
 
-    override fun onSubscribe() {
-        searchVM.searchPlaceResults.observe(viewLifecycleOwner, {
-            it
-//            val adapter = binding.rvPlace.adapter as SearchPlaceAdapter
-//            adapter.run {
-//                setItems(it)
-//                notifyDataSetChanged()
-//            }
-        })
-    }
+    override fun onSubscribe() { }
 
     override fun release() { }
 }

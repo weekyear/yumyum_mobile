@@ -1,15 +1,11 @@
 package com.omnyom.yumyum.ui.search
 
 import android.app.Activity
-import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentPlaceListBinding
-import com.omnyom.yumyum.helper.recycler.SearchKakaoPlaceAdapter
 import com.omnyom.yumyum.helper.recycler.SearchPlaceAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
@@ -37,12 +33,7 @@ class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout
                 notifyDataSetChanged()
             }
         })
-
-        searchVM.searchTextTest.observe(viewLifecycleOwner, {
-            println("들어와라~")
-        })
     }
 
     override fun release() { }
-
 }
