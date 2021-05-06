@@ -22,13 +22,13 @@ class MypageVC: UIViewController {
         super.viewDidLoad()
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
-        self.loadData()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
         imageMakeRouded(imageview: myProfileImgView)
+        self.loadData()
     }
     
     func loadData() {
