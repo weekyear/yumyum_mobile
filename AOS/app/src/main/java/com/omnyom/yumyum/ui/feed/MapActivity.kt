@@ -6,34 +6,32 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMapBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_FINE_LOCATION
-import com.omnyom.yumyum.model.maps.SearchPlaceResult
+import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 class MapActivity : BaseBindingActivity<ActivityMapBinding>(R.layout.activity_map) {
-    lateinit var x: String
-    lateinit var y: String
 
-    private lateinit var placeResult: SearchPlaceResult
+    private lateinit var place: SearchPlaceData
 
     override fun extraSetupBinding() {
     }
 
     override fun setup() {
         requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERM_FINE_LOCATION)
-        placeResult = intent.getSerializableExtra("placeResult") as SearchPlaceResult
+        place = intent.getSerializableExtra("placeResult") as SearchPlaceData
     }
 
     override fun setupViews() {
         var mapViewInput = MapView(this).apply {
             currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
             setShowCurrentLocationMarker(true)
-            val mapPoint = MapPoint.mapPointWithGeoCoord(placeResult.y.toDouble(), placeResult.x.toDouble())
+            val mapPoint = MapPoint.mapPointWithGeoCoord(place.locationY, place.locationX)
             setMapCenterPointAndZoomLevel(mapPoint, 0, true)
 
-            addPOIItem(getMarker(mapPoint, placeResult.place_name))
+            addPOIItem(getMarker(mapPoint, place.name))
         }
         binding.mapView.addView(mapViewInput)
 
@@ -68,7 +66,7 @@ class MapActivity : BaseBindingActivity<ActivityMapBinding>(R.layout.activity_ma
 
     private fun getMarker(mapPoint: MapPoint, placeName: String): MapPOIItem {
         return MapPOIItem().apply {
-            itemName = placeResult.place_name
+            itemName = place.name
             tag = 0
             this.mapPoint = mapPoint
             markerType = MapPOIItem.MarkerType.YellowPin
