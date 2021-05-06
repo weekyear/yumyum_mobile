@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.omnyom.yumyum.ui.search.SearchInnerTabViewModel" />
+            type="com.omnyom.yumyum.ui.search.SearchViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

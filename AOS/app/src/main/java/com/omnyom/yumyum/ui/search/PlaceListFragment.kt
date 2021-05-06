@@ -1,7 +1,10 @@
 package com.omnyom.yumyum.ui.search
 
 import android.app.Activity
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omnyom.yumyum.R
@@ -11,7 +14,7 @@ import com.omnyom.yumyum.helper.recycler.SearchPlaceAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
 class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout.fragment_place_list) {
-    private val searchVM: SearchViewModel by activityViewModels()
+    private val searchVM: SearchViewModel by viewModels({requireParentFragment().requireParentFragment()})
 
     override fun extraSetupBinding() { }
 
@@ -33,6 +36,10 @@ class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout
                 setItems(it)
                 notifyDataSetChanged()
             }
+        })
+
+        searchVM.searchTextTest.observe(viewLifecycleOwner, {
+            println("들어와라~")
         })
     }
 

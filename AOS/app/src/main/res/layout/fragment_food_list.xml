@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.omnyom.yumyum.ui.search.FoodListViewModel" />
+            type="com.omnyom.yumyum.ui.search.SearchViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"

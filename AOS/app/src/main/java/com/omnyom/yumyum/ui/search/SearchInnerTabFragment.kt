@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.omnyom.yumyum.R
@@ -17,7 +18,7 @@ import com.omnyom.yumyum.model.myinfo.PagerAdapters
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
 class SearchInnerTabFragment : BaseBindingFragment<FragmentSearchInnerTabBinding>(R.layout.fragment_search_inner_tab) {
-    private val searchVM: SearchViewModel by activityViewModels()
+    private val searchVM: SearchViewModel by viewModels({requireParentFragment()})
 
     override fun extraSetupBinding() { }
 
@@ -36,7 +37,11 @@ class SearchInnerTabFragment : BaseBindingFragment<FragmentSearchInnerTabBinding
         tabs.setupWithViewPager(viewPager)
     }
 
-    override fun onSubscribe() { }
+    override fun onSubscribe() {
+        searchVM.searchPlaceResults.observe(viewLifecycleOwner, {
+            it
+        })
+    }
 
     override fun release() { }
 

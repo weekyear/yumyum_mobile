@@ -14,8 +14,22 @@ import retrofit2.Response
 
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
-    private val _searchPlaceResults = MutableLiveData<List<SearchPlaceData>>().apply {
+    val searchPlaceResults = MutableLiveData<List<SearchPlaceData>>().apply {
         value = arrayListOf(SearchPlaceData(
+                "dd",
+                0.1,
+                0.2,
+                "ddjj",
+                "0101--1-32-",
+                99
+        ), SearchPlaceData(
+                "dd",
+                0.1,
+                0.2,
+                "ddjj",
+                "0101--1-32-",
+                99
+        ), SearchPlaceData(
                 "dd",
                 0.1,
                 0.2,
@@ -24,15 +38,21 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
                 99
         ))
     }
-    val searchPlaceResults : LiveData<List<SearchPlaceData>> = _searchPlaceResults
+//    val searchPlaceResults : LiveData<List<SearchPlaceData>> = _searchPlaceResults
+
+    private val _searchText = MutableLiveData<String>().apply {
+        value = ""
+    }
+    val searchTextTest : LiveData<String> = _searchText
 
     fun searchPlace(searchText: String) {
         var call = retrofitService.getSearchPlaceList("name", searchText)
         call.enqueue(object : Callback<SearchPlaceListResponse> {
             override fun onResponse(call: Call<SearchPlaceListResponse>, response: Response<SearchPlaceListResponse>) {
                 if (response.isSuccessful) {
+                    _searchText.postValue(searchText)
                     val list : List<SearchPlaceData> = response.body()?.data!!
-                    _searchPlaceResults.postValue(list)
+                    searchPlaceResults.value = list
                 }
             }
 
