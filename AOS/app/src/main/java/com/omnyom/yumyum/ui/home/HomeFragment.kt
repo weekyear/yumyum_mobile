@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -25,6 +27,8 @@ import com.omnyom.yumyum.model.like.LikeRequest
 import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
 import com.omnyom.yumyum.model.place.PlaceData
+import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
+import com.omnyom.yumyum.ui.useroption.MyOptionActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -131,12 +135,25 @@ class HomeFragment : Fragment() {
                 })
             }
 
+            fun goUserFeed() {
+                val intent = Intent(context, UserFeedActivity::class.java)
+                val authorId = item[position].userId.toString()
+
+                intent.putExtra("authorId", authorId)
+                Log.d("check1", "${intent.getStringExtra("authorId")}")
+                context?.startActivity(intent)
+            }
+
+
             getPlaceData(item[position].placeId.toLong())
 
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
             holder.userName.text = item[position].userId.toString()
+            holder.userName.setOnClickListener{
+                goUserFeed()
+            }
 
             holder.thumbUp.setMaxFrame(15)
             holder.thumbUp2.setMinFrame(15)
@@ -194,6 +211,4 @@ class HomeFragment : Fragment() {
             val thumbUp2 = innerBinding.avThumbUp2
         }
     }
-
-
 }
