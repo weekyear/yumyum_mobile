@@ -27,18 +27,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var logOutBtn: UIButton!
     
-    @IBAction func logout(_ sender: Any) {
-        // 구글로그인 해제하고
-        GIDSignIn.sharedInstance()?.signOut()
-        // 저장된 유저이메일과, 유저데이터를 삭제한다.
-        UserDefaults.standard.removeObject(forKey: "userEamil")
-        UserDefaults.standard.removeObject(forKey: "userData")
-        // 아래 코드를 통해 현재 로그인이 됬는지 안됬는지 확인할 수 있음.
-//        GIDSignIn.sharedInstance()?.currentUser != nil)
-        
-        print("로그아웃 성공")
-    }
-    
     var player : AVPlayer?
     
     private var model : VideoVO?

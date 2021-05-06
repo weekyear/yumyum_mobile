@@ -25,6 +25,9 @@ interface RetrofitService {
     @POST("user/signup")
     fun signup(@Body parameters: HashMap<String, String>): Call<SignUpResponse>
 
+    @PUT("user/")
+    fun editUser(@Body parameters: HashMap<String, String>): Call<UserResponse>
+
     @Multipart
     @POST("user/profile")
     fun uploadProfile(@Part image: MultipartBody.Part?): Call<UploadProfileResponse>
