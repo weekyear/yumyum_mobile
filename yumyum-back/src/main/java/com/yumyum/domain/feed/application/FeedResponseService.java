@@ -60,7 +60,7 @@ public class FeedResponseService {
     }
 
     public Long getLikeCount(final Long feedId){
-        final Long likeCount = likeDao.countById(feedId);
+        final Long likeCount = likeDao.countByFeedId(feedId);
         return likeCount;
     }
 
