@@ -21,10 +21,11 @@ struct Feed {
     var likeCount: Int?
     var isLike: Bool?
     var placeId: Int?
+    var user: User?
+
     
     // Encodable
     var place: Place?
-    
     init() {
         
     }
@@ -37,6 +38,21 @@ struct Feed {
         self.placeId = json["placeId"].intValue
         self.content = json["content"].stringValue
         self.likeCount = json["likeCount"].intValue
+    }
+    
+    init(feedJson: JSON) {
+        self.videoPath = URL(string: feedJson["videoPath"].stringValue)
+        self.isLike = feedJson["isLike"].boolValue
+        self.id = feedJson["id"].intValue
+        self.thumbnailPath = URL(string: feedJson["thumbnailPath"].stringValue)
+        self.placeId = feedJson["placeId"].intValue
+        self.content = feedJson["content"].stringValue
+        self.likeCount = feedJson["likeCount"].intValue
+        self.title = feedJson["title"].stringValue
+        self.userId = feedJson["userId"].intValue
+        self.score = feedJson["score"].intValue
+        self.place = Place(json: feedJson)
+        self.user = User(fromjson: feedJson)
     }
     
     enum CodingKeys: String, CodingKey {
