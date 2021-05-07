@@ -20,7 +20,7 @@ public interface LikeDao extends JpaRepository<Like, Long> {
 
     List<Like> findAllByUserEmail(String userEmail);
 
-    Long countById(Long feedId);
+    Long countByFeedId(Long feedId);
 
     List<Like> findByUserId(Long userId);
 }
