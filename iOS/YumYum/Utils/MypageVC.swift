@@ -8,35 +8,9 @@
 import UIKit
 
 class MypageVC: UIViewController {
-//    var numberOfCell : Int = 10
+    
     let cellIdentifire : String = "cell"
-    
-    let userJsonData = UserDefaults.getLoginedUserInfo()
-    
-    var dumyData = [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6Mjtp1rdyeBKKtnTzZtzDMbt6FVeoCnn4ew&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5R_Jk3aSuKVm5wPJtdfN0PKpqAfZl5CyPLg&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeMRzZNEFEvC8p7ovNITF0IvCxBbusMu-mSA&usqp=CAU",
-        "http://k4b206.p.ssafy.io/resources/1619775160792video2_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781249745video3_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781263567video4_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619775160792video2_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781249745video3_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781263567video4_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619775160792video2_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781249745video3_thumbnail.png",
-        "http://k4b206.p.ssafy.io/resources/1619781263567video4_thumbnail.png",
-    ]
-    
-    lazy var foodImageList: [MyPageModel] = {
-        var datalist = [MyPageModel]()
-        for (imgurl) in self.dumyData {
-            let model = MyPageModel()
-            model.foodImageUrl = imgurl
-            datalist.append(model)
-        }
-        return datalist
-    }()
+    var feedList: [Feed] = []
  
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -46,48 +20,61 @@ class MypageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 이거 안해주면 난리남 까먹지말자.. 콜렉션뷰에 레이아웃을 적용시키는 부분
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
-        profileMakeRounded()
+        imageMakeRouded(imageview: myProfileImgView)
+        self.loadData()
     }
     
-    func profileMakeRounded() {
-        myProfileImgView.layer.borderWidth = 2
-        myProfileImgView.layer.masksToBounds = false
-        myProfileImgView.layer.borderColor = UIColor.systemYellow.cgColor
-        myProfileImgView.layer.cornerRadius = myProfileImgView.frame.height/2
-        myProfileImgView.clipsToBounds = true
-        myProfileImgView.contentMode = .scaleAspectFill
-    }
+    func loadData() {
+        let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+        WebApiManager.shared.getMyFeedList(userId: userId, authorId: userId){
+            (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                self.feedList = results.arrayValue.compactMap({Feed(json: $0)})
+                self.collectionView.reloadData()
+            }
+        } failure: { (error) in
+            print(error.localizedDescription)
+        }
+        }
     
     func initTitle() {
+        let userData  = UserDefaults.getLoginedUserInfo()
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = userJsonData!["nickname"].stringValue
+        nTitle.text = userData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
         // 네비게이션 바 배경색상 선택
     }
     
     func presentuserData(){
-        self.myIntroduceLabel.text = userJsonData!["introduction"].stringValue
-        let url = URL(string: userJsonData!["profilePath"].stringValue)
-        var image: UIImage?
+        let userData  = UserDefaults.getLoginedUserInfo()
+        print(userData!["introduction"].stringValue)
+        self.myIntroduceLabel.text = userData!["introduction"].stringValue
         
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
-            DispatchQueue.main.async {
-                image = UIImage(data: data!)
-                self.myProfileImgView.image = image
+        if let url = URL(string: userData!["profilePath"].stringValue) {
+            var image: UIImage?
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    image = UIImage(data: data!)
+                    self.myProfileImgView.image = image
+                }
             }
+        } else {
+            var image: UIImage?
+            image = UIImage(named: "ic_profile")
+            self.myProfileImgView.image = image
         }
     }
 }
@@ -96,19 +83,17 @@ class MypageVC: UIViewController {
 extension MypageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.foodImageList.count
+        return self.feedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = self.foodImageList[indexPath.item]
-        
+        let imageurl:URL = self.feedList[indexPath.item].thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
         
-        let url: URL! = URL(string: item.foodImageUrl!)
         var image: UIImage?
-        
+
         DispatchQueue.global().async {
-            let data = try? Data(contentsOf: url!)
+            let data = try? Data(contentsOf: imageurl)
             DispatchQueue.main.async {
                 image = UIImage(data: data!)
                 cell.foodImageView.image = image

@@ -52,7 +52,6 @@ class MyFeedFragment : Fragment() {
 
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-
             var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
                 url = URL(item[position].thumbnailPath)
             }

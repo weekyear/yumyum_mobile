@@ -6,6 +6,7 @@ import com.yumyum.domain.feed.dao.LikeDao;
 import com.yumyum.domain.feed.dto.FeedResponse;
 import com.yumyum.domain.feed.entity.Feed;
 import com.yumyum.domain.feed.entity.Like;
+import com.yumyum.domain.user.application.RegexChecker;
 import com.yumyum.domain.user.dao.UserFindDao;
 import com.yumyum.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,20 @@ public class FeedSearchService {
     private final FeedFindDao feedFindDao;
     private final LikeDao likeDao;
     private final UserFindDao userFindDao;
+    private final RegexChecker regexChecker;
 
     public List<FeedResponse> findAll(final Long userId){
         final List<FeedResponse> list = new ArrayList<>();
         final List<Feed> fList = feedDao.findAll();
+        for(Feed feed : fList){
+            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
+        }
+        return list;
+    }
+
+    public List<FeedResponse> findByTitle(final String title, final Long userId){
+        final List<FeedResponse> list = new ArrayList<>();
+        final List<Feed> fList = feedDao.findByTitleContainingIgnoreCase(title);
         for(Feed feed : fList){
             list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
         }

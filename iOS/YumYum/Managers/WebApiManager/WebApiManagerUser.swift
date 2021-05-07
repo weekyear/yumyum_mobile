@@ -63,7 +63,27 @@ extension WebApiManager {
                 break
             }
         }
+    }
+    
+    func updateProfile(user: User, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
         
+        let url = "\(domainUrl)user"
+        AF.request(url, method: .put, parameters: user, encoder: JSONParameterEncoder.default)
+          .responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                let json = JSON(response.value!)
+                success(json)
+                break
+            case .failure(_):
+                let error: Error = response.error!
+                failure(error)
+                break
+            }
+        }
+        
+    
+    
     }
     //MARK: - 프로필사진 URL을 반환하는 메서드
     func createProfilePath(image: UIImage, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {

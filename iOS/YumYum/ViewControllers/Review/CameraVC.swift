@@ -12,11 +12,6 @@ import PhotosUI
 
 
 class CameraVC: UIViewController {
-    
-    static func instance() -> CameraVC {
-        let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "CameraVC") as! CameraVC
-        return vc
-    }
 
     var captureSession:AVCaptureSession = AVCaptureSession()
     var videoDevice: AVCaptureDevice!
@@ -30,31 +25,28 @@ class CameraVC: UIViewController {
     @IBOutlet weak var cameraView: PreviewView!
     @IBOutlet weak var recordButton: UIButton!
     
-    @IBAction func closeCamera(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBAction func closeCamera(_ sender: UIButton) {
+        print(type(of: self), #function)
+        self.dismiss(animated: true, completion: nil)
     }
     
     var previewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(type(of: self), #function)
         // layout
         setupLayout()
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // 권한 설정
         requestCameraPermission()
         requestGalleryPermission()
         
         resetTimer()
-
-    }
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
     }
     
     
@@ -289,6 +281,14 @@ class CameraVC: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextVC = segue.destination as? VideoPlayBackVC
+        else {
+            return
+        }
+        print("확인!!", outputUrl)
+        nextVC.videoUrl = outputUrl
+    }
     
 }
 
@@ -297,23 +297,10 @@ extension CameraVC: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         
         print("녹화끝 outputUrl: \(outputFileURL)")
-        let vc = VideoPlayBackVC.instance(videoUrl: outputFileURL)
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.outputUrl = outputFileURL
+        performSegue(withIdentifier: "CameraToPlaySegue", sender: nil)
         
     }
     
     
 }
-
-
-
-//private func tempURL() -> URL? {
-//  let directory = NSTemporaryDirectory() as NSString
-//
-//  if directory != "" {
-//    let path = directory.appendingPathComponent(NSUUID().uuidString + ".mp4")
-//    return URL(fileURLWithPath: path)
-//  }
-//
-//  return nil
-//}

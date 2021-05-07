@@ -1,18 +1,22 @@
 package com.omnyom.yumyum.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentHomeBinding
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
 import com.omnyom.yumyum.helper.PreferencesManager
@@ -21,6 +25,10 @@ import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.like.LikeRequest
 import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.model.place.GetPlaceDataResponse
+import com.omnyom.yumyum.model.place.PlaceData
+import com.omnyom.yumyum.ui.search.SearchFragment
+import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
+import com.omnyom.yumyum.ui.useroption.MyOptionActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,6 +55,11 @@ class HomeFragment : Fragment() {
 
         binding.viewPagerHome.orientation = ViewPager2.ORIENTATION_VERTICAL
 
+        binding.icSearch.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, SearchFragment())
+            transaction.commit()
+        }
 
         return root
     }
@@ -72,28 +85,6 @@ class HomeFragment : Fragment() {
         override fun getItemCount(): Int = item.size
 
         override fun onBindViewHolder(holder: Holder, position: Int) {
-            Log.d("HomFrag", "${item[position].placeId}")
-
-            // 장소 불러오기
-            fun getPlaceData(placeId : Long) {
-                var call = retrofitService.getPlaceData(placeId)
-                call.enqueue(object : Callback<GetPlaceDataResponse> {
-                    override fun onResponse(call: Call<GetPlaceDataResponse>, response: Response<GetPlaceDataResponse>) {
-                        if (response.isSuccessful) {
-                            Log.d("placeData", "오나?")
-                            val placeData = response.body()!!.data
-                            holder.placeName.text = placeData.name
-                            holder.address.text = placeData.address
-                        }
-                    }
-
-                    override fun onFailure(call: Call<GetPlaceDataResponse>, t: Throwable) {
-                        t
-                        Log.d("placeData", "${t}")
-                    }
-
-                })
-            }
 
             // 좋아요!
             fun likeFeed() {
@@ -126,12 +117,29 @@ class HomeFragment : Fragment() {
                 })
             }
 
-            getPlaceData(item[position].placeId.toLong())
+            fun goUserFeed() {
+                val intent = Intent(context, UserFeedActivity::class.java)
+                val authorId = item[position].user.id.toString()
 
+                intent.putExtra("authorId", authorId)
+                Log.d("check1", "${intent.getStringExtra("authorId")}")
+                context?.startActivity(intent)
+            }
+
+
+            if (holder.expendable.lineCount == 1) {
+                holder.btnExpend.visibility = View.GONE
+            }
+
+            holder.placeName.text = item[position].place.name
+            holder.address.text = item[position].place.address
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
-            holder.userName.text = item[position].userId.toString()
+            holder.userName.text = item[position].user.nickname
+            holder.userName.setOnClickListener{
+                goUserFeed()
+            }
 
             holder.thumbUp.setMaxFrame(15)
             holder.thumbUp2.setMinFrame(15)
@@ -179,6 +187,8 @@ class HomeFragment : Fragment() {
         }
 
         class Holder(private val innerBinding: ListItemFoodBinding) : RecyclerView.ViewHolder(innerBinding.root) {
+            val expendable = innerBinding.expandableText
+            val btnExpend = innerBinding.expandCollapse
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
             val placeName = innerBinding.textPlacename
@@ -189,6 +199,4 @@ class HomeFragment : Fragment() {
             val thumbUp2 = innerBinding.avThumbUp2
         }
     }
-
-
 }

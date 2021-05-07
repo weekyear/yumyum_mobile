@@ -39,14 +39,8 @@ class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
 
     }
     
-    
-    // 회원가입 둥글게 만들기!
-    func makeRounded() {
-        profileImgView.layer.borderWidth = 2
-        profileImgView.layer.masksToBounds = false
-        profileImgView.layer.borderColor = UIColor.systemYellow.cgColor
-        profileImgView.layer.cornerRadius = profileImgView.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
-        profileImgView.clipsToBounds = true
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     override func viewDidLoad() {
@@ -63,7 +57,7 @@ class SignupVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.nickNameLabel.autocorrectionType = .no
         self.nickNameLabel.autocapitalizationType = .none
         
-        makeRounded()
+        imageMakeRouded(imageview: profileImgView)
         
     }
     

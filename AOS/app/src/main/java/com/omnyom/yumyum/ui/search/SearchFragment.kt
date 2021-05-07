@@ -1,9 +1,12 @@
 package com.omnyom.yumyum.ui.search
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -20,10 +23,12 @@ import com.omnyom.yumyum.ui.feed.SearchPlaceViewModel
 
 class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchVM: SearchViewModel by viewModels()
+    private lateinit var callback: OnBackPressedCallback
 
     override fun extraSetupBinding() { }
 
-    override fun setup() { }
+    override fun setup() {
+    }
 
     override fun setupViews() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -42,4 +47,14 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     override fun onSubscribe() { }
 
     override fun release() { }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("backbtn", "제발 ㅠㅠ")
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 }

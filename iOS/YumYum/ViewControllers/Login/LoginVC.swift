@@ -144,7 +144,6 @@ class LoginVC : UIViewController, GIDSignInDelegate {
                                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
                                     if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
                                         self.view.window?.rootViewController = tabbarvc
-        //                                self.present(tabbarvc, animated: true, completion: nil)
                                     } else {
                                         print("탭바가 없습니다.")
                                     }
