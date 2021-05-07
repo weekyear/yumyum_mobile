@@ -41,6 +41,10 @@ extension SettingVC: UITableViewDelegate{
             switch indexPath.row {
             case 0:
                 print("개인정보 보호정책을 클릭!")
+                guard let editProfileVC = self.storyboard?.instantiateViewController(identifier: "PrivateLawVC") else {
+                    return
+                }
+                self.navigationController?.pushViewController(editProfileVC, animated: true)
             default:
                 break
             }
