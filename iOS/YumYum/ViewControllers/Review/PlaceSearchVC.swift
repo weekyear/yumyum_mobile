@@ -70,17 +70,23 @@ extension PlaceSearchVC: UITableViewDelegate, UITableViewDataSource {
         return results.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceSearchCell") as! PlaceSearchCell
         
         cell.nameLabel.text = self.results[indexPath.row].name
-        
+        cell.addressLabel.text = self.results[indexPath.row].address
+        cell.reviewLabel.text = self.results[indexPath.row].phone
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let vc = MapVC.instance(place: results[indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

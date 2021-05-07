@@ -10,16 +10,16 @@ import SwiftyJSON
 
 struct Place: Codable {
     var address: String
-    var locationX: Float
-    var locationY: Float
+    var locationX: Double
+    var locationY: Double
     var name: String
     var phone: String?
     
     
     init(json: JSON) {
         self.address = json["address_name"].stringValue
-        self.locationX = json["x"].floatValue
-        self.locationY = json["y"].floatValue
+        self.locationX = json["x"].doubleValue
+        self.locationY = json["y"].doubleValue
         self.phone = json["phone"].stringValue
         self.name = json["place_name"].stringValue
     }
