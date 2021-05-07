@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityUserFeedBinding
-import com.omnyom.yumyum.databinding.FeedListItemBinding
 import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity

@@ -10,8 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.feed.AllFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.model.userInfo.UserData
 import com.omnyom.yumyum.model.userInfo.UserResponse
@@ -37,14 +37,14 @@ class UserFeedViewModel(application: Application) : AndroidViewModel(application
 
     fun getAuthorFeed(authorId:Long) {
         var call = retrofitService.getUserFeeds(authorId, userId!!)
-        call.enqueue(object : Callback<AllFeedResponse> {
-            override fun onResponse(call: Call<AllFeedResponse>, response: Response<AllFeedResponse>) {
+        call.enqueue(object : Callback<FeedResponse> {
+            override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
                     val list : List<FeedData> = response.body()?.data!!
                     _foodData.postValue(list)
                 }
             }
-            override fun onFailure(call: Call<AllFeedResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
                 t
             }
 

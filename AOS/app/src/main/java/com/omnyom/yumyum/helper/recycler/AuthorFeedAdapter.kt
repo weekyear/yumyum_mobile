@@ -3,7 +3,7 @@ package com.omnyom.yumyum.helper.recycler
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.omnyom.yumyum.databinding.FeedListItemBinding
+import com.omnyom.yumyum.databinding.ListItemFeedBinding
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
@@ -13,7 +13,7 @@ import java.net.URL
 
 class AuthorFeedAdapter(private val activity: UserFeedActivity) : BaseRecyclerAdapter<AuthorFeedAdapter.AuthorFeedViewHolder, FeedData>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : AuthorFeedViewHolder {
-        val itemBinding = FeedListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = ListItemFeedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AuthorFeedViewHolder(itemBinding)
     }
 
@@ -30,7 +30,7 @@ class AuthorFeedAdapter(private val activity: UserFeedActivity) : BaseRecyclerAd
 
     override fun getItemCount(): Int = items.size
 
-    inner class AuthorFeedViewHolder(private val itemBinding: FeedListItemBinding) : BaseViewHolder(itemBinding.root) {
+    inner class AuthorFeedViewHolder(private val itemBinding: ListItemFeedBinding) : BaseViewHolder(itemBinding.root) {
         val thumbnail = itemBinding.ivThumbnail
     }
 
