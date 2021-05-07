@@ -48,6 +48,10 @@ class ReviewVC: UIViewController {
         setEmoji(value: .five)
     }
     
+    @IBAction func didTabLocationButton(_ sender: Any) {
+        let vc = PlaceSearchVC.instance()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,9 +86,9 @@ class ReviewVC: UIViewController {
             self.feed.videoPath = URL(string: result["data"]["videoPath"].stringValue)
             let user = UserDefaults.getLoginedUserInfo()
             self.feed.userId = user!["id"].intValue
-            let place = Place(address: "대전", locationX: 10.0, locationY: 10.0, name: "족발맛짐", phone: "02-1111-2222")
+//            let place = Place(address: "대전", locationX: 10.0, locationY: 10.0, name: "족발맛짐", phone: "02-1111-2222")
             self.feed.score = self.score.rawValue
-            self.feed.place = place
+//            self.feed.place = place
 
             dump(self.feed)
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in

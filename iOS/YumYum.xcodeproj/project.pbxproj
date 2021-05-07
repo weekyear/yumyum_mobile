@@ -99,6 +99,8 @@
 		E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */; };
 		E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */; };
 		E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B30F7726441129000D8934 /* KAKAO-Info.plist */; };
+		E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */; };
+		E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F812644C061000D8934 /* PlaceSearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,6 +235,8 @@
 		E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
 		E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerKakao.swift; sourceTree = "<group>"; };
 		E5B30F7726441129000D8934 /* KAKAO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KAKAO-Info.plist"; sourceTree = "<group>"; };
+		E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchVC.swift; sourceTree = "<group>"; };
+		E5B30F812644C061000D8934 /* PlaceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,6 +485,8 @@
 				E548AB0B2639ECC70049AA0B /* ReviewVC.swift */,
 				E521F3C82641398B0083957B /* MapVC.swift */,
 				E521F3CD264375890083957B /* ReviewNavigationVC.swift */,
+				E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */,
+				E5B30F812644C061000D8934 /* PlaceSearchCell.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -918,10 +924,12 @@
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
+				E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */,
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
 				54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
+				E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */,
 				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
