@@ -40,17 +40,12 @@
         android:id="@+id/btn_create_feed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="200dp"
+        android:background="@null"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_add" />
-
-    <ImageButton
-        android:id="@+id/btn_main_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btn_create_feed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

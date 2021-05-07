@@ -6,14 +6,17 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
+import com.omnyom.yumyum.databinding.FragmentHomeBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
+import com.omnyom.yumyum.ui.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
         binding.btnCreateFeed.setOnClickListener { startActivity(cameraIntent) }
+
     }
 
 

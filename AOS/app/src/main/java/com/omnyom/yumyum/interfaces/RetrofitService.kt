@@ -1,7 +1,7 @@
 package com.omnyom.yumyum.interfaces
 
-import com.omnyom.yumyum.model.feed.AllFeedResponse
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
+import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.feed.SendVideoResponse
 import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.model.login.LoginResponse
@@ -41,11 +41,11 @@ interface RetrofitService {
     // Feed
     // 모든 피드 불러오기
     @GET("feed/list/{userId}")
-    fun getAllFeeds(@Path("userId") userId: Long): Call<AllFeedResponse>
+    fun getAllFeeds(@Path("userId") userId: Long): Call<FeedResponse>
 
     // 특정 유저 피드 불러오기
     @GET("feed/list/{authorId}/{userId}")
-    fun getUserFeeds(@Path("authorId")authorId: Long, @Path("userId") userId: Long) : Call<AllFeedResponse>
+    fun getUserFeeds(@Path("authorId")authorId: Long, @Path("userId") userId: Long) : Call<FeedResponse>
 
     // 비디오 데이터 보내기
     @Multipart
@@ -70,7 +70,7 @@ interface RetrofitService {
 
     // 좋아요 피드 불러오기
     @GET("feed/list/like/{userId}")
-    fun getLikedFeed(@Path("userId") userId: Long) : Call<AllFeedResponse>
+    fun getLikedFeed(@Path("userId") userId: Long) : Call<FeedResponse>
 
     // Place
     // 식당ID로 정보 불러오기
