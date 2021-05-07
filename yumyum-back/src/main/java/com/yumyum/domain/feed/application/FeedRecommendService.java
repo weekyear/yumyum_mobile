@@ -43,9 +43,9 @@ public class FeedRecommendService {
             map[i][j] = 1;
         }
 
-        double[][] smap = new double[N+1][M+1];
+        double[][] smap = new double[N+1][N+1];
         for(int i = 1; i <= N; i++){
-            for(int j = 1; j <= M; j++){
+            for(int j = 1; j <= N; j++){
                 smap[i][j] = getSimilarity(map, M, i, j);
             }
         }
@@ -61,6 +61,7 @@ public class FeedRecommendService {
         int u = userId.intValue();
         for(int m = 1; m <= M; m++){
             if(map[u][m] == 1) continue; // 이미 좋아요 한 피드는 제외
+            if(smap[u][m] == 0) continue; // 비추천 피드는 제외
             Long feedId = new Long(m);
             Feed feed = feedFindDao.findById(feedId);
             if(feed.getUser().getId() == userId) continue; // 본인이 작성한 피드는 제외
