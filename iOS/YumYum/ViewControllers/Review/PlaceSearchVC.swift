@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PlaceDelegate {
+    func setPlace(_ viewController: PlaceSearchVC, place: Place)
+}
+
 class PlaceSearchVC: UIViewController {
     
     static func instance() -> PlaceSearchVC {
@@ -15,6 +19,7 @@ class PlaceSearchVC: UIViewController {
     }
     
     var results: [Place] = []
+    var delegate: PlaceDelegate?
 
     @IBOutlet var resultTableView: UITableView!
     
@@ -48,11 +53,9 @@ class PlaceSearchVC: UIViewController {
 
 extension PlaceSearchVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        dump(searchBar.text)
         let searchKey = searchBar.text!
         WebApiManager.shared.searchPlace(searchKey: searchKey) { (result) in
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
-            print(self.results)
             self.resultTableView.reloadData()
         } failure: { (error) in
             print(#function, "error: \(error)")
@@ -86,7 +89,14 @@ extension PlaceSearchVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = MapVC.instance(place: results[indexPath.row])
+        vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension PlaceSearchVC: PlaceToSearchVCDelegate {
+    func setPlaceToSearchVC(_ controller: MapVC, place: Place) {
+        delegate?.setPlace(self, place: place)
+    }
 }
