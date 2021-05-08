@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.observe
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySignUpBinding
@@ -45,9 +46,9 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
     }
 
     override fun onSubscribe() {
-        signUpVM.isComplete.observe(this, {
+        signUpVM.isComplete.observe(this) {
             signUpVM.uploadProfileImage(body, getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
-        })
+        }
     }
 
     override fun release() { }

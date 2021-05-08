@@ -3,6 +3,7 @@ package com.yumyum.domain.feed.api;
 import com.yumyum.domain.feed.application.*;
 import com.yumyum.domain.feed.dto.*;
 import com.yumyum.global.common.response.HttpUtils;
+import com.yumyum.global.python.PythonService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,9 @@ public class FeedController {
     private final FeedDeleteService feedDeleteService;
     private final FeedSearchService feedSearchService;
     private final FeedLikeService feedLikeService;
+    private final FeedRecommendService feedRecommendService;
     private final FileService fileService;
-//    private final RegexChecker regexChecker;
+    private final PythonService pythonService;
 
     @ApiOperation(value = "피드 등록", notes = "제목, 내용, 평점, 회원 번호, 장소 번호, 동영상, 썸네일로 피드를 등록한다.")
     @PostMapping("")
@@ -50,6 +52,13 @@ public class FeedController {
     @GetMapping("/list/{userId}")
     public Object feedList(@PathVariable final Long userId) {
         final List<FeedResponse> response = feedSearchService.findAll(userId);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "피드 목록 검색", notes = "제목으로 피드 목록을 검색한다.")
+    @GetMapping("/list/title/{title}/{userId}")
+    public Object feedListByTitle(@PathVariable final String title, @PathVariable final Long userId) {
+        final List<FeedResponse> response = feedSearchService.findByTitle(title, userId);
         return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
@@ -95,10 +104,25 @@ public class FeedController {
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
-//    @ApiOperation(value = "전번 테스트")
-//    @GetMapping("/phone")
-//    public Object phoneTest() {
-//        regexChecker.phoneCheck("02-123-4124");
-//        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
-//    }
+    @ApiOperation(value = "이미지 식별")
+    @PostMapping("/ai")
+    public Object imageClassification(@RequestParam MultipartFile file) {
+//        feedLikeService.doCancelLikeFeed(feedId, userId);
+        return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "피드 추천 목록 조회", notes = "사용자 맞춤 추천 피드 목록 조회, 로그인 회원 번호로 좋아요 여부를 확인한다.")
+    @GetMapping("/list/recommend/{userId}")
+    public Object feedRecommendList(@PathVariable final Long userId) {
+        final List<FeedResponse> response = feedRecommendService.getRecommendList(userId);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "파이썬 연동 테스트")
+    @GetMapping("/python")
+    public Object pythonTest() {
+//        feedLikeService.doCancelLikeFeed(feedId, userId);
+        final Object response = pythonService.getTest();
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
+    }
 }

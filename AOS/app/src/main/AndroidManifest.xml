@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.useroption.MyOptionActivity"></activity>
+        <activity android:name=".ui.userfeed.UserFeedActivity"></activity>
+        <activity android:name=".ui.useroption.UserInfoEditActivity" />
+        <activity android:name=".ui.useroption.MyOptionActivity" />
         <activity android:name=".ui.feed.SearchPlaceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -32,23 +34,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ui.feed.LocationListActivity" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="a48ac35487722b760df861b584827760" />
 
         <activity android:name=".ui.feed.MapActivity" />
-
-        <activity android:name=".ui.feed.SearchPlaceActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
         <activity android:name=".ui.feed.FeedCreateActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld

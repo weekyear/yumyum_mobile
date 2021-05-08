@@ -17,29 +17,56 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
     
     var user = User(profilePath: "", nickname: "", introduction: "", id: 0)
     
+    var isProfile: Bool = true
+    
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     @IBAction func completeBtn(_ sender: Any) {
         let userData = UserDefaults.getLoginedUserInfo()
+        let tempprofilePath: String = userData!["profilePath"].stringValue
+        
         user.id = userData!["id"].intValue
         user.nickname = self.nickNameTF.text
         user.introduction = self.introduceTF.text
+        print(tempprofilePath.isEmpty)
+    
+        if isProfile == false {
+            user.profilePath = ""
+        } else {
+            if tempprofilePath.isEmpty , user.profilePath == ""  {
+                user.profilePath = ""
+            } else if tempprofilePath.isEmpty == false, user.profilePath == "" {
+                user.profilePath = tempprofilePath
+            }
+        }
         
         WebApiManager.shared.updateProfile(user: user) { (result) in
-            print(result)
+            if result["status"] == "200" {
+                UserDefaults.setUserInfo(json: result["data"])
+                print("저장되었습니다.")
+            }
         } failure: { (error) in
-            print(error)
+            print("제발뜨지마라")
         }
+        showToast(message: "변경이 완료되었습니다.")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let user = UserDefaults.getLoginedUserInfo()
         // 인전값을 그대로 가져와서 회원변경 탭에 넣어준다.
         nickNameTF.text = user!["nickname"].stringValue
         introduceTF.text = user!["introduction"].stringValue
         if let url = URL(string: user!["profilePath"].stringValue) {
             var image: UIImage?
-            
+            print("url들어오나요?")
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: url)
                 DispatchQueue.main.async {
@@ -49,17 +76,21 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             }
         } else {
             var image: UIImage?
-            image = UIImage(systemName: "person.crop.circle.badge.plus")
+            image = UIImage(named: "ic_profile")
             self.profileImgView.image = image
         }
+        
         imageMakeRouded(imageview: profileImgView)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchToPickPhoto))
         
         profileImgView.addGestureRecognizer(tapGesture)
         profileImgView.isUserInteractionEnabled = true
+        self.nickNameTF.autocorrectionType = .no
+        self.nickNameTF.autocapitalizationType = .none
+        self.introduceTF.autocorrectionType = .no
+        self.introduceTF.autocapitalizationType = .none
     }
-    
     
     @objc func touchToPickPhoto(){
         let alert = UIAlertController(title: nil, message: "사진가져올 곳을 선택해주세요.", preferredStyle: .actionSheet)
@@ -76,12 +107,18 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             })
         }
         // 취소 버튼 추가
+        let defaultImgAction = UIAlertAction(title: "기본 이미지로 변경", style: .default) { (_) in
+            var image: UIImage?
+            image = UIImage(named: "ic_profile")
+            self.profileImgView.image = image
+            self.isProfile = false
+        }
+        alert.addAction(defaultImgAction)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
         
     }
-    
     // 포토라이브러리랑 저장앨범을 구분해서 알람창을 띄우기 위해! souce를 다르게 받아온다.
     func imgPikcer (_ source : UIImagePickerController.SourceType){
         let picker = UIImagePickerController()
@@ -104,5 +141,4 @@ class EditProfileVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
 
         picker.dismiss(animated: true)
     }
-    
 }

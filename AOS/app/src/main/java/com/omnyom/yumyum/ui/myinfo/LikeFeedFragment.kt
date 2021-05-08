@@ -1,22 +1,17 @@
 package com.omnyom.yumyum.ui.myinfo
 
 import android.graphics.Bitmap
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.omnyom.yumyum.R
-import com.omnyom.yumyum.databinding.FeedListItemBinding
 import com.omnyom.yumyum.databinding.FragmentLikeFeedBinding
+import com.omnyom.yumyum.databinding.ListItemFeedBinding
 import com.omnyom.yumyum.model.feed.FeedData
 import java.net.URL
 
@@ -45,7 +40,7 @@ class LikeFeedFragment : Fragment() {
         var item = foodList
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
-            val innerBinding = FeedListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val innerBinding = ListItemFeedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return Holder(innerBinding)
         }
 
@@ -59,7 +54,7 @@ class LikeFeedFragment : Fragment() {
         }
 
 
-        class Holder(private val innerBinding: FeedListItemBinding) : RecyclerView.ViewHolder(innerBinding.root) {
+        class Holder(private val innerBinding: ListItemFeedBinding) : RecyclerView.ViewHolder(innerBinding.root) {
             val thumbnail = innerBinding.ivThumbnail
         }
     }

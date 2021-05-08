@@ -63,6 +63,7 @@ extension UIViewController {
         }
     }
     
+    //MARK: - 이미지 뷰를 둥글게 만들기
     func imageMakeRouded(imageview:UIImageView) {
         imageview.layer.borderWidth = 2
         imageview.layer.masksToBounds = false
@@ -70,5 +71,26 @@ extension UIViewController {
         imageview.layer.cornerRadius = imageview.frame.height/2
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleAspectFill
+    }
+    
+    func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
+                    y: self.view.frame.size.height/9, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds = true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 10.0, delay: 0.1, options: .curveEaseOut , animations: {
+            toastLabel.alpha = 0.0
+        }, completion: { (isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+        
     }
 }

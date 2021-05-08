@@ -6,9 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.feed.AllFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.userInfo.UserResponse
 import com.omnyom.yumyum.ui.base.BaseViewModel
 import retrofit2.Call
@@ -16,22 +17,21 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MyFeedViewModel(application: Application) : BaseViewModel(application) {
-    private var myRetrofitService: RetrofitService = TempRetrofitBuilder.buildService(RetrofitService::class.java)
 
     init {
         val userId = PreferencesManager.getLong(getApplication(), "userId")
         Log.d("userID","${userId}" )
 
         // 내 피드 불러오기
-        var call = myRetrofitService.getUserFeeds(userId!!, userId!!)
-        call.enqueue(object : Callback<AllFeedResponse> {
-            override fun onResponse(call: Call<AllFeedResponse>, response: Response<AllFeedResponse>) {
+        var call = retrofitService.getUserFeeds(userId!!, userId!!)
+        call.enqueue(object : Callback<FeedResponse> {
+            override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
                     _foodData.postValue(response.body()?.data!!.toMutableList())
                 }
             }
 
-            override fun onFailure(call: Call<AllFeedResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
                 t
             }
 

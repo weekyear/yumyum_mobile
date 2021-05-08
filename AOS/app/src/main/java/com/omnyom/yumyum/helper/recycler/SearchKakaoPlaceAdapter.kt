@@ -5,31 +5,33 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import com.omnyom.yumyum.databinding.PlaceListItemBinding
+import com.omnyom.yumyum.databinding.ListItemKakaoPlaceBinding
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
+import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
-import com.omnyom.yumyum.ui.feed.FeedCreateActivity
 import com.omnyom.yumyum.ui.feed.MapActivity
 import com.omnyom.yumyum.ui.feed.SearchPlaceActivity
 import java.io.Serializable
 
-class SearchPlaceResultsAdapter(private val activity: SearchPlaceActivity) : BaseRecyclerAdapter<SearchPlaceResultsAdapter.SearchPlaceResultViewHolder, SearchPlaceResult>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchPlaceResultViewHolder {
-        val itemBinding = PlaceListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchPlaceResultViewHolder(itemBinding)
+class SearchKakaoPlaceAdapter(private val activity: Activity) : BaseRecyclerAdapter<SearchKakaoPlaceAdapter.SearchKakaoPlaceViewHolder, SearchPlaceResult>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchKakaoPlaceViewHolder {
+        val itemBinding = ListItemKakaoPlaceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return SearchKakaoPlaceViewHolder(itemBinding)
     }
 
-    override fun onBindViewHolder(holder: SearchPlaceResultViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun onBindViewHolder(holderKakao: SearchKakaoPlaceViewHolder, position: Int) {
+        holderKakao.bind(items[position])
     }
 
     override fun getItemCount(): Int = items.size
 
-    inner class SearchPlaceResultViewHolder(private val itemBinding: PlaceListItemBinding) : BaseViewHolder(itemBinding.root) {
+    inner class SearchKakaoPlaceViewHolder(private val itemBinding: ListItemKakaoPlaceBinding) : BaseViewHolder(itemBinding.root) {
         init {
             itemBinding.root.setOnClickListener {
-                setPlaceResult()
+                if (activity is SearchPlaceActivity) {
+                    setPlaceResult()
+                }
                 Toast.makeText(itemBinding.root.context, "클릭된 아이템 = ${itemBinding.tvPlaceListItemName.text}", Toast.LENGTH_SHORT).show()
             }
 
@@ -40,7 +42,18 @@ class SearchPlaceResultsAdapter(private val activity: SearchPlaceActivity) : Bas
 
         private fun checkPlaceByMap() {
             val placeIntent = Intent(activity, MapActivity::class.java).apply {
-                putExtra("placeResult", itemBinding.data as Serializable)
+                val place: SearchPlaceResult? = itemBinding.data
+                place?.let {
+                    val placeData = SearchPlaceData(
+                            place.address_name,
+                            place.x.toDouble(),
+                            place.y.toDouble(),
+                            place.place_name,
+                            place.phone,
+                            -1
+                    )
+                    putExtra("placeResult", placeData as Serializable)
+                }
             }
             activity.startActivity(placeIntent)
         }

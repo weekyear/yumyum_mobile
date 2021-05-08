@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,49 +23,36 @@ public class FeedSearchService {
     private final FeedFindDao feedFindDao;
     private final LikeDao likeDao;
     private final UserFindDao userFindDao;
+    private final FeedResponseService feedResponseService;
+
+    public FeedResponse findById(final Long feedId, final Long userId){
+        final Feed feed = feedFindDao.findById(feedId);
+        final FeedResponse response = feedResponseService.entityToDto(feed, userId);
+        return response;
+    }
 
     public List<FeedResponse> findAll(final Long userId){
-        final List<FeedResponse> list = new ArrayList<>();
         final List<Feed> fList = feedDao.findAll();
-        for(Feed feed : fList){
-            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
-        }
+        final List<FeedResponse> list = feedResponseService.entityToDto(fList, userId);
+        return list;
+    }
+
+    public List<FeedResponse> findByTitle(final String title, final Long userId){
+        final List<Feed> fList = feedDao.findByTitleContainingIgnoreCase(title);
+        final List<FeedResponse> list = feedResponseService.entityToDto(fList, userId);
         return list;
     }
 
     public List<FeedResponse> findByAuthor(final Long authorId, final Long userId){
         final User user = userFindDao.findById(authorId);
-        final List<FeedResponse> list = new ArrayList<>();
         final List<Feed> fList = feedDao.findByUser(user);
-        for(Feed feed : fList){
-            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), checkIsLike(feed.getId(), userId)));
-        }
+        final List<FeedResponse> list = feedResponseService.entityToDto(fList, userId);
         return list;
     }
 
     public List<FeedResponse> findByLike(final Long userId){
         final List<Like> lList = likeDao.findByUserId(userId);
-        final List<FeedResponse> list = new ArrayList<>();
-        for(Like like : lList){
-            Feed feed = like.getFeed();
-            list.add(new FeedResponse(feed, getLikeCount(feed.getId()), true));
-        }
+        final List<FeedResponse> list = feedResponseService.entityToDto(lList);
         return list;
-    }
-
-    public FeedResponse findById(final Long feedId, final Long userId){
-        final Feed feed = feedFindDao.findById(feedId);
-        final FeedResponse response = new FeedResponse(feed, getLikeCount(feedId), checkIsLike(feedId, userId));
-        return response;
-    }
-
-    public Long getLikeCount(final Long feedId){
-        final Long likeCount = likeDao.countById(feedId);
-        return likeCount;
-    }
-
-    public boolean checkIsLike(final Long feedId, final Long userId) {
-        final Optional<Like> like = likeDao.findByFeedIdAndUserId(feedId, userId);
-        return like.isPresent();
     }
 }

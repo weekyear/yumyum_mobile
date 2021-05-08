@@ -9,7 +9,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySearchPlaceBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.KakaoMapUtils.Companion.PERM_FINE_LOCATION
-import com.omnyom.yumyum.helper.recycler.SearchPlaceResultsAdapter
+import com.omnyom.yumyum.helper.recycler.SearchKakaoPlaceAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 
 class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.layout.activity_search_place) {
@@ -31,7 +31,7 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
     override fun setupViews() {
         supportActionBar?.hide()
         binding.rvPlace.apply {
-            val _adapter = SearchPlaceResultsAdapter(this@SearchPlaceActivity).apply {
+            val _adapter = SearchKakaoPlaceAdapter(this@SearchPlaceActivity).apply {
                 setVM(searchPlaceVM)
             }
             adapter = _adapter
@@ -53,7 +53,7 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
 
     override fun onSubscribe() {
         searchPlaceVM.searchPlaceResults.observe(this, {
-            val adapter = binding.rvPlace.adapter as SearchPlaceResultsAdapter
+            val adapter = binding.rvPlace.adapter as SearchKakaoPlaceAdapter
             adapter.run {
                 setItems(it)
                 notifyDataSetChanged()

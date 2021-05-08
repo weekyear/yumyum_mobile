@@ -665,3 +665,62 @@ final class ElonMusk {
 
 - 참고 : https://zeddios.tistory.com/226
 
+
+
+### 어려움을 겪었던 문제
+
+- 회원정보 수정시 프로필을 안바꾸고 별명과 소개만 바꿨을때 현재 프로필은 그래도 유지시키는 것이 어렵다.
+
+- 현재 userDefaults에 있는 profilePath를 꺼내오고 그걸 저장할떄 넣어주면되는데 두가지 조건이 생겨서 오래걸렸음
+
+```swift
+  let tempprofilePath: String = userData!["profilePath"].stringValue
+        
+        user.id = userData!["id"].intValue
+        user.nickname = self.nickNameTF.text
+        user.introduction = self.introduceTF.text
+        print(tempprofilePath.isEmpty)
+        
+        if tempprofilePath.isEmpty , user.profilePath == nil  {
+            user.profilePath = ""
+        } else if tempprofilePath.isEmpty == false, user.profilePath == "" {
+            user.profilePath = tempprofilePath
+        }
+```
+
+- 이런식으로 문제 해결
+
+
+
+## EscapingClosure
+
+> 참고 : https://jusung.github.io/Escaping-Closure/
+
+- 함수 밖에서 호출되었을떄 비로소 그 구문이 실행된다.
+
+```swift
+	func getFeedList(userId: Int, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        let url = "\(domainUrl)\(feedUrl)/list/\(userId)"
+        AF.request(url, method: .get)
+          .responseJSON {(response) in
+            switch response.result {
+            case .success(_):
+                let json = JSON(response.value!)
+                //아래 success는 외부에서 호출할떄 실행된다.
+                success(json)
+                break
+                
+            case .failure(_):
+                let error: Error = response.error!
+                failure(error)
+                break
+            }
+        }
+    }
+```
+
+- 위에서 보면 getFeedList()에서서 사용되는 success와 failure 함수는 즉시 실행되지 않고 URL요청이 끝나고 비동기적으로 실행이된다.
+- 즉, getFeedList 함수의 실해ㅐㅇ이 먼저 종료되고 값을 반환한 다음에 success가 외부에서 호출되었을떄 실행된다고 보면된다.
+- JSON으로 받아온 데이터를 처리하고 **그 값을 반환하기위해서 escaping을 사용하고 함수 외부에서** 접근하도록하는 것이다.
+- 간단하게 생각하면 데이터를 전달 받고나서 그 값을 함수 밖에서 사용하기 위해서이다. 
+

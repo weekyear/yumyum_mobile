@@ -38,6 +38,14 @@ struct User: Codable {
         self.id = id
     }
     
+    init(fromjson: JSON) {
+        self.id = fromjson["user"]["id"].intValue
+        self.email = fromjson["user"]["email"].stringValue
+        self.nickname = fromjson["user"]["nickname"].stringValue
+        self.introduction = fromjson["user"]["introduction"].stringValue
+        self.profilePath = fromjson["user"]["profilePath"].stringValue
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case profilePath
