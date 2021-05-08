@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var collectionView: UICollectionView!
     
     var feedList: [Feed] = []
+    let userData = UserDefaults.getLoginedUserInfo()!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +31,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.collectionView.collectionViewLayout = flowLayout
         
          let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
-            WebApiManager.shared.getFeedList(userId: userId) { (result) in
+            WebApiManager.shared.getFeedList(userId: 58) { (result) in
                 if result["status"] == "200" {
                     let results = result["data"]
-//                    print(results)
+                    print(results)
                     self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
                     self.collectionView.reloadData()
                 }
             } failure: { (error) in
+                print("에러에러")
                 print("feed list error: \(error)")
             }
     }
@@ -57,6 +59,27 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return self.feedList.count
     }
     
+    //like버튼 클릭하면 출력
+    @IBAction public func liketap(_ sender:AnyObject){
+        print("ViewController tap() Clicked Item: \(sender.view.tag)")
+        let feedReverse =  Array(feedList.reversed())
+        let feed = feedReverse[sender.view.tag]
+        print(feed)
+        let userId = userData["id"].intValue
+        var userLikeModel = userLike()
+        userLikeModel.feedId = feed.id!
+        userLikeModel.userId = userId
+        
+        WebApiManager.shared.postLikeFeed(likeInfo: userLikeModel){ (result) in
+            if result["status"] == "200"{
+                print(result["message"])
+            }
+        } failure: { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
+    
     // 컬렉션 뷰의 지정된 위치에 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -65,12 +88,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
         
-        cell.configureVideo(with: feed)
+        //이부분에서 feedId랑,userId를 같이 담아서 넘겨주면 되게
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(liketap(_:)))
+
+            cell.likeImgView.isUserInteractionEnabled = true
+            cell.likeImgView.tag = indexPath.row
+            cell.likeImgView.addGestureRecognizer(tapGestureRecognizer)
+        
+            cell.configureVideo(with: feed)
         
         return cell
     }
-    
-    // 콜렉션 뷰 레이아웃 조정 메서드
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cvRect = collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)

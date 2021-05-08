@@ -64,5 +64,26 @@ extension WebApiManager {
                 }
             }
     }
+    
+    func postLikeFeed(likeInfo : userLike, suceess: @escaping (JSON) -> Void,
+                      failure : @escaping(Error) -> Void) {
+
+        let url = "\(domainUrl)\(feedUrl)like"
+
+        AF.request(url, method: .post, parameters: likeInfo, encoder: JSONParameterEncoder.default)
+            .responseJSON{ (response) in
+                switch response.result {
+                case .success(_):
+                    let json = JSON(response.value!)
+                    suceess(json)
+                    break
+                case .failure(_):
+                    let error: Error = response.error!
+                    failure(error)
+                    break
+                }
+            }
+
+    }
 }
 

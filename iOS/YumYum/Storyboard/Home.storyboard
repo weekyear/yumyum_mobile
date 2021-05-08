@@ -49,8 +49,8 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="3bU-hd-RGH" userLabel="PlaceStackView">
-                                                            <rect key="frame" x="26" y="624" width="102" height="20.5"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="3bU-hd-RGH" userLabel="PlaceStackView">
+                                                            <rect key="frame" x="26" y="624" width="87" height="20.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="253" text="음식점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljz-OA-fhk">
                                                                     <rect key="frame" x="0.0" y="0.0" width="44.5" height="20.5"/>
@@ -59,7 +59,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="주소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bq1-T9-SLb">
-                                                                    <rect key="frame" x="57.5" y="0.0" width="44.5" height="20.5"/>
+                                                                    <rect key="frame" x="57.5" y="0.0" width="29.5" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -67,7 +67,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eg-vj-KMi">
-                                                            <rect key="frame" x="26" y="652.5" width="362" height="41"/>
+                                                            <rect key="frame" x="26" y="652.5" width="323" height="61"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -79,6 +79,12 @@
                                                                 <constraint firstAttribute="width" constant="39" id="wvD-28-jT6"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="좋아요수" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Loa-uk-7b5">
+                                                            <rect key="frame" x="349" y="579" width="39" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -89,10 +95,13 @@
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="top" secondItem="lQR-Jy-oBF" secondAttribute="top" constant="548" id="Nkp-jE-NaK"/>
                                                         <constraint firstItem="3bU-hd-RGH" firstAttribute="top" secondItem="ctm-Jv-q22" secondAttribute="bottom" constant="8" id="PuR-Rg-HgM"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="QmU-RZ-Xqn"/>
+                                                        <constraint firstItem="Loa-uk-7b5" firstAttribute="trailing" secondItem="pxG-Uo-vAU" secondAttribute="trailing" id="Qmb-IF-uP8"/>
                                                         <constraint firstAttribute="trailing" secondItem="pxG-Uo-vAU" secondAttribute="trailing" constant="26" id="S12-SI-Oed"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="leading" secondItem="lQR-Jy-oBF" secondAttribute="leading" constant="26" id="WoY-Nr-Mh6"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="top" secondItem="3bU-hd-RGH" secondAttribute="bottom" constant="8" id="ZOK-Gh-ZbC"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1eg-vj-KMi" secondAttribute="trailing" constant="26" id="lCi-SX-WtT"/>
+                                                        <constraint firstItem="Loa-uk-7b5" firstAttribute="leading" secondItem="pxG-Uo-vAU" secondAttribute="leading" id="ksN-z6-EmE"/>
+                                                        <constraint firstItem="Loa-uk-7b5" firstAttribute="top" secondItem="pxG-Uo-vAU" secondAttribute="bottom" constant="1" id="l30-92-mQ1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1eg-vj-KMi" secondAttribute="trailing" constant="65" id="ocb-Bw-IYj"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ctm-Jv-q22" secondAttribute="trailing" constant="30" id="qRZ-lN-ofE"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3bU-hd-RGH" secondAttribute="trailing" constant="30" id="xSc-3K-4L9"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="top" secondItem="ig6-dI-2UN" secondAttribute="bottom" constant="8" id="y0W-48-qhE"/>
@@ -110,6 +119,7 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="Bq1-T9-SLb" id="aZZ-3R-ZSM"/>
                                             <outlet property="foodLabel" destination="ctm-Jv-q22" id="iHl-oG-ln3"/>
+                                            <outlet property="likeCountLabel" destination="Loa-uk-7b5" id="bua-GP-EgB"/>
                                             <outlet property="likeImgView" destination="pxG-Uo-vAU" id="2yK-lQ-THh"/>
                                             <outlet property="placeLabel" destination="ljz-OA-fhk" id="fzi-bV-dau"/>
                                             <outlet property="placeStackView" destination="3bU-hd-RGH" id="bwF-B8-qDW"/>

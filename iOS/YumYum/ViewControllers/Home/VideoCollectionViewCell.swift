@@ -25,6 +25,8 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var placeStackView : UIStackView!
     
+    @IBOutlet var likeCountLabel: UILabel!
+    
     @IBOutlet weak var likeImgView: UIImageView!
     
     var player : AVPlayer?
@@ -39,10 +41,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     }
     
     public func configureVideo(with feed:Feed){
-        print(feed)
-        foodLabel.text = feed.title
-        userLabel.text = userData!["nickname"].stringValue
-        reviewLabel.text = feed.content
         player = AVPlayer(url: feed.videoPath!)
         let playerView = AVPlayerLayer()
         playerView.player = player
@@ -51,6 +49,29 @@ class VideoCollectionViewCell: UICollectionViewCell{
         videoLayout.layer.addSublayer(playerView)
         player?.volume = 0
         player?.play()
+        bringUpViewobject()
+        loadData(feed: feed)
+    }
+    
+    private func loadData(feed:Feed) {
+        foodLabel.text = feed.title
+        userLabel.text = feed.user?.nickname
+        reviewLabel.text = feed.content
+        placeLabel.text = feed.place?.name
+        addressLabel.text = feed.place?.address
+        likeCountLabel.text = String(feed.likeCount!)
+        
+        if feed.isLike == true {
+            let image = UIImage(named: "ic_thumbs_up_filled")
+            likeImgView.image = image
+        } else {
+            let image = UIImage(named: "ic_thumbs_up")
+            likeImgView.image = image
+        }
+        
+    }
+    
+    private func bringUpViewobject() {
         videoLayout.bringSubviewToFront(foodLabel)
         videoLayout.bringSubviewToFront(placeLabel)
         videoLayout.bringSubviewToFront(addressLabel)
@@ -58,6 +79,8 @@ class VideoCollectionViewCell: UICollectionViewCell{
         videoLayout.bringSubviewToFront(userLabel)
         videoLayout.bringSubviewToFront(placeStackView)
         videoLayout.bringSubviewToFront(likeImgView)
+        videoLayout
+            .bringSubviewToFront(likeCountLabel)
     }
 }
 

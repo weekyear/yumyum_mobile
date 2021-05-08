@@ -64,3 +64,12 @@ struct User: Codable {
     
 }
 
+struct userLike:Codable {
+    var userId : Int
+    var feedId : Int
+
+    init () {
+        self.userId = 0
+        self.feedId = 0
+    }
+}

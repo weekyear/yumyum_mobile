@@ -97,4 +97,3 @@ extension Feed: Encodable {
         try container.encode(place, forKey: .place)
     }
 }
-
