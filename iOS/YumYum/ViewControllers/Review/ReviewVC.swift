@@ -9,11 +9,11 @@ import UIKit
 import SwiftyJSON
 
 enum Score: Int {
-    case one
-    case two
-    case three
-    case four
-    case five
+    case one = 1
+    case two = 2
+    case three = 3
+    case four = 4
+    case five = 5
 }
 
 class ReviewVC: UIViewController {
@@ -27,9 +27,11 @@ class ReviewVC: UIViewController {
     var videoUrl: URL!
     var feed: Feed = Feed()
     var score: Score = .five
+    var place: Place?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet var locationTextField: UITextField!
     @IBOutlet weak var emojiLabel: UILabel!
     
     @IBAction func TabEmoji1(_ sender: Any) {
@@ -48,6 +50,11 @@ class ReviewVC: UIViewController {
         setEmoji(value: .five)
     }
     
+    @IBAction func didTabLocationButton(_ sender: Any) {
+        let vc = PlaceSearchVC.instance()
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,11 +89,14 @@ class ReviewVC: UIViewController {
             self.feed.videoPath = URL(string: result["data"]["videoPath"].stringValue)
             let user = UserDefaults.getLoginedUserInfo()
             self.feed.userId = user!["id"].intValue
-            let place = Place(address: "대전", locationX: 10.0, locationY: 10.0, name: "족발맛짐", phone: "02-1111-2222")
+            
             self.feed.score = self.score.rawValue
-            self.feed.place = place
-
+            
+            self.feed.place = self.place
+            
+            
             dump(self.feed)
+            
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in
                 print("feed생성: \(result)")
                 if result["status"] == "200" {
@@ -102,6 +112,7 @@ class ReviewVC: UIViewController {
     }
 
     func setEmoji(value: Score) {
+        self.score = value
         switch value {
         case .one:
             emojiLabel.text = "웩맛"
@@ -127,5 +138,14 @@ extension ReviewVC: UITextFieldDelegate {
         } else if textField == contentTextField {
             self.feed.content = contentTextField.text ?? ""
         }
+    }
+}
+
+
+extension ReviewVC: PlaceDelegate {
+    func setPlace(_ controller: PlaceSearchVC, place: Place) {
+        print("띵동place도착: \(place)")
+        self.locationTextField.text = place.name
+        self.place = place
     }
 }
