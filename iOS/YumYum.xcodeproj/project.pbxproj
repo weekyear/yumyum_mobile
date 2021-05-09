@@ -28,6 +28,7 @@
 		54CC1D672636F6BF0023963F /* image1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 54CC1D662636F6BF0023963F /* image1.jpeg */; };
 		54DA48C6262F1FD400AC4863 /* video3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48C5262F1FD400AC4863 /* video3.mp4 */; };
 		54DA48CE262F249700AC4863 /* video4.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 54DA48CD262F249700AC4863 /* video4.mp4 */; };
+		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
 		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
 		5FE9A28FA160C665CBC61AB2 /* Pods_YumYumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E748F51A7196099FB67267 /* Pods_YumYumTests.framework */; };
 		C5A3452B51F98A7115513DBD /* Pods_YumYum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */; };
@@ -145,6 +146,7 @@
 		54CC1D662636F6BF0023963F /* image1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpeg; sourceTree = "<group>"; };
 		54DA48C5262F1FD400AC4863 /* video3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video3.mp4; sourceTree = "<group>"; };
 		54DA48CD262F249700AC4863 /* video4.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video4.mp4; sourceTree = "<group>"; };
+		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumYum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		660FBCDD88D6F913501CB333 /* Pods-YumYum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.release.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.release.xcconfig"; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				E548AAE32638656C0049AA0B /* UserDefaultsExtension.swift */,
 				E548AB062639D8F60049AA0B /* UINavigationBarExtension.swift */,
 				E548AB10263A697C0049AA0B /* UIColor.swift */,
+				54DA8169264816530029FC92 /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -927,6 +930,7 @@
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 				E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */,
 				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
+				54DA816A264816530029FC92 /* UIImage.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
 			);
