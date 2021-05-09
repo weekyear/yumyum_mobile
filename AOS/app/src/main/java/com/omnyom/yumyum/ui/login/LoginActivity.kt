@@ -3,6 +3,7 @@ package com.omnyom.yumyum.ui.login
 import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.gms.auth.api.Auth
@@ -52,7 +53,8 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+        val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+        Log.e("RESULT", result?.status.toString())
 
         if (resultCode == RESULT_OK && requestCode == RESULT_CODE) {
             val loginEmail = googleSignIn(data)

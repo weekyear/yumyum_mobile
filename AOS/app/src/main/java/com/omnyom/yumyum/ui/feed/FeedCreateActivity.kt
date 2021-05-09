@@ -4,28 +4,39 @@ import android.content.Intent
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
+import com.airbnb.lottie.LottieAnimationView
+import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
-import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
+import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
-import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.signup.SignUpActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
+
 class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layout.activity_feed_create) {
 
     private val feedCreateVM: FeedCreateViewModel by viewModels()
-
+    private val avStars: List<LottieAnimationView> by lazy {
+        arrayListOf(
+                binding.avStar1,
+                binding.avStar2,
+                binding.avStar3,
+                binding.avStar4,
+                binding.avStar5
+        )
+    }
 
     override fun extraSetupBinding() {
         binding.apply {
@@ -38,13 +49,23 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun setupViews() {
+        supportActionBar?.hide()
         binding.btnGoBack.setOnClickListener { finish() }
         binding.btnSubmit.setOnClickListener {
             feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
-            finish()
+            startMainActivity()
         }
 
-        binding.btnMap.setOnClickListener { startSearchPlaceActivity() }
+        binding.editTextPlace.setOnClickListener { startSearchPlaceActivity() }
+
+        for ((idx, avStar) in avStars.withIndex()) {
+            avStar.setOnClickListener {
+                avStar.playAnimation()
+                feedCreateVM.score.value = idx + 1
+                changeAvStarColor(avStar.id)
+                changeAvStarSize(avStar.id)
+            }
+        }
 
         textWatcher()
     }
@@ -68,7 +89,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                     name = placeResult.place_name
                     phone = placeResult.phone
                 }
-                binding.tvPlaceName.text = placeResult.place_name
+                binding.editTextPlace.setText(placeResult.place_name)
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "사진 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
@@ -86,6 +107,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                     binding.inputLayoutTitle.error = null
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -96,6 +118,15 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         startActivityForResult(intent, SearchPlaceActivity.PLACE_CODE)
     }
 
+    private fun startMainActivity() {
+        Intent(this, MainActivity::class.java).let {
+            it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(it)
+        }
+    }
+
     private fun getMultipartBodyOfVideo(videoUri: Uri?): MultipartBody.Part? {
         val parcelFileDescriptor = contentResolver.openFileDescriptor(videoUri!!, "r", null) ?: return null
         val file = File(cacheDir, contentResolver.getFileName(videoUri!!))
@@ -103,8 +134,36 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
 
-        val requestFile = RequestBody.create("video/mp4".toMediaTypeOrNull(), file)
+        val requestFile = file.asRequestBody("video/mp4".toMediaTypeOrNull())
         return MultipartBody.Part.createFormData("file", file.name, requestFile)
+    }
+
+    private fun changeAvStarColor(avStarId: Int) {
+        for (avStar in avStars) {
+            if (avStar.id == avStarId) {
+                avStar.changeLayersColor(R.color.colorPrimary)
+            } else {
+                avStar.changeLayersColor(R.color.black)
+            }
+        }
+    }
+
+    private fun changeAvStarSize(avStarId: Int) {
+        for (avStar in avStars) {
+            if (avStar.id == avStarId) {
+                avStar.animate()
+                        .scaleX(1.5f)
+                        .scaleY(1.5f)
+                        .setDuration(200)
+                        .withEndAction {  }
+            } else {
+                avStar.animate()
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .setDuration(200)
+                        .withEndAction {  }
+            }
+        }
     }
 }
 
