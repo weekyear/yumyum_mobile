@@ -40,7 +40,7 @@ class UserFeedViewModel(application: Application) : AndroidViewModel(application
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
-                    val list : List<FeedData> = response.body()?.data!!
+                    val list : List<FeedData> = response.body()?.data!!.reversed()
                     _foodData.postValue(list)
                 }
             }

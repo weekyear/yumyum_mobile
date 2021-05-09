@@ -1,69 +1,48 @@
 package com.omnyom.yumyum.ui.myinfo
 
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import android.content.Context
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentMyFeedBinding
-import com.omnyom.yumyum.databinding.ListItemFeedBinding
-import com.omnyom.yumyum.model.feed.FeedData
-import java.net.URL
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class MyFeedFragment : Fragment() {
-    private lateinit var myFeedviewModel: MyFeedViewModel
-    val binding  by lazy { FragmentMyFeedBinding.inflate(layoutInflater) }
+class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragment_my_feed) {
+    private val myFeedVM: MyFeedViewModel by viewModels()
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        myFeedviewModel = ViewModelProvider(this).get(MyFeedViewModel::class.java)
-
-        myFeedviewModel.foodData.observe(viewLifecycleOwner, Observer {
-            binding.rvMyFeed.adapter = FeedPagesAdapter(it)
-        })
-
-        val context = context
-        binding.rvMyFeed.layoutManager = GridLayoutManager(context, 3)
-
-        return binding.root
+    override fun extraSetupBinding() {
+        binding.apply {
+            vm = myFeedVM
+        }
     }
 
+    override fun setup() {
+        myFeedVM.getMyFeed()
+    }
 
-    // 어탭터 형성
-    class FeedPagesAdapter(foodList: List<FeedData>) : RecyclerView.Adapter<FeedPagesAdapter.Holder>() {
-        var item = foodList
-        lateinit var matrix: Matrix
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
-            val innerBinding = ListItemFeedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return Holder(innerBinding)
+    override fun setupViews() {
+        binding.rvMyFeed.apply {
+            adapter = AuthorFeedAdapter(context)
+            layoutManager = GridLayoutManager(context, 3)
         }
+        binding.btnGoMap.setOnClickListener {
+            myFeedVM.goMarkerMap(context as Context)
+        }
+    }
 
-        override fun getItemCount(): Int = item.size
-
-
-        override fun onBindViewHolder(holder: Holder, position: Int) {
-            var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
-                url = URL(item[position].thumbnailPath)
+    override fun onSubscribe() {
+        myFeedVM.myFeedData.observe(this) {
+            val adapter = binding.rvMyFeed.adapter as AuthorFeedAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
             }
-            var bitmap: Bitmap = image_task.execute().get()
-            holder.thumbnail.setImageBitmap(bitmap)
-
         }
-
-        class Holder(private val innerBinding: ListItemFeedBinding) : RecyclerView.ViewHolder(innerBinding.root) {
-            val thumbnail = innerBinding.ivThumbnail
-        }
-
     }
 
+    override fun release() {
+    }
 }
+

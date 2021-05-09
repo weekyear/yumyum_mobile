@@ -1,62 +1,47 @@
 package com.omnyom.yumyum.ui.myinfo
 
-import android.graphics.Bitmap
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import android.content.Context
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentLikeFeedBinding
-import com.omnyom.yumyum.databinding.ListItemFeedBinding
-import com.omnyom.yumyum.model.feed.FeedData
-import java.net.URL
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
+import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
-class LikeFeedFragment : Fragment() {
-    private lateinit var myLikeviewModel: LikeFeedViewModel
-    val binding by lazy { FragmentLikeFeedBinding.inflate(layoutInflater) }
+class LikeFeedFragment : BaseBindingFragment<FragmentLikeFeedBinding>(R.layout.fragment_like_feed) {
+    private val likeFeedVM: LikeFeedViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        myLikeviewModel = ViewModelProvider(this).get(LikeFeedViewModel::class.java)
-
-        myLikeviewModel.likeFeedData.observe(viewLifecycleOwner, Observer {
-            binding.rvLikeFeed.adapter = LikeFeedPagesAdapter(it)
-        })
-
-        val context = context
-        binding.rvLikeFeed.layoutManager = GridLayoutManager(context, 3)
-
-        return binding.root
+    override fun extraSetupBinding() {
+        binding.apply {
+            vm = likeFeedVM
+        }
     }
 
-    // 어탭터 형성
-    class LikeFeedPagesAdapter(foodList: List<FeedData>) : RecyclerView.Adapter<LikeFeedPagesAdapter.Holder>() {
-        var item = foodList
+    override fun setup() {
+        likeFeedVM.getLikeFeed()
+    }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
-            val innerBinding = ListItemFeedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-            return Holder(innerBinding)
+    override fun setupViews() {
+        binding.rvLikeFeed.apply {
+            adapter = AuthorFeedAdapter(context)
+            layoutManager = GridLayoutManager(context, 3)
         }
+        binding.btnGoMap.setOnClickListener {
+            likeFeedVM.goMarkerMap(context as Context)
+        }
+    }
 
-        override fun getItemCount(): Int = item.size
-        override fun onBindViewHolder(holder: Holder, position: Int) {
-            var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
-                url = URL(item[position].thumbnailPath)
+    override fun onSubscribe() {
+        likeFeedVM.likeFeedData.observe(this) {
+            val adapter = binding.rvLikeFeed.adapter as AuthorFeedAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
             }
-            var bitmap: Bitmap = image_task.execute().get()
-            holder.thumbnail.setImageBitmap(bitmap)
-        }
-
-
-        class Holder(private val innerBinding: ListItemFeedBinding) : RecyclerView.ViewHolder(innerBinding.root) {
-            val thumbnail = innerBinding.ivThumbnail
         }
     }
 
+    override fun release() {
+    }
 }
