@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val cameraIntent = Intent(this, FeedCreateActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
         supportActionBar?.hide()
 
         val navController = findNavController(R.id.nav_host_fragment)

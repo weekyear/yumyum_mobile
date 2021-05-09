@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginBottom="45dp"
-            android:tint="@color/gray_3"
+            android:tint="@color/white"
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
