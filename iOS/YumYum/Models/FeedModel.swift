@@ -51,7 +51,7 @@ struct Feed {
         self.title = feedJson["title"].stringValue
         self.userId = feedJson["userId"].intValue
         self.score = feedJson["score"].intValue
-        self.place = Place(json: feedJson)
+        self.place = Place(feedJson: feedJson)
         self.user = User(fromjson: feedJson)
     }
     

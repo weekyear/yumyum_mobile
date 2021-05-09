@@ -319,25 +319,35 @@
             </objects>
             <point key="canvasLocation" x="3882.608695652174" y="1072.7678571428571"/>
         </scene>
-        <!--View Controller-->
+        <!--Private LawVC-->
         <scene sceneID="ezN-oV-iEp">
             <objects>
-                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" customClass="PrivateLawVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yF3-ga-NMW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="개인정보 보호 처리방침" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-om-Uc2">
-                                <rect key="frame" x="64" y="69" width="287" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4TD-pu-ETb">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IEI-ti-UEd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4TD-pu-ETb" firstAttribute="top" secondItem="IEI-ti-UEd" secondAttribute="top" id="CuG-gA-fQO"/>
+                            <constraint firstItem="IEI-ti-UEd" firstAttribute="trailing" secondItem="4TD-pu-ETb" secondAttribute="trailing" id="FdH-aR-Na0"/>
+                            <constraint firstItem="4TD-pu-ETb" firstAttribute="leading" secondItem="IEI-ti-UEd" secondAttribute="leading" id="Gzu-Ly-QdA"/>
+                            <constraint firstItem="IEI-ti-UEd" firstAttribute="bottom" secondItem="4TD-pu-ETb" secondAttribute="bottom" id="aeW-cx-xkg"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="4TD-pu-ETb" id="xdh-Ho-Fc3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHW-Yg-LqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
