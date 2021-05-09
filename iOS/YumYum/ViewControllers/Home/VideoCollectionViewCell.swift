@@ -27,17 +27,52 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet var likeCountLabel: UILabel!
     
-    @IBOutlet weak var likeImgView: UIImageView!
+    @IBOutlet var Likebutton: UIButton!
     
     var player : AVPlayer?
     
-    let userData = UserDefaults.getLoginedUserInfo()
+    let userData = UserDefaults.getLoginedUserInfo()!
     
     var checkLike: Bool = false
+    
+    var nowFeed : Feed = Feed()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    }
+    
+    @IBAction func likeBtnPress(_ sender: Any) {
+        if checkLike == true {
+            checkLike = false
+            let image = UIImage(named: "ic_thumbs_up")
+            Likebutton.setImage(image, for: .normal)
+            let userId = userData["id"].intValue
+            let feedId = nowFeed.id!
+            
+            WebApiManager.shared.cancleLikeFeed(feedId: feedId, userId: userId){ (result) in
+                if result["status"] == "200"{
+                    print("싫어요요청을 보냈습니다.")
+                }
+            } failure: { (error) in
+                print(error.localizedDescription)
+                print("좋아요 서버 호출 에러")
+            }
+        } else {
+            checkLike = true
+            let image = UIImage(named: "ic_thumbs_up_filled")
+            Likebutton.setImage(image, for: .normal)
+            var likeInfo = userLike()
+            likeInfo.userId = userData["id"].intValue
+            likeInfo.feedId = nowFeed.id!
+            WebApiManager.shared.postLikeFeed(likeInfo: likeInfo){ (result) in
+                if result["status"] == "200"{
+                    print("좋아요 포스트 요청을 보냈습니다.")
+                }
+            } failure: { (error) in
+                print(error.localizedDescription)
+                print("좋아요 서버 호출 에러")
+            }
+        }
     }
     
     public func configureVideo(with feed:Feed, myLikeFeed:Feed) {
@@ -54,20 +89,21 @@ class VideoCollectionViewCell: UICollectionViewCell{
     }
     
     private func loadData(feed:Feed, myLikeFeed: Feed) {
+        nowFeed = feed
         foodLabel.text = feed.title
         userLabel.text = feed.user?.nickname
         reviewLabel.text = feed.content
         placeLabel.text = feed.place?.name
         addressLabel.text = feed.place?.address
         likeCountLabel.text = String(feed.likeCount!)
-        checkLike = myLikeFeed.isLike!
+        checkLike = myLikeFeed.isLike ?? false
         
         if checkLike == true {
             let image = UIImage(named: "ic_thumbs_up_filled")
-            likeImgView.image = image
+            Likebutton.setImage(image, for: .normal)
         } else {
             let image = UIImage(named: "ic_thumbs_up")
-            likeImgView.image = image
+            Likebutton.setImage(image, for: .normal)
         }
         
     }
@@ -79,7 +115,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
         videoLayout.bringSubviewToFront(reviewLabel)
         videoLayout.bringSubviewToFront(userLabel)
         videoLayout.bringSubviewToFront(placeStackView)
-        videoLayout.bringSubviewToFront(likeImgView)
+        videoLayout.bringSubviewToFront(Likebutton)
         videoLayout
             .bringSubviewToFront(likeCountLabel)
     }
