@@ -28,6 +28,8 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
 
     override fun setupViews() {
         binding.btnNext.setOnClickListener { startFeedCreateActivity() }
+        binding.btnRetry.setOnClickListener { openCamera() }
+        supportActionBar?.hide()
     }
 
     override fun onSubscribe() { }
@@ -37,7 +39,6 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
     fun startFeedCreateActivity() {
         val intent = Intent(this, FeedCreateActivity::class.java).apply {
             putExtra("videoUri", videoUri)
-            putExtra("testText", "오닝?")
         }
         startActivity(intent)
     }
@@ -56,17 +57,19 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
             }
             PERM_CAMERA -> {
                 Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다!", Toast.LENGTH_SHORT).show()
+                finish()
             }
         }
     }
 
 
     fun openCamera() {
-        var intent =  Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-        intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3);
-        intent.also { takeVideoIntent ->
-            takeVideoIntent.resolveActivity(packageManager)?.also {
-                startActivityForResult(takeVideoIntent, REQ_CAMERA)
+        Intent(MediaStore.ACTION_VIDEO_CAPTURE).apply {
+            putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3)
+            also { takeVideoIntent ->
+                takeVideoIntent.resolveActivity(packageManager)?.also {
+                    startActivityForResult(takeVideoIntent, REQ_CAMERA)
+                }
             }
         }
     }

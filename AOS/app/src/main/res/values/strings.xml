@@ -14,6 +14,8 @@
     <string name="next">Next</string>
     <string name="name">이름</string>
     <string name="please_write_name">이름을 입력해주세요.</string>
+    <string name="please_write_food_name">무엇을 맛있게 먹을건가요?</string>
+    <string name="please_write_place_name">어디서 먹었나요?</string>
     <string name="introduction">소개</string>
     <string name="please_write_introduction">자신을 소개해주세요.</string>
     <string name="complete">완료</string>

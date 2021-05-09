@@ -17,6 +17,7 @@ import com.omnyom.yumyum.databinding.FragmentHomeBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
+import com.omnyom.yumyum.ui.feed.FeedCreateActivity
 import com.omnyom.yumyum.ui.home.HomeFragment
 import com.omnyom.yumyum.ui.myinfo.MyInfoFragment
 import com.omnyom.yumyum.ui.search.SearchFragment
@@ -29,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val cameraIntent = Intent(this, FeedCreateActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         supportActionBar?.hide()
 
         val navController = findNavController(R.id.nav_host_fragment)

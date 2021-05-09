@@ -23,6 +23,7 @@ public class FeedController {
     private final FeedDeleteService feedDeleteService;
     private final FeedSearchService feedSearchService;
     private final FeedLikeService feedLikeService;
+    private final FeedRecommendService feedRecommendService;
     private final FileService fileService;
     private final PythonService pythonService;
 
@@ -108,6 +109,13 @@ public class FeedController {
     public Object imageClassification(@RequestParam MultipartFile file) {
 //        feedLikeService.doCancelLikeFeed(feedId, userId);
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "피드 추천 목록 조회", notes = "사용자 맞춤 추천 피드 목록 조회, 로그인 회원 번호로 좋아요 여부를 확인한다.")
+    @GetMapping("/list/recommend/{userId}")
+    public Object feedRecommendList(@PathVariable final Long userId) {
+        final List<FeedResponse> response = feedRecommendService.getRecommendList(userId);
+        return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
     @ApiOperation(value = "파이썬 연동 테스트")

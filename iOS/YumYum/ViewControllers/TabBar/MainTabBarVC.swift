@@ -30,9 +30,7 @@ class MainTabBarVC: UITabBarController {
 
 extension MainTabBarVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        print(viewController)
         if viewController.isKind(of: ReviewNavigationVC.self) {
-            print("yes!!!")
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "Review")
             vc?.modalPresentationStyle = .fullScreen
             self.present(vc!, animated: true, completion: nil)

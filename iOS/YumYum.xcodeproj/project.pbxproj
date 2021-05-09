@@ -96,6 +96,10 @@
 		E5920A352627C47600836123 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A342627C47600836123 /* Accounts.storyboard */; };
 		E5B071302634761E0094E880 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0712F2634761E0094E880 /* PreviewView.swift */; };
 		E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */; };
+		E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */; };
+		E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B30F7726441129000D8934 /* KAKAO-Info.plist */; };
+		E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */; };
+		E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F812644C061000D8934 /* PlaceSearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +231,10 @@
 		E5920A342627C47600836123 /* Accounts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Accounts.storyboard; sourceTree = "<group>"; };
 		E5B0712F2634761E0094E880 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
+		E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerKakao.swift; sourceTree = "<group>"; };
+		E5B30F7726441129000D8934 /* KAKAO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KAKAO-Info.plist"; sourceTree = "<group>"; };
+		E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchVC.swift; sourceTree = "<group>"; };
+		E5B30F812644C061000D8934 /* PlaceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -449,6 +457,7 @@
 				E548AAEF26386A9F0049AA0B /* WebApiManagerUser.swift */,
 				E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */,
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
+				E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -474,6 +483,8 @@
 				E548AB0B2639ECC70049AA0B /* ReviewVC.swift */,
 				E521F3C82641398B0083957B /* MapVC.swift */,
 				E521F3CD264375890083957B /* ReviewNavigationVC.swift */,
+				E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */,
+				E5B30F812644C061000D8934 /* PlaceSearchCell.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -536,6 +547,7 @@
 				E52F57FF2625B746002C2637 /* Assets.xcassets */,
 				E52F57FC2625B746002C2637 /* YumYum.xcdatamodeld */,
 				E536EBBC263C7E2600791E7C /* Utils.swift */,
+				E5B30F7726441129000D8934 /* KAKAO-Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -694,6 +706,7 @@
 				E521F3BA264132B50083957B /* map_present_direction.png in Resources */,
 				E521F3BC264132B50083957B /* map_present.png in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
+				E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */,
 				54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
 				E521F3B2264132B50083957B /* map_pin@3x.png in Resources */,
@@ -897,6 +910,7 @@
 				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
+				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				541A0BFA262E8E97006C9582 /* VideoVO.swift in Sources */,
@@ -906,10 +920,12 @@
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
 				54C6DA5C262B1965006C8D96 /* HomeViewController.swift in Sources */,
+				E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */,
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
 				54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
+				E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */,
 				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
@@ -1100,7 +1116,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1127,7 +1143,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

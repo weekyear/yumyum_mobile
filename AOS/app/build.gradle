@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\Users\\multicampus\\Desktop\\ssafy_2\\YumYum\\yumyumkey.jks')
+            storePassword 'ssafy123!'
+            keyAlias 'yumyum'
+            keyPassword 'ssafy123!'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -24,6 +32,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release_2 {
+            debuggable true
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
