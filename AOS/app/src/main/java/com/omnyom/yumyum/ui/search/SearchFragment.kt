@@ -20,6 +20,7 @@ import com.omnyom.yumyum.helper.recycler.SearchPlaceAdapter
 import com.omnyom.yumyum.model.myinfo.PagerAdapters
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.feed.SearchPlaceViewModel
+import com.omnyom.yumyum.ui.home.HomeFragment
 
 class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchVM: SearchViewModel by viewModels()
@@ -52,9 +53,12 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                Log.d("backbtn", "제발 ㅠㅠ")
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_host_fragment, HomeFragment())
+                transaction.commit()
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
+
 }

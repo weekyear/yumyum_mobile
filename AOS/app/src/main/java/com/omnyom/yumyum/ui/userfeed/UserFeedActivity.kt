@@ -1,24 +1,13 @@
 package com.omnyom.yumyum.ui.userfeed
 
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityUserFeedBinding
 import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
-import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.myinfo.MyFeedFragment
-import com.omnyom.yumyum.ui.myinfo.URLtoBitmapTask
-import java.net.URL
 
 class UserFeedActivity : BaseBindingActivity<ActivityUserFeedBinding>(R.layout.activity_user_feed) {
     private val userFeedVM: UserFeedViewModel by viewModels()
@@ -55,7 +44,7 @@ class UserFeedActivity : BaseBindingActivity<ActivityUserFeedBinding>(R.layout.a
         userFeedVM.authorData.observe(this) {
             binding.tvUsername.text = it.nickname
             binding.tvIntroduction.text = it.introduction
-            Glide.with(this).load(it.profilePath).into(binding.ivAvatar)
+            Glide.with(this).load(it.profilePath).override(120,120).circleCrop().into(binding.ivAvatar)
         }
     }
 
