@@ -20,6 +20,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var collectionView: UICollectionView!
     
     var feedList: [Feed] = []
+    var myLikeFeedList: [Feed] = []
+    
     let userData = UserDefaults.getLoginedUserInfo()!
         
     override func viewDidLoad() {
@@ -30,18 +32,26 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         flowLayout.minimumInteritemSpacing = 0
         self.collectionView.collectionViewLayout = flowLayout
         
-         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
-            WebApiManager.shared.getFeedList(userId: 58) { (result) in
-                if result["status"] == "200" {
-                    let results = result["data"]
-                    print(results)
-                    self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
-                    self.collectionView.reloadData()
-                }
-            } failure: { (error) in
-                print("에러에러")
-                print("feed list error: \(error)")
+        let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+        WebApiManager.shared.getFeedList(userId: 58) { (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.collectionView.reloadData()
             }
+        } failure: { (error) in
+            print("에러에러")
+            print("feed list error: \(error)")
+        }
+            
+        WebApiManager.shared.getMyLikeFeed(userId: userId){ (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                self.myLikeFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+            }
+        } faliure: { (error) in
+            print("내가 좋아요한 피드 리스트 에러 \(error)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,20 +72,21 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     //like버튼 클릭하면 출력
     @IBAction public func liketap(_ sender:AnyObject){
         print("ViewController tap() Clicked Item: \(sender.view.tag)")
-        let feedReverse =  Array(feedList.reversed())
+        let feedReverse = Array(feedList.reversed())
         let feed = feedReverse[sender.view.tag]
-        print(feed)
         let userId = userData["id"].intValue
         var userLikeModel = userLike()
         userLikeModel.feedId = feed.id!
         userLikeModel.userId = userId
         
+        
         WebApiManager.shared.postLikeFeed(likeInfo: userLikeModel){ (result) in
             if result["status"] == "200"{
-                print(result["message"])
+                
             }
         } failure: { (error) in
             print(error.localizedDescription)
+            print("좋아요 서버 호출 에러")
         }
         
     }
@@ -85,17 +96,24 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let feedReverse = Array(feedList.reversed())
         let feed = feedReverse[indexPath.row]
+        var myLikeFeed : Feed = Feed()
+        
+        for myfeed in myLikeFeedList {
+            if feed.id == myfeed.id {
+                myLikeFeed = myfeed
+            }
+        }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
         
         //이부분에서 feedId랑,userId를 같이 담아서 넘겨주면 되게
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(liketap(_:)))
 
-            cell.likeImgView.isUserInteractionEnabled = true
-            cell.likeImgView.tag = indexPath.row
-            cell.likeImgView.addGestureRecognizer(tapGestureRecognizer)
+        cell.likeImgView.isUserInteractionEnabled = true
+        cell.likeImgView.tag = indexPath.row
+        cell.likeImgView.addGestureRecognizer(tapGestureRecognizer)
         
-            cell.configureVideo(with: feed)
+        cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
         
         return cell
     }

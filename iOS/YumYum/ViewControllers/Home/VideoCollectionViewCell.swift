@@ -31,16 +31,16 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     var player : AVPlayer?
     
-    private var model : VideoVO?
-    
     let userData = UserDefaults.getLoginedUserInfo()
     
+    var checkLike: Bool = false
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
-    public func configureVideo(with feed:Feed){
+    public func configureVideo(with feed:Feed, myLikeFeed:Feed) {
         player = AVPlayer(url: feed.videoPath!)
         let playerView = AVPlayerLayer()
         playerView.player = player
@@ -50,18 +50,19 @@ class VideoCollectionViewCell: UICollectionViewCell{
         player?.volume = 0
         player?.play()
         bringUpViewobject()
-        loadData(feed: feed)
+        loadData(feed: feed, myLikeFeed: myLikeFeed)
     }
     
-    private func loadData(feed:Feed) {
+    private func loadData(feed:Feed, myLikeFeed: Feed) {
         foodLabel.text = feed.title
         userLabel.text = feed.user?.nickname
         reviewLabel.text = feed.content
         placeLabel.text = feed.place?.name
         addressLabel.text = feed.place?.address
         likeCountLabel.text = String(feed.likeCount!)
+        checkLike = myLikeFeed.isLike!
         
-        if feed.isLike == true {
+        if checkLike == true {
             let image = UIImage(named: "ic_thumbs_up_filled")
             likeImgView.image = image
         } else {
