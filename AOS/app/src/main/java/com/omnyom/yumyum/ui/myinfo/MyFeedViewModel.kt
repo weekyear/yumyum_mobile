@@ -1,33 +1,39 @@
 package com.omnyom.yumyum.ui.myinfo
 
 import android.app.Application
-import android.util.Log
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
-import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.FeedResponse
-import com.omnyom.yumyum.model.userInfo.UserResponse
+import com.omnyom.yumyum.model.feed.Place
 import com.omnyom.yumyum.ui.base.BaseViewModel
+import com.omnyom.yumyum.ui.markermap.MarkerMapActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MyFeedViewModel(application: Application) : BaseViewModel(application) {
 
-    init {
-        val userId = PreferencesManager.getLong(getApplication(), "userId")
-        Log.d("userID","${userId}" )
+    private val _myFeedData = MutableLiveData<List<FeedData>>().apply {
+        value = ArrayList()
+    }
+    val myFeedData : LiveData<List<FeedData>> = _myFeedData
+    lateinit var placeData : ArrayList<Place>
 
-        // 내 피드 불러오기
+    fun getMyFeed() {
+        val userId = PreferencesManager.getLong(getApplication(), "userId")
+
         var call = retrofitService.getUserFeeds(userId!!, userId!!)
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
-                    _foodData.postValue(response.body()?.data!!.toMutableList())
+                    val list : List<FeedData> = response.body()?.data!!.toMutableList().reversed()
+                    _myFeedData.postValue(list)
+                    placeData = ArrayList(list.map { item -> item.place })
                 }
             }
 
@@ -36,13 +42,14 @@ class MyFeedViewModel(application: Application) : BaseViewModel(application) {
             }
 
         })
-
     }
 
-    // FoodList를 LiveData 객채로 생성
-    private val _foodData = MutableLiveData<List<FeedData>>().apply {
+    fun goMarkerMap(context: Context) {
+        val intent = Intent(context, MarkerMapActivity::class.java).apply {
+            putExtra("placeData", placeData)
+        }
+        context.startActivity(intent)
     }
-    val foodData : LiveData<List<FeedData>> = _foodData
 
 
 }

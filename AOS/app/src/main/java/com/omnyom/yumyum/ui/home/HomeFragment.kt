@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
 
         homeViewModel.foodData.observe(viewLifecycleOwner, Observer {
             binding.viewPagerHome.adapter = FeedPagesAdapter(context, it)
-            Log.d("HomFrag", "${it}")
         })
 
         binding.viewPagerHome.orientation = ViewPager2.ORIENTATION_VERTICAL
@@ -120,9 +119,7 @@ class HomeFragment : Fragment() {
             fun goUserFeed() {
                 val intent = Intent(context, UserFeedActivity::class.java)
                 val authorId = item[position].user.id.toString()
-
                 intent.putExtra("authorId", authorId)
-                Log.d("check1", "${intent.getStringExtra("authorId")}")
                 context?.startActivity(intent)
             }
 
@@ -136,7 +133,8 @@ class HomeFragment : Fragment() {
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
-            holder.userName.text = item[position].user.nickname
+            holder.userName.text = "@" + item[position].user.nickname
+            holder.likeNum.text = item[position].likeCount.toString()
             holder.userName.setOnClickListener{
                 goUserFeed()
             }
@@ -147,13 +145,16 @@ class HomeFragment : Fragment() {
             // 버튼 구현
             if (item[position].isLike) {
                 holder.thumbUp.visibility = View.INVISIBLE
+                holder.thumbUp2.visibility = View.VISIBLE
             } else {
                 holder.thumbUp2.visibility = View.INVISIBLE
+                holder.thumbUp.visibility = View.VISIBLE
             }
 
             holder.thumbUp.setOnClickListener {
                 likeFeed()
                 Log.d("nanta", "쪼아요")
+                holder.likeNum.text = (item[position].likeCount + 1).toString()
                 holder.thumbUp.playAnimation()
                 Handler().postDelayed({
                     holder.thumbUp.progress = 0.0f
@@ -165,6 +166,7 @@ class HomeFragment : Fragment() {
             holder.thumbUp2.setOnClickListener {
                 unlikeFeed()
                 Log.d("nanta", "씨러요")
+                holder.likeNum.text = item[position].likeCount.toString()
                 holder.thumbUp2.playAnimation()
                 Handler().postDelayed({
                     holder.thumbUp2.progress = 0.5f
@@ -173,11 +175,8 @@ class HomeFragment : Fragment() {
                 }, 800)
             }
 
-
-            // 루프 설정!
-            holder.food.setOnPreparedListener { mp -> //Start Playback
+            holder.food.setOnPreparedListener { mp ->
                 holder.food.start()
-                //Loop Video
                 mp.setVolume(0f,0f)
                 mp!!.isLooping = true;
             };
@@ -197,6 +196,7 @@ class HomeFragment : Fragment() {
             val userName = innerBinding.textUser
             val thumbUp = innerBinding.avThumbUp
             val thumbUp2 = innerBinding.avThumbUp2
+            val likeNum = innerBinding.tvLikeNum
         }
     }
 }
