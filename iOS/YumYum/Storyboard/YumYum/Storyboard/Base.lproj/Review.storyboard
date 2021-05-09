@@ -452,7 +452,7 @@
         <scene sceneID="G9p-b3-lqh">
             <objects>
                 <navigationController storyboardIdentifier="ReviewNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" customClass="ReviewNavigationVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Review" image="plus" catalog="system" id="HvN-Vx-kaX"/>
+                    <tabBarItem key="tabBarItem" title="Review" image="ic_plus" id="HvN-Vx-kaX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kji-5d-IY0">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -470,8 +470,8 @@
     </scenes>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="ic_plus" width="32" height="32"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="return" catalog="system" width="128" height="101"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">

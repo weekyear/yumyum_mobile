@@ -210,7 +210,7 @@
         <scene sceneID="yQY-fc-62a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mT8-Qs-aO0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="MyPage" image="person" catalog="system" id="0zy-1N-JzT"/>
+                    <tabBarItem key="tabBarItem" title="MyPage" image="ic_user" id="0zy-1N-JzT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qFe-sV-uJV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -356,7 +356,7 @@
     </scenes>
     <resources>
         <image name="ic_profile" width="120" height="120"/>
-        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="ic_user" width="32" height="32"/>
         <image name="square.grid.3x3" catalog="system" width="128" height="112"/>
         <image name="suit.heart" catalog="system" width="128" height="109"/>
         <systemColor name="systemBackgroundColor">

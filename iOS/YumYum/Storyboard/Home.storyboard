@@ -144,7 +144,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7QI-Ql-GTB" secondAttribute="trailing" id="m9Z-0J-x2E"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="71B-Ce-VOh"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="ic_home" id="71B-Ce-VOh"/>
                     <connections>
                         <outlet property="collectionView" destination="7QI-Ql-GTB" id="Tdj-ej-ozr"/>
                     </connections>
@@ -155,7 +155,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="homekit" catalog="system" width="128" height="106"/>
+        <image name="ic_home" width="32" height="32"/>
         <image name="ic_thumbs_up" width="75" height="75"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
