@@ -11,10 +11,10 @@ class MyCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var foodImageView : UIImageView!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         foodImageView.contentMode = .scaleAspectFill
     }
- 
 }

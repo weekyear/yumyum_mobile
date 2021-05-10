@@ -11,6 +11,8 @@ class MypageVC: UIViewController {
     
     let cellIdentifire : String = "cell"
     var feedList: [Feed] = []
+    var myfeedList: [Feed] = []
+    var tempList: [Feed] = []
  
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -23,12 +25,24 @@ class MypageVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
         self.presentuserData()
         imageMakeRouded(imageview: myProfileImgView)
         self.loadData()
+    }
+    
+    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.feedList = self.tempList
+            self.collectionView.reloadData()
+        } else if sender.selectedSegmentIndex == 1{
+            self.tempList = self.feedList
+            self.feedList = self.myfeedList
+            self.collectionView.reloadData()
+        }
     }
     
     func loadData() {
@@ -43,7 +57,20 @@ class MypageVC: UIViewController {
         } failure: { (error) in
             print(error.localizedDescription)
         }
+        
+        WebApiManager.shared.getMyLikeFeed(userId: userId) {
+            (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                self.myfeedList = results.arrayValue.compactMap({Feed(json: $0)})
+            } else {
+                print("좋아요 피드 설정 오류 ")
+            }
+        } faliure: { (error) in
+            print(error.localizedDescription)
         }
+        
+    }
     
     func initTitle() {
         let userData  = UserDefaults.getLoginedUserInfo()
@@ -99,8 +126,9 @@ extension MypageVC: UICollectionViewDataSource {
                 cell.foodImageView.image = image
             }
         }
-        return cell
         
+        
+        return cell
     }
 }
 
@@ -110,6 +138,7 @@ extension MypageVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("You tepped me \(indexPath.item)")
+        moveRootView(name: "MyPage", identifier: "MyFeedVC")
     }
     
 }
