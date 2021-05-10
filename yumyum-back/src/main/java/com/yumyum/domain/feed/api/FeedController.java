@@ -1,6 +1,7 @@
 package com.yumyum.domain.feed.api;
 
 import com.yumyum.domain.feed.application.*;
+import com.yumyum.domain.feed.dao.FeedDeleteDao;
 import com.yumyum.domain.feed.dto.*;
 import com.yumyum.global.common.response.HttpUtils;
 import com.yumyum.global.python.PythonService;
@@ -18,9 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FeedController {
 
+    private final FeedDeleteDao feedDeleteDao;
     private final FeedCreateService feedCreateService;
     private final FeedUpdateService feedUpdateService;
-    private final FeedDeleteService feedDeleteService;
     private final FeedSearchService feedSearchService;
     private final FeedLikeService feedLikeService;
     private final FeedRecommendService feedRecommendService;
@@ -86,7 +87,7 @@ public class FeedController {
     @ApiOperation(value = "피드 삭제", notes = "피드 번호로 피드를 삭제한다.")
     @DeleteMapping("/{feedId}")
     public Object deleteFeed(@PathVariable final Long feedId) {
-        feedDeleteService.deleteFeed(feedId);
+        feedDeleteDao.deleteFeed(feedId);
         return HttpUtils.makeResponse("200", null, "success", HttpStatus.OK);
     }
 
