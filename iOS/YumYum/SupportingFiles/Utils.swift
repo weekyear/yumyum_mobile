@@ -9,3 +9,10 @@ import Foundation
 
 
 let LOGINED_USERINFO_USERDEFAULT_KEY = "LOGINED_USERINFO_USERDEFAULT_KEY"
+
+
+public enum ColorSet: String {
+    case yumyumYellow = "F6D705"
+    
+    
+}
