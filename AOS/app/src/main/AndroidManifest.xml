@@ -22,15 +22,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="a48ac35487722b760df861b584827760" />
 
-        <activity android:name=".ui.userfeed.UserFeedActivity"/>
-        <activity android:name=".ui.selectedfeed.SelectedAllActivity"></activity>
-        <activity android:name=".ui.markermap.MarkerMapActivity" />
         <activity android:name=".ui.userfeed.UserFeedActivity" />
+        <activity android:name=".ui.selectedfeed.SelectedAllActivity" />
+        <activity android:name=".ui.markermap.MarkerMapActivity" />
         <activity android:name=".ui.useroption.UserInfoEditActivity" />
         <activity android:name=".ui.useroption.MyOptionActivity" />
         <activity android:name=".ui.feed.SearchPlaceActivity">
@@ -42,9 +48,9 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
         <activity android:name=".ui.feed.MapActivity" />
-        <activity android:name=".ui.feed.FeedCreateActivity"
+        <activity
+            android:name=".ui.feed.FeedCreateActivity"
             android:screenOrientation="portrait" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
@@ -65,14 +71,8 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
