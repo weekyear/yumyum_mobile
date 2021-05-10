@@ -448,11 +448,11 @@
             </objects>
             <point key="canvasLocation" x="2659" y="1069"/>
         </scene>
-        <!--Review-->
+        <!--리뷰 작성-->
         <scene sceneID="G9p-b3-lqh">
             <objects>
                 <navigationController storyboardIdentifier="ReviewNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" customClass="ReviewNavigationVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Review" image="ic_plus" id="HvN-Vx-kaX"/>
+                    <tabBarItem key="tabBarItem" title="리뷰 작성" image="ic_plus" id="HvN-Vx-kaX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kji-5d-IY0">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

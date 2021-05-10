@@ -12,30 +12,21 @@ import GoogleSignIn
 class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet weak var videoLayout: UIView!
-    
     @IBOutlet weak var foodLabel: UILabel!
-    
     @IBOutlet weak var placeLabel: UILabel!
-    
-    @IBOutlet weak var addressLabel: UILabel!
-    
     @IBOutlet weak var reviewLabel: UILabel!
-    
     @IBOutlet weak var userLabel: UILabel!
-    
-    @IBOutlet weak var placeStackView : UIStackView!
-    
     @IBOutlet var likeCountLabel: UILabel!
-    
-    @IBOutlet var Likebutton: UIButton!
-    
-//    var player : AVPlayer?
+    @IBOutlet var likeButton: UIButton!
+    @IBOutlet var mapIcon: UIImageView!
+
+    let yumyumYellow: ColorSet = .yumyumYellow
     
     let userData = UserDefaults.getLoginedUserInfo()!
     
     var checkLike: Bool = false
     
-    var nowFeed : Feed = Feed()
+    var nowFeed: Feed = Feed()
     
     var player: AVPlayer?
     
@@ -43,11 +34,14 @@ class VideoCollectionViewCell: UICollectionViewCell{
         super.awakeFromNib()
     }
     
+    func setLayout() {
+        
+    }
+    
     @IBAction func likeBtnPress(_ sender: Any) {
         if checkLike == true {
             checkLike = false
-            let image = UIImage(named: "ic_thumbs_up")
-            Likebutton.setImage(image, for: .normal)
+            likeButton.tintColor = .white
             let userId = userData["id"].intValue
             let feedId = nowFeed.id!
             
@@ -62,8 +56,8 @@ class VideoCollectionViewCell: UICollectionViewCell{
             likeCountLabel.text = String(Int(likeCountLabel.text!)! - 1)
         } else {
             checkLike = true
-            let image = UIImage(named: "ic_thumbs_up_filled")
-            Likebutton.setImage(image, for: .normal)
+            likeButton.tintColor = yumyumYellow.toColor()
+            
             var likeInfo = userLike()
             likeInfo.userId = userData["id"].intValue
             likeInfo.feedId = nowFeed.id!
@@ -91,7 +85,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
         self.player!.volume = 0
         self.player?.play()
         loadData(feed: feed, myLikeFeed: myLikeFeed)
-        bringUpViewobject()
     }
     
     @objc func playerItemDidReachEnd(notification: NSNotification) {
@@ -102,33 +95,22 @@ class VideoCollectionViewCell: UICollectionViewCell{
     private func loadData(feed:Feed, myLikeFeed: Feed) {
         nowFeed = feed
         foodLabel.text = feed.title
-        userLabel.text = feed.user?.nickname
+        userLabel.text = "@" + (feed.user?.nickname)! as String
         reviewLabel.text = feed.content
-        placeLabel.text = feed.place?.name
-        addressLabel.text = feed.place?.address
+        
+        let arr = feed.place?.address.components(separatedBy: " ")
+        
+        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
         likeCountLabel.text = String(feed.likeCount!)
         checkLike = myLikeFeed.isLike ?? false
         
         if checkLike == true {
-            let image = UIImage(named: "ic_thumbs_up_filled")
-            Likebutton.setImage(image, for: .normal)
+            likeButton.tintColor = yumyumYellow.toColor()
         } else {
-            let image = UIImage(named: "ic_thumbs_up")
-            Likebutton.setImage(image, for: .normal)
+            likeButton.tintColor = .white
         }
         
     }
     
-    private func bringUpViewobject() {
-        videoLayout.bringSubviewToFront(foodLabel)
-        videoLayout.bringSubviewToFront(placeLabel)
-        videoLayout.bringSubviewToFront(addressLabel)
-        videoLayout.bringSubviewToFront(reviewLabel)
-        videoLayout.bringSubviewToFront(userLabel)
-        videoLayout.bringSubviewToFront(placeStackView)
-        videoLayout.bringSubviewToFront(Likebutton)
-        videoLayout
-            .bringSubviewToFront(likeCountLabel)
-    }
 }
 

@@ -206,11 +206,11 @@
             </objects>
             <point key="canvasLocation" x="2979.7101449275365" y="1072.7678571428571"/>
         </scene>
-        <!--MyPage-->
+        <!--마이페이지-->
         <scene sceneID="yQY-fc-62a">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mT8-Qs-aO0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="MyPage" image="ic_user" id="0zy-1N-JzT"/>
+                    <tabBarItem key="tabBarItem" title="마이페이지" image="ic_user" id="0zy-1N-JzT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qFe-sV-uJV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
