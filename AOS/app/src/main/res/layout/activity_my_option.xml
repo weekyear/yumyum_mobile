@@ -44,7 +44,7 @@
         android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_private_policy" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_info_agreement" />
 
     <TextView
         android:id="@+id/tv_inner_head"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_inner_head" />
 
     <Button
-        android:id="@+id/btn_private_policy"
+        android:id="@+id/btn_info_agreement"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -119,5 +119,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_inner_head3" />
+
+    <WebView
+        android:id="@+id/wv_info_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="374dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

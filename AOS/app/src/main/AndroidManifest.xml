@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.selectedfeed.SelectedAllActivity"></activity>
+        <activity android:name=".ui.selectedfeed.SelectedAllActivity" />
         <activity android:name=".ui.markermap.MarkerMapActivity" />
         <activity android:name=".ui.userfeed.UserFeedActivity" />
         <activity android:name=".ui.useroption.UserInfoEditActivity" />
