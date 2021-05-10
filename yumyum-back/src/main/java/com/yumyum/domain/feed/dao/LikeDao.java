@@ -16,6 +16,8 @@ public interface LikeDao extends JpaRepository<Like, Long> {
 
     Optional<Like> findByFeedAndUser(Feed feed, User user);
 
+    Boolean existsByFeedIdAndUserId(Long feedId, Long userId);
+
     List<Like> findAllById(Long id);
 
     List<Like> findAllByUserEmail(String userEmail);
