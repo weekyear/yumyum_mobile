@@ -27,7 +27,7 @@ class LikeFeedFragment : BaseBindingFragment<FragmentLikeFeedBinding>(R.layout.f
             adapter = AuthorFeedAdapter(context)
             layoutManager = GridLayoutManager(context, 3)
         }
-        binding.btnGoMap.setOnClickListener {
+        binding.btnGoMarker.setOnClickListener {
             likeFeedVM.goMarkerMap(context as Context)
         }
     }
