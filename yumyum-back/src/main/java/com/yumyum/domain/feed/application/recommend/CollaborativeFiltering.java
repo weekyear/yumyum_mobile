@@ -54,7 +54,7 @@ public class CollaborativeFiltering {
         for(int i = 1; i <= N; i++){
             for(int j = 1; j <= M; j++){
                 if(map[i][j] == 1) continue;
-                smap[i][j] = getPrediction(map, smap, N, i, j);
+                map[i][j] = getPrediction(map, smap, N, i, j);
             }
         }
 
@@ -62,11 +62,11 @@ public class CollaborativeFiltering {
         int u = userId.intValue();
         for(int m = 1; m <= M; m++){
             if(map[u][m] == 1) continue; // 이미 좋아요 한 피드는 제외
-            if(smap[u][m] == 0) continue; // 비추천 피드는 제외
+            if(map[u][m] == 0) continue; // 비추천 피드는 제외
             Long feedId = new Long(m);
             Feed feed = feedFindDao.findById(feedId);
             if(feed.getUser().getId() == userId) continue; // 본인이 작성한 피드는 제외
-            sList.add(new SimilarityDto(feedId, smap[u][m]));
+            sList.add(new SimilarityDto(feedId, map[u][m]));
         }
 
         Collections.sort(sList, new CollaborativeFiltering.SimilarityComparator());
