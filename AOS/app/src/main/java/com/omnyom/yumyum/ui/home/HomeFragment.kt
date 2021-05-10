@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
@@ -77,7 +78,8 @@ class HomeFragment : Fragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
             val innerBinding = ListItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-
+            // assigning that animation to
+            // the image and start animation
             return Holder(innerBinding)
         }
 
@@ -123,6 +125,8 @@ class HomeFragment : Fragment() {
                 context?.startActivity(intent)
             }
 
+            val clkRotate = AnimationUtils.loadAnimation(context, R.anim.rotate_clockwise)
+            holder.progressBar.startAnimation(clkRotate)
 
             if (holder.expendable.lineCount == 1) {
                 holder.btnExpend.visibility = View.GONE
@@ -179,6 +183,8 @@ class HomeFragment : Fragment() {
                 holder.food.start()
                 mp.setVolume(0f,0f)
                 mp!!.isLooping = true;
+                holder.progressBar.clearAnimation()
+                holder.progressBar.visibility = View.GONE
             };
         }
 
@@ -194,6 +200,7 @@ class HomeFragment : Fragment() {
             val thumbUp = innerBinding.avThumbUp
             val thumbUp2 = innerBinding.avThumbUp2
             val likeNum = innerBinding.tvLikeNum
+            val progressBar = innerBinding.progressBar
         }
     }
 }
