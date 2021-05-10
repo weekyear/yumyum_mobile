@@ -16,6 +16,4 @@ public interface FeedDao extends JpaRepository<Feed, Long> {
     List<Feed> findByUser(User user);
 
     List<Feed> findByTitleContainingIgnoreCase(String title);
-
-    List<Feed> findAllOrderByCreatedDateDesc();
 }
