@@ -91,6 +91,7 @@
 		E5920A222627C2E800836123 /* Review.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A202627C2E800836123 /* Review.storyboard */; };
 		E5920A2A2627C30B00836123 /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A292627C30B00836123 /* MyPage.storyboard */; };
 		E5920A352627C47600836123 /* Accounts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5920A342627C47600836123 /* Accounts.storyboard */; };
+		E5A47BDC2649C0B40021B780 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A47BDB2649C0B40021B780 /* SearchVC.swift */; };
 		E5B071302634761E0094E880 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0712F2634761E0094E880 /* PreviewView.swift */; };
 		E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */; };
 		E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */; };
@@ -223,6 +224,7 @@
 		E5920A212627C2E800836123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = YumYum/Storyboard/Base.lproj/Review.storyboard; sourceTree = "<group>"; };
 		E5920A292627C30B00836123 /* MyPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = SOURCE_ROOT; };
 		E5920A342627C47600836123 /* Accounts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Accounts.storyboard; sourceTree = "<group>"; };
+		E5A47BDB2649C0B40021B780 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		E5B0712F2634761E0094E880 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
 		E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerKakao.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 			children = (
 				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
 				54C6DA5B262B1965006C8D96 /* HomeVC.swift */,
+				E5A47BDB2649C0B40021B780 /* SearchVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
+				E5A47BDC2649C0B40021B780 /* SearchVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,

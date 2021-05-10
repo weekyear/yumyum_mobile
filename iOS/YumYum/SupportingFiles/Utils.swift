@@ -12,9 +12,9 @@ let LOGINED_USERINFO_USERDEFAULT_KEY = "LOGINED_USERINFO_USERDEFAULT_KEY"
 
 
 public enum ColorSet: String {
-    case yumyumYellow = "F6D705"
+    case yumyumYellow = "#F6D705"
     
     func toColor() -> UIColor {
-        return UIColor(named: self.rawValue) ?? UIColor.clear
+        return UIColor(hex: self.rawValue) ?? UIColor.clear
     }
 }

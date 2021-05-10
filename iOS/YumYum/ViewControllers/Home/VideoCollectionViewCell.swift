@@ -20,6 +20,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
 
+    let yumyumYellow: ColorSet = .yumyumYellow
     
     let userData = UserDefaults.getLoginedUserInfo()!
     
@@ -40,8 +41,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBAction func likeBtnPress(_ sender: Any) {
         if checkLike == true {
             checkLike = false
-            let image = UIImage(named: "ic_thumbs_up")
-            likeButton.setImage(image, for: .normal)
+            likeButton.tintColor = .white
             let userId = userData["id"].intValue
             let feedId = nowFeed.id!
             
@@ -56,8 +56,8 @@ class VideoCollectionViewCell: UICollectionViewCell{
             likeCountLabel.text = String(Int(likeCountLabel.text!)! - 1)
         } else {
             checkLike = true
-            let image = UIImage(named: "ic_thumbs_up_filled")
-            likeButton.setImage(image, for: .normal)
+            likeButton.tintColor = yumyumYellow.toColor()
+            
             var likeInfo = userLike()
             likeInfo.userId = userData["id"].intValue
             likeInfo.feedId = nowFeed.id!
@@ -105,11 +105,9 @@ class VideoCollectionViewCell: UICollectionViewCell{
         checkLike = myLikeFeed.isLike ?? false
         
         if checkLike == true {
-            let image = UIImage(named: "ic_thumbs_up_filled")
-            likeButton.setImage(image, for: .normal)
+            likeButton.tintColor = yumyumYellow.toColor()
         } else {
-            let image = UIImage(named: "ic_thumbs_up")
-            likeButton.setImage(image, for: .normal)
+            likeButton.tintColor = .white
         }
         
     }

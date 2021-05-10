@@ -9,7 +9,7 @@ import UIKit
 import GoogleSignIn
 import SwiftyJSON
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeVC: UIViewController {
     
     static func instance() -> HomeVC {
         let vc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
@@ -24,22 +24,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
+    @IBAction func didTapSearchButton(_ sender: Any) {
+        let vc = SearchVC.instance()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         setLayout()
         
     }
-    
-    func setLayout() {
-        collectionView.isPagingEnabled = true
-        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.minimumInteritemSpacing = 0
-        collectionView.collectionViewLayout = flowLayout
-        collectionView.contentInsetAdjustmentBehavior = .never
-    }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,10 +65,26 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         self.collectionView.reloadData()
-        
-        
     }
     
+    
+    func setLayout() {
+        self.navigationController?.navigationBar.isHidden = true
+        collectionView.isPagingEnabled = true
+        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.minimumInteritemSpacing = 0
+        collectionView.collectionViewLayout = flowLayout
+        collectionView.contentInsetAdjustmentBehavior = .never
+    }
+
+    
+    
+   
+}
+
+
+extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     // 해당 row에 이벤트가 발생했을때 출력되는 함수
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
@@ -114,4 +128,3 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: cvRect.width, height: cvRect.height)
     }
 }
-
