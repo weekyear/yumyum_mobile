@@ -180,9 +180,6 @@ class HomeFragment : Fragment() {
                 mp.setVolume(0f,0f)
                 mp!!.isLooping = true;
             };
-
-
-
         }
 
         class Holder(private val innerBinding: ListItemFoodBinding) : RecyclerView.ViewHolder(innerBinding.root) {

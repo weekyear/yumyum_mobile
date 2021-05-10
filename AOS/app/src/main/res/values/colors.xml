@@ -29,6 +29,7 @@
     <color name="gray_d">#DDDDDD</color>
     <color name="orange">#FF9F47</color>
     <color name="orange_5d">#FF5D29</color>
+    <color name="transparent">@android:color/transparent</color>
 
     <color name="select_color_yellow">#F8D149</color>
     <color name="select_color_orange">#FF9F47</color>

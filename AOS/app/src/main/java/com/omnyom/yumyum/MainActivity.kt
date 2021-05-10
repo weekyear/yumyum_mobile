@@ -17,6 +17,7 @@ import com.omnyom.yumyum.databinding.FragmentHomeBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.feed.CameraActivity
+import com.omnyom.yumyum.ui.feed.FeedCreateActivity
 import com.omnyom.yumyum.ui.home.HomeFragment
 import com.omnyom.yumyum.ui.myinfo.MyInfoFragment
 import com.omnyom.yumyum.ui.search.SearchFragment
