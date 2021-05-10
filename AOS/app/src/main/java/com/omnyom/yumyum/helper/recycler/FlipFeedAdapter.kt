@@ -126,6 +126,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
             holder.food.start()
             mp.setVolume(0f,0f)
             mp!!.isLooping = true;
+            holder.progressBar.visibility = View.GONE
         };
 
 
@@ -144,5 +145,6 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         val thumbUp = innerBinding.avThumbUp
         val thumbUp2 = innerBinding.avThumbUp2
         val likeNum = innerBinding.tvLikeNum
+        val progressBar = innerBinding.progressBar
     }
 }
