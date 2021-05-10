@@ -9,14 +9,14 @@ import UIKit
 import GoogleSignIn
 import SwiftyJSON
 
-class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    static func instance() -> HomeViewController {
-        let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeViewController
+    static func instance() -> HomeVC {
+        let vc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
         return vc
     }
     
-    let cellIdentifier: String = "cell"
+    let cellIdentifier: String = "HomeCell"
     @IBOutlet var collectionView: UICollectionView!
     
     var feedList: [Feed] = []
@@ -26,12 +26,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setLayout()
+        
+    }
+    
+    func setLayout() {
         collectionView.isPagingEnabled = true
-        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
         self.collectionView.collectionViewLayout = flowLayout
-        
     }
 
     
@@ -39,6 +44,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewWillAppear(animated)
         
         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+        
         WebApiManager.shared.getFeedList(userId: userId) { (result) in
             if result["status"] == "200" {
                 let results = result["data"]
@@ -74,27 +80,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return self.feedList.count
     }
     
-//    //like버튼 클릭하면 출력
-//    @IBAction public func liketap(_ sender:AnyObject){
-//        print("ViewController tap() Clicked Item: \(sender.view.tag)")
-//        let feedReverse = Array(feedList.reversed())
-//        let feed = feedReverse[sender.view.tag]
-//        let userId = userData["id"].intValue
-//        var userLikeModel = userLike()
-//        userLikeModel.feedId = feed.id!
-//        userLikeModel.userId = userId
-//
-//
-//        WebApiManager.shared.postLikeFeed(likeInfo: userLikeModel){ (result) in
-//            if result["status"] == "200"{
-//
-//            }
-//        } failure: { (error) in
-//            print(error.localizedDescription)
-//            print("좋아요 서버 호출 에러")
-//        }
-//
-//    }
     
     // 컬렉션 뷰의 지정된 위치에 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -124,7 +109,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cvRect = collectionView.frame
+        let cvRect = self.collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)
     }
 }
