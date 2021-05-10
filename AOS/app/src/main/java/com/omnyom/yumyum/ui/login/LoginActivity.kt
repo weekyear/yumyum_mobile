@@ -80,11 +80,11 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
         when (requestCode) {
             PERM_COARSE_LOCATION -> {
                 Toast.makeText(baseContext, "위치 권한을 승인해야 지도를 사용할 수 있습니다! [COARSE_LOCATION]", Toast.LENGTH_SHORT).show()
-//                finish()
+                finishAffinity()
             }
             PERM_FINE_LOCATION -> {
                 Toast.makeText(baseContext, "위치 권한을 승인해야 지도를 사용할 수 있습니다! [FINE_LOCATION]", Toast.LENGTH_SHORT).show()
-//                finish()
+                finishAffinity()
             }
         }
     }
@@ -98,13 +98,6 @@ class LoginActivity: BaseBindingActivity<ActivityLoginBinding>(R.layout.activity
 
     private fun startSignUpActivity() {
         Intent(this, SignUpActivity::class.java).let {
-            startActivity(it)
-            finish()
-        }
-    }
-
-    private fun startSearchActivity() {
-        Intent(this, SearchPlaceActivity::class.java).let {
             startActivity(it)
             finish()
         }

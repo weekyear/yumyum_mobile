@@ -15,6 +15,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
+import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -71,6 +72,53 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun onSubscribe() {
+        feedCreateVM.run {
+            for (elem in listOf(score, title, content, placeRequest)) {
+                elem.observe(this@FeedCreateActivity, {
+                    feedCreateVM.isCompleted = checkAllFeedRequest()
+                    if (feedCreateVM.isCompleted) {
+                        binding.btnSubmit.text = getString(R.string.complete)
+                    } else {
+                        binding.btnSubmit.text = getString(R.string.pre_save)
+                    }
+                })
+            }
+//            score.observe(this@FeedCreateActivity, {
+//                feedCreateVM.isCompleted = checkAllFeedRequest()
+//                if (feedCreateVM.isCompleted) {
+//                    binding.btnSubmit.text = getString(R.string.complete)
+//                } else {
+//                    binding.btnSubmit.text = getString(R.string.pre_save)
+//                }
+//            })
+//
+//            title.observe(this@FeedCreateActivity, {
+//                feedCreateVM.isCompleted = checkAllFeedRequest()
+//                if (feedCreateVM.isCompleted) {
+//                    binding.btnSubmit.text = getString(R.string.complete)
+//                } else {
+//                    binding.btnSubmit.text = getString(R.string.pre_save)
+//                }
+//            })
+//
+//            content.observe(this@FeedCreateActivity, {
+//                feedCreateVM.isCompleted = checkAllFeedRequest()
+//                if (feedCreateVM.isCompleted) {
+//                    binding.btnSubmit.text = getString(R.string.complete)
+//                } else {
+//                    binding.btnSubmit.text = getString(R.string.pre_save)
+//                }
+//            })
+//
+//            placeRequest.observe(this@FeedCreateActivity, {
+//                feedCreateVM.isCompleted = checkAllFeedRequest()
+//                if (feedCreateVM.isCompleted) {
+//                    binding.btnSubmit.text = getString(R.string.complete)
+//                } else {
+//                    binding.btnSubmit.text = getString(R.string.pre_save)
+//                }
+//            })
+        }
     }
 
     override fun release() {
@@ -82,13 +130,10 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         if (requestCode == SearchPlaceActivity.PLACE_CODE) {
             if (resultCode == RESULT_OK) {
                 val placeResult = data?.getSerializableExtra("placeResult") as SearchPlaceResult
-                feedCreateVM.placeRequest.run {
-                    address = placeResult.address_name
-                    locationX = placeResult.x.toDouble()
-                    locationY = placeResult.y.toDouble()
-                    name = placeResult.place_name
-                    phone = placeResult.phone
+                PlaceRequest(placeResult.address_name, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
+                    feedCreateVM.placeRequest.postValue(it)
                 }
+
                 binding.editTextPlace.setText(placeResult.place_name)
 
             } else if (resultCode == RESULT_CANCELED) {
@@ -163,6 +208,12 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                         .setDuration(200)
                         .withEndAction {  }
             }
+        }
+    }
+
+    private fun checkAllFeedRequest(): Boolean {
+        feedCreateVM.run {
+            return !(title.value.isNullOrBlank() || content.value.isNullOrBlank() || score.value == 0 || placeRequest.value?.name.isNullOrBlank())
         }
     }
 }
