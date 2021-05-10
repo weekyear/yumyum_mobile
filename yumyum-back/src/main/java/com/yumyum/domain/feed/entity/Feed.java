@@ -51,6 +51,9 @@ public class Feed {
     @Column(name = "thumbnail_path")
     private String thumbnailPath;
 
+    @Column(name = "is_completed")
+    private Boolean isCompleted;
+
     @CreationTimestamp
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDateTime createdDate;
@@ -60,8 +63,19 @@ public class Feed {
     private LocalDateTime modifiedDate;
 
     public void updateFeed(final UpdateFeedRequest dto){
+        this.title = dto.getTitle();
         this.content = dto.getContent();
         this.score = dto.getScore();
+        this.isCompleted = dto.getIsCompleted();
+        this.modifiedDate = LocalDateTime.now();
+    }
+
+    public void updateFeed(final UpdateFeedRequest dto, final Place place){
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+        this.score = dto.getScore();
+        this.place = place;
+        this.isCompleted = dto.getIsCompleted();
         this.modifiedDate = LocalDateTime.now();
     }
 }

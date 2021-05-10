@@ -2,9 +2,7 @@ package com.yumyum.domain.feed.application;
 
 import com.yumyum.domain.feed.dao.FeedDao;
 import com.yumyum.domain.feed.dto.CreateFeedRequest;
-import com.yumyum.domain.feed.entity.Feed;
 import com.yumyum.domain.map.application.PlaceCreateService;
-import com.yumyum.domain.map.dao.PlaceDao;
 import com.yumyum.domain.map.dto.PlaceRequest;
 import com.yumyum.domain.map.entity.Place;
 import com.yumyum.domain.user.application.RegexChecker;
@@ -14,18 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class FeedCreateService {
 
     private final FeedDao feedDao;
-    private final PlaceDao placeDao;
     private final UserFindDao userFindDao;
-    private final FileUploadService fileUploadService;
-    private final FileThumbnailService fileThumbnailService;
     private final PlaceCreateService placeCreateService;
     private final RegexChecker regexChecker;
 
@@ -33,13 +26,22 @@ public class FeedCreateService {
         final User user = userFindDao.findById(dto.getUserId());
         final PlaceRequest placeRequest = dto.getPlaceRequest();
 
-        regexChecker.stringCheck("Title", dto.getTitle());
-        regexChecker.stringCheck("Content", dto.getContent());
+        if(dto.getIsCompleted() == null) dto.setIsCompleted(false);
 
-        placeCreateService.createPlace(placeRequest);
+        if(!dto.getIsCompleted()){
+            if(dto.getTitle() == null) dto.setTitle("");
+            if(dto.getContent() == null) dto.setContent("");
+            if(dto.getScore() == null) dto.setScore(0L);
+        }else{
+            regexChecker.stringCheck("Title", dto.getTitle());
+            regexChecker.stringCheck("Content", dto.getContent());
+        }
 
-        final Optional<Place> place = placeDao.findByAddressAndName(placeRequest.getAddress(), placeRequest.getName());
-        final Feed feed = feedDao.save(dto.toEntity(user, place.get()));
-        feedDao.save(feed);
+        if(placeRequest != null){
+            final Place place = placeCreateService.createPlace(placeRequest);
+            feedDao.save(dto.toEntity(user, place));
+        }else{
+            feedDao.save(dto.toEntity(user, null));
+        }
     }
 }
