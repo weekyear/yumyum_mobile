@@ -26,9 +26,9 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
         extraSetupBinding()
         setup()
         setupViews()
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         actionBar?.hide()
-//        initTransparentStatusBar()
+        initTransparentStatusBar()
         onSubscribe()
     }
 

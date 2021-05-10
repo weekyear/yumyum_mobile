@@ -12,10 +12,10 @@
         <!-- Status bar color. -->
 <!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
 
-<!--        <item name="android:windowTranslucentStatus">true</item>-->
-<!--        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>-->
-<!--        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item> // 시스템바를 백그라운드에 그린다.-->
-<!--        <item name="android:windowFullscreen">true</item>-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item> // 시스템바를 백그라운드에 그린다.
+        <item name="android:windowFullscreen">true</item>
 
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <!-- Customize your theme here. -->
