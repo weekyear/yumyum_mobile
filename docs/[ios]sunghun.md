@@ -724,3 +724,28 @@ final class ElonMusk {
 - JSON으로 받아온 데이터를 처리하고 **그 값을 반환하기위해서 escaping을 사용하고 함수 외부에서** 접근하도록하는 것이다.
 - 간단하게 생각하면 데이터를 전달 받고나서 그 값을 함수 밖에서 사용하기 위해서이다. 
 
+
+
+## 영상무한재생
+
+> AVplayer를 계속해서 재생 시키기 위한 코드를 적어놉니다.
+
+```swift
+        var playerLooper: AVPlayerLooper!
+                var queuePlayer: AVQueuePlayer!
+        
+                let asset = AVAsset(url: feed.videoPath!)
+                let playerItem = AVPlayerItem(asset: asset)
+                queuePlayer = AVQueuePlayer(playerItem: playerItem)
+                playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem)
+                
+                NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem, queue: .main) { [weak self] _ in
+                    self?.player?.seek(to: CMTime.zero)
+                    self?.player?.play()
+                    let playerView = AVPlayerLayer()
+                    playerView.player = self!.player
+                    playerView.frame = self!.videoLayout.bounds
+                    playerView.videoGravity = .resize
+                }
+```
+
