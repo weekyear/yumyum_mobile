@@ -19,7 +19,13 @@ class MyOptionActivity : AppCompatActivity() {
 
         binding.btnLogout.setOnClickListener { signOut() }
         binding.btnEditProfile.setOnClickListener { goUserEdit() }
+        binding.btnInfoAgreement.setOnClickListener { goInfoAgreement() }
 
+
+    }
+
+    private fun goInfoAgreement() {
+        binding.wvInfoAgreement.loadUrl("https://week-year.tistory.com/190?category=891710")
     }
 
     private fun signOut() {
