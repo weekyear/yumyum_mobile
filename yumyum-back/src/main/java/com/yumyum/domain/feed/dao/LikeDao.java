@@ -10,19 +10,15 @@ import java.util.Optional;
 
 public interface LikeDao extends JpaRepository<Like, Long> {
 
-    List<Like> findByUserEmailAndFeedId(String email, Long feedId);
-
     Optional<Like> findByFeedIdAndUserId(Long feedId, Long userId);
 
     Optional<Like> findByFeedAndUser(Feed feed, User user);
 
     Boolean existsByFeedIdAndUserId(Long feedId, Long userId);
 
-    List<Like> findAllById(Long id);
-
-    List<Like> findAllByUserEmail(String userEmail);
-
     Long countByFeedId(Long feedId);
 
     List<Like> findByUserId(Long userId);
+
+    List<Like> findByFeedId(Long feedId);
 }
