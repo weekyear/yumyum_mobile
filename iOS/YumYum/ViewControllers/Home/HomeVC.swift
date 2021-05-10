@@ -36,7 +36,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 0
         flowLayout.minimumInteritemSpacing = 0
-        self.collectionView.collectionViewLayout = flowLayout
+        collectionView.collectionViewLayout = flowLayout
+        collectionView.contentInsetAdjustmentBehavior = .never
     }
 
     
