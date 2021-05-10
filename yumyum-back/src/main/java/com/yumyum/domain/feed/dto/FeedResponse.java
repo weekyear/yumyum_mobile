@@ -28,6 +28,8 @@ public class FeedResponse {
 
     private String thumbnailPath;
 
+    private Boolean isCompleted;
+
     private Long likeCount;
 
     private Boolean isLike;
@@ -44,6 +46,7 @@ public class FeedResponse {
         this.place = place;
         this.videoPath = feed.getVideoPath();
         this.thumbnailPath = feed.getThumbnailPath();
+        this.isCompleted = feed.getIsCompleted();
         this.likeCount = likeCount;
         this.isLike = isLike;
         this.createdDate = feed.getCreatedDate();

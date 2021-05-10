@@ -58,7 +58,6 @@ class MypageVC: UIViewController {
     
     func presentuserData(){
         let userData  = UserDefaults.getLoginedUserInfo()
-        print(userData!["introduction"].stringValue)
         self.myIntroduceLabel.text = userData!["introduction"].stringValue
         
         if let url = URL(string: userData!["profilePath"].stringValue) {
@@ -87,15 +86,16 @@ extension MypageVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let imageurl:URL = self.feedList[indexPath.item].thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
-        
         var image: UIImage?
 
         DispatchQueue.global().async {
             let data = try? Data(contentsOf: imageurl)
             DispatchQueue.main.async {
-                image = UIImage(data: data!)
+                let beforeimage = UIImage(data: data!)
+                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
                 cell.foodImageView.image = image
             }
         }

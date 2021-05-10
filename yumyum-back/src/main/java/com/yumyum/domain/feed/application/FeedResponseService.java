@@ -27,19 +27,20 @@ public class FeedResponseService {
 
     public FeedResponse entityToDto(final Feed feed, final Long userId){
         final User user = userFindDao.findById(feed.getUser().getId());
-        final Place place = placeFindDao.findById(feed.getPlace().getId());
         final Long likeCount = getLikeCount(feed.getId());
         final Boolean isLike = checkIsLike(feed.getId(), userId);
-        final FeedResponse response = new FeedResponse(feed, user, place, likeCount, isLike);
-        return response;
+
+        if(feed.getPlace() != null) {
+            final Place place = placeFindDao.findById(feed.getPlace().getId());
+            return new FeedResponse(feed, user, place, likeCount, isLike);
+        }else return new FeedResponse(feed, user, null, likeCount, isLike);
     }
 
     public FeedResponse entityToDto(final Feed feed, final Boolean isLike){
         final User user = userFindDao.findById(feed.getUser().getId());
         final Place place = placeFindDao.findById(feed.getPlace().getId());
         final Long likeCount = getLikeCount(feed.getId());
-        final FeedResponse response = new FeedResponse(feed, user, place, likeCount, isLike);
-        return response;
+        return new FeedResponse(feed, user, place, likeCount, isLike);
     }
 
     public List<FeedResponse> entityToDto(final List<Feed> fList, final Long userId) {

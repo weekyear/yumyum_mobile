@@ -30,4 +30,14 @@ public class PlaceResponse {
         this.locationY = place.getLocationY();
         this.locationX = place.getLocationX();
     }
+
+    public PlaceRequest toRequest(){
+        return PlaceRequest.builder()
+                .address(address.trim())
+                .phone(phone.trim())
+                .name(name)
+                .locationY(locationY)
+                .locationX(locationX)
+                .build();
+    }
 }
