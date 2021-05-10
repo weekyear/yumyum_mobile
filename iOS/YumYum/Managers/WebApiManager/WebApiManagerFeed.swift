@@ -98,6 +98,7 @@ extension WebApiManager {
             case .failure(_):
                 let error = response.error!
                 failure(error)
+                print("좋아요 취소 요청 실패!")
                 break
             }
         }

@@ -32,8 +32,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         flowLayout.minimumInteritemSpacing = 0
         self.collectionView.collectionViewLayout = flowLayout
         
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
-        WebApiManager.shared.getFeedList(userId: 58) { (result) in
+        WebApiManager.shared.getFeedList(userId: userId) { (result) in
             if result["status"] == "200" {
                 let results = result["data"]
                 self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
@@ -52,11 +58,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } faliure: { (error) in
             print("내가 좋아요한 피드 리스트 에러 \(error)")
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         self.collectionView.reloadData()
+        
+        
     }
     
     // 해당 row에 이벤트가 발생했을때 출력되는 함수

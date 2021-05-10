@@ -29,14 +29,16 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     @IBOutlet var Likebutton: UIButton!
     
-    var player : AVPlayer?
+//    var player : AVPlayer?
     
     let userData = UserDefaults.getLoginedUserInfo()!
     
     var checkLike: Bool = false
     
     var nowFeed : Feed = Feed()
-
+    
+    var player: AVPlayer?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -57,6 +59,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
                 print(error.localizedDescription)
                 print("좋아요 서버 호출 에러")
             }
+            likeCountLabel.text = String(Int(likeCountLabel.text!)! - 1)
         } else {
             checkLike = true
             let image = UIImage(named: "ic_thumbs_up_filled")
@@ -64,6 +67,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
             var likeInfo = userLike()
             likeInfo.userId = userData["id"].intValue
             likeInfo.feedId = nowFeed.id!
+            
             WebApiManager.shared.postLikeFeed(likeInfo: likeInfo){ (result) in
                 if result["status"] == "200"{
                     print("좋아요 포스트 요청을 보냈습니다.")
@@ -72,20 +76,27 @@ class VideoCollectionViewCell: UICollectionViewCell{
                 print(error.localizedDescription)
                 print("좋아요 서버 호출 에러")
             }
+            likeCountLabel.text = String(Int(likeCountLabel.text!)! + 1)
         }
     }
     
     public func configureVideo(with feed:Feed, myLikeFeed:Feed) {
-        player = AVPlayer(url: feed.videoPath!)
+        self.player = AVPlayer(url: feed.videoPath!)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
         let playerView = AVPlayerLayer()
-        playerView.player = player
+        playerView.player = self.player
         playerView.frame = videoLayout.bounds
         playerView.videoGravity = .resize
         videoLayout.layer.addSublayer(playerView)
-        player?.volume = 0
-        player?.play()
-        bringUpViewobject()
+        self.player!.volume = 0
+        self.player?.play()
         loadData(feed: feed, myLikeFeed: myLikeFeed)
+        bringUpViewobject()
+    }
+    
+    @objc func playerItemDidReachEnd(notification: NSNotification) {
+        self.player?.seek(to: CMTime.zero)
+        self.player?.play()
     }
     
     private func loadData(feed:Feed, myLikeFeed: Feed) {

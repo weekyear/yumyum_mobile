@@ -33,7 +33,7 @@ class MypageVC: UIViewController {
     
     func loadData() {
         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
-        WebApiManager.shared.getMyFeedList(userId: 58, authorId: userId){
+        WebApiManager.shared.getMyFeedList(userId: userId, authorId: userId){
             (result) in
             if result["status"] == "200" {
                 let results = result["data"]
