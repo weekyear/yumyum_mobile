@@ -19,6 +19,7 @@
     <string name="introduction">소개</string>
     <string name="please_write_introduction">자신을 소개해주세요.</string>
     <string name="complete">완료</string>
+    <string name="pre_save">임시저장</string>
     <string name="previous">Previous</string>
     <string name="title_user_edit">회원 정보 수정</string>
 

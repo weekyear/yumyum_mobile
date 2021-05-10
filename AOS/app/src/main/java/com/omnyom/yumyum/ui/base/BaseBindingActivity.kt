@@ -1,8 +1,11 @@
 package com.omnyom.yumyum.ui.base
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -23,6 +26,9 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
         extraSetupBinding()
         setup()
         setupViews()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        actionBar?.hide()
+//        initTransparentStatusBar()
         onSubscribe()
     }
 
@@ -73,6 +79,20 @@ abstract class BaseBindingActivity<T : ViewDataBinding>(
                 permissionGranted(requestCode)
             } else {
                 ActivityCompat.requestPermissions(this, permissions, requestCode)
+            }
+        }
+    }
+
+    fun initTransparentStatusBar() {
+        window.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                statusBarColor = Color.TRANSPARENT
+                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
         }
     }

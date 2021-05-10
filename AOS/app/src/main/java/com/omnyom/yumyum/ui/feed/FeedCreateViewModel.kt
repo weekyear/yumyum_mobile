@@ -6,6 +6,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.common.internal.FallbackServiceBroker
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
@@ -30,9 +31,11 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
 
     private var videoPath: String = ""
     private var thumbnailPath: String = ""
+    var isCompleted: Boolean = false
 
-    var placeRequest: PlaceRequest = PlaceRequest("", 0.0, 0.0, "", "")
-
+    val placeRequest = MutableLiveData<PlaceRequest>().apply {
+        value = null
+    }
     val content = MutableLiveData<String>().apply {
         value = ""
     }
@@ -66,7 +69,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     fun createFeed() {
         val userId = PreferencesManager.getLong(getApplication(), "userId")
 
-        val createFeedRequest = CreateFeedRequest(content.value?:"", placeRequest, score.value?:0, thumbnailPath, title.value?:"", userId?:0, videoPath)
+        val createFeedRequest = CreateFeedRequest(content.value?:"", isCompleted, placeRequest.value, score.value?:0, thumbnailPath, title.value?:"", userId?:0, videoPath)
 
         retrofitService.createFeed(createFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {

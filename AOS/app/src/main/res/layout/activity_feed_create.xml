@@ -89,7 +89,7 @@
             app:layout_constraintEnd_toStartOf="@id/av_star_2"
             app:layout_constraintTop_toTopOf="@id/av_star_3"
             app:lottie_colorFilter="@color/black"
-            app:lottie_fileName="ic_thumb_up.json" />
+            app:lottie_fileName="ic_vomited.json" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star_2"
@@ -99,7 +99,7 @@
             app:layout_constraintEnd_toStartOf="@id/av_star_3"
             app:layout_constraintTop_toTopOf="@id/av_star_3"
             app:lottie_colorFilter="@color/black"
-            app:lottie_fileName="ic_thumb_up.json" />
+            app:lottie_fileName="ic_confused.json" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star_3"
@@ -111,7 +111,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_layout_title"
             app:lottie_colorFilter="@color/black"
-            app:lottie_fileName="ic_thumb_up.json" />
+            app:lottie_fileName="ic_neutral.json" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star_4"
@@ -121,7 +121,7 @@
             app:layout_constraintStart_toEndOf="@id/av_star_3"
             app:layout_constraintTop_toTopOf="@id/av_star_3"
             app:lottie_colorFilter="@color/black"
-            app:lottie_fileName="ic_thumb_up.json" />
+            app:lottie_fileName="ic_lol.json" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star_5"
@@ -132,7 +132,7 @@
             app:layout_constraintStart_toEndOf="@id/av_star_4"
             app:layout_constraintTop_toTopOf="@id/av_star_3"
             app:lottie_colorFilter="@color/black"
-            app:lottie_fileName="ic_thumb_up.json" />
+            app:lottie_fileName="ic_inloveface.json" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_content"

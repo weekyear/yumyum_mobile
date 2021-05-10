@@ -54,7 +54,7 @@ interface RetrofitService {
 
     // 피드 작성하기
     @POST("feed/")
-    fun createFeed(@Body parameters: HashMap<String, Any>): Call<CreateFeedResponse>
+    fun createFeed(@Body parameters: HashMap<String, Any?>): Call<CreateFeedResponse>
 
     // 피드 좋아요!
     @POST("feed/like")

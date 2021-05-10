@@ -76,7 +76,7 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQ_CAMERA -> {
                     Log.d("captureData", "${data?.data}")
@@ -92,5 +92,9 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
 
                 }
             }
+        } else {
+            finish()
+        }
+
     }
 }
