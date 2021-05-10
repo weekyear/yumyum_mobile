@@ -49,4 +49,6 @@ public class FeedResponse {
         this.createdDate = feed.getCreatedDate();
         this.modifiedDate = feed.getModifiedDate();
     }
+
+
 }
