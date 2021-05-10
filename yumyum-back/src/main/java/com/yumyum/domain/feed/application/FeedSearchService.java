@@ -37,6 +37,12 @@ public class FeedSearchService {
         return list;
     }
 
+    public List<FeedResponse> findAllDesc(final Long userId){
+        final List<Feed> fList = feedDao.findAllOrderByCreatedDateDesc();
+        final List<FeedResponse> list = feedResponseService.entityToDto(fList, userId);
+        return list;
+    }
+
     public List<FeedResponse> findByTitle(final String title, final Long userId){
         final List<Feed> fList = feedDao.findByTitleContainingIgnoreCase(title);
         final List<FeedResponse> list = feedResponseService.entityToDto(fList, userId);
