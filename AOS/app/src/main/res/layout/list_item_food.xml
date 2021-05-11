@@ -11,8 +11,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -86,31 +88,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
         android:text="염이네 감자탕"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/text_address"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="10dp"
-        android:text="대전 유성구 레자미 3차 802호"
         android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/text_detail"
-        app:layout_constraintStart_toStartOf="@+id/food_video" />
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/text_detail"
+        tools:layout_editor_absoluteY="685dp" />
 
     <TextView
         android:id="@+id/tv_like_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="40dp"
         android:textColor="@color/white"
         android:text="0"
         android:textSize="10sp"
@@ -138,6 +129,80 @@
         app:layout_constraintBottom_toTopOf="@id/tv_like_num"
         app:lottie_colorFilter="@color/white"
         app:lottie_fileName="ic_thumb_up.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_star_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_placename"
+        app:layout_constraintStart_toEndOf="@+id/text_name"
+        app:lottie_colorFilter="@color/white"
+        android:visibility="gone"
+        app:lottie_fileName="ic_vomited.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_star_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_placename"
+        app:layout_constraintStart_toEndOf="@+id/text_name"
+        app:lottie_colorFilter="@color/white"
+        android:visibility="gone"
+        app:lottie_fileName="ic_confused.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_star_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_placename"
+        app:layout_constraintStart_toEndOf="@+id/text_name"
+        app:lottie_colorFilter="@color/white"
+        android:visibility="gone"
+        app:lottie_fileName="ic_neutral.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_star_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_placename"
+        app:layout_constraintStart_toEndOf="@+id/text_name"
+        app:lottie_colorFilter="@color/white"
+        android:visibility="gone"
+        app:lottie_fileName="ic_lol.json" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/av_star_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/text_placename"
+        app:layout_constraintStart_toEndOf="@+id/text_name"
+        app:lottie_colorFilter="@color/white"
+        android:visibility="gone"
+        app:lottie_fileName="ic_inloveface.json" />
+
+    <ImageButton
+        android:id="@+id/btn_edit_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/tv_like_num"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:background="@null"
+        tools:layout_editor_absoluteX="320dp"
+        tools:layout_editor_absoluteY="587dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

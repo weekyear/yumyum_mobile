@@ -16,6 +16,7 @@ import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import com.omnyom.yumyum.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +43,7 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>(R.layout.activ
 
         if (GoogleLoginHelper.firebaseAuth.currentUser == null) {
             PreferencesManager.setString(this, getString(R.string.saved_google_email), "")
+            startLoginActivity()
         } else {
             login(GoogleLoginHelper.firebaseAuth.currentUser.email, { startMainActivity() }, { Toast.makeText(this, "로그인이 불안정합니다.", Toast.LENGTH_LONG).show()})
         }
@@ -89,6 +91,13 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>(R.layout.activ
 
     private fun startMainActivity() {
         Intent(this, MainActivity::class.java).let {
+            startActivity(it)
+            finish()
+        }
+    }
+
+    private fun startLoginActivity() {
+        Intent(this, LoginActivity::class.java).let {
             startActivity(it)
             finish()
         }

@@ -132,8 +132,11 @@ class HomeFragment : Fragment() {
                 holder.btnExpend.visibility = View.GONE
             }
 
-            holder.placeName.text = item[position].place.name
-            holder.address.text = item[position].place.address
+            if (item[position].place == null) {
+                holder.placeName.text = "장소를 추가해주세요"
+            } else {
+                holder.placeName.text = item[position].place.name + " | " + item[position].place.address
+            }
             holder.food.setVideoURI(item[position].videoPath.toUri())
             holder.foodName.text = item[position].title
             holder.detail.text = item[position].content
@@ -153,6 +156,54 @@ class HomeFragment : Fragment() {
             } else {
                 holder.thumbUp2.visibility = View.INVISIBLE
                 holder.thumbUp.visibility = View.VISIBLE
+            }
+
+            when(item[position].score) {
+                1 -> {
+                    holder.star1.playAnimation()
+                    holder.star1.loop(true)
+                    holder.star1.visibility = View.VISIBLE
+                    holder.star2.visibility = View.GONE
+                    holder.star3.visibility = View.GONE
+                    holder.star4.visibility = View.GONE
+                    holder.star5.visibility = View.GONE
+                }
+                2 -> {
+                    holder.star2.playAnimation()
+                    holder.star2.loop(true)
+                    holder.star1.visibility = View.GONE
+                    holder.star2.visibility = View.VISIBLE
+                    holder.star3.visibility = View.GONE
+                    holder.star4.visibility = View.GONE
+                    holder.star5.visibility = View.GONE
+                }
+                3 -> {
+                    holder.star3.playAnimation()
+                    holder.star3.loop(true)
+                    holder.star1.visibility = View.GONE
+                    holder.star2.visibility = View.GONE
+                    holder.star3.visibility = View.VISIBLE
+                    holder.star4.visibility = View.GONE
+                    holder.star5.visibility = View.GONE
+                }
+                4 -> {
+                    holder.star4.playAnimation()
+                    holder.star4.loop(true)
+                    holder.star1.visibility = View.GONE
+                    holder.star2.visibility = View.GONE
+                    holder.star3.visibility = View.GONE
+                    holder.star4.visibility = View.VISIBLE
+                    holder.star5.visibility = View.GONE
+                }
+                5 -> {
+                    holder.star5.playAnimation()
+                    holder.star5.loop(true)
+                    holder.star1.visibility = View.GONE
+                    holder.star2.visibility = View.GONE
+                    holder.star3.visibility = View.GONE
+                    holder.star4.visibility = View.GONE
+                    holder.star5.visibility = View.VISIBLE
+                }
             }
 
             holder.thumbUp.setOnClickListener {
@@ -194,13 +245,17 @@ class HomeFragment : Fragment() {
             val food = innerBinding.foodVideo
             val foodName = innerBinding.textName
             val placeName = innerBinding.textPlacename
-            val address = innerBinding.textAddress
             val detail = innerBinding.textDetail
             val userName = innerBinding.textUser
             val thumbUp = innerBinding.avThumbUp
             val thumbUp2 = innerBinding.avThumbUp2
             val likeNum = innerBinding.tvLikeNum
             val progressBar = innerBinding.progressBar
+            val star1 = innerBinding.avStar1
+            val star2 = innerBinding.avStar2
+            val star3 = innerBinding.avStar3
+            val star4 = innerBinding.avStar4
+            val star5 = innerBinding.avStar5
         }
     }
 }
