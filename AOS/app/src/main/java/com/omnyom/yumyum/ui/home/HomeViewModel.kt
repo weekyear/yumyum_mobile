@@ -24,7 +24,11 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
-                    _foodData.postValue(response.body()?.data!!.toMutableList().reversed())
+                    val feeds = response.body()?.data!!.toMutableList().reversed()
+                    val filteredFeeds = feeds.filter {
+                            feed -> feed.isCompleted
+                    }
+                    _foodData.postValue(filteredFeeds)
                 }
             }
 
