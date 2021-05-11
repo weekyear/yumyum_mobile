@@ -374,6 +374,9 @@
                                                             </constraints>
                                                             <color key="tintColor" red="0.96470588239999999" green="0.84313725490000002" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <state key="normal" title="H" image="ic_thumbs_up_filled"/>
+                                                            <connections>
+                                                                <action selector="myLikeBtnPressed:" destination="x9F-gA-2NI" eventType="touchUpInside" id="NxO-9h-ZmH"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cnt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ND-mN-pln">
                                                             <rect key="frame" x="11" y="68" width="18.5" height="14.5"/>

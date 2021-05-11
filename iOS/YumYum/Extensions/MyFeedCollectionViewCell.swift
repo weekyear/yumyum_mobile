@@ -25,11 +25,47 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     var feedInfo : Feed = Feed()
     
     var checkLike: Bool = false
+    var userData = UserDefaults.getLoginedUserInfo()!
     
     @IBOutlet var backMyPageBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    @IBAction func myLikeBtnPressed(_ sender: Any) {
+        if checkLike == true {
+            checkLike = false
+            myLikeBtn.tintColor = .white
+            let userId = userData["id"].intValue
+            let feedId = feedInfo.id!
+            
+            WebApiManager.shared.cancleLikeFeed(feedId: feedId, userId: userId){ (result) in
+                if result["status"] == "200"{
+                    print("싫어요요청을 보냈습니다.")
+                }
+            } failure: { (error) in
+                print(error.localizedDescription)
+                print("좋아요 서버 호출 에러")
+            }
+            myLikeCountLabel.text = String(Int(myLikeCountLabel.text!)! - 1)
+        } else {
+            checkLike = true
+            myLikeBtn.tintColor = yumyumYellow.toColor()
+            
+            var likeInfo = userLike()
+            likeInfo.userId = userData["id"].intValue
+            likeInfo.feedId = feedInfo.id!
+            
+            WebApiManager.shared.postLikeFeed(likeInfo: likeInfo){ (result) in
+                if result["status"] == "200"{
+                    print("좋아요 포스트 요청을 보냈습니다.")
+                }
+            } failure: { (error) in
+                print(error.localizedDescription)
+                print("좋아요 서버 호출 에러")
+            }
+            myLikeCountLabel.text = String(Int(myLikeCountLabel.text!)! + 1)
+        }
     }
     
     public func configureVideo(with feed:Feed) {
@@ -56,7 +92,7 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         myNameLabel.text = "@" + (feed.user?.nickname)! as String
         myReviewLabel.text = feed.content
         
-        let arr = feed.place?.address.components(separatedBy: " ")
+        let arr = feed.place?.address.components(separatedBy: "")
         
 //        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
         myLikeCountLabel.text = String(feed.likeCount!)
