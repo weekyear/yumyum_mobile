@@ -688,10 +688,6 @@ final class ElonMusk {
         }
 ```
 
-- 이런식으로 문제 해결
-
-
-
 ## EscapingClosure
 
 > 참고 : https://jusung.github.io/Escaping-Closure/

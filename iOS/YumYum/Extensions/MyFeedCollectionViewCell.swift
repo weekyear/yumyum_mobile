@@ -1,48 +1,43 @@
 //
-//  VideoCollectionViewCell.swift
+//  MyFeedCollectionViewCell.swift
 //  YumYum
 //
-//  Created by 염성훈 on 2021/04/20.
+//  Created by 염성훈 on 2021/05/11.
 //
 
 import UIKit
 import AVFoundation
 
-class VideoCollectionViewCell: UICollectionViewCell{
+class MyFeedCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var videoLayout: UIView!
-    @IBOutlet weak var foodLabel: UILabel!
-    @IBOutlet weak var placeLabel: UILabel!
-    @IBOutlet weak var reviewLabel: UILabel!
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet var likeCountLabel: UILabel!
-    @IBOutlet var likeButton: UIButton!
+    @IBOutlet weak var myVideoView : UIView!
+    @IBOutlet weak var myNameLabel: UILabel!
+    @IBOutlet weak var myFoodLabel: UILabel!
+    @IBOutlet weak var myPlaceLabel: UILabel!
+    @IBOutlet weak var myReviewLabel: UILabel!
+    @IBOutlet var myLikeCountLabel: UILabel!
+    @IBOutlet var myLikeBtn: UIButton!
     @IBOutlet var mapIcon: UIImageView!
-
+    
     let yumyumYellow: ColorSet = .yumyumYellow
     
-    let userData = UserDefaults.getLoginedUserInfo()!
+    var player: AVPlayer?
+    var feedInfo : Feed = Feed()
     
     var checkLike: Bool = false
+    var userData = UserDefaults.getLoginedUserInfo()!
     
-    var nowFeed: Feed = Feed()
-    
-    var player: AVPlayer?
-    
+    @IBOutlet var backMyPageBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    func setLayout() {
         
     }
-    
-    @IBAction func likeBtnPress(_ sender: Any) {
+    @IBAction func myLikeBtnPressed(_ sender: Any) {
         if checkLike == true {
             checkLike = false
-            likeButton.tintColor = .white
+            myLikeBtn.tintColor = .white
             let userId = userData["id"].intValue
-            let feedId = nowFeed.id!
+            let feedId = feedInfo.id!
             
             WebApiManager.shared.cancleLikeFeed(feedId: feedId, userId: userId){ (result) in
                 if result["status"] == "200"{
@@ -52,14 +47,14 @@ class VideoCollectionViewCell: UICollectionViewCell{
                 print(error.localizedDescription)
                 print("좋아요 서버 호출 에러")
             }
-            likeCountLabel.text = String(Int(likeCountLabel.text!)! - 1)
+            myLikeCountLabel.text = String(Int(myLikeCountLabel.text!)! - 1)
         } else {
             checkLike = true
-            likeButton.tintColor = yumyumYellow.toColor()
+            myLikeBtn.tintColor = yumyumYellow.toColor()
             
             var likeInfo = userLike()
             likeInfo.userId = userData["id"].intValue
-            likeInfo.feedId = nowFeed.id!
+            likeInfo.feedId = feedInfo.id!
             
             WebApiManager.shared.postLikeFeed(likeInfo: likeInfo){ (result) in
                 if result["status"] == "200"{
@@ -69,21 +64,22 @@ class VideoCollectionViewCell: UICollectionViewCell{
                 print(error.localizedDescription)
                 print("좋아요 서버 호출 에러")
             }
-            likeCountLabel.text = String(Int(likeCountLabel.text!)! + 1)
+            myLikeCountLabel.text = String(Int(myLikeCountLabel.text!)! + 1)
         }
     }
     
-    public func configureVideo(with feed:Feed, myLikeFeed:Feed) {
+    public func configureVideo(with feed:Feed) {
+        self.feedInfo = feed
         self.player = AVPlayer(url: feed.videoPath!)
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
         let playerView = AVPlayerLayer()
         playerView.player = self.player
-        playerView.frame = videoLayout.bounds
+        playerView.frame = myVideoView.bounds
         playerView.videoGravity = .resize
-        videoLayout.layer.addSublayer(playerView)
+        myVideoView.layer.addSublayer(playerView)
         self.player!.volume = 0
         self.player?.play()
-        loadData(feed: feed, myLikeFeed: myLikeFeed)
+        loadData(feed: feed)
     }
     
     @objc func playerItemDidReachEnd(notification: NSNotification) {
@@ -91,25 +87,23 @@ class VideoCollectionViewCell: UICollectionViewCell{
         self.player?.play()
     }
     
-    private func loadData(feed:Feed, myLikeFeed: Feed) {
-        nowFeed = feed
-        foodLabel.text = feed.title
-        userLabel.text = "@" + (feed.user?.nickname)! as String
-        reviewLabel.text = feed.content
+    private func loadData(feed:Feed) {
+        myFoodLabel.text = feed.title
+        myNameLabel.text = "@" + (feed.user?.nickname)! as String
+        myReviewLabel.text = feed.content
         
         let arr = feed.place?.address.components(separatedBy: "")
         
 //        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
-        likeCountLabel.text = String(feed.likeCount!)
-        checkLike = myLikeFeed.isLike ?? false
+        myLikeCountLabel.text = String(feed.likeCount!)
+        checkLike = feed.isLike ?? false
         
         if checkLike == true {
-            likeButton.tintColor = yumyumYellow.toColor()
+            myLikeBtn.tintColor = yumyumYellow.toColor()
         } else {
-            likeButton.tintColor = .white
+            myLikeBtn.tintColor = .white
         }
         
     }
     
 }
-
