@@ -11,6 +11,7 @@ data class FeedResponse(
 data class FeedData(
         val content: String,
         val createdDate: String,
+        val isCompleted: Boolean,
         val id: Int,
         val isLike: Boolean,
         val likeCount: Int,
