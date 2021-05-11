@@ -33,6 +33,7 @@ class SelectedAllActivity : BaseBindingActivity<ActivitySelectedAllBinding>(R.la
                 binding.viewPagerSelectFeed.setCurrentItem(position ,false)
             }
         }
+
         supportActionBar?.hide()
     }
 

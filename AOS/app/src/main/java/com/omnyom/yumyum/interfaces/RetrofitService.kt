@@ -56,6 +56,13 @@ interface RetrofitService {
     @POST("feed/")
     fun createFeed(@Body parameters: HashMap<String, Any?>): Call<CreateFeedResponse>
 
+    // 피드 수정하기
+    @PUT("feed/")
+    fun editFeed(@Body parameters: HashMap<String, Any?>): Call<CreateFeedResponse>
+
+    @DELETE("feed/{feedId}")
+    fun deleteFeed(@Path("feedId") feedId: Long) : Call<CreateFeedResponse>
+
     // 피드 좋아요!
     @POST("feed/like")
     fun feedLike(@Body parameters: HashMap<String, Int>) : Call<LikeResponse>
@@ -80,4 +87,5 @@ interface RetrofitService {
     // 키워드로 장소, 주소 검색
     @GET("place/list/{type}/{keyword}")
     fun getSearchPlaceList(@Path("type") type: String, @Path("keyword") keyword: String) : Call <SearchPlaceListResponse>
+
 }
