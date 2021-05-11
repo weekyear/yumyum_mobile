@@ -26,7 +26,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 if (response.isSuccessful) {
                     val feeds = response.body()?.data!!.toMutableList().reversed()
                     val filteredFeeds = feeds.filter {
-                            feed -> feed.isCompleted
+                        feed -> feed.isCompleted
                     }
                     _foodData.postValue(filteredFeeds)
                 }

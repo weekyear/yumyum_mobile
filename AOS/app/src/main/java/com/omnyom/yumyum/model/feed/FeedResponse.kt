@@ -21,6 +21,7 @@ data class FeedData(
         val title: String,
         val user: User,
         val videoPath: String,
+        val isCompleted: Boolean,
         val score: Int
 ) : Serializable
 
