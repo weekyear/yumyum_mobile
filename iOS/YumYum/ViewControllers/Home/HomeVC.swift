@@ -24,10 +24,6 @@ class HomeVC: UIViewController {
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
-    @IBAction func didTapSearchButton(_ sender: Any) {
-        let vc = SearchVC.instance()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
