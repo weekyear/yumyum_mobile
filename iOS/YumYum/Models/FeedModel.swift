@@ -15,6 +15,7 @@ struct Feed {
     var score: Int?
     var thumbnailPath: URL? = nil
     var videoPath: URL? = nil
+    var isCompleted: Bool?
     
     //Decodable
     var id: Int?
@@ -38,6 +39,7 @@ struct Feed {
         self.placeId = json["placeId"].intValue
         self.content = json["content"].stringValue
         self.likeCount = json["likeCount"].intValue
+        self.isCompleted = json["isCompleted"].boolValue
     }
     
     init(feedJson: JSON) {
@@ -53,6 +55,7 @@ struct Feed {
         self.score = feedJson["score"].intValue
         self.place = Place(feedJson: feedJson)
         self.user = User(fromjson: feedJson)
+        self.isCompleted = feedJson["isCompleted"].boolValue
     }
     
     enum CodingKeys: String, CodingKey {
@@ -66,6 +69,7 @@ struct Feed {
         case likeCount
         case isLike
         case placeId
+        case isCompleted
         case place = "placeRequest"
     }
 }
@@ -95,5 +99,6 @@ extension Feed: Encodable {
         try container.encode(thumbnailPath, forKey: .thumbnailPath)
         try container.encode(videoPath, forKey: .videoPath)
         try container.encode(place, forKey: .place)
+        try container.encode(isCompleted, forKey: .isCompleted)
     }
 }
