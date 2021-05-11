@@ -75,11 +75,23 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
             holder.btnExpend.visibility = View.GONE
         }
 
-        holder.placeName.text = items[position].place.name
-        holder.address.text = items[position].place.address
+        if (items[position].place == null) {
+            holder.placeName.text = "장소를 추가해주세요"
+        } else {
+            holder.placeName.text = items[position].place.name + " | " + items[position].place.address
+        }
         holder.food.setVideoURI(items[position].videoPath.toUri())
-        holder.foodName.text = items[position].title
-        holder.detail.text = items[position].content
+        if (items[position].title == "") {
+            holder.foodName.text = "음식명를 입력해주세요"
+        } else {
+            holder.foodName.text = items[position].title
+        }
+
+        if (items[position].content == "") {
+            holder.detail.text = "내용을 입력해주세요"
+        } else {
+            holder.detail.text = items[position].content
+        }
         holder.userName.text = "@" + items[position].user.nickname
         holder.likeNum.text = items[position].likeCount.toString()
         holder.userName.setOnClickListener{
@@ -96,6 +108,13 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         } else {
             holder.thumbUp2.visibility = View.INVISIBLE
             holder.thumbUp.visibility = View.VISIBLE
+        }
+
+        if (!items[position].isCompleted) {
+            holder.thumbUp2.visibility = View.GONE
+            holder.thumbUp.visibility = View.GONE
+            holder.likeNum.visibility = View.GONE
+            holder.btnEdit.visibility = View.VISIBLE
         }
 
         holder.thumbUp.setOnClickListener {
@@ -139,12 +158,12 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         val food = innerBinding.foodVideo
         val foodName = innerBinding.textName
         val placeName = innerBinding.textPlacename
-        val address = innerBinding.textAddress
         val detail = innerBinding.textDetail
         val userName = innerBinding.textUser
         val thumbUp = innerBinding.avThumbUp
         val thumbUp2 = innerBinding.avThumbUp2
         val likeNum = innerBinding.tvLikeNum
         val progressBar = innerBinding.progressBar
+        val btnEdit = innerBinding.btnEditFeed
     }
 }
