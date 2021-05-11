@@ -77,10 +77,6 @@ class HomeVC: UIViewController {
         collectionView.collectionViewLayout = flowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
     }
-
-    
-    
-   
 }
 
 
@@ -110,13 +106,6 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
-        
-//        //이부분에서 feedId랑,userId를 같이 담아서 넘겨주면 되게
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(liketap(_:)))
-//
-//        cell.likeImgView.isUserInteractionEnabled = true
-//        cell.likeImgView.tag = indexPath.row
-//        cell.likeImgView.addGestureRecognizer(tapGestureRecognizer)
         
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
         

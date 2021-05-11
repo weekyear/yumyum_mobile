@@ -7,7 +7,6 @@
 
 import UIKit
 import AVFoundation
-import GoogleSignIn
 
 class VideoCollectionViewCell: UICollectionViewCell{
     
@@ -98,9 +97,9 @@ class VideoCollectionViewCell: UICollectionViewCell{
         userLabel.text = "@" + (feed.user?.nickname)! as String
         reviewLabel.text = feed.content
         
-        let arr = feed.place?.address.components(separatedBy: " ")
+        let arr = feed.place?.address.components(separatedBy: "")
         
-        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
+//        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
         likeCountLabel.text = String(feed.likeCount!)
         checkLike = myLikeFeed.isLike ?? false
         
