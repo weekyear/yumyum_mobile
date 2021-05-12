@@ -111,7 +111,7 @@ extension SearchVC: UISearchBarDelegate {
 extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCell.reusableIdentifier, for: indexPath) as! PageCell
-        cell.label.text = "\(indexPath.row + 1)번째 뷰"
+//        cell.label.text = "\(indexPath.row + 1)번째 뷰"
         return cell
     }
     

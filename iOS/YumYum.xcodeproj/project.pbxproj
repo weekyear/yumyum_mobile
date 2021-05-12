@@ -96,8 +96,11 @@
 		E5969657264BC66D009B64A3 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5969656264BC66D009B64A3 /* CustomCell.swift */; };
 		E596965D264BC6A0009B64A3 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596965C264BC6A0009B64A3 /* PageCell.swift */; };
 		E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5969661264BC6D7009B64A3 /* NSObjectExtension.swift */; };
-		E5969667264BC789009B64A3 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5969666264BC789009B64A3 /* CustomCell.xib */; };
 		E596966C264BC7EC009B64A3 /* PageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E596966B264BC7EC009B64A3 /* PageCell.xib */; };
+		E596967A264BD4B7009B64A3 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5969678264BD4B7009B64A3 /* PlaceTableViewCell.swift */; };
+		E596967B264BD4B7009B64A3 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5969679264BD4B7009B64A3 /* PlaceTableViewCell.xib */; };
+		E5969683264BD831009B64A3 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5969682264BD831009B64A3 /* CustomCell.xib */; };
+		E5969688264BE361009B64A3 /* UITabBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5969687264BE361009B64A3 /* UITabBarExtension.swift */; };
 		E5A47BDC2649C0B40021B780 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A47BDB2649C0B40021B780 /* SearchVC.swift */; };
 		E5B071302634761E0094E880 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B0712F2634761E0094E880 /* PreviewView.swift */; };
 		E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */; };
@@ -239,8 +242,11 @@
 		E5969656264BC66D009B64A3 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		E596965C264BC6A0009B64A3 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		E5969661264BC6D7009B64A3 /* NSObjectExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectExtension.swift; sourceTree = "<group>"; };
-		E5969666264BC789009B64A3 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		E596966B264BC7EC009B64A3 /* PageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageCell.xib; sourceTree = "<group>"; };
+		E5969678264BD4B7009B64A3 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
+		E5969679264BD4B7009B64A3 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		E5969682264BD831009B64A3 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		E5969687264BE361009B64A3 /* UITabBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarExtension.swift; sourceTree = "<group>"; };
 		E5A47BDB2649C0B40021B780 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		E5B0712F2634761E0094E880 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
 		E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
@@ -524,6 +530,7 @@
 				E548AB10263A697C0049AA0B /* UIColor.swift */,
 				54DA8169264816530029FC92 /* UIImage.swift */,
 				E5969661264BC6D7009B64A3 /* NSObjectExtension.swift */,
+				E5969687264BE361009B64A3 /* UITabBarExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -578,8 +585,10 @@
 				E5969651264BC61A009B64A3 /* CustomMenuBar.swift */,
 				E5969656264BC66D009B64A3 /* CustomCell.swift */,
 				E596965C264BC6A0009B64A3 /* PageCell.swift */,
-				E5969666264BC789009B64A3 /* CustomCell.xib */,
 				E596966B264BC7EC009B64A3 /* PageCell.xib */,
+				E5969678264BD4B7009B64A3 /* PlaceTableViewCell.swift */,
+				E5969679264BD4B7009B64A3 /* PlaceTableViewCell.xib */,
+				E5969682264BD831009B64A3 /* CustomCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -738,7 +747,6 @@
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
 				E5C2B062264B0031008BB747 /* Search.storyboard in Resources */,
 				E521F3AC264132B50083957B /* map_pinup@3x.png in Resources */,
-				E5969667264BC789009B64A3 /* CustomCell.xib in Resources */,
 				E521F3B7264132B50083957B /* map_pinup_custom.png in Resources */,
 				E596966C264BC7EC009B64A3 /* PageCell.xib in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
@@ -759,10 +767,12 @@
 				E521F3B5264132B50083957B /* info_box.png in Resources */,
 				E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */,
 				E521F3BF264132B50083957B /* daum_th_line.png in Resources */,
+				E5969683264BD831009B64A3 /* CustomCell.xib in Resources */,
 				E521F3BB264132B50083957B /* map_pin.png in Resources */,
 				E521F3BD264132B50083957B /* noimage.png in Resources */,
 				E521F3C0264132B50083957B /* map_pin_shadow.png in Resources */,
 				E521F3B8264132B50083957B /* info_box_tail.png in Resources */,
+				E596967B264BD4B7009B64A3 /* PlaceTableViewCell.xib in Resources */,
 				E521F3AF264132B50083957B /* th_line.png in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 				E521F3AA264132B50083957B /* detail_button.png in Resources */,
@@ -930,6 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5969688264BE361009B64A3 /* UITabBarExtension.swift in Sources */,
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
@@ -941,6 +952,7 @@
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
+				E596967A264BD4B7009B64A3 /* PlaceTableViewCell.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5747F10262AA0F300DD0672 /* CameraVC.swift in Sources */,
 				E536EBB7263BFDCD00791E7C /* PlaceModel.swift in Sources */,

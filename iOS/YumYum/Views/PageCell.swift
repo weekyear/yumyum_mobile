@@ -9,21 +9,19 @@ import UIKit
 
 class PageCell: UICollectionViewCell {
     
-    var label: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    var tableView: UITableView =  {
+        let tableView = UITableView()
+        return tableView
     }()
     
-
+//    var collectionView: UICollectionView = {
+//        let collectionView = UICollectionView()
+//        return collectionView
+//    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addSubview(label)
-        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.addSubview(tableView)
+
     }
 }
