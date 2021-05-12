@@ -14,6 +14,7 @@ protocol CustomMenuBarDelegate: class {
 class CustomMenuBar: UIView {
     
     weak var delegate: CustomMenuBarDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -21,7 +22,8 @@ class CustomMenuBar: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+//        fatalError("init(coder:) has not been implemented")
     }
     
     var customTabBarCollectionView: UICollectionView = {
@@ -60,10 +62,10 @@ class CustomMenuBar: UIView {
         customTabBarCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         customTabBarCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         customTabBarCollectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        customTabBarCollectionView.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        customTabBarCollectionView.heightAnchor.constraint(equalToConstant: 58).isActive = true
         
         self.addSubview(indicatorView)
-        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: self.frame.width / 4)
+        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: self.frame.width / 2)
         indicatorViewWidthConstraint.isActive = true
         indicatorView.heightAnchor.constraint(equalToConstant: 2).isActive = true
         indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
@@ -78,7 +80,6 @@ extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCell.reusableIdentifier, for: indexPath) as! CustomCell
-        
         switch indexPath.row {
         case 0:
             cell.label.text = "피드"

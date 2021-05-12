@@ -13,6 +13,8 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
         return vc
     }
 
+    var feedResult: [Feed]?
+    var placeResult: [Place]?
     
     var pageCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -22,6 +24,7 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
         return collectionView
     }()
     
+
     var customMenuBar: CustomMenuBar = CustomMenuBar()
     
     override func viewDidLoad() {
@@ -36,12 +39,15 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
         searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "검색"
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        self.navigationItem.title = "Search"
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationController?.navigationBar.transparentNavigationBar()
         
         self.view.backgroundColor = .white
-        title = "Search"
+        
         navigationController?.hidesBarsOnSwipe = true
         setupCustomTabBar()
         setupPageCollectionView()
@@ -51,7 +57,8 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
         self.view.addSubview(customMenuBar)
         customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
-        customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 2
+        customMenuBar.indicatorViewWidthConstraint?.constant = self.view.frame.width / 2
+        customMenuBar.indicatorViewWidthConstraint?.isActive = true
         customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         customMenuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -66,7 +73,6 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
     func setupPageCollectionView(){
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
-        pageCollectionView.backgroundColor = .gray
         pageCollectionView.showsHorizontalScrollIndicator = false
         pageCollectionView.isPagingEnabled = true
         pageCollectionView.register(UINib(nibName: PageCell.reusableIdentifier, bundle: nil), forCellWithReuseIdentifier: PageCell.reusableIdentifier)
@@ -91,18 +97,23 @@ extension SearchVC: UISearchBarDelegate {
         guard let searchKey = searchBar.text else { return }
         WebApiManager.shared.searchStore(searchKey: searchKey) { (result) in
             print(result["data"])
+            self.placeResult = result["data"].arrayValue.compactMap{Place(json: $0)}
+            self.pageCollectionView.reloadData()
         } failure: { (error) in
             print(#function, error)
         }
         
         WebApiManager.shared.searchFeed(userId: 24, searchKey: searchKey) { (result) in
             print("feed", result["data"])
+            self.feedResult = result["data"].arrayValue.compactMap{ Feed(json: $0) }
+            self.pageCollectionView.reloadData()
         } failure: { (error) in
             print(#function, error)
         }
 
 
-
+        
+        
     }
 }
 
@@ -110,8 +121,25 @@ extension SearchVC: UISearchBarDelegate {
 //MARK:- UICollectionViewDelegate, UICollectionViewDataSource
 extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCell.reusableIdentifier, for: indexPath) as! PageCell
-//        cell.label.text = "\(indexPath.row + 1)번째 뷰"
+        
+        cell.placeResult = self.placeResult
+        cell.feedResult = self.feedResult
+        
+        cell.collectionView.reloadData()
+        
+        switch indexPath.row {
+        case 0:
+            cell.tableView.isHidden = true
+            cell.collectionView.isHidden = false
+        case 1:
+            cell.tableView.isHidden = false
+            cell.collectionView.isHidden = true
+            cell.tableView.reloadData()
+        default: break
+            
+        }
         return cell
     }
     

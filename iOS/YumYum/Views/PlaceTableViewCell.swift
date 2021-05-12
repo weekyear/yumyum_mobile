@@ -8,7 +8,12 @@
 import UIKit
 
 class PlaceTableViewCell: UITableViewCell {
+    
+    static let identifier = "PlaceTableViewCell"
 
+    @IBOutlet var placeNameLabel: UILabel!
+    @IBOutlet var placeAddressLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

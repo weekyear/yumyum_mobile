@@ -58,14 +58,14 @@ class LoginVC : UIViewController, GIDSignInDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
 
         appleLoginView.addSubview(button)
-//        button.centerXAnchor.constraint(equalTo:appleLoginView.centerXAnchor)
-//                .isActive = true
-//        button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
-//                .isActive = true
-//        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor)
-//                    .isActive = true
-//        button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
-//                    .isActive = true
+        button.centerXAnchor.constraint(equalTo:appleLoginView.centerXAnchor)
+                .isActive = true
+        button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
+                .isActive = true
+        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor)
+                    .isActive = true
+        button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
+                    .isActive = true
 
     }
     
