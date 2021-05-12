@@ -33,7 +33,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     }
 
     override fun onSubscribe() {
-        homeVM.foodData.observe(viewLifecycleOwner, Observer {
+        homeVM.foodData.observe(viewLifecycleOwner, {
             val adapter = binding.viewPagerHome.adapter as FlipFeedAdapter
             adapter.run {
                 setItems(it)

@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.omnyom.yumyum.databinding.ListItemFeedBinding
+import com.omnyom.yumyum.helper.RotateTransformation
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
@@ -28,11 +30,17 @@ class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAd
     override fun onBindViewHolder(holder: AuthorFeedViewHolder, position: Int) {
         holder.bind(items[position])
 
-        var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
-            url = URL(items[position].thumbnailPath)
-        }
-        var bitmap: Bitmap = image_task.execute().get()
-        holder.thumbnail.setImageBitmap(bitmap)
+//        var image_task : URLtoBitmapTask = URLtoBitmapTask().apply {
+//            url = URL(items[position].thumbnailPath)
+//        }
+//        var bitmap: Bitmap = image_task.execute().get()
+//        holder.thumbnail.setImageBitmap(bitmap)
+
+        Glide.with(context)
+            .load(items[position].thumbnailPath)
+            .transform(RotateTransformation(context, 90f))
+            .thumbnail(0.1f)
+            .into(holder.thumbnail)
 
         holder.thumbnail.setOnClickListener {
             val sendData : ArrayList<FeedData> = ArrayList(items.map { item -> item })

@@ -1,26 +1,13 @@
 package com.omnyom.yumyum.ui.search
 
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
-import com.omnyom.yumyum.helper.recycler.SearchPlaceAdapter
-import com.omnyom.yumyum.model.myinfo.PagerAdapters
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
-import com.omnyom.yumyum.ui.feed.SearchPlaceViewModel
-import com.omnyom.yumyum.ui.home.HomeFragment
+import com.omnyom.yumyum.ui.home.MainFragment
 
 class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchVM: SearchViewModel by viewModels()
@@ -54,7 +41,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, HomeFragment())
+                transaction.replace(R.id.nav_host_fragment, MainFragment())
                 transaction.commit()
             }
         }

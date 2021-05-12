@@ -83,41 +83,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                     }
                 })
             }
-//            score.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            title.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            content.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            placeRequest.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
         }
     }
 
