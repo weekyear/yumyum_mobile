@@ -31,10 +31,6 @@ class LoginVC : UIViewController, GIDSignInDelegate {
         // 구글 로그인되어있는지 안되어 있는지 확인
         print(GIDSignIn.sharedInstance()?.currentUser != nil)
 
-        UserDefaults.standard.removeObject(forKey: "USEREMAIL")
-        UserDefaults.standard.removeObject(forKey: "USERDATA")
-        
-
         GIDSignIn.sharedInstance()?.signOut()
     }
     
@@ -62,14 +58,14 @@ class LoginVC : UIViewController, GIDSignInDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
 
         appleLoginView.addSubview(button)
-        button.centerXAnchor.constraint(equalTo:appleLoginView.centerXAnchor)
-                .isActive = true
-        button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
-                .isActive = true
-        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor, multiplier: 0.9)
-                    .isActive = true
-        button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
-                    .isActive = true
+//        button.centerXAnchor.constraint(equalTo:appleLoginView.centerXAnchor)
+//                .isActive = true
+//        button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
+//                .isActive = true
+//        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor)
+//                    .isActive = true
+//        button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
+//                    .isActive = true
 
     }
     
@@ -129,16 +125,16 @@ class LoginVC : UIViewController, GIDSignInDelegate {
             guard let userEmail = user.profile.email else {
                 return
             }
-            print("나는 이메일이다", userEmail)
+//            print("나는 이메일이다", userEmail)
             // 이메일 가입 체크
                 WebApiManager.shared.checkUser(userEmail: userEmail) { (result) in
-                    print("emailcheck: \(result)")
+//                    print("emailcheck: \(result)")
                     if result["status"] == "200" {
                         // 회원가입된 유저라면
                         if result["data"]["existence"] == true {
                             // 로그인
                             WebApiManager.shared.login(userEmail: userEmail) {(result) in
-                                print("login: \(result)")
+//                                print("login: \(result)")
                                 if result["status"] == "200" {
                                     UserDefaults.setUserInfo(json: result["data"])
                                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
