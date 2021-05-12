@@ -100,6 +100,7 @@
 		E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F812644C061000D8934 /* PlaceSearchCell.swift */; };
 		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
 		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
+		E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +236,7 @@
 		E5B30F812644C061000D8934 /* PlaceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCell.swift; sourceTree = "<group>"; };
 		E5C2B061264B0031008BB747 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
+		E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerSearch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,7 +311,6 @@
 			children = (
 				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
 				54C6DA5B262B1965006C8D96 /* HomeVC.swift */,
-				E5A47BDB2649C0B40021B780 /* SearchVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -454,6 +455,7 @@
 				E548AAF4263887C10049AA0B /* WebApiManagerFeed.swift */,
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
 				E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */,
+				E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -512,6 +514,7 @@
 		E5920A152627C19400836123 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E5C2B06E264B74C6008BB747 /* Search */,
 				54D5B2DD26366AD5004F0BBB /* Home */,
 				54D5B2DC26366AA3004F0BBB /* Login */,
 				E56663E9263347E2003A503F /* MyPage */,
@@ -558,6 +561,14 @@
 				E5B112F0262EBD0E00ACB7C8 /* MainTabBarVC.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		E5C2B06E264B74C6008BB747 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E5A47BDB2649C0B40021B780 /* SearchVC.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		FEC3D879C8C1ACAF1854F682 /* Frameworks */ = {
@@ -903,6 +914,7 @@
 				E536EBB7263BFDCD00791E7C /* PlaceModel.swift in Sources */,
 				E52F57FE2625B746002C2637 /* YumYum.xcdatamodeld in Sources */,
 				E521F3CE264375890083957B /* ReviewNavigationVC.swift in Sources */,
+				E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */,
 				E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
