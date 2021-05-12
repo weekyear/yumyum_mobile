@@ -203,7 +203,6 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
             override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
                 t
             }
-
         })
     }
 

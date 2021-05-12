@@ -98,13 +98,13 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         if (feedCreateVM.isEdit) {
             feedCreateVM.editData.observe(this) {
                 val feedData = feedCreateVM.editData.value!!
-                val starIds = arrayOf(0, 2131230792, 2131230793, 2131230794, 2131230795, 2131230796)
                 binding.tvTitle.text = "피드 수정"
                 binding.editTextContent.setText(feedData.content)
                 binding.editTextTitle.setText(feedData.title)
-                feedCreateVM.score.value = 1
-                changeAvStarColor(starIds[feedData.score])
-                changeAvStarSize(starIds[feedData.score])
+                if (feedData.score != 0) {
+                    changeAvStarColor(avStars[feedData.score - 1].id)
+                    changeAvStarSize(avStars[feedData.score - 1].id)
+                }
                 if (feedData.place != null) {
                     binding.editTextPlace.setText(feedData.place.name)
                 }
