@@ -16,7 +16,6 @@ extension WebApiManager {
             .responseJSON { (response) in
                 switch response.result {
                 case .success(_):
-                    print(JSON(response.value!))
                     let json = JSON(response.value!)
                     success(json)
                     break
@@ -36,7 +35,6 @@ extension WebApiManager {
                 case .success(_):
                     let json = JSON(response.value!)
                     success(json)
-                    print(json)
                     break
                 case .failure(_):
                     let error = response.error!

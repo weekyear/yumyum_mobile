@@ -46,22 +46,25 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="bhG-gC-4F6">
-                                        <rect key="frame" x="83" y="465" width="248" height="215"/>
+                                        <rect key="frame" x="83" y="465" width="248" height="227"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="OwV-W7-k4t"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nd0-on-6Im" userLabel="Appel Login View">
-                                        <rect key="frame" x="83" y="688" width="248" height="60"/>
+                                        <rect key="frame" x="83" y="700" width="248" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="HLX-ga-7fg"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dJ-z6-4Yz" customClass="GIDSignInButton">
-                                        <rect key="frame" x="83" y="756" width="248" height="60"/>
+                                        <rect key="frame" x="83" y="768" width="248" height="48"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="ZML-uM-CUl"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EnR-Z9-TIx">
                                         <rect key="frame" x="62" y="824" width="290" height="30"/>
@@ -77,7 +80,6 @@
                                     <constraint firstItem="bhG-gC-4F6" firstAttribute="trailing" secondItem="2kR-sh-CKZ" secondAttribute="trailing" id="Dnl-u1-Gq0"/>
                                     <constraint firstItem="2kR-sh-CKZ" firstAttribute="leading" secondItem="NJQ-Mm-7k3" secondAttribute="leading" id="Gn9-hU-FyZ"/>
                                     <constraint firstItem="Nd0-on-6Im" firstAttribute="leading" secondItem="2kR-sh-CKZ" secondAttribute="leading" id="Khb-S7-M84"/>
-                                    <constraint firstItem="0dJ-z6-4Yz" firstAttribute="height" secondItem="Nd0-on-6Im" secondAttribute="height" id="m9f-0J-CmI"/>
                                     <constraint firstItem="bhG-gC-4F6" firstAttribute="leading" secondItem="2kR-sh-CKZ" secondAttribute="leading" id="oGP-Hi-dT3"/>
                                     <constraint firstItem="2kR-sh-CKZ" firstAttribute="trailing" secondItem="NJQ-Mm-7k3" secondAttribute="trailing" id="obd-fC-ddh"/>
                                     <constraint firstItem="Nd0-on-6Im" firstAttribute="trailing" secondItem="bhG-gC-4F6" secondAttribute="trailing" id="oyD-NM-zcW"/>
