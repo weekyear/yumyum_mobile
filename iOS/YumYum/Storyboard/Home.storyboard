@@ -128,32 +128,31 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IoJ-zs-XJA">
-                                                            <rect key="frame" x="91" y="36.5" width="145" height="25"/>
+                                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IoJ-zs-XJA">
+                                                            <rect key="frame" x="91" y="36" width="145" height="25"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-jF-kWv">
+                                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="kj4-jF-kWv" customClass="AnimationView" customModule="Lottie">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="25" id="LZ0-sk-sef"/>
-                                                                        <constraint firstAttribute="height" constant="25" id="maI-2t-xfg"/>
+                                                                        <constraint firstAttribute="width" constant="25" id="Kat-hh-NQV"/>
+                                                                        <constraint firstAttribute="height" constant="25" id="XD6-3F-40F"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcM-Ez-yGu">
+                                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="tcM-Ez-yGu" customClass="AnimationView" customModule="Lottie">
                                                                     <rect key="frame" x="30" y="0.0" width="25" height="25"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="25" id="QfQ-ID-aF3"/>
+                                                                        <constraint firstAttribute="height" constant="25" id="dIS-mo-ZqJ"/>
+                                                                    </constraints>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-jF-olu">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzu-jF-olu" customClass="AnimationView" customModule="Lottie">
                                                                     <rect key="frame" x="60" y="0.0" width="25" height="25"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-45-EFM">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfq-45-EFM" customClass="AnimationView" customModule="Lottie">
                                                                     <rect key="frame" x="90" y="0.0" width="25" height="25"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                 </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljy-At-h2o">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ljy-At-h2o" customClass="AnimationView" customModule="Lottie">
                                                                     <rect key="frame" x="120" y="0.0" width="25" height="25"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
@@ -163,9 +162,11 @@
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="top" secondItem="ljz-OA-fhk" secondAttribute="bottom" constant="8" id="Fpz-NC-VX1"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="leading" secondItem="9um-rT-yZn" secondAttribute="leading" constant="10" id="GJI-Af-cuT"/>
                                                         <constraint firstAttribute="trailing" secondItem="1eg-vj-KMi" secondAttribute="trailing" constant="10" id="N9Z-sN-6xj"/>
-                                                        <constraint firstItem="IoJ-zs-XJA" firstAttribute="leading" secondItem="ctm-Jv-q22" secondAttribute="trailing" constant="8" id="cnt-HD-pQN"/>
+                                                        <constraint firstItem="ljz-OA-fhk" firstAttribute="top" secondItem="IoJ-zs-XJA" secondAttribute="bottom" constant="12.5" id="RSN-Ox-3qa"/>
+                                                        <constraint firstItem="IoJ-zs-XJA" firstAttribute="leading" secondItem="ctm-Jv-q22" secondAttribute="trailing" constant="8" id="ZOx-m0-J3a"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="top" secondItem="ig6-dI-2UN" secondAttribute="bottom" constant="8" id="eKV-np-N3v"/>
                                                         <constraint firstAttribute="bottom" secondItem="1eg-vj-KMi" secondAttribute="bottom" id="eWO-h7-Pz2"/>
+                                                        <constraint firstItem="IoJ-zs-XJA" firstAttribute="top" secondItem="ig6-dI-2UN" secondAttribute="bottom" constant="12" id="f4p-ii-lwb"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="leading" secondItem="9um-rT-yZn" secondAttribute="leading" constant="10" id="h1h-GG-QLt"/>
                                                         <constraint firstItem="1eg-vj-KMi" firstAttribute="top" secondItem="HBz-mi-T3O" secondAttribute="bottom" constant="8" id="jqZ-LP-WzO"/>
                                                         <constraint firstItem="ig6-dI-2UN" firstAttribute="top" secondItem="9um-rT-yZn" secondAttribute="top" id="mTn-RU-Gdq"/>
@@ -174,8 +175,8 @@
                                                         <constraint firstItem="HBz-mi-T3O" firstAttribute="top" secondItem="ctm-Jv-q22" secondAttribute="bottom" constant="8" id="tBa-ex-1Xf"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="leading" secondItem="9um-rT-yZn" secondAttribute="leading" constant="10" id="u4s-5G-qaE"/>
                                                         <constraint firstItem="ljz-OA-fhk" firstAttribute="leading" secondItem="HBz-mi-T3O" secondAttribute="trailing" constant="8" id="vQg-SD-wFD"/>
-                                                        <constraint firstItem="IoJ-zs-XJA" firstAttribute="centerY" secondItem="ctm-Jv-q22" secondAttribute="centerY" id="vgi-wf-NXI"/>
                                                         <constraint firstAttribute="trailing" secondItem="ig6-dI-2UN" secondAttribute="trailing" constant="10" id="xSv-88-xW0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IoJ-zs-XJA" secondAttribute="trailing" constant="102" id="xUZ-xu-z5P"/>
                                                         <constraint firstAttribute="trailing" secondItem="ljz-OA-fhk" secondAttribute="trailing" constant="10" id="xu3-pk-Sew"/>
                                                     </constraints>
                                                 </view>
@@ -200,6 +201,11 @@
                                             <outlet property="mapIcon" destination="HBz-mi-T3O" id="Avi-hr-v4w"/>
                                             <outlet property="placeLabel" destination="ljz-OA-fhk" id="fzi-bV-dau"/>
                                             <outlet property="reviewLabel" destination="1eg-vj-KMi" id="rsb-LO-ygl"/>
+                                            <outlet property="scoreFiveView" destination="Ljy-At-h2o" id="z6J-Ig-fUz"/>
+                                            <outlet property="scoreFourView" destination="Rfq-45-EFM" id="C8C-OB-3e9"/>
+                                            <outlet property="scoreOneView" destination="kj4-jF-kWv" id="tmZ-nR-ugF"/>
+                                            <outlet property="scoreThreeView" destination="Nzu-jF-olu" id="YIa-jl-ThC"/>
+                                            <outlet property="scoreTwoView" destination="tcM-Ez-yGu" id="FHJ-p8-6Qg"/>
                                             <outlet property="userLabel" destination="ig6-dI-2UN" id="Gwl-48-trM"/>
                                             <outlet property="videoLayout" destination="lQR-Jy-oBF" id="uqA-DD-5lb"/>
                                         </connections>
@@ -244,22 +250,14 @@
             </objects>
             <point key="canvasLocation" x="-1020.2898550724639" y="1072.7678571428571"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="a5W-A4-Wqg">
-            <objects>
-                <viewController id="oOx-HK-kqe" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uc3-1B-1bA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="GZg-j9-IBT"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rsh-Oo-KwF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="937.68115942028987" y="1072.7678571428571"/>
-        </scene>
     </scenes>
+    <designables>
+        <designable name="Ljy-At-h2o"/>
+        <designable name="Nzu-jF-olu"/>
+        <designable name="Rfq-45-EFM"/>
+        <designable name="kj4-jF-kWv"/>
+        <designable name="tcM-Ez-yGu"/>
+    </designables>
     <resources>
         <image name="ic_home" width="32" height="32"/>
         <image name="ic_place" width="60" height="60"/>
@@ -267,9 +265,6 @@
         <image name="ic_thumbs_up_filled" width="75" height="75"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

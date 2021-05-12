@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class VideoCollectionViewCell: UICollectionViewCell{
     
@@ -19,6 +20,12 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
 
+    @IBOutlet weak var scoreOneView: UIView!
+    @IBOutlet weak var scoreTwoView: UIView!
+    @IBOutlet weak var scoreThreeView: AnimationView!
+    @IBOutlet weak var scoreFourView: AnimationView!
+    @IBOutlet weak var scoreFiveView: AnimationView!
+    
     let yumyumYellow: ColorSet = .yumyumYellow
     
     let userData = UserDefaults.getLoginedUserInfo()!
@@ -33,8 +40,61 @@ class VideoCollectionViewCell: UICollectionViewCell{
         super.awakeFromNib()
     }
     
-    func setLayout() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+    public func setUpAnimation() {
+        let animationview = AnimationView(name: "ic_vomited")
+        animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview.contentMode = .scaleAspectFit
+        scoreOneView.addSubview(animationview)
         
+        
+        let animationview2 = AnimationView(name: "ic_confused")
+        animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview2.contentMode = .scaleAspectFit
+        scoreTwoView.addSubview(animationview2)
+        
+        let animationview3 = AnimationView(name: "ic_neutral")
+        animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview3.contentMode = .scaleAspectFit
+        scoreThreeView.addSubview(animationview3)
+        
+        let animationview4 = AnimationView(name: "ic_lol")
+        animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview4.contentMode = .scaleAspectFit
+        scoreFourView.addSubview(animationview4)
+
+        let animationview5 = AnimationView(name: "ic_inloveface")
+        animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview5.contentMode = .scaleAspectFit
+        scoreFiveView.addSubview(animationview5)
+        
+        switch nowFeed.score! {
+        case 1:
+            animationview.play()
+            animationview.loopMode = .loop
+//            animationview.setValueProvider(colorProvider, keypath: keypath)
+        case 2:
+            animationview2.play()
+            animationview2.loopMode = .loop
+//            animationview2.setValueProvider(colorProvider, keypath: keypath)
+        case 3:
+            animationview3.play()
+            animationview3.loopMode = .loop
+//            animationview3.setValueProvider(colorProvider, keypath: keypath)
+        case 4:
+            animationview4.play()
+            animationview4.loopMode = .loop
+//            animationview4.setValueProvider(colorProvider, keypath: keypath)
+        case 5:
+            animationview5.play()
+            animationview5.loopMode = .loop
+//            animationview5.setValueProvider(colorProvider, keypath: keypath)
+        default:
+            print("잘못된 값")
+        }
     }
     
     @IBAction func likeBtnPress(_ sender: Any) {

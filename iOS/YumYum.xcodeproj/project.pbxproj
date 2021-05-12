@@ -3,19 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		03A33E7516FE1D00B6A4C3EB /* Pods_YumYum_YumYumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93E4C0E82BCBDA8F90B5A0F /* Pods_YumYum_YumYumUITests.framework */; };
 		540CAAF426314F7D0045917B /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CAAF326314F7D0045917B /* SignupVC.swift */; };
+		540F22B8264C073000F7581D /* ic_inloveface.json in Resources */ = {isa = PBXBuildFile; fileRef = 540F22B7264C072F00F7581D /* ic_inloveface.json */; };
+		540F22BD264C073F00F7581D /* ic_confused.json in Resources */ = {isa = PBXBuildFile; fileRef = 540F22BC264C073F00F7581D /* ic_confused.json */; };
 		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
+		542340CA264BE0720052F04B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 542340C9264BE0720052F04B /* Lottie */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54552441262FF0A100BFFD54 /* GoogleService-Info.plist */; };
 		5488E21626394F640096C35B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488E21526394F640096C35B /* UserModel.swift */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
+		549A6276264BBF3500B0B905 /* ic_vomited.json in Resources */ = {isa = PBXBuildFile; fileRef = 549A6275264BBF3500B0B905 /* ic_vomited.json */; };
+		549A627B264BC5B600B0B905 /* ic_neutral.json in Resources */ = {isa = PBXBuildFile; fileRef = 549A627A264BC5B600B0B905 /* ic_neutral.json */; };
+		549A6280264BC6DA00B0B905 /* ic_lol.json in Resources */ = {isa = PBXBuildFile; fileRef = 549A627F264BC6DA00B0B905 /* ic_lol.json */; };
 		54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* UIViewControllerExtension.swift */; };
 		54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E22A26371ECB0030C832 /* ConfigUrls.swift */; };
 		54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */; };
@@ -135,6 +141,8 @@
 		452F8AFF9E6F936F5A82F3E2 /* Pods-YumYumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumTests.release.xcconfig"; path = "Target Support Files/Pods-YumYumTests/Pods-YumYumTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B829E1AD96BD40F54F7A6BA /* Pods-YumYum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.debug.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.debug.xcconfig"; sourceTree = "<group>"; };
 		540CAAF326314F7D0045917B /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		540F22B7264C072F00F7581D /* ic_inloveface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_inloveface.json; sourceTree = "<group>"; };
+		540F22BC264C073F00F7581D /* ic_confused.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_confused.json; sourceTree = "<group>"; };
 		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYum/Extensions/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYum/Extensions/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYum/Extensions/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
@@ -142,6 +150,9 @@
 		5488E21526394F640096C35B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYum/ViewControllers/Home/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		549A6275264BBF3500B0B905 /* ic_vomited.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_vomited.json; sourceTree = "<group>"; };
+		549A627A264BC5B600B0B905 /* ic_neutral.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_neutral.json; sourceTree = "<group>"; };
+		549A627F264BC6DA00B0B905 /* ic_lol.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_lol.json; sourceTree = "<group>"; };
 		54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYum.entitlements; sourceTree = "<group>"; };
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		54B1E222263713150030C832 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -269,6 +280,7 @@
 				E516C0A82641264900B8F4E0 /* libsqlite3.tbd in Frameworks */,
 				E516C09A264125E800B8F4E0 /* CoreLocation.framework in Frameworks */,
 				E516C0A32641262E00B8F4E0 /* libxml2.tbd in Frameworks */,
+				542340CA264BE0720052F04B /* Lottie in Frameworks */,
 				C5A3452B51F98A7115513DBD /* Pods_YumYum.framework in Frameworks */,
 				E516C098264125D700B8F4E0 /* SystemConfiguration.framework in Frameworks */,
 				E521F3C1264132B50083957B /* DaumMap.framework in Frameworks */,
@@ -428,6 +440,11 @@
 			isa = PBXGroup;
 			children = (
 				E5969650264BC5FC009B64A3 /* Views */,
+				549A6275264BBF3500B0B905 /* ic_vomited.json */,
+				549A627A264BC5B600B0B905 /* ic_neutral.json */,
+				549A627F264BC6DA00B0B905 /* ic_lol.json */,
+				540F22B7264C072F00F7581D /* ic_inloveface.json */,
+				540F22BC264C073F00F7581D /* ic_confused.json */,
 				E516C0AE264129DF00B8F4E0 /* Headers */,
 				E548AAE8263869570049AA0B /* Managers */,
 				54AD7E3D2627CC4E00FC51F9 /* YumYum.entitlements */,
@@ -646,6 +663,9 @@
 			dependencies = (
 			);
 			name = YumYum;
+			packageProductDependencies = (
+				542340C9264BE0720052F04B /* Lottie */,
+			);
 			productName = YumYum;
 			productReference = E52F57F02625B746002C2637 /* YumYum.app */;
 			productType = "com.apple.product-type.application";
@@ -721,6 +741,9 @@
 				Base,
 			);
 			mainGroup = E52F57E72625B746002C2637;
+			packageReferences = (
+				542340C8264BE0720052F04B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = E52F57F12625B746002C2637 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -744,6 +767,7 @@
 				E521F3A7264132B50083957B /* map_pin_custom.png in Resources */,
 				E521F3B4264132B50083957B /* map_pin_red.png in Resources */,
 				E521F3B6264132B50083957B /* point_sprite.png in Resources */,
+				549A627B264BC5B600B0B905 /* ic_neutral.json in Resources */,
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
 				E5C2B062264B0031008BB747 /* Search.storyboard in Resources */,
 				E521F3AC264132B50083957B /* map_pinup@3x.png in Resources */,
@@ -751,11 +775,14 @@
 				E596966C264BC7EC009B64A3 /* PageCell.xib in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
 				E521F3B9264132B50083957B /* noimage256.png in Resources */,
+				540F22BD264C073F00F7581D /* ic_confused.json in Resources */,
 				E521F3A6264132B50083957B /* map_pinup_custom@3x.png in Resources */,
 				E521F3BA264132B50083957B /* map_present_direction.png in Resources */,
 				E521F3BC264132B50083957B /* map_present.png in Resources */,
+				549A6280264BC6DA00B0B905 /* ic_lol.json in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
 				E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */,
+				549A6276264BBF3500B0B905 /* ic_vomited.json in Resources */,
 				54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
 				E521F3B2264132B50083957B /* map_pin@3x.png in Resources */,
@@ -776,6 +803,7 @@
 				E521F3AF264132B50083957B /* th_line.png in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 				E521F3AA264132B50083957B /* detail_button.png in Resources */,
+				540F22B8264C073000F7581D /* ic_inloveface.json in Resources */,
 				E521F3AB264132B50083957B /* map_pin_custom@3x.png in Resources */,
 				E521F3A9264132B50083957B /* map_pinup.png in Resources */,
 				E521F3B3264132B50083957B /* map_present_tracking.png in Resources */,
@@ -1353,6 +1381,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		542340C8264BE0720052F04B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		542340C9264BE0720052F04B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 542340C8264BE0720052F04B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E52F57FC2625B746002C2637 /* YumYum.xcdatamodeld */ = {

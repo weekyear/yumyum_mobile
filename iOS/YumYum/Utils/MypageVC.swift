@@ -17,7 +17,7 @@ class MypageVC: UIViewController {
     var myFeedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
     var tempList: [Feed] = []
-    var isCheckFeeList = false
+    var isCheckFeedList = false
 //    var delegate: SendDataDelegate?
     
     static func instance() -> MypageVC {
@@ -36,7 +36,7 @@ class MypageVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
@@ -47,11 +47,11 @@ class MypageVC: UIViewController {
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            isCheckFeeList = false
+            isCheckFeedList = false
             self.myFeedList = self.tempList
             self.collectionView.reloadData()
         } else if sender.selectedSegmentIndex == 1 {
-            isCheckFeeList = true
+            isCheckFeedList = true
             self.tempList = self.myFeedList
             self.myFeedList = self.myLikeFeedList
             self.collectionView.reloadData()
@@ -66,7 +66,7 @@ class MypageVC: UIViewController {
                 let results = result["data"]
                 self.myFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
                 self.tempList = results.arrayValue.compactMap({Feed(feedJson: $0)})
-                
+                print(self.myFeedList)
                 self.collectionView.reloadData()
             }
         } failure: { (error) in
@@ -155,7 +155,7 @@ extension MypageVC: UICollectionViewDelegate {
 //        self.delegate = myFeedVC
         let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
         
-        if isCheckFeeList == false {
+        if isCheckFeedList == false {
             vc.myFeedList = myFeedList
         } else {
             vc.myFeedList = myLikeFeedList
