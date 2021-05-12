@@ -1,7 +1,11 @@
 package com.yumyum.domain.feed.dto;
 
 import com.yumyum.domain.feed.entity.Feed;
+import com.yumyum.domain.map.entity.Place;
+import com.yumyum.domain.user.entity.User;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Data
 @ToString
@@ -16,27 +20,39 @@ public class FeedResponse {
 
     private String content;
 
-    private Long userId;
+    private Long score;
 
-    private Long placeId;
+    private User user;
+
+    private Place place;
 
     private String videoPath;
 
     private String thumbnailPath;
 
+    private Boolean isCompleted;
+
     private Long likeCount;
 
     private Boolean isLike;
 
-    public FeedResponse(final Feed feed, final Long likeCount, final Boolean isLike){
+    private LocalDateTime createdDate;
+
+    private LocalDateTime modifiedDate;
+
+    public FeedResponse(final Feed feed, final User user, final Place place, final Long likeCount, final Boolean isLike){
         this.id = feed.getId();
         this.title = feed.getTitle();
         this.content = feed.getContent();
-        this.userId = feed.getUser().getId();
-        this.placeId = feed.getPlace().getId();
+        this.score = feed.getScore();
+        this.user = user;
+        this.place = place;
         this.videoPath = feed.getVideoPath();
         this.thumbnailPath = feed.getThumbnailPath();
+        this.isCompleted = feed.getIsCompleted();
         this.likeCount = likeCount;
         this.isLike = isLike;
+        this.createdDate = feed.getCreatedDate();
+        this.modifiedDate = feed.getModifiedDate();
     }
 }

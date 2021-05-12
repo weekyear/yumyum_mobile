@@ -27,6 +27,8 @@ public class CreateFeedRequest {
 
     private String thumbnailPath;
 
+    private Boolean isCompleted;
+
     public Feed toEntity(final User user, final Place place){
         return Feed.builder()
                 .title(title)
@@ -36,6 +38,7 @@ public class CreateFeedRequest {
                 .place(place)
                 .videoPath(videoPath)
                 .thumbnailPath(thumbnailPath)
+                .isCompleted(isCompleted)
                 .build();
     }
 }

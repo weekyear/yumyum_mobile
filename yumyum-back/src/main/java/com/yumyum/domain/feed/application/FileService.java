@@ -23,14 +23,14 @@ public class FileService {
     private final FileUploadService fileUploadService;
     private final FileThumbnailService fileThumbnailService;
 
-    public String uploadImage(final MultipartFile file){
-        final String imageName = fileUploadService.upload(file, uploadPath);
-        return savePath + imageName;
+    public String uploadImage(final MultipartFile file, final String folderName){
+        final String imageName = fileUploadService.upload(file, uploadPath + folderName);
+        return savePath + folderName + imageName;
     }
 
-    public FileDto uploadMedia(final MultipartFile file){
-        final String videoName = fileUploadService.upload(file, uploadPath);
-        final String thumbnailName = fileThumbnailService.createThumbnail(videoName, uploadPath);
-        return new FileDto(savePath + videoName, savePath + thumbnailName);
+    public FileDto uploadMedia(final MultipartFile file, final String folderName){
+        final String videoName = fileUploadService.upload(file, uploadPath + folderName);
+        final String thumbnailName = fileThumbnailService.createThumbnail(videoName, uploadPath + folderName);
+        return new FileDto(savePath + folderName + videoName, savePath + folderName + thumbnailName);
     }
 }

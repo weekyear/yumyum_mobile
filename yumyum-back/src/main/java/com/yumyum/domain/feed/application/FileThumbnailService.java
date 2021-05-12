@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,10 +25,18 @@ public class FileThumbnailService {
         final File video = new File(uploadPath + videoName);
         final File thumbnail = new File(uploadPath + thumbnailName);
 
+        int thumbnail_width = 480;
+        int thumbnail_height = 270;
+
         try {
             Picture picture = FrameGrab.getFrameFromFile(video, frameNumber);
-            BufferedImage bufferedImage = AWTUtil.toBufferedImage(picture);
-            ImageIO.write(bufferedImage, "png", thumbnail);
+            BufferedImage buffer_original_image = AWTUtil.toBufferedImage(picture);
+            BufferedImage buffer_thumbnail_image = new BufferedImage(thumbnail_width, thumbnail_height, BufferedImage.TYPE_3BYTE_BGR);
+
+            Graphics2D graphic = buffer_thumbnail_image.createGraphics();
+            graphic.drawImage(buffer_original_image, 0, 0, thumbnail_width, thumbnail_height, null);
+
+            ImageIO.write(buffer_thumbnail_image, "png", thumbnail);
             return thumbnailName;
         } catch (IOException e) {
             e.printStackTrace();
