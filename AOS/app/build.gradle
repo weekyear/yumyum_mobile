@@ -75,6 +75,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
 
+    // video-cache
+    implementation 'com.danikula:videocache:2.7.1'
+
     //design
     implementation 'com.google.android.material:material:1.0.0'
 

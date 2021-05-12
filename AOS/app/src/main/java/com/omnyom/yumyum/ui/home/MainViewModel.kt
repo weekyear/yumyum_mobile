@@ -17,7 +17,7 @@ import com.omnyom.yumyum.ui.base.BaseViewModel
 
 import retrofit2.*
 
-class HomeViewModel(application: Application) : BaseViewModel(application) {
+class MainViewModel(application: Application) : BaseViewModel(application) {
 
     init {
         getAllFeeds()

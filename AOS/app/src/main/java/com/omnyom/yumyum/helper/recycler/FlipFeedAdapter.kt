@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.ProxyFactory
 import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
@@ -32,6 +33,7 @@ import retrofit2.Response
 
 class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapter.Holder, FeedData>() {
     val userId = PreferencesManager.getLong(context, "userId").toString().toInt()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
         val itemBinding = ListItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
@@ -127,6 +129,8 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         } else {
             holder.placeName.text = items[position].place.name + " | " + items[position].place.address
         }
+
+//        holder.food.setVideoURI(ProxyFactory.feedVideoPathList[position])
         holder.food.setVideoURI(items[position].videoPath.toUri())
         if (items[position].title == "") {
             holder.foodName.text = "음식명를 입력해주세요"
