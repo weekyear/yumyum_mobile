@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03A33E7516FE1D00B6A4C3EB /* Pods_YumYum_YumYumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93E4C0E82BCBDA8F90B5A0F /* Pods_YumYum_YumYumUITests.framework */; };
 		540CAAF426314F7D0045917B /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CAAF326314F7D0045917B /* SignupVC.swift */; };
+		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54552441262FF0A100BFFD54 /* GoogleService-Info.plist */; };
@@ -124,6 +125,7 @@
 		452F8AFF9E6F936F5A82F3E2 /* Pods-YumYumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumTests.release.xcconfig"; path = "Target Support Files/Pods-YumYumTests/Pods-YumYumTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B829E1AD96BD40F54F7A6BA /* Pods-YumYum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.debug.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.debug.xcconfig"; sourceTree = "<group>"; };
 		540CAAF326314F7D0045917B /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYum/Extensions/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYum/Extensions/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYum/Extensions/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		54552441262FF0A100BFFD54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				54B82478263C921A001F6A17 /* SettingVC.swift */,
 				543648E726481EF600392C12 /* PrivateLawVC.swift */,
 				5439717D264982FE005FD966 /* MyFeedVC.swift */,
+				54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
+				54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */,
 				543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */,
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
