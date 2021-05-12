@@ -182,7 +182,10 @@ class CameraVC: UIViewController {
         
         let devices = discoverySession.devices
         
-        guard !devices.isEmpty else { fatalError("Missing capture devices.")}
+        guard !devices.isEmpty else {
+            fatalError("Missing capture devices.")
+            self.dismiss(animated: true, completion: nil)
+        }
         return devices.first(where: { device in device.position == position })!
         
     }

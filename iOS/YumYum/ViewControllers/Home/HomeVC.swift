@@ -24,10 +24,6 @@ class HomeVC: UIViewController {
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
-    @IBAction func didTapSearchButton(_ sender: Any) {
-        let vc = SearchVC.instance()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +43,8 @@ class HomeVC: UIViewController {
         WebApiManager.shared.getFeedList(userId: userId) { (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                let list = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.feedList = list.filter { $0.isCompleted == true }
                 self.collectionView.reloadData()
             }
         } failure: { (error) in

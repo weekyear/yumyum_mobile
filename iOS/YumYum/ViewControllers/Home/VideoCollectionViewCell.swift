@@ -97,10 +97,16 @@ class VideoCollectionViewCell: UICollectionViewCell{
         userLabel.text = "@" + (feed.user?.nickname)! as String
         reviewLabel.text = feed.content
         
-        let arr = feed.place?.address.components(separatedBy: "")
         
-//        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
-        likeCountLabel.text = String(feed.likeCount!)
+        if let arr = feed.place?.address.components(separatedBy: " ") {
+            if arr.count > 1 {
+                placeLabel.text = String(feed.place?.name ?? " ") +
+                    " | \(String(arr[0])) \(String(arr[1]))"
+                likeCountLabel.text = String(feed.likeCount!)
+                
+            }
+        }
+        
         checkLike = myLikeFeed.isLike ?? false
         
         if checkLike == true {

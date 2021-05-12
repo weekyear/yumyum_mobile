@@ -99,6 +99,8 @@
 		E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B30F7726441129000D8934 /* KAKAO-Info.plist */; };
 		E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */; };
 		E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F812644C061000D8934 /* PlaceSearchCell.swift */; };
+		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
+		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,6 +235,8 @@
 		E5B30F7726441129000D8934 /* KAKAO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KAKAO-Info.plist"; sourceTree = "<group>"; };
 		E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchVC.swift; sourceTree = "<group>"; };
 		E5B30F812644C061000D8934 /* PlaceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCell.swift; sourceTree = "<group>"; };
+		E5C2B061264B0031008BB747 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,6 +528,8 @@
 		E5920A162627C19F00836123 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				E5C2B066264B0095008BB747 /* Eureka.storyboard */,
+				E5C2B061264B0031008BB747 /* Search.storyboard */,
 				E5920A292627C30B00836123 /* MyPage.storyboard */,
 				E5920A202627C2E800836123 /* Review.storyboard */,
 				E52F58012625B746002C2637 /* LaunchScreen.storyboard */,
@@ -693,6 +699,7 @@
 				E521F3B4264132B50083957B /* map_pin_red.png in Resources */,
 				E521F3B6264132B50083957B /* point_sprite.png in Resources */,
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
+				E5C2B062264B0031008BB747 /* Search.storyboard in Resources */,
 				E521F3AC264132B50083957B /* map_pinup@3x.png in Resources */,
 				E521F3B7264132B50083957B /* map_pinup_custom.png in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
@@ -711,6 +718,7 @@
 				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E521F3B1264132B50083957B /* daum_copyright.png in Resources */,
 				E521F3B5264132B50083957B /* info_box.png in Resources */,
+				E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */,
 				E521F3BF264132B50083957B /* daum_th_line.png in Resources */,
 				E521F3BB264132B50083957B /* map_pin.png in Resources */,
 				E521F3BD264132B50083957B /* noimage.png in Resources */,
@@ -1112,7 +1120,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
