@@ -24,6 +24,8 @@
 		549A6280264BC6DA00B0B905 /* ic_lol.json in Resources */ = {isa = PBXBuildFile; fileRef = 549A627F264BC6DA00B0B905 /* ic_lol.json */; };
 		54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E222263713150030C832 /* UIViewControllerExtension.swift */; };
 		54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1E22A26371ECB0030C832 /* ConfigUrls.swift */; };
+		54B30C84264C4EF900E2F801 /* PeopleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B30C83264C4EF900E2F801 /* PeopleVC.swift */; };
+		54B30C89264C567500E2F801 /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B30C88264C567500E2F801 /* PeopleCell.swift */; };
 		54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */; };
 		54B8246F263C0EC1001F6A17 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */; };
 		54B82479263C921A001F6A17 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B82478263C921A001F6A17 /* SettingVC.swift */; };
@@ -157,6 +159,8 @@
 		54AE774853566DBA5881A568 /* Pods-YumYum-YumYumUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.release.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.release.xcconfig"; sourceTree = "<group>"; };
 		54B1E222263713150030C832 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		54B1E22A26371ECB0030C832 /* ConfigUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigUrls.swift; sourceTree = "<group>"; };
+		54B30C83264C4EF900E2F801 /* PeopleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleVC.swift; sourceTree = "<group>"; };
+		54B30C88264C567500E2F801 /* PeopleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
 		54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyCollectionViewCell.swift; path = YumYum/MyCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = YumYum/MyCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		54B82478263C921A001F6A17 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = YumYum/Models/SettingVC.swift; sourceTree = SOURCE_ROOT; };
@@ -343,6 +347,9 @@
 			children = (
 				548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */,
 				54C6DA5B262B1965006C8D96 /* HomeVC.swift */,
+				E5A47BDB2649C0B40021B780 /* SearchVC.swift */,
+				54B30C83264C4EF900E2F801 /* PeopleVC.swift */,
+				54B30C88264C567500E2F801 /* PeopleCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -992,6 +999,7 @@
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
+				54B30C89264C567500E2F801 /* PeopleCell.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
 				E5969657264BC66D009B64A3 /* CustomCell.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
@@ -1010,6 +1018,7 @@
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
 				54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
+				54B30C84264C4EF900E2F801 /* PeopleVC.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
 				E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */,
 				E5969652264BC61A009B64A3 /* CustomMenuBar.swift in Sources */,

@@ -8,22 +8,31 @@
 import UIKit
 
 class PeopleVC: UIViewController {
-
+    let cellIdentifire : String  = "peopleCell"
+    var peopleFeedList: [Feed] = []
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var ProfileImgView: UIImageView!
+    
+    @IBOutlet weak var IntroduceLabel : UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+}
 
-        // Do any additional setup after loading the view.
+extension PeopleVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.peopleFeedList.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: PeopleCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! PeopleCell
+        
+        return cell
     }
-    */
-
+    
+    
 }
