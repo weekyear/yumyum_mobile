@@ -58,7 +58,7 @@ public class UserController {
     @ApiOperation(value = "프로필 이미지 업로드", notes = "프로필 이미지를 업로드 후 경로를 반환한다.")
     @PostMapping("/profile")
     public Object profileUpload(@RequestParam final MultipartFile file) {
-        final String profilePath = fileService.uploadImage(file);
+        final String profilePath = fileService.uploadImage(file, "profile/");
         return HttpUtils.makeResponse("200", profilePath, "success", HttpStatus.OK);
     }
 

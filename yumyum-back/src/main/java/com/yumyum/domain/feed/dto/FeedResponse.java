@@ -20,6 +20,8 @@ public class FeedResponse {
 
     private String content;
 
+    private Long score;
+
     private User user;
 
     private Place place;
@@ -42,6 +44,7 @@ public class FeedResponse {
         this.id = feed.getId();
         this.title = feed.getTitle();
         this.content = feed.getContent();
+        this.score = feed.getScore();
         this.user = user;
         this.place = place;
         this.videoPath = feed.getVideoPath();
