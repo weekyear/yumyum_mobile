@@ -7,12 +7,23 @@
 
 import UIKit
 
+//protocol SendDataDelegate {
+//    func sendData(_ viewController: MypageVC, feedList: [Feed])
+//}
+
 class MypageVC: UIViewController {
     
     let cellIdentifire : String = "cell"
-    var feedList: [Feed] = []
-    var myfeedList: [Feed] = []
+    var myFeedList: [Feed] = []
+    var myLikeFeedList: [Feed] = []
     var tempList: [Feed] = []
+    var isCheckFeeList = false
+//    var delegate: SendDataDelegate?
+    
+    static func instance() -> MypageVC {
+        let vc = UIStoryboard.init(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MypageVC") as! MypageVC
+        return vc
+    }
  
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -36,11 +47,13 @@ class MypageVC: UIViewController {
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            self.feedList = self.tempList
+            isCheckFeeList = false
+            self.myFeedList = self.tempList
             self.collectionView.reloadData()
-        } else if sender.selectedSegmentIndex == 1{
-            self.tempList = self.feedList
-            self.feedList = self.myfeedList
+        } else if sender.selectedSegmentIndex == 1 {
+            isCheckFeeList = true
+            self.tempList = self.myFeedList
+            self.myFeedList = self.myLikeFeedList
             self.collectionView.reloadData()
         }
     }
@@ -51,7 +64,9 @@ class MypageVC: UIViewController {
             (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.feedList = results.arrayValue.compactMap({Feed(json: $0)})
+                self.myFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.tempList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                
                 self.collectionView.reloadData()
             }
         } failure: { (error) in
@@ -62,14 +77,13 @@ class MypageVC: UIViewController {
             (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.myfeedList = results.arrayValue.compactMap({Feed(json: $0)})
+                self.myLikeFeedList = results.arrayValue.compactMap({Feed(json: $0)})
             } else {
                 print("좋아요 피드 설정 오류 ")
             }
         } faliure: { (error) in
             print(error.localizedDescription)
         }
-        
     }
     
     func initTitle() {
@@ -109,13 +123,14 @@ class MypageVC: UIViewController {
 extension MypageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.feedList.count
+        return self.myFeedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let imageurl:URL = self.feedList[indexPath.item].thumbnailPath!
+        let reverseMyFeedList = Array(self.myFeedList.reversed())
+        let imageurl:URL = reverseMyFeedList[indexPath.item].thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
+        
         var image: UIImage?
 
         DispatchQueue.global().async {
@@ -126,8 +141,6 @@ extension MypageVC: UICollectionViewDataSource {
                 cell.foodImageView.image = image
             }
         }
-        
-        
         return cell
     }
 }
@@ -136,12 +149,23 @@ extension MypageVC: UICollectionViewDataSource {
 extension MypageVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         print("You tepped me \(indexPath.item)")
-        moveRootView(name: "MyPage", identifier: "MyFeedVC")
-    }
+//        delegate?.sendData(self, feedList: tempList)
+//        let myFeedVC = MyFeedVC.instance()
+//        self.delegate = myFeedVC
+        let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
+        
+        if isCheckFeeList == false {
+            vc.myFeedList = myFeedList
+        } else {
+            vc.myFeedList = myLikeFeedList
+        }
+        vc.itemId = indexPath.item
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        }
     
-}
+    }
 // 셀의 레이아웃 정하기
 extension MypageVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

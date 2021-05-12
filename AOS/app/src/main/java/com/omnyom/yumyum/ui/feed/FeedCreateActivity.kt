@@ -4,11 +4,13 @@ import android.content.Intent
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
+import androidx.lifecycle.observe
 import com.airbnb.lottie.LottieAnimationView
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
@@ -47,16 +49,25 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun setup() {
+        feedCreateVM.getEditData(intent)
     }
 
     override fun setupViews() {
         supportActionBar?.hide()
-        binding.btnGoBack.setOnClickListener { finish() }
-        binding.btnSubmit.setOnClickListener {
-            feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
-            startMainActivity()
+        if (feedCreateVM.isEdit) {
+            binding.btnSubmit.setOnClickListener {
+                feedCreateVM.editFeed(feedCreateVM.editData.value?.id.toString().toLong())
+                finish()
+            }
+
+        } else {
+            binding.btnSubmit.setOnClickListener {
+                feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
+                startMainActivity()
+            }
         }
 
+        binding.btnGoBack.setOnClickListener { finish() }
         binding.editTextPlace.setOnClickListener { startSearchPlaceActivity() }
 
         for ((idx, avStar) in avStars.withIndex()) {
@@ -83,41 +94,21 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                     }
                 })
             }
-//            score.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            title.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            content.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
-//
-//            placeRequest.observe(this@FeedCreateActivity, {
-//                feedCreateVM.isCompleted = checkAllFeedRequest()
-//                if (feedCreateVM.isCompleted) {
-//                    binding.btnSubmit.text = getString(R.string.complete)
-//                } else {
-//                    binding.btnSubmit.text = getString(R.string.pre_save)
-//                }
-//            })
+        }
+        if (feedCreateVM.isEdit) {
+            feedCreateVM.editData.observe(this) {
+                val feedData = feedCreateVM.editData.value!!
+                val starIds = arrayOf(0, 2131230792, 2131230793, 2131230794, 2131230795, 2131230796)
+                binding.tvTitle.text = "피드 수정"
+                binding.editTextContent.setText(feedData.content)
+                binding.editTextTitle.setText(feedData.title)
+                feedCreateVM.score.value = 1
+                changeAvStarColor(starIds[feedData.score])
+                changeAvStarSize(starIds[feedData.score])
+                if (feedData.place != null) {
+                    binding.editTextPlace.setText(feedData.place.name)
+                }
+            }
         }
     }
 
@@ -137,7 +128,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 binding.editTextPlace.setText(placeResult.place_name)
 
             } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "사진 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "장소 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -196,12 +187,14 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     private fun changeAvStarSize(avStarId: Int) {
         for (avStar in avStars) {
             if (avStar.id == avStarId) {
+                avStar.loop(true)
                 avStar.animate()
                         .scaleX(1.5f)
                         .scaleY(1.5f)
                         .setDuration(200)
                         .withEndAction {  }
             } else {
+                avStar.loop(false)
                 avStar.animate()
                         .scaleX(1.0f)
                         .scaleY(1.0f)

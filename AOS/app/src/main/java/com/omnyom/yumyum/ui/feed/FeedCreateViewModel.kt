@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.feed
 
 import android.app.Application
+import android.content.Intent
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
@@ -12,10 +13,7 @@ import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
-import com.omnyom.yumyum.model.feed.CreateFeedRequest
-import com.omnyom.yumyum.model.feed.CreateFeedResponse
-import com.omnyom.yumyum.model.feed.PlaceRequest
-import com.omnyom.yumyum.model.feed.SendVideoResponse
+import com.omnyom.yumyum.model.feed.*
 import com.omnyom.yumyum.ui.base.BaseViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -32,6 +30,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     private var videoPath: String = ""
     private var thumbnailPath: String = ""
     var isCompleted: Boolean = false
+    var isEdit: Boolean = false
 
     val placeRequest = MutableLiveData<PlaceRequest>().apply {
         value = null
@@ -45,13 +44,23 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     val title = MutableLiveData<String>().apply {
         value = ""
     }
+    val editData = MutableLiveData<FeedData>().apply {
+    }
+
+
+    fun getEditData(myIntent: Intent) {
+        val feedData = myIntent.getSerializableExtra("FeedData") as FeedData
+        if (feedData != null) {
+            isEdit = true
+        }
+        editData.value = feedData
+    }
 
     // 비디오 데이터를 보냅니다!
     fun sendVideo(body: MultipartBody.Part?) {
         retrofitService.sendVideo(body!!).enqueue(object : Callback<SendVideoResponse> {
             override fun onResponse(call: Call<SendVideoResponse>, response: Response<SendVideoResponse>) {
                 if (response.isSuccessful) {
-                    Log.d("createFeed", "${response.body()}")
                     videoPath = response.body()?.data!!.videoPath
                     thumbnailPath = response.body()?.data!!.thumbnailPath
                     createFeed()
@@ -74,15 +83,26 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
         retrofitService.createFeed(createFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
                 if (response.isSuccessful) {
-                    Log.d("createFeed", "${response.body()}")
                 }
             }
-
             override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
-                Log.d("createFeed", "${t}")
                 t
             }
 
         })
     }
+
+    fun editFeed(id: Long) {
+        val editFeedRequest = EditFeedRequest(content.value?:"",id , isCompleted, placeRequest.value, score.value?:0,  title.value?:"", )
+
+        retrofitService.editFeed(editFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
+            override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
+            }
+            override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
+                t
+            }
+        })
+    }
+
+
 }
