@@ -38,7 +38,7 @@ public class FeedController {
     @ApiOperation(value = "동영상 및 썸네일 등록", notes = "동영상에서 썸네일을 추출하여 동영상과 함께 저장 후 경로를 반환한다.")
     @PostMapping("/video")
     public Object uploadVideo(@RequestParam MultipartFile file) {
-        FileDto response = fileService.uploadMedia(file);
+        FileDto response = fileService.uploadMedia(file, "media/");
         return HttpUtils.makeResponse("200", response, "success", HttpStatus.OK);
     }
 
