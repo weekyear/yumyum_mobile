@@ -15,36 +15,14 @@
                     <view key="view" contentMode="scaleToFill" id="ui0-Us-ehx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mjg-1z-JX0">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mMV-Ra-O8R">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mMV-Ra-O8R" id="uGc-7D-ql7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="8bv-PT-izP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="8bv-PT-izP" firstAttribute="bottom" secondItem="mjg-1z-JX0" secondAttribute="bottom" id="29e-jU-Poy"/>
-                            <constraint firstItem="mjg-1z-JX0" firstAttribute="leading" secondItem="8bv-PT-izP" secondAttribute="leading" id="VV2-8s-Uc0"/>
-                            <constraint firstItem="mjg-1z-JX0" firstAttribute="top" secondItem="8bv-PT-izP" secondAttribute="top" id="hzQ-3e-dJq"/>
-                            <constraint firstItem="8bv-PT-izP" firstAttribute="trailing" secondItem="mjg-1z-JX0" secondAttribute="trailing" id="q3D-N9-hjP"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Vmo-c8-xkF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIH-Of-6Vb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402.89855072463769" y="1229.4642857142856"/>
+            <point key="canvasLocation" x="402.89855072463769" y="1228.7946428571429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="gvm-Ku-9SN">

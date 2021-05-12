@@ -11,8 +11,11 @@ import SwiftyJSON
 
 
 extension WebApiManager {
-    func searchFeed(userId: String, searchKey: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void)  {
-        let url = "\(domainUrl)\(feedUrl)list/title/\(searchKey)/\(userId)/"
+    func searchFeed(userId: Int, searchKey: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void)  {
+        let urlString = "\(domainUrl)\(feedUrl)list/title/\(searchKey)/\(userId)/"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedString)!
+
         
         AF.request(url, method: .get)
             .responseJSON { (response) in
@@ -27,10 +30,14 @@ extension WebApiManager {
                     break
                 }
             }
+        
+
     }
     
     func searchStore(searchKey: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
-        let url = "\(domainUrl)place/list/name/\(searchKey)/"
+        let urlString = "\(domainUrl)place/list/name/\(searchKey)/"
+        let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedString)!
         
         AF.request(url, method: .get)
             .responseJSON { (response) in
