@@ -1,7 +1,7 @@
 package com.omnyom.yumyum.model.like
 
-class LikeRequest (private val feedId: Int, private val userId: Int) {
-    fun get() : HashMap<String, Int> {
+class LikeRequest (private val feedId: Long, private val userId: Long) {
+    fun get() : HashMap<String, Long> {
         return hashMapOf(
                 "feedId" to feedId,
                 "userId" to userId

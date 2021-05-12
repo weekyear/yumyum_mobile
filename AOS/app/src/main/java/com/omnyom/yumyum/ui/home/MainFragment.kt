@@ -38,7 +38,7 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_
 
     override fun release() { }
 
-    class FlipFeedPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    inner class FlipFeedPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         private val items: MutableList<Fragment> = mutableListOf()
 
         override fun getItemCount(): Int {
@@ -53,7 +53,7 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_
             this.items.clear()
             val tempList = mutableListOf<Fragment>()
             for (feed in feedList) {
-                tempList.add(FeedFragment(feed))
+                tempList.add(FeedFragment(feed, mainVM))
             }
             items.addAll(tempList)
         }
@@ -61,13 +61,13 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_
         fun addItems(feedList: List<FeedData>) {
             val tempList = mutableListOf<Fragment>()
             for (feed in feedList) {
-                tempList.add(FeedFragment(feed))
+                tempList.add(FeedFragment(feed, mainVM))
             }
             items.addAll(tempList)
         }
 
         fun addItem(feed: FeedData) {
-            items.add(FeedFragment(feed))
+            items.add(FeedFragment(feed, mainVM))
         }
     }
 }

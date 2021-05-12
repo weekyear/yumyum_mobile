@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.model.search.SearchFeedData
@@ -23,7 +24,7 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     val searchFeedResults : LiveData<List<SearchFeedData>> = _searchFeedResults
 
     fun searchFeed(searchText: String) {
-        var call = retrofitService.getSearchFeedListByTitle(searchText, PreferencesManager.getLong(getApplication(), "userId"))
+        var call = retrofitService.getSearchFeedListByTitle(searchText, userId)
         call.enqueue(object : Callback<SearchFeedListResponse> {
             override fun onResponse(call: Call<SearchFeedListResponse>, response: Response<SearchFeedListResponse>) {
                 if (response.isSuccessful) {

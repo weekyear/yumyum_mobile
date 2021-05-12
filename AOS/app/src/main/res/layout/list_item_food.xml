@@ -106,39 +106,28 @@
             app:layout_constraintBottom_toTopOf="@+id/text_detail"
             tools:layout_editor_absoluteY="685dp" />
 
-        <TextView
-            android:id="@+id/tv_like_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="40dp"
-            android:textColor="@color/white"
-            android:text="0"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toTopOf="@id/text_detail"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/av_thumb_up2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_like_num"
-            app:lottie_colorFilter="@color/white"
-            app:lottie_fileName="ic_thumb_up.json" />
-
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_thumb_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
+            android:layout_marginEnd="18dp"
             android:layout_marginBottom="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tv_like_num"
             app:lottie_colorFilter="@color/white"
             app:lottie_fileName="ic_thumb_up.json" />
+
+        <TextView
+            android:id="@+id/tv_like_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:textColor="@color/white"
+            android:text="0"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/av_thumb_up"
+            app:layout_constraintBottom_toTopOf="@id/text_detail"
+            app:layout_constraintEnd_toEndOf="@id/av_thumb_up" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star"

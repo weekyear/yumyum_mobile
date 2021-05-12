@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.omnyom.yumyum.TempRetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.userInfo.UserData
@@ -18,8 +19,7 @@ import retrofit2.Response
 class MyInfoViewModel(application: Application) : BaseViewModel(application) {
 
     init {
-        val userId = PreferencesManager.getLong(getApplication(), "userId")
-        var myFeedCall = retrofitService.getUserData(userId!!)
+        var myFeedCall = retrofitService.getUserData(userId)
         myFeedCall.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
