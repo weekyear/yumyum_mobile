@@ -66,7 +66,6 @@ class MypageVC: UIViewController {
                 let results = result["data"]
                 self.myFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
                 self.tempList = results.arrayValue.compactMap({Feed(feedJson: $0)})
-                print(self.myFeedList)
                 self.collectionView.reloadData()
             }
         } failure: { (error) in
@@ -128,7 +127,8 @@ extension MypageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let reverseMyFeedList = Array(self.myFeedList.reversed())
-        let imageurl:URL = reverseMyFeedList[indexPath.item].thumbnailPath!
+        let myfeed = reverseMyFeedList[indexPath.item]
+        let imageurl:URL = myfeed.thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
         
         var image: UIImage?
@@ -138,7 +138,12 @@ extension MypageVC: UICollectionViewDataSource {
             DispatchQueue.main.async {
                 let beforeimage = UIImage(data: data!)
                 image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-                cell.foodImageView.image = image
+                if myfeed.isCompleted! == false {
+                    let opacityimage = image?.image(alpha: 0.3)
+                    cell.foodImageView.image = opacityimage
+                } else {
+                    cell.foodImageView.image = image
+                }
             }
         }
         return cell
@@ -163,6 +168,7 @@ extension MypageVC: UICollectionViewDelegate {
         vc.itemId = indexPath.item
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+        
         }
     
     }

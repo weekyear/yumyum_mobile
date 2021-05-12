@@ -28,11 +28,11 @@
 		54B8246F263C0EC1001F6A17 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */; };
 		54B82479263C921A001F6A17 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B82478263C921A001F6A17 /* SettingVC.swift */; };
 		54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F131263ACBC700027590 /* CommenResponse.swift */; };
-		54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F139263BA87D00027590 /* MypageVC.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeVC.swift */; };
 		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
 		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
 		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
+		54E4D369264C4CB9006CC665 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E4D368264C4CB9006CC665 /* MypageVC.swift */; };
 		5FE9A28FA160C665CBC61AB2 /* Pods_YumYumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E748F51A7196099FB67267 /* Pods_YumYumTests.framework */; };
 		C5A3452B51F98A7115513DBD /* Pods_YumYum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */; };
 		E516C096264125CA00B8F4E0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C095264125CA00B8F4E0 /* OpenGLES.framework */; };
@@ -161,11 +161,11 @@
 		54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = YumYum/MyCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		54B82478263C921A001F6A17 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = YumYum/Models/SettingVC.swift; sourceTree = SOURCE_ROOT; };
 		54B9F131263ACBC700027590 /* CommenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenResponse.swift; sourceTree = "<group>"; };
-		54B9F139263BA87D00027590 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MypageVC.swift; path = YumYum/Utils/MypageVC.swift; sourceTree = SOURCE_ROOT; };
 		54C6DA5B262B1965006C8D96 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYum/Models/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
 		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		54E4D368264C4CB9006CC665 /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MypageVC.swift; path = YumYum/Utils/MypageVC.swift; sourceTree = SOURCE_ROOT; };
 		5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumYum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		660FBCDD88D6F913501CB333 /* Pods-YumYum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.release.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.release.xcconfig"; sourceTree = "<group>"; };
 		843970AD8155E7CF31EF0110 /* Pods-YumYum-YumYumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -501,7 +501,7 @@
 		E56663E9263347E2003A503F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				54B9F139263BA87D00027590 /* MypageVC.swift */,
+				54E4D368264C4CB9006CC665 /* MypageVC.swift */,
 				54C78FB2264001C200E1F600 /* EditProfileVC.swift */,
 				54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */,
 				54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */,
@@ -976,6 +976,7 @@
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
+				54E4D369264C4CB9006CC665 /* MypageVC.swift in Sources */,
 				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
@@ -989,7 +990,6 @@
 				E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */,
 				E548AB072639D8F60049AA0B /* UINavigationBarExtension.swift in Sources */,
 				E52F57F42625B746002C2637 /* AppDelegate.swift in Sources */,
-				54B9F13A263BA87D00027590 /* MypageVC.swift in Sources */,
 				54B1E22B26371ECB0030C832 /* ConfigUrls.swift in Sources */,
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
