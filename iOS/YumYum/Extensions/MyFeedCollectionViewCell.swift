@@ -92,10 +92,14 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         myNameLabel.text = "@" + (feed.user?.nickname)! as String
         myReviewLabel.text = feed.content
         
-        let arr = feed.place?.address.components(separatedBy: "")
-        
-//        placeLabel.text = String(feed.place?.name ?? " ") + " | \(String(arr?[0] ?? " ")) \(String(arr?[1] ?? " "))"
-        myLikeCountLabel.text = String(feed.likeCount!)
+        if let arr = feed.place?.address.components(separatedBy: " ") {
+            if arr.count > 1 {
+                myPlaceLabel.text = String(feed.place?.name ?? " ") +
+                    " | \(String(arr[0])) \(String(arr[1]))"
+                myLikeCountLabel.text = String(feed.likeCount!)
+                
+            }
+        }
         checkLike = feed.isLike ?? false
         
         if checkLike == true {
