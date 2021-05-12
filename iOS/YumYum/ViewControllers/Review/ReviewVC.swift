@@ -66,7 +66,6 @@ class ReviewVC: UIViewController {
         
     }
     
-    
     func setLayout() {
         // navigationBar
         self.navigationController?.navigationBar.isHidden = false
@@ -94,8 +93,10 @@ class ReviewVC: UIViewController {
             
             self.feed.place = self.place
             
-            
             dump(self.feed)
+            
+            
+            
             
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in
                 print("feed생성: \(result)")

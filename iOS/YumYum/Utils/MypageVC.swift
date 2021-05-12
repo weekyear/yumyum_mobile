@@ -17,7 +17,7 @@ class MypageVC: UIViewController {
     var myFeedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
     var tempList: [Feed] = []
-    var isCheckFeeList = false
+    var isCheckFeedList = false
 //    var delegate: SendDataDelegate?
     
     static func instance() -> MypageVC {
@@ -36,7 +36,7 @@ class MypageVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.initTitle()
@@ -47,11 +47,11 @@ class MypageVC: UIViewController {
     
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            isCheckFeeList = false
+            isCheckFeedList = false
             self.myFeedList = self.tempList
             self.collectionView.reloadData()
         } else if sender.selectedSegmentIndex == 1 {
-            isCheckFeeList = true
+            isCheckFeedList = true
             self.tempList = self.myFeedList
             self.myFeedList = self.myLikeFeedList
             self.collectionView.reloadData()
@@ -66,7 +66,6 @@ class MypageVC: UIViewController {
                 let results = result["data"]
                 self.myFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
                 self.tempList = results.arrayValue.compactMap({Feed(feedJson: $0)})
-                
                 self.collectionView.reloadData()
             }
         } failure: { (error) in
@@ -128,7 +127,8 @@ extension MypageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let reverseMyFeedList = Array(self.myFeedList.reversed())
-        let imageurl:URL = reverseMyFeedList[indexPath.item].thumbnailPath!
+        let myfeed = reverseMyFeedList[indexPath.item]
+        let imageurl:URL = myfeed.thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
         
         var image: UIImage?
@@ -138,7 +138,12 @@ extension MypageVC: UICollectionViewDataSource {
             DispatchQueue.main.async {
                 let beforeimage = UIImage(data: data!)
                 image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-                cell.foodImageView.image = image
+                if myfeed.isCompleted! == false {
+                    let opacityimage = image?.image(alpha: 0.3)
+                    cell.foodImageView.image = opacityimage
+                } else {
+                    cell.foodImageView.image = image
+                }
             }
         }
         return cell
@@ -155,7 +160,7 @@ extension MypageVC: UICollectionViewDelegate {
 //        self.delegate = myFeedVC
         let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
         
-        if isCheckFeeList == false {
+        if isCheckFeedList == false {
             vc.myFeedList = myFeedList
         } else {
             vc.myFeedList = myLikeFeedList
@@ -163,6 +168,7 @@ extension MypageVC: UICollectionViewDelegate {
         vc.itemId = indexPath.item
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
+        
         }
     
     }

@@ -8,6 +8,7 @@
 import UIKit
 import GoogleSignIn
 import SwiftyJSON
+import Lottie
 
 class HomeVC: UIViewController {
     
@@ -103,7 +104,8 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
-        
+        cell.nowFeed = feed
+        cell.setUpAnimation()
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
         
         return cell

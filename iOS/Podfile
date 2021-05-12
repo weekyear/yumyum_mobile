@@ -12,8 +12,8 @@ target 'YumYum' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'  
   pod 'GoogleSignIn'
-
-
+  pod 'lottie-ios'
+	
   target 'YumYumTests' do
     inherit! :search_paths
     # Pods for testing
