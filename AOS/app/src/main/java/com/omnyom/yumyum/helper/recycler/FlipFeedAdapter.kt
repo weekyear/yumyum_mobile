@@ -142,8 +142,8 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
 
         // 다양한 버튼
         holder.userName.setOnClickListener{ goUserFeed() }
-        holder.btnEdit.setOnClickListener { goEditFeed() }
-        holder.btnDelete.setOnClickListener { deleteAlert() }
+//        holder.btnEdit.setOnClickListener { goEditFeed() }
+//        holder.btnDelete.setOnClickListener { deleteAlert() }
 
         // 좋아요 버튼 관련 모든 내용들
         holder.thumbUp.setMaxFrame(15)
@@ -190,7 +190,5 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         val thumbUp = innerBinding.avThumbUp
         val likeNum = innerBinding.tvLikeNum
         val progressBar = innerBinding.progressBar
-        val btnEdit = innerBinding.btnEditFeed
-        val btnDelete = innerBinding.btnDelete
     }
 }

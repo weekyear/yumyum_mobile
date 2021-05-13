@@ -1,16 +1,28 @@
 package com.omnyom.yumyum.ui.home
 
+import android.content.Intent
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.widget.PopupMenu
 import androidx.fragment.app.*
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentMainBinding
+import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.helper.recycler.FlipFeedAdapter
+import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.base.BaseViewModel
+import com.omnyom.yumyum.ui.feed.FeedCreateActivity
+import com.omnyom.yumyum.ui.home.FeedFragment.Companion.curFeed
 import com.omnyom.yumyum.ui.search.SearchFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_main) {
     private val mainVM: MainViewModel by viewModels()
@@ -20,10 +32,23 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_
     override fun setup() {  }
 
     override fun setupViews() {
-        val viewPager = binding.viewPager
-        viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL
-        val pagerAdapters = FlipFeedPagerAdapter(requireActivity())
-        viewPager.adapter = pagerAdapters
+        binding.viewPager.run {
+            orientation = ViewPager2.ORIENTATION_VERTICAL
+            adapter = FlipFeedPagerAdapter(requireActivity())
+        }
+
+        binding.btnPopup.setOnClickListener {
+            val popupMenu = PopupMenu(requireContext(), it)
+            popupMenu.inflate(R.menu.feed_popup)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.edit_feed -> goEditFeed()
+                    R.id.delete_feed -> mainVM.deleteFeed(curFeed.id.toLong())
+                }
+                false
+            }
+        }
     }
 
     override fun onSubscribe() {
@@ -37,6 +62,16 @@ class MainFragment : BaseBindingFragment<FragmentMainBinding>(R.layout.fragment_
     }
 
     override fun release() { }
+
+    // 피드 수정
+    fun goEditFeed() {
+        Intent(context, FeedCreateActivity::class.java).run {
+            putExtra("FeedData", curFeed)
+            context?.startActivity(this)
+        }
+    }
+
+
 
     inner class FlipFeedPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         private val items: MutableList<Fragment> = mutableListOf()

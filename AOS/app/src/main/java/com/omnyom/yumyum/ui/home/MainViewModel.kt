@@ -1,12 +1,14 @@
 package com.omnyom.yumyum.ui.home
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
+import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.like.LikeRequest
@@ -72,6 +74,18 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 t
             }
 
+        })
+    }
+
+    // 피드 삭제
+    fun deleteFeed(feedId: Long) {
+        RetrofitManager.retrofitService.deleteFeed(feedId).enqueue(object : Callback<CreateFeedResponse> {
+            override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
+                Log.d("delete", "$response")
+            }
+            override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
+                t
+            }
         })
     }
 }

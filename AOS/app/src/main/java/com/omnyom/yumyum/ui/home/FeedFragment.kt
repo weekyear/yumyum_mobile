@@ -1,6 +1,8 @@
 package com.omnyom.yumyum.ui.home
 
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -20,6 +22,10 @@ import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
 
 class FeedFragment(private var feed: FeedData, private val mainVM : MainViewModel) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
+    companion object {
+        lateinit var curFeed : FeedData
+    }
+
     private lateinit var clkRotate : Animation
 
     private lateinit var expandable : TextView
@@ -56,13 +62,13 @@ class FeedFragment(private var feed: FeedData, private val mainVM : MainViewMode
         likeNum = binding.tvLikeNum
         ivThumbnail = binding.ivThumbnail
         progressBar = binding.progressBar
-        btnEdit = binding.btnEditFeed
         avStar = binding.avStar
     }
 
     override fun onResume() {
         initProgressBar()
         initAVStar()
+        curFeed = feed
 
         super.onResume()
     }
