@@ -18,7 +18,6 @@ class MypageVC: UIViewController {
     var myLikeFeedList: [Feed] = []
     var tempList: [Feed] = []
     var isCheckFeedList = false
-//    var delegate: SendDataDelegate?
     
     static func instance() -> MypageVC {
         let vc = UIStoryboard.init(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MypageVC") as! MypageVC

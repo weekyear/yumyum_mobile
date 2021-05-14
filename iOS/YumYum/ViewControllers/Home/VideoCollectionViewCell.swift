@@ -15,10 +15,12 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var foodLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
-    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var userBtn: UIButton!
     @IBOutlet var likeCountLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    var index : Int = 0
+    var delegate: userProfileBtnDelegate?
 
     @IBOutlet weak var scoreOneView: UIView!
     @IBOutlet weak var scoreTwoView: UIView!
@@ -97,8 +99,10 @@ class VideoCollectionViewCell: UICollectionViewCell{
         }
     }
     
+    @IBAction func userBtnPress(_ sender: Any) {
+        self.delegate?.userBtnPress(index: index, nowfeed: nowFeed)
+    }
     @IBAction func likeBtnPress(_ sender: Any) {
-        print(nowFeed)
         if checkLike == true {
             checkLike = false
             likeButton.tintColor = .white
@@ -155,7 +159,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     private func loadData(feed:Feed, myLikeFeed: Feed) {
         nowFeed = feed
         foodLabel.text = feed.title
-        userLabel.text = "@" + (feed.user?.nickname)! as String
+        userBtn.setTitle("@" + (feed.user?.nickname!)! , for: .normal)
         reviewLabel.text = feed.content
         
         
@@ -180,3 +184,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
 }
 
+protocol userProfileBtnDelegate {
+    func userBtnPress(index: Int , nowfeed: Feed)
+}

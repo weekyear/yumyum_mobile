@@ -22,7 +22,7 @@ class HomeVC: UIViewController {
     
     var feedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
-    var cellfeed: Feed = Feed()
+
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
@@ -97,9 +97,8 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let feedReverse = Array(feedList.reversed())
-        let feed = feedReverse[indexPath.row]
+        let feed = feedReverse[indexPath.item]
         var myLikeFeed : Feed = Feed()
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(goToUserProfile))
         
         for myfeed in myLikeFeedList {
             if feed.id == myfeed.id {
@@ -109,14 +108,11 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
         
-        self.cellfeed = feed
-        print(feed)
+        cell.index = indexPath.item
+        cell.delegate = self
         cell.nowFeed = feed
         cell.setUpAnimation()
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
-        cell.userLabel.isUserInteractionEnabled = true
-        cell.userLabel.tag = indexPath.item
-        cell.userLabel.addGestureRecognizer(tapGestureRecognizer)
         
         return cell
     }
@@ -128,8 +124,6 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
             return
         }
 
-        peopleVC.userId = cellfeed.user?.id!
-        peopleVC.username = cellfeed.user?.nickname!
         self.navigationController?.pushViewController(peopleVC, animated: true)
         
     }
@@ -137,5 +131,29 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cvRect = self.collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)
+    }
+}
+
+extension HomeVC:userProfileBtnDelegate {
+    
+    func userBtnPress(index: Int, nowfeed: Feed) {
+        let storyboard: UIStoryboard? = UIStoryboard(name: "Home", bundle: nil)
+        
+        guard let peopleVC = storyboard?.instantiateViewController(withIdentifier: "PeopleVC") as? PeopleVC else {
+            return
+        }
+        
+        peopleVC.userId = nowfeed.user?.id!
+        peopleVC.username = nowfeed.user?.nickname!
+        
+        WebApiManager.shared.getUserInfo(userId: (nowfeed.user?.id!)!) { (result) in
+            if result["status"] == "200"{
+                let results = result["data"]
+                peopleVC.userData = User(json: results)
+                self.navigationController?.pushViewController(peopleVC, animated: true)
+            }
+        } failure: { (error) in
+            print(error)
+        }
     }
 }
