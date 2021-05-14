@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		03A33E7516FE1D00B6A4C3EB /* Pods_YumYum_YumYumUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A93E4C0E82BCBDA8F90B5A0F /* Pods_YumYum_YumYumUITests.framework */; };
 		540CAAF426314F7D0045917B /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540CAAF326314F7D0045917B /* SignupVC.swift */; };
-		542B31D02648F7FE00442D65 /* VideoPlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542B31CF2648F7FE00442D65 /* VideoPlay.swift */; };
-		541A0BFF262EAD0F006C9582 /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 541A0BFE262EAD0F006C9582 /* video2.mp4 */; };
+		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		54552442262FF0A100BFFD54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54552441262FF0A100BFFD54 /* GoogleService-Info.plist */; };
@@ -100,6 +99,8 @@
 		E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B30F7726441129000D8934 /* KAKAO-Info.plist */; };
 		E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */; };
 		E5B30F822644C061000D8934 /* PlaceSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30F812644C061000D8934 /* PlaceSearchCell.swift */; };
+		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
+		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,8 +125,7 @@
 		452F8AFF9E6F936F5A82F3E2 /* Pods-YumYumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumTests.release.xcconfig"; path = "Target Support Files/Pods-YumYumTests/Pods-YumYumTests.release.xcconfig"; sourceTree = "<group>"; };
 		4B829E1AD96BD40F54F7A6BA /* Pods-YumYum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.debug.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.debug.xcconfig"; sourceTree = "<group>"; };
 		540CAAF326314F7D0045917B /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
-		542B31CF2648F7FE00442D65 /* VideoPlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlay.swift; sourceTree = "<group>"; };
-		541A0BFE262EAD0F006C9582 /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
+		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYum/Extensions/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYum/Extensions/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYum/Extensions/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		54552441262FF0A100BFFD54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -235,6 +235,8 @@
 		E5B30F7726441129000D8934 /* KAKAO-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KAKAO-Info.plist"; sourceTree = "<group>"; };
 		E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchVC.swift; sourceTree = "<group>"; };
 		E5B30F812644C061000D8934 /* PlaceSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSearchCell.swift; sourceTree = "<group>"; };
+		E5C2B061264B0031008BB747 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +470,7 @@
 				54B82478263C921A001F6A17 /* SettingVC.swift */,
 				543648E726481EF600392C12 /* PrivateLawVC.swift */,
 				5439717D264982FE005FD966 /* MyFeedVC.swift */,
+				54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -525,6 +528,8 @@
 		E5920A162627C19F00836123 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				E5C2B066264B0095008BB747 /* Eureka.storyboard */,
+				E5C2B061264B0031008BB747 /* Search.storyboard */,
 				E5920A292627C30B00836123 /* MyPage.storyboard */,
 				E5920A202627C2E800836123 /* Review.storyboard */,
 				E52F58012625B746002C2637 /* LaunchScreen.storyboard */,
@@ -694,6 +699,7 @@
 				E521F3B4264132B50083957B /* map_pin_red.png in Resources */,
 				E521F3B6264132B50083957B /* point_sprite.png in Resources */,
 				E5920A222627C2E800836123 /* Review.storyboard in Resources */,
+				E5C2B062264B0031008BB747 /* Search.storyboard in Resources */,
 				E521F3AC264132B50083957B /* map_pinup@3x.png in Resources */,
 				E521F3B7264132B50083957B /* map_pinup_custom.png in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
@@ -712,6 +718,7 @@
 				E5920A352627C47600836123 /* Accounts.storyboard in Resources */,
 				E521F3B1264132B50083957B /* daum_copyright.png in Resources */,
 				E521F3B5264132B50083957B /* info_box.png in Resources */,
+				E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */,
 				E521F3BF264132B50083957B /* daum_th_line.png in Resources */,
 				E521F3BB264132B50083957B /* map_pin.png in Resources */,
 				E521F3BD264132B50083957B /* noimage.png in Resources */,
@@ -906,6 +913,7 @@
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
+				54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */,
 				543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */,
 				E548AB11263A697C0049AA0B /* UIColor.swift in Sources */,
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
@@ -1112,7 +1120,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",

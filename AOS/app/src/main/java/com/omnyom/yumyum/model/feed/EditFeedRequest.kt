@@ -4,7 +4,7 @@ class EditFeedRequest (
     private val content: String?,
     private val id  : Long,
     private val isCompleted: Boolean,
-    private val placeRequest: PlaceRequest?,
+    private val placeResponse: EditPlaceRequest?,
     private val score : Int?,
     private val title : String?,
     ) {
@@ -13,9 +13,18 @@ class EditFeedRequest (
                 "content" to content,
                 "id" to id,
                 "isCompleted" to isCompleted,
-                "placeRequest" to placeRequest,
+                "placeResponse" to placeResponse,
                 "score" to score,
                 "title" to title
         )
     }
 }
+
+data class EditPlaceRequest(
+        var address: String,
+        var id: Int,
+        var locationX: Double,
+        var locationY: Double,
+        var name: String,
+        var phone: String
+)

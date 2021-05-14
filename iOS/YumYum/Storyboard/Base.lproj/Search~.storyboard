@@ -3,6 +3,8 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,10 +22,10 @@
                     </tabBar>
                     <connections>
                         <segue destination="pLF-SE-ugK" kind="relationship" relationship="viewControllers" id="SD8-AC-78p"/>
-                        <segue destination="dIc-uJ-VEG" kind="relationship" relationship="viewControllers" id="q5V-tG-uLc"/>
-                        <segue destination="e6U-0F-zhe" kind="relationship" relationship="viewControllers" id="VpD-jH-1y8"/>
-                        <segue destination="GPl-ZZ-ikz" kind="relationship" relationship="viewControllers" id="8xw-2P-ceS"/>
-                        <segue destination="Ahg-fr-U73" kind="relationship" relationship="viewControllers" id="Ejs-Ca-eIs"/>
+                        <segue destination="MBr-2A-F5Z" kind="relationship" relationship="viewControllers" id="kvG-qE-JsN"/>
+                        <segue destination="e6U-0F-zhe" kind="relationship" relationship="viewControllers" id="68e-WR-sRp"/>
+                        <segue destination="pvf-03-ww5" kind="relationship" relationship="viewControllers" id="GYe-eE-RmE"/>
+                        <segue destination="Ahg-fr-U73" kind="relationship" relationship="viewControllers" id="CVc-V7-iKI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQi-Pz-5VD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -39,6 +41,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWK-lg-xhU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1014" y="1071"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="FW1-7K-Hy8">
+            <objects>
+                <viewController id="MBr-2A-F5Z" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lxs-QJ-oW7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Z6w-n9-0Qf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="HSh-U2-piu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p0I-we-tzS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-477" y="1194"/>
         </scene>
         <!--Review-->
         <scene sceneID="yOo-5Q-w3Y">
@@ -58,27 +76,28 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kG3-8T-LK2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872" y="840"/>
+            <point key="canvasLocation" x="1143" y="1074"/>
         </scene>
-        <!--Search-->
-        <scene sceneID="sbh-ph-hzo">
+        <!--Item-->
+        <scene sceneID="40j-CS-H2x">
             <objects>
-                <viewControllerPlaceholder storyboardName="Search" id="dIc-uJ-VEG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="xiN-rh-q1A"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nTI-nx-Egf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="pvf-03-ww5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y6F-0A-cYb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MQa-dJ-1NK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="n3h-I6-134"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rXt-x8-pdn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="1230"/>
-        </scene>
-        <!--Eureka-->
-        <scene sceneID="Onu-cy-8Wc">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Eureka" id="GPl-ZZ-ikz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2hS-PV-mj7"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jqn-sJ-iiE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="659" y="1069"/>
+            <point key="canvasLocation" x="624" y="1200"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

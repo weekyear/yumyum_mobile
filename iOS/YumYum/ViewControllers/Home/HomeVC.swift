@@ -24,10 +24,6 @@ class HomeVC: UIViewController {
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
-    @IBAction func didTapSearchButton(_ sender: Any) {
-        let vc = SearchVC.instance()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +43,8 @@ class HomeVC: UIViewController {
         WebApiManager.shared.getFeedList(userId: userId) { (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.feedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                let list = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.feedList = list.filter { $0.isCompleted == true }
                 self.collectionView.reloadData()
             }
         } failure: { (error) in
@@ -77,10 +74,6 @@ class HomeVC: UIViewController {
         collectionView.collectionViewLayout = flowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
     }
-
-    
-    
-   
 }
 
 
@@ -110,13 +103,6 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
-        
-//        //이부분에서 feedId랑,userId를 같이 담아서 넘겨주면 되게
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(liketap(_:)))
-//
-//        cell.likeImgView.isUserInteractionEnabled = true
-//        cell.likeImgView.tag = indexPath.row
-//        cell.likeImgView.addGestureRecognizer(tapGestureRecognizer)
         
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
         

@@ -3,6 +3,7 @@ package com.omnyom.yumyum.ui.feed
 import android.app.Application
 import android.content.Intent
 import android.util.Log
+import android.util.Log.d
 import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,6 +34,9 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     var isEdit: Boolean = false
 
     val placeRequest = MutableLiveData<PlaceRequest>().apply {
+        value = null
+    }
+    val editPlaceRequest = MutableLiveData<EditPlaceRequest>().apply {
         value = null
     }
     val content = MutableLiveData<String>().apply {
@@ -91,7 +95,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     }
 
     fun editFeed(id: Long) {
-        val editFeedRequest = EditFeedRequest(content.value?:"",id , isCompleted, placeRequest.value, score.value?:0,  title.value?:"", )
+        val editFeedRequest = EditFeedRequest(content.value?:"",id , isCompleted, editPlaceRequest.value, score.value?:0,  title.value?:"", )
 
         retrofitService.editFeed(editFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
