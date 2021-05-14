@@ -179,7 +179,7 @@
                                                         <constraint firstItem="HBz-mi-T3O" firstAttribute="top" secondItem="ctm-Jv-q22" secondAttribute="bottom" constant="8" id="tBa-ex-1Xf"/>
                                                         <constraint firstItem="ctm-Jv-q22" firstAttribute="leading" secondItem="9um-rT-yZn" secondAttribute="leading" constant="10" id="u4s-5G-qaE"/>
                                                         <constraint firstItem="ljz-OA-fhk" firstAttribute="leading" secondItem="HBz-mi-T3O" secondAttribute="trailing" constant="8" id="vQg-SD-wFD"/>
-                                                        <constraint firstAttribute="trailing" secondItem="IoJ-zs-XJA" secondAttribute="trailing" constant="102" id="xUZ-xu-z5P"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IoJ-zs-XJA" secondAttribute="trailing" constant="102" id="xUZ-xu-z5P"/>
                                                         <constraint firstAttribute="trailing" secondItem="ljz-OA-fhk" secondAttribute="trailing" constant="10" id="xu3-pk-Sew"/>
                                                     </constraints>
                                                 </view>

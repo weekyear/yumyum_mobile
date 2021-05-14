@@ -22,8 +22,7 @@ class HomeVC: UIViewController {
     
     var feedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
-
-    
+    var Scores : [Int] = []
     let userData = UserDefaults.getLoginedUserInfo()!
         
     
@@ -32,8 +31,8 @@ class HomeVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         setLayout()
+        Scores = Array<Int>(repeating: 0, count: 100)
         
     }
     
@@ -111,8 +110,43 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         cell.index = indexPath.item
         cell.delegate = self
         cell.nowFeed = feed
-        cell.setUpAnimation()
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
+        
+        print(feed.score!)
+        switch feed.score! {
+        case 1:
+            cell.animationview.play()
+            cell.animationview.loopMode = .loop
+//            animationview.setValueProvider(colorProvider, keypath: keypath)
+            break
+        case 2:
+            cell.animationview2.play()
+            cell.animationview2.loopMode = .loop
+//            animationview2.setValueProvider(colorProvider, keypath: keypath)
+            break
+        case 3:
+            cell.animationview3.play()
+            cell.animationview3.loopMode = .loop
+//            animationview3.setValueProvider(colorProvider, keypath: keypath)
+            break
+        case 4:
+            cell.animationview4.play()
+            cell.animationview4.loopMode = .loop
+//            animationview4.setValueProvider(colorProvider, keypath: keypath)
+            break
+        case 5:
+            cell.animationview5.play()
+            cell.animationview5.loopMode = .loop
+//            animationview5.setValueProvider(colorProvider, keypath: keypath)
+            break
+        default:
+            print("평점 값이 없습니다.")
+            cell.animationview.pause()
+            cell.animationview2.pause()
+            cell.animationview3.pause()
+            cell.animationview4.pause()
+            cell.animationview5.pause()
+        }
         
         return cell
     }
@@ -135,6 +169,22 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
 }
 
 extension HomeVC:userProfileBtnDelegate {
+    func saveScoreState(index: Int, nowfeed: Feed) {
+        switch nowfeed.score! {
+        case 1:
+            Scores[index] = 1
+        case 2:
+            Scores[index] = 2
+        case 3:
+            Scores[index] = 3
+        case 4:
+            Scores[index] = 4
+        case 5:
+            Scores[index] = 5
+        default:
+            print("평점값이 없어요!")
+        }
+    }
     
     func userBtnPress(index: Int, nowfeed: Feed) {
         let storyboard: UIStoryboard? = UIStoryboard(name: "Home", bundle: nil)

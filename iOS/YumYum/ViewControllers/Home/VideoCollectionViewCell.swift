@@ -19,6 +19,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet var likeCountLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    
     var index : Int = 0
     var delegate: userProfileBtnDelegate?
 
@@ -28,6 +29,12 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var scoreFourView: AnimationView!
     @IBOutlet weak var scoreFiveView: AnimationView!
     
+    let animationview = AnimationView(name: "ic_vomited")
+    let animationview2 = AnimationView(name: "ic_confused")
+    let animationview3 = AnimationView(name: "ic_neutral")
+    let animationview4 = AnimationView(name: "ic_lol")
+    let animationview5 = AnimationView(name: "ic_inloveface")
+
     let yumyumYellow: ColorSet = .yumyumYellow
     
     let userData = UserDefaults.getLoginedUserInfo()!
@@ -40,68 +47,44 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpAnimation()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        animationview.stop()
+        animationview2.stop()
+        animationview3.stop()
+        animationview4.stop()
+        animationview5.stop()
     }
     
     public func setUpAnimation() {
-        let animationview = AnimationView(name: "ic_vomited")
         animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview.contentMode = .scaleAspectFit
         scoreOneView.addSubview(animationview)
-        
-        
-        let animationview2 = AnimationView(name: "ic_confused")
+    
         animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview2.contentMode = .scaleAspectFit
         scoreTwoView.addSubview(animationview2)
         
-        let animationview3 = AnimationView(name: "ic_neutral")
         animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview3.contentMode = .scaleAspectFit
         scoreThreeView.addSubview(animationview3)
         
-        let animationview4 = AnimationView(name: "ic_lol")
         animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview4.contentMode = .scaleAspectFit
         scoreFourView.addSubview(animationview4)
 
-        let animationview5 = AnimationView(name: "ic_inloveface")
         animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview5.contentMode = .scaleAspectFit
         scoreFiveView.addSubview(animationview5)
-        
-        switch nowFeed.score! {
-        case 1:
-            animationview.play()
-            animationview.loopMode = .loop
-//            animationview.setValueProvider(colorProvider, keypath: keypath)
-        case 2:
-            animationview2.play()
-            animationview2.loopMode = .loop
-//            animationview2.setValueProvider(colorProvider, keypath: keypath)
-        case 3:
-            animationview3.play()
-            animationview3.loopMode = .loop
-//            animationview3.setValueProvider(colorProvider, keypath: keypath)
-        case 4:
-            animationview4.play()
-            animationview4.loopMode = .loop
-//            animationview4.setValueProvider(colorProvider, keypath: keypath)
-        case 5:
-            animationview5.play()
-            animationview5.loopMode = .loop
-//            animationview5.setValueProvider(colorProvider, keypath: keypath)
-        default:
-            print("잘못된 값")
-        }
     }
     
     @IBAction func userBtnPress(_ sender: Any) {
         self.delegate?.userBtnPress(index: index, nowfeed: nowFeed)
     }
+    
     @IBAction func likeBtnPress(_ sender: Any) {
         if checkLike == true {
             checkLike = false
@@ -185,5 +168,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
 }
 
 protocol userProfileBtnDelegate {
-    func userBtnPress(index: Int , nowfeed: Feed)
+    func userBtnPress(index: Int, nowfeed : Feed)
+    func saveScoreState(index:Int, nowfeed: Feed)
 }
