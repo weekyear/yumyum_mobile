@@ -4,23 +4,18 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Handler
-import android.util.Log
 import android.widget.Toast
-import com.danikula.videocache.Cache
-import com.danikula.videocache.HttpUrlSource
-import com.danikula.videocache.file.FileCache
 import com.omnyom.yumyum.databinding.ActivitySplashBinding
-import com.omnyom.yumyum.helper.*
-import com.omnyom.yumyum.helper.ProxyFactory.Companion.feedVideoPathList
-import com.omnyom.yumyum.model.feed.FeedResponse
+import com.omnyom.yumyum.helper.GoogleLoginHelper
+import com.omnyom.yumyum.helper.KakaoMapUtils
+import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.model.login.LoginResponse
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.util.*
 
 
 class SplashActivity : BaseBindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {

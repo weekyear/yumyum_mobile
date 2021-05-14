@@ -65,7 +65,7 @@ interface RetrofitService {
 
     // 피드 좋아요!
     @POST("feed/like")
-    fun feedLike(@Body parameters: HashMap<String, Int>) : Call<LikeResponse>
+    fun feedLike(@Body parameters: HashMap<String, Long>) : Call<LikeResponse>
 
     // 피드 좋아요 취소!
     @DELETE("feed/like/{feedId}/{userId}")

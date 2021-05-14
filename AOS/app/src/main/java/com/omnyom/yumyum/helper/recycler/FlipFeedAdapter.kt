@@ -4,19 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.util.Log
 import android.util.Log.d
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.net.toUri
-import androidx.recyclerview.widget.RecyclerView
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
 import com.omnyom.yumyum.helper.PreferencesManager
-import com.omnyom.yumyum.helper.ProxyFactory
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
@@ -25,15 +22,12 @@ import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
 import com.omnyom.yumyum.ui.feed.FeedCreateActivity
-import com.omnyom.yumyum.ui.selectedfeed.SelectedAllViewModel
 import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapter.Holder, FeedData>() {
-    val userId = PreferencesManager.getLong(context, "userId").toString().toInt()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : Holder {
         val itemBinding = ListItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
@@ -45,7 +39,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
     override fun onBindViewHolder(holder: Holder, position: Int) {
         // 좋아요!
         fun likeFeed() {
-            var Call = RetrofitManager.retrofitService.feedLike(LikeRequest(items[position].id, userId).get())
+            var Call = RetrofitManager.retrofitService.feedLike(LikeRequest(items[position].id.toLong(), userId).get())
             Call.enqueue(object : Callback<LikeResponse> {
                 override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
                     if (response.isSuccessful) {
@@ -61,7 +55,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
 
         // 안좋아요!
         fun unlikeFeed() {
-            var Call = RetrofitManager.retrofitService.cancelFeedLike(items[position].id.toLong(), userId.toLong())
+            var Call = RetrofitManager.retrofitService.cancelFeedLike(items[position].id.toLong(), userId)
             Call.enqueue(object : Callback<LikeResponse> {
                 override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
                     if (response.isSuccessful) {
@@ -148,21 +142,17 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
 
         // 다양한 버튼
         holder.userName.setOnClickListener{ goUserFeed() }
-        holder.btnEdit.setOnClickListener { goEditFeed() }
-        holder.btnDelete.setOnClickListener { deleteAlert() }
+//        holder.btnEdit.setOnClickListener { goEditFeed() }
+//        holder.btnDelete.setOnClickListener { deleteAlert() }
 
         // 좋아요 버튼 관련 모든 내용들
         holder.thumbUp.setMaxFrame(15)
-        holder.thumbUp2.setMinFrame(15)
         if (items[position].isLike) {
             holder.thumbUp.visibility = View.INVISIBLE
-            holder.thumbUp2.visibility = View.VISIBLE
         } else {
-            holder.thumbUp2.visibility = View.INVISIBLE
             holder.thumbUp.visibility = View.VISIBLE
         }
         if (!items[position].isCompleted) {
-            holder.thumbUp2.visibility = View.GONE
             holder.thumbUp.visibility = View.GONE
             holder.likeNum.visibility = View.GONE
         }
@@ -174,18 +164,6 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
             Handler().postDelayed({
                 holder.thumbUp.progress = 0.0f
                 holder.thumbUp.visibility = View.INVISIBLE
-                holder.thumbUp2.visibility = View.VISIBLE
-            }, 800)
-        }
-        holder.thumbUp2.setOnClickListener {
-            unlikeFeed()
-            d("nanta", "씨러요")
-            holder.likeNum.text = items[position].likeCount.toString()
-            holder.thumbUp2.playAnimation()
-            Handler().postDelayed({
-                holder.thumbUp2.progress = 0.5f
-                holder.thumbUp2.visibility = View.INVISIBLE
-                holder.thumbUp.visibility = View.VISIBLE
             }, 800)
         }
 
@@ -210,10 +188,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         val detail = innerBinding.textDetail
         val userName = innerBinding.textUser
         val thumbUp = innerBinding.avThumbUp
-        val thumbUp2 = innerBinding.avThumbUp2
         val likeNum = innerBinding.tvLikeNum
         val progressBar = innerBinding.progressBar
-        val btnEdit = innerBinding.btnEditFeed
-        val btnDelete = innerBinding.btnDelete
     }
 }

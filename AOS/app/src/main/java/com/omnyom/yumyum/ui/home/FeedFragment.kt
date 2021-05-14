@@ -1,36 +1,27 @@
 package com.omnyom.yumyum.ui.home
 
 import android.content.Intent
-import android.os.Handler
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.net.toUri
-import androidx.fragment.app.viewModels
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
 import com.ms.square.android.expandabletextview.ExpandableTextView
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
-import com.omnyom.yumyum.helper.PreferencesManager
-import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.helper.RotateTransformation
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.model.feed.FeedData
-import com.omnyom.yumyum.model.like.LikeRequest
-import com.omnyom.yumyum.model.like.LikeResponse
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
-import org.w3c.dom.Text
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
-    private val mainVM: MainViewModel by viewModels({requireParentFragment()})
-    private var userId: Long = 0
+class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewModel) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
+    companion object {
+        lateinit var curFeed : FeedData
+    }
 
     private lateinit var clkRotate : Animation
 
@@ -42,19 +33,18 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     private lateinit var detail : ExpandableTextView
     private lateinit var userName : TextView
     private lateinit var thumbUp : LottieAnimationView
-    private lateinit var thumbUp2 : LottieAnimationView
     private lateinit var likeNum : TextView
     private lateinit var ivThumbnail : ImageView
     private lateinit var progressBar : ProgressBar
     private lateinit var btnEdit : ImageButton
     private lateinit var avStar : LottieAnimationView
+    private var isLikeAnimating : Boolean = false
 
     override fun extraSetupBinding() { }
 
     override fun setup() {
         initViewByBinding()
         clkRotate = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_clockwise)
-        userId = PreferencesManager.getLong(requireContext(), "userId")?: 0
     }
 
     private fun initViewByBinding() {
@@ -66,18 +56,50 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         detail = binding.textDetail
         userName = binding.textUser
         thumbUp = binding.avThumbUp
-        thumbUp2 = binding.avThumbUp2
         likeNum = binding.tvLikeNum
         ivThumbnail = binding.ivThumbnail
         progressBar = binding.progressBar
-        btnEdit = binding.btnEditFeed
         avStar = binding.avStar
     }
 
     override fun onResume() {
+        initProgressBar()
+        initAVStar()
+        curFeed = feed
+
+        super.onResume()
+    }
+
+    override fun onPause() {
+        foodVideo.pause()
+        ivThumbnail.visibility = View.VISIBLE
+        super.onPause()
+    }
+
+    override fun setupViews() {
+        initIsCompleted()
+        initIVThumbnail()
+        initExpandable()
+        initTVPlace()
+        initTVTitle()
+        initTVContent()
+        initTVUserName()
+        initTVLikeNum()
+        initLikeBtn()
+        initVideoFood()
+    }
+
+    override fun onSubscribe() {
+    }
+
+    override fun release() { }
+
+    private fun initProgressBar() {
         progressBar.visibility = View.VISIBLE
         progressBar.startAnimation(clkRotate)
+    }
 
+    private fun initAVStar() {
         when(feed.score) {
             0 -> avStar.visibility = View.INVISIBLE
             1 -> avStar.setAnimation(R.raw.ic_vomited)
@@ -89,92 +111,107 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         avStar.repeatCount = LottieDrawable.INFINITE
         avStar.changeLayersColor(R.color.colorPrimary)
         avStar.playAnimation()
-        super.onResume()
     }
 
-    override fun onPause() {
-        foodVideo.pause()
-        ivThumbnail.visibility = View.VISIBLE
-        super.onPause()
+    private fun initIsCompleted() {
+        if (!feed.isCompleted) {
+            thumbUp.visibility = View.GONE
+            likeNum.visibility = View.GONE
+            btnEdit.visibility = View.VISIBLE
+        }
     }
 
-    override fun setupViews() {
-
+    private fun initIVThumbnail() {
         Glide.with(requireActivity())
-            .load(feed.thumbnailPath)
-            .centerCrop()
-            .transform(RotateTransformation(context, 90f))
-            .into(ivThumbnail)
+                .load(feed.thumbnailPath)
+                .centerCrop()
+                .transform(RotateTransformation(context, 90f))
+                .into(ivThumbnail)
+    }
 
+    private fun initExpandable() {
         if (expandable.lineCount == 1) {
             btnExpend.visibility = View.GONE
         }
+    }
 
-        if (feed.place == null) {
-            placeName.text = "장소를 추가해주세요"
-        } else {
-            placeName.text = feed.place.name + " | " + feed.place.address
-        }
-
-        foodVideo.setVideoURI(feed.videoPath.toUri())
-
+    private fun initTVPlace() {
         if (feed.title == "") {
             foodName.text = "음식명를 입력해주세요"
         } else {
             foodName.text = feed.title
         }
+    }
 
+    private fun initTVTitle() {
+        if (feed.place == null) {
+            placeName.text = "장소를 추가해주세요"
+        } else {
+            placeName.text = feed.place.name + " | " + feed.place.address
+        }
+    }
+
+    private fun initTVContent() {
         if (feed.content == "") {
             detail.text = "내용을 입력해주세요"
         } else {
             detail.text = feed.content
         }
+    }
+
+    private fun initTVUserName() {
         userName.text = "@" + feed.user.nickname
-        likeNum.text = feed.likeCount.toString()
         userName.setOnClickListener{
             goUserFeed()
         }
+    }
 
-        thumbUp.setMaxFrame(15)
-        thumbUp2.setMinFrame(15)
+    private fun initTVLikeNum() {
+        likeNum.text = feed.likeCount.toString()
+    }
 
-        // 버튼 구현
+    private fun initLikeBtn() {
         if (feed.isLike) {
-            thumbUp.visibility = View.INVISIBLE
-            thumbUp2.visibility = View.VISIBLE
+            thumbUp.progress = 0.5f
+            thumbUp.changeLayersColor(R.color.colorPrimary)
         } else {
-            thumbUp2.visibility = View.INVISIBLE
-            thumbUp.visibility = View.VISIBLE
-        }
-
-        if (!feed.isCompleted) {
-            thumbUp2.visibility = View.GONE
-            thumbUp.visibility = View.GONE
-            likeNum.visibility = View.GONE
-            btnEdit.visibility = View.VISIBLE
+            thumbUp.progress = 0.0f
+            thumbUp.changeLayersColor(R.color.white)
         }
 
         thumbUp.setOnClickListener {
-            likeFeed()
-            likeNum.text = (feed.likeCount + 1).toString()
-            thumbUp.playAnimation()
-            Handler().postDelayed({
-                thumbUp.progress = 0.0f
-                thumbUp.visibility = View.INVISIBLE
-                thumbUp2.visibility = View.VISIBLE
-            }, 800)
+            if (!isLikeAnimating) {
+                isLikeAnimating = true
+                if (feed.isLike) {
+                    homeVM.unlikeFeed(feed.id.toLong())
+                    likeNum.text = feed.likeCount.toString()
+                    thumbUp.setMinAndMaxProgress(0.5f, 1.0f)
+                    thumbUp.changeLayersColor(R.color.white)
+                } else {
+                    homeVM.likeFeed(feed.id.toLong())
+                    likeNum.text = (feed.likeCount + 1).toString()
+                    thumbUp.setMinAndMaxProgress(0.0f, 0.5f)
+                    thumbUp.changeLayersColor(R.color.colorPrimary)
+                }
+                feed.isLike = !feed.isLike
+                thumbUp.playAnimation()
+                isLikeAnimating = false
+            }
         }
+    }
 
-        thumbUp2.setOnClickListener {
-            unlikeFeed()
-            likeNum.text = feed.likeCount.toString()
-            thumbUp2.playAnimation()
-            Handler().postDelayed({
-                thumbUp2.progress = 0.5f
-                thumbUp2.visibility = View.INVISIBLE
-                thumbUp.visibility = View.VISIBLE
-            }, 800)
-        }
+    private fun initThumbUpLikeState() {
+        thumbUp.setMinAndMaxProgress(0.0f, 0.5f)
+        thumbUp.changeLayersColor(R.color.colorPrimary)
+    }
+
+    private fun initThumbUpUnLikeState() {
+        thumbUp.setMinAndMaxProgress(0.5f, 1.0f)
+        thumbUp.changeLayersColor(R.color.white)
+    }
+
+    private fun initVideoFood() {
+        foodVideo.setVideoURI(feed.videoPath.toUri())
 
         foodVideo.setOnPreparedListener { mp ->
             foodVideo.start()
@@ -185,43 +222,15 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
             progressBar.visibility = View.GONE
             ivThumbnail.visibility = View.INVISIBLE
         }
+
+        foodVideo.setOnCompletionListener {
+            progressBar.clearAnimation()
+            progressBar.visibility = View.GONE
+            ivThumbnail.visibility = View.INVISIBLE
+        }
     }
 
-    override fun onSubscribe() {
-    }
-
-    override fun release() { }
-
-    fun likeFeed() {
-        var Call = RetrofitManager.retrofitService.feedLike(LikeRequest(feed.id, userId.toInt()).get())
-        Call.enqueue(object : Callback<LikeResponse> {
-            override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
-                if (response.isSuccessful) {
-                }
-            }
-
-            override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
-                t
-            }
-        })
-    }
-
-    // 안좋아요!
-    fun unlikeFeed() {
-        var Call = RetrofitManager.retrofitService.cancelFeedLike(feed.id.toLong(), userId)
-        Call.enqueue(object : Callback<LikeResponse> {
-            override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
-                if (response.isSuccessful) {
-                }
-            }
-            override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
-                t
-            }
-
-        })
-    }
-
-    fun goUserFeed() {
+    private fun goUserFeed() {
         val intent = Intent(context, UserFeedActivity::class.java)
         val authorId = feed.user.id.toString()
         intent.putExtra("authorId", authorId)

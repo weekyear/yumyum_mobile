@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.FeedResponse
@@ -25,9 +26,7 @@ class MyFeedViewModel(application: Application) : BaseViewModel(application) {
     lateinit var placeData : ArrayList<Place>
 
     fun getMyFeed() {
-        val userId = PreferencesManager.getLong(getApplication(), "userId")
-
-        var call = retrofitService.getUserFeeds(userId!!, userId!!)
+        var call = retrofitService.getUserFeeds(userId, userId)
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {

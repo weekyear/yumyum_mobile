@@ -13,7 +13,7 @@ data class FeedData(
         val createdDate: String,
         val isCompleted: Boolean,
         val id: Int,
-        val isLike: Boolean,
+        var isLike: Boolean,
         val likeCount: Int,
         val modifiedDate: String,
         val place: Place,

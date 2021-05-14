@@ -11,6 +11,9 @@ class PreferencesManager {
         private const val DEFAULT_VALUE_STRING = ""
         private const val DEFAULT_VALUE_LONG = -1L
 
+        // MainActivity에서 값을 부여함
+        var userId : Long = 0
+
         private fun getPreferences(context: Context): SharedPreferences {
             return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
         }

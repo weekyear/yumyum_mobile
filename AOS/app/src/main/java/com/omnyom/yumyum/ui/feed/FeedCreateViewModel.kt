@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.common.internal.FallbackServiceBroker
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
@@ -26,7 +27,6 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class FeedCreateViewModel(application: Application) : BaseViewModel(application) {
-
     private var videoPath: String = ""
     private var thumbnailPath: String = ""
     var isCompleted: Boolean = false
@@ -76,9 +76,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
 
     // 응답으로 받은 비디오 데이터를 넣어서 피드 전체 데이터를 보냅니다!
     fun createFeed() {
-        val userId = PreferencesManager.getLong(getApplication(), "userId")
-
-        val createFeedRequest = CreateFeedRequest(content.value?:"", isCompleted, placeRequest.value, score.value?:0, thumbnailPath, title.value?:"", userId?:0, videoPath)
+        val createFeedRequest = CreateFeedRequest(content.value?:"", isCompleted, placeRequest.value, score.value?:0, thumbnailPath, title.value?:"", userId, videoPath)
 
         retrofitService.createFeed(createFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {

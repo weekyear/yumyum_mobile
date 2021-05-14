@@ -6,13 +6,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.omnyom.yumyum.databinding.ActivityMainBinding
+import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.feed.CameraActivity
 
 class MainActivity : BaseBindingActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun extraSetupBinding() { }
 
-    override fun setup() { }
+    override fun setup() {
+        userId = PreferencesManager.getLong(this, "userId")?: 0
+    }
 
     override fun setupViews() {
         val navController = findNavController(R.id.nav_host_fragment)
