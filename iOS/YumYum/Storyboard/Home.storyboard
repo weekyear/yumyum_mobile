@@ -225,11 +225,12 @@
                     <navigationItem key="navigationItem" id="eRx-9K-fgS"/>
                     <connections>
                         <outlet property="collectionView" destination="7QI-Ql-GTB" id="1V0-48-6fj"/>
+                        <segue destination="ZJg-PB-WhG" kind="show" id="S1X-57-lHk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110.14492753623189" y="1072.7678571428571"/>
+            <point key="canvasLocation" x="-45" y="1066"/>
         </scene>
         <!--홈-->
         <scene sceneID="Iq9-WN-qJn">
@@ -259,7 +260,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ies-7O-sbS">
-                                <rect key="frame" x="0.0" y="44" width="414" height="210"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="210"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한줄소개" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUD-FZ-ZQk">
                                         <rect key="frame" x="20" y="161" width="374" height="20.5"/>
@@ -286,7 +287,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oam-ap-fIn">
-                                <rect key="frame" x="10" y="292" width="394" height="570"/>
+                                <rect key="frame" x="10" y="336" width="394" height="526"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="03b-E1-vzd">
                                     <size key="itemSize" width="128" height="128"/>
@@ -324,7 +325,7 @@
                                 </connections>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="brL-54-goA">
-                                <rect key="frame" x="10" y="256" width="394" height="32"/>
+                                <rect key="frame" x="10" y="300" width="394" height="32"/>
                                 <segments>
                                     <segment title="" image="square.grid.3x3.fill" catalog="system"/>
                                     <segment title="" image="heart.fill" catalog="system"/>
