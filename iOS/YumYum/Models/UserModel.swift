@@ -15,6 +15,10 @@ struct User: Codable {
     var introduction: String?
     var email: String?
     
+    init () {
+        
+    }
+    
     init(profilePath: String, nickname: String, introduction: String, email: String) {
         self.profilePath = profilePath
         self.nickname = nickname

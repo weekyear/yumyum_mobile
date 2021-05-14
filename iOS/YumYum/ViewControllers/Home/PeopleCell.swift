@@ -9,4 +9,13 @@ import UIKit
 
 class PeopleCell: UICollectionViewCell {
     
+    @IBOutlet var foodImgView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        foodImgView.contentMode = .scaleAspectFill
+    }
+    
+    
 }
