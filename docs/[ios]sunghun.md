@@ -745,3 +745,9 @@ final class ElonMusk {
                 }
 ```
 
+## isUserInteractionEnabled
+
+> 유저의 이벤트가 event queue로 부터 무시되고 삭제됐는지 판단하는 Bool값이다.
+
+- false : view를 위한 touch, press, keyboard 이벤트가 무시되고 삭제된다.
+- true : true로 set해야 이벤트가 정상적으로 view에 전달되게 된다. 기본적으로 value는 true이다.

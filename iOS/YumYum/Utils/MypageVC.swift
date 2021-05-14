@@ -93,7 +93,6 @@ class MypageVC: UIViewController {
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
         nTitle.text = userData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
-        // 네비게이션 바 배경색상 선택
     }
     
     func presentuserData(){

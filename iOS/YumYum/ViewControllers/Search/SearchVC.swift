@@ -110,10 +110,6 @@ extension SearchVC: UISearchBarDelegate {
         } failure: { (error) in
             print(#function, error)
         }
-
-
-        
-        
     }
 }
 

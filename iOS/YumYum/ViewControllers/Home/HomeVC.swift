@@ -22,6 +22,7 @@ class HomeVC: UIViewController {
     
     var feedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
+    var cellfeed: Feed = Feed()
     
     let userData = UserDefaults.getLoginedUserInfo()!
         
@@ -38,6 +39,8 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+
         
         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
         
@@ -96,6 +99,7 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         let feedReverse = Array(feedList.reversed())
         let feed = feedReverse[indexPath.row]
         var myLikeFeed : Feed = Feed()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(goToUserProfile))
         
         for myfeed in myLikeFeedList {
             if feed.id == myfeed.id {
@@ -104,11 +108,30 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
+        
+        self.cellfeed = feed
+        print(feed)
         cell.nowFeed = feed
         cell.setUpAnimation()
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
+        cell.userLabel.isUserInteractionEnabled = true
+        cell.userLabel.tag = indexPath.item
+        cell.userLabel.addGestureRecognizer(tapGestureRecognizer)
         
         return cell
+    }
+    
+    @objc func goToUserProfile() {
+        let storyboard: UIStoryboard? = UIStoryboard(name: "Home", bundle: nil)
+        
+        guard let peopleVC = storyboard?.instantiateViewController(withIdentifier: "PeopleVC") as? PeopleVC else {
+            return
+        }
+
+        peopleVC.userId = cellfeed.user?.id!
+        peopleVC.username = cellfeed.user?.nickname!
+        self.navigationController?.pushViewController(peopleVC, animated: true)
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

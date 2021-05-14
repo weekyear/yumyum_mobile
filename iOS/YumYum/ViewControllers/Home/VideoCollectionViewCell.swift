@@ -98,6 +98,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     }
     
     @IBAction func likeBtnPress(_ sender: Any) {
+        print(nowFeed)
         if checkLike == true {
             checkLike = false
             likeButton.tintColor = .white
