@@ -17,6 +17,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
+import com.omnyom.yumyum.model.feed.EditPlaceRequest
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
@@ -121,8 +122,14 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         if (requestCode == SearchPlaceActivity.PLACE_CODE) {
             if (resultCode == RESULT_OK) {
                 val placeResult = data?.getSerializableExtra("placeResult") as SearchPlaceResult
-                PlaceRequest(placeResult.address_name, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
-                    feedCreateVM.placeRequest.postValue(it)
+                if (feedCreateVM.isEdit) {
+                    EditPlaceRequest(placeResult.address_name, 0,  placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
+                        feedCreateVM.editPlaceRequest.postValue(it)
+                    }
+                } else {
+                    PlaceRequest(placeResult.address_name, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
+                        feedCreateVM.placeRequest.postValue(it)
+                    }
                 }
 
                 binding.editTextPlace.setText(placeResult.place_name)
