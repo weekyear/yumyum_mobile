@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
-import com.omnyom.yumyum.ui.home.MainFragment
+import com.omnyom.yumyum.ui.home.HomeFragment
 
 class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragment_search) {
     private val searchVM: SearchViewModel by viewModels()
@@ -41,7 +41,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
         callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, MainFragment())
+                transaction.replace(R.id.nav_host_fragment, HomeFragment())
                 transaction.commit()
             }
         }

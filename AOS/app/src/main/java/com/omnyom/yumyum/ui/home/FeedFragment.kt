@@ -1,14 +1,11 @@
 package com.omnyom.yumyum.ui.home
 
 import android.content.Intent
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.net.toUri
-import androidx.fragment.app.viewModels
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
@@ -21,7 +18,7 @@ import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
 
-class FeedFragment(private var feed: FeedData, private val mainVM : MainViewModel) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
+class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewModel) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
     companion object {
         lateinit var curFeed : FeedData
     }
@@ -186,12 +183,12 @@ class FeedFragment(private var feed: FeedData, private val mainVM : MainViewMode
             if (!isLikeAnimating) {
                 isLikeAnimating = true
                 if (feed.isLike) {
-                    mainVM.unlikeFeed(feed.id.toLong())
+                    homeVM.unlikeFeed(feed.id.toLong())
                     likeNum.text = feed.likeCount.toString()
                     thumbUp.setMinAndMaxProgress(0.5f, 1.0f)
                     thumbUp.changeLayersColor(R.color.white)
                 } else {
-                    mainVM.likeFeed(feed.id.toLong())
+                    homeVM.likeFeed(feed.id.toLong())
                     likeNum.text = (feed.likeCount + 1).toString()
                     thumbUp.setMinAndMaxProgress(0.0f, 0.5f)
                     thumbUp.changeLayersColor(R.color.colorPrimary)
