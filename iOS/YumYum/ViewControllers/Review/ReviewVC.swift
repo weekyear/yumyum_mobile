@@ -28,6 +28,7 @@ class ReviewVC: UIViewController {
     var feed: Feed = Feed()
     var score: Score = .five
     var place: Place?
+    var tempfeed: Feed?
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextField: UITextField!
@@ -59,13 +60,38 @@ class ReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
-        // delegate 설정
         titleTextField.delegate = self
         contentTextField.delegate = self
         titleTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .editingChanged)
         contentTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .editingChanged)
         locationTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .valueChanged)
         
+        if tempfeed != nil {
+            loadTempData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkNowReviewData()
+    }
+    
+    func checkNowReviewData() {
+        if titleTextField.text == "" || contentTextField.text == "" || locationTextField.text == "" || emojiLabel.text == "Label"{
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "임시저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
+        } else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
+            self.feed.isCompleted = true
+        }
+    }
+    
+    private func loadTempData() {
+        feed = tempfeed!
+        feed.userId = tempfeed?.user?.id
+        setEmoji(value: Score(rawValue: feed.score!)!)
+        titleTextField.text = feed.title
+        contentTextField.text = feed.content
+        locationTextField.text = feed.place?.name
     }
     
     @objc func textFieldDidChange(_sender: UITextField) {
@@ -88,34 +114,46 @@ class ReviewVC: UIViewController {
     @objc
     func leftBarButtonAction() {
         self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc
     func rightBarButtonAction() {
-        WebApiManager.shared.createMediaPath(mediaUrl: self.videoUrl) { (result) in
-            print("json: \(result)")
-            self.feed.thumbnailPath = URL(string: result["data"]["thumbnailPath"].stringValue)
-            self.feed.videoPath = URL(string: result["data"]["videoPath"].stringValue)
-            let user = UserDefaults.getLoginedUserInfo()
-            self.feed.userId = user!["id"].intValue
-            
-            self.feed.score = self.score.rawValue
-            
-            self.feed.place = self.place
-            
-            dump(self.feed)
-            
+        if self.videoUrl != nil {
+            WebApiManager.shared.createMediaPath(mediaUrl: self.videoUrl) { (result) in
+                print("json: \(result)")
+                self.feed.thumbnailPath = URL(string: result["data"]["thumbnailPath"].stringValue)
+                self.feed.videoPath = URL(string: result["data"]["videoPath"].stringValue)
+                let user = UserDefaults.getLoginedUserInfo()
+                self.feed.userId = user!["id"].intValue
+                
+                self.feed.score = self.score.rawValue
+                
+                self.feed.place = self.place
+                
+                WebApiManager.shared.createFeed(feed: self.feed) { (result) in
+                    print("feed생성: \(result)")
+                    if result["status"] == "200" {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+
+                } failure: { (error) in
+                    print("feed생성에러: \(error)")
+                }
+            } failure: { (error) in
+                print("error: \(error)")
+            }
+        } else {
+            print(self.feed)
+            print("임시저장시 들아오는 피드 생성부분")
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in
                 print("feed생성: \(result)")
                 if result["status"] == "200" {
-                    self.dismiss(animated: true, completion: nil)
+                    self.navigationController?.popViewController(animated: true)
                 }
-
             } failure: { (error) in
                 print("feed생성에러: \(error)")
             }
-        } failure: { (error) in
-            print("error: \(error)")
         }
     }
 
@@ -155,5 +193,6 @@ extension ReviewVC: PlaceDelegate {
         print("띵동place도착: \(place)")
         self.locationTextField.text = place.name
         self.place = place
+        self.feed.place = place
     }
 }

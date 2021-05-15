@@ -18,7 +18,6 @@ class MypageVC: UIViewController {
     var myLikeFeedList: [Feed] = []
     var tempList: [Feed] = []
     var isCheckFeedList = false
-    var nowMyFeed: Feed?
     
     static func instance() -> MypageVC {
         let vc = UIStoryboard.init(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MypageVC") as! MypageVC
@@ -76,7 +75,7 @@ class MypageVC: UIViewController {
             (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.myLikeFeedList = results.arrayValue.compactMap({Feed(json: $0)})
+                self.myLikeFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
             } else {
                 print("좋아요 피드 설정 오류 ")
             }
@@ -135,7 +134,6 @@ extension MypageVC: UICollectionViewDataSource {
         
         if isCheckFeedList == false {
             let myfeed = reverseMyFeedList[indexPath.item]
-            self.nowMyFeed = myfeed
             let imageurl:URL = myfeed.thumbnailPath!
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageurl)
@@ -152,7 +150,6 @@ extension MypageVC: UICollectionViewDataSource {
             }
         } else {
             let myfeed = reverseMyLikeFeedList[indexPath.item]
-            self.nowMyFeed = myfeed
             let imageurl:URL = myfeed.thumbnailPath!
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageurl)
@@ -185,6 +182,21 @@ extension MypageVC: UICollectionViewDelegate {
             vc.myFeedList = myFeedList
             vc.itemId = indexPath.item
             let reverseMyFeedList = Array(self.myFeedList.reversed())
+            let nowMyFeed = reverseMyFeedList[indexPath.item]
+            // 임시저장된 피드면 다시 리뷰작성 피드로 이동
+            if nowMyFeed.isCompleted == false {
+                defaultalert("피드를 계속 작성하시겠어요?"){() in
+                    let reviewVC = UIStoryboard(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVC
+                    reviewVC.tempfeed = nowMyFeed
+                    self.navigationController?.pushViewController(reviewVC, animated: true)
+                } failure: {
+                    print("취소")
+                }
+            } else {
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            // 좋아요 피드 전달
         } else {
             vc.myFeedList = myLikeFeedList
             vc.itemId = indexPath.item
