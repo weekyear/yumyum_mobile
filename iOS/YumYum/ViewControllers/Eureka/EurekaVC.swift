@@ -11,8 +11,12 @@ import GeoFire
 import FirebaseFirestore
 
 class EurekaVC: UIViewController {
-    var locationManager = CLLocationManager()
     
+    @IBOutlet var eurekaTextField: UITextField!
+    @IBOutlet var myChatLabel: UILabel!
+    
+    var locationManager = CLLocationManager()
+    let user = UserDefaults.getLoginedUserInfo()
     
     //위도와 경도
     var latitude: Double?
@@ -23,6 +27,8 @@ class EurekaVC: UIViewController {
         
         // 델리게이트 설정
         locationManager.delegate = self
+        eurekaTextField.delegate = self
+        
         // 거리 정확도 설정
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         // 사용자에게 허용 받기 alert 띄우기
@@ -56,20 +62,7 @@ class EurekaVC: UIViewController {
             object: nil
         )
         
-        
-        let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-        
-        let hash = GFUtils.geoHash(forLocation: location)
-        
-        let chat: [String: Any] = [
-            "lat": latitude,
-            "lng": longitude,
-            "geohash": hash,
-            "message": "아아 마이크테스트"
-        ]
-        
-        FirestoreManager.shared.createChat(userId: 24, chat: chat)
-        
+        myChatLabel.isHidden = true
         
     }
     
@@ -78,6 +71,43 @@ class EurekaVC: UIViewController {
         self.view.endEditing(true)
     }
     
+    func createChat(message: String) {
+        // 아이폰 설정에서의 위치 서비스가 켜진 상태라면
+        if CLLocationManager.locationServicesEnabled() {
+            print("위치 서비스 On 상태")
+            locationManager.startUpdatingLocation() //위치 정보 업데이트
+            // 위도 경도 가져오기
+            let coor = locationManager.location?.coordinate
+            latitude = coor?.latitude
+            longitude = coor?.longitude
+        } else {
+            print("위치 서비스 Off 상태")
+        }
+        
+        let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
+        let hash = GFUtils.geoHash(forLocation: location)
+        
+        
+
+        let chat: Chat = Chat(userId: user!["id"].intValue, message: message, geohash: hash, lat: latitude, lng: longitude)
+        
+        
+        
+        FirestoreManager.shared.createChat(userId: 24, chat: chat)
+        myChatLabel.text = message
+        myChatLabel.isHidden = false
+        eurekaTextField.text = ""
+        self.view.endEditing(true)
+        
+    }
+    
+    @IBAction func didTapEurekaButton(_ sender: Any) {
+        let message = eurekaTextField.text!
+        if message.count > 0 {
+            createChat(message: message)
+        }
+ 
+    }
     
     
     @objc
@@ -154,4 +184,18 @@ extension EurekaVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
+}
+
+extension EurekaVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.text!.count > 0 {
+            print("enter")
+            createChat(message: textField.text!)
+            
+            return true
+            
+        }
+        return false
+    }
+    
 }

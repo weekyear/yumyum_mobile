@@ -29,6 +29,9 @@
                                         <state key="normal" title="유레카!">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTapEurekaButton:" destination="pZ1-1H-eTq" eventType="touchUpInside" id="tyC-1e-Lyd"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -41,16 +44,28 @@
                                     <constraint firstAttribute="height" constant="50" id="sOb-KH-hrM"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eb2-oJ-ZHc">
+                                <rect key="frame" x="186" y="437.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iZQ-Vk-RfL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ZJr-6Y-UEi" firstAttribute="leading" secondItem="iZQ-Vk-RfL" secondAttribute="leading" id="EmF-tW-GWB"/>
                             <constraint firstItem="iZQ-Vk-RfL" firstAttribute="bottom" secondItem="ZJr-6Y-UEi" secondAttribute="bottom" id="IfD-fc-XZp"/>
+                            <constraint firstItem="Eb2-oJ-ZHc" firstAttribute="centerX" secondItem="ebn-Fy-WKF" secondAttribute="centerX" id="JSl-cf-4Os"/>
                             <constraint firstItem="iZQ-Vk-RfL" firstAttribute="trailing" secondItem="ZJr-6Y-UEi" secondAttribute="trailing" id="Xkd-r2-M47"/>
+                            <constraint firstItem="Eb2-oJ-ZHc" firstAttribute="centerY" secondItem="ebn-Fy-WKF" secondAttribute="centerY" id="xjP-Kc-ZUa"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="유레카" image="ellipsis.bubble" catalog="system" id="HpO-Pv-1GK"/>
+                    <connections>
+                        <outlet property="eurekaTextField" destination="RbF-IQ-01e" id="6E4-Xz-Qb2"/>
+                        <outlet property="myChatLabel" destination="Eb2-oJ-ZHc" id="YNS-YE-mHa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ztn-Td-lcy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

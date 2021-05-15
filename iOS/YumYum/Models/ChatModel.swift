@@ -8,8 +8,10 @@
 import Foundation
 
 
-struct Chat {
+struct Chat: Codable {
     var userId: Int?
     var message: String?
-    var geoHash: String?
+    var geohash: String?
+    var lat: Double?
+    var lng: Double?
 }
