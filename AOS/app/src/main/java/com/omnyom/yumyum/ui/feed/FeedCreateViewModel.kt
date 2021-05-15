@@ -38,14 +38,17 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     val content = MutableLiveData<String>().apply {
         value = ""
     }
+    val id = MutableLiveData<Long>().apply {
+        value = 0
+    }
     val score = MutableLiveData<Int>().apply {
         value = 0
     }
     val title = MutableLiveData<String>().apply {
         value = ""
     }
-    val editData = MutableLiveData<FeedData>().apply {
-    }
+//    val editData = MutableLiveData<FeedData>().apply {
+//    }
 
     // 비디오 데이터를 보냅니다!
     fun sendVideo(body: MultipartBody.Part?) {
@@ -81,8 +84,8 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
         })
     }
 
-    fun editFeed(id: Long) {
-        val editFeedRequest = EditFeedRequest(content.value?:"",id , isCompleted, placeRequest.value, score.value?:0,  title.value?:"", )
+    fun editFeed() {
+        val editFeedRequest = EditFeedRequest(content.value?:"", id.value?:-1, isCompleted, placeRequest.value, score.value?:0,  title.value?:"", )
 
         retrofitService.editFeed(editFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
@@ -92,6 +95,4 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
             }
         })
     }
-
-
 }

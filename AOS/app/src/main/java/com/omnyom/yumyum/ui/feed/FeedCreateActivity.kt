@@ -4,9 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
@@ -18,6 +15,7 @@ import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.model.feed.Place
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
@@ -30,7 +28,6 @@ import java.io.FileOutputStream
 
 
 class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layout.activity_feed_create) {
-
     private val feedCreateVM: FeedCreateViewModel by viewModels()
     private val avStars: List<LottieAnimationView> by lazy {
         arrayListOf(
@@ -50,14 +47,14 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun setup() {
-        initEditFeedData()
+        initFeedDataWhenEdit()
     }
 
     override fun setupViews() {
         supportActionBar?.hide()
         if (feedCreateVM.isEdit) {
             binding.btnSubmit.setOnClickListener {
-                feedCreateVM.editFeed(feedCreateVM.editData.value?.id.toString().toLong())
+                feedCreateVM.editFeed()
                 finish()
             }
 
@@ -96,21 +93,21 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 })
             }
         }
-        if (feedCreateVM.isEdit) {
-            feedCreateVM.editData.observe(this) {
-                val feedData = feedCreateVM.editData.value!!
-                binding.tvTitle.text = "피드 수정"
-                binding.editTextContent.setText(feedData.content)
-                binding.editTextTitle.setText(feedData.title)
-                if (feedData.score != 0) {
-                    changeAvStarColor(avStars[feedData.score - 1].id)
-                    changeAvStarSize(avStars[feedData.score - 1].id)
-                }
-                if (feedData.place != null) {
-                    binding.editTextPlace.setText(feedData.place.name)
-                }
-            }
-        }
+//        if (feedCreateVM.isEdit) {
+//            feedCreateVM.editData.observe(this) {
+//                val feedData = feedCreateVM.editData.value!!
+//                binding.tvTitle.text = "피드 수정"
+//                binding.editTextContent.setText(feedData.content)
+//                binding.editTextTitle.setText(feedData.title)
+//                if (feedData.score != 0) {
+//                    changeAvStarColor(avStars[feedData.score - 1].id)
+//                    changeAvStarSize(avStars[feedData.score - 1].id)
+//                }
+//                if (feedData.place != null) {
+//                    binding.editTextPlace.setText(feedData.place.name)
+//                }
+//            }
+//        }
     }
 
     override fun release() {
@@ -211,11 +208,35 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         }
     }
 
-    private fun initEditFeedData() {
+    private fun initFeedDataWhenEdit() {
         if (intent.hasExtra("feedData")) {
             val feedData = intent.getSerializableExtra("feedData") as FeedData
             feedCreateVM.isEdit = true
-            feedCreateVM.editData.value = feedData
+            binding.tvTitle.text = "피드 수정"
+            feedCreateVM.id.postValue(feedData.id.toLong())
+            feedCreateVM.title.postValue(feedData.title)
+            feedCreateVM.content.postValue(feedData.content)
+            feedCreateVM.score.postValue(feedData.score)
+
+            val feedPlace = feedData.place ?: Place("", 0, 0.0, 0.0, "", "")
+
+            PlaceRequest(
+                feedPlace.address,
+                feedPlace.locationX,
+                feedPlace.locationY,
+                feedPlace.name,
+                feedPlace.phone
+            ).let {
+                feedCreateVM.placeRequest.postValue(it)
+                binding.editTextPlace.setText(it.name)
+            }
+
+            if (feedData.score != 0) {
+                changeAvStarColor(avStars[feedData.score - 1].id)
+                changeAvStarSize(avStars[feedData.score - 1].id)
+            }
+
+//            feedCreateVM.editData.value = feedData
         }
     }
 }

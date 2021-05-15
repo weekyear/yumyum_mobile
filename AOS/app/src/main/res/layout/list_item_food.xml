@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="feed"
+            type="com.omnyom.yumyum.model.feed.FeedData" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,6 +50,7 @@
             app:animDuration="200"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:text="@{feed.content}"
             app:layout_goneMarginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="5dp"
-            android:text="AshOil"
+            android:text="@{'@' + feed.user.nickname}"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/text_name"
             android:textColor="@color/white"
@@ -87,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="10dp"
-            android:text="감자탕"
+            android:text="@{feed.title}"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/text_placename"
@@ -98,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="염이네 감자탕"
+            android:text="주소/가게이름"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:layout_marginBottom="15dp"

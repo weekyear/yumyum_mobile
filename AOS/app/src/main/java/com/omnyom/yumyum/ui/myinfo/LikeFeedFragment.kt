@@ -42,6 +42,5 @@ class LikeFeedFragment : BaseBindingFragment<FragmentLikeFeedBinding>(R.layout.f
         }
     }
 
-    override fun release() {
-    }
+    override fun release() { }
 }

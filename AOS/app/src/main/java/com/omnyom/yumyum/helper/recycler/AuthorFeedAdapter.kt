@@ -10,7 +10,7 @@ import com.omnyom.yumyum.helper.RotateTransformation
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
-import com.omnyom.yumyum.ui.selectedfeed.SelectedAllActivity
+import com.omnyom.yumyum.ui.myinfo.SelectedAllActivity
 
 class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAdapter.AuthorFeedViewHolder, FeedData>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : AuthorFeedViewHolder {
@@ -37,7 +37,7 @@ class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAd
 
     override fun getItemCount(): Int = items.size
 
-    inner class AuthorFeedViewHolder(private val itemBinding: ListItemFeedBinding) : BaseViewHolder(itemBinding.root) {
+    inner class AuthorFeedViewHolder(itemBinding: ListItemFeedBinding) : BaseViewHolder(itemBinding.root) {
         val thumbnail = itemBinding.ivThumbnail
     }
 

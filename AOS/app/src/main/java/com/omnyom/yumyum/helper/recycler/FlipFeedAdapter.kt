@@ -121,7 +121,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         if (items[position].place == null) {
             holder.placeName.text = "장소를 추가해주세요"
         } else {
-            holder.placeName.text = items[position].place.name + " | " + items[position].place.address
+            holder.placeName.text = items[position].place!!.name + " | " + items[position].place!!.address
         }
 
 //        holder.food.setVideoURI(ProxyFactory.feedVideoPathList[position])

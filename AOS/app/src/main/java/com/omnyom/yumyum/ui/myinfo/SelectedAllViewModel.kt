@@ -1,7 +1,6 @@
-package com.omnyom.yumyum.ui.selectedfeed
+package com.omnyom.yumyum.ui.myinfo
 
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,18 +11,13 @@ import com.omnyom.yumyum.ui.base.BaseViewModel
 class SelectedAllViewModel(application: Application) : BaseViewModel(application) {
     private val _feedData = MutableLiveData<List<FeedData>>().apply {
     }
-    val foodData : LiveData<List<FeedData>> = _feedData
+    val feedData : LiveData<List<FeedData>> = _feedData
 
-    lateinit var position : String
+    var position : Int = 0
 
     fun getData(intent: Intent) {
         val comeData = intent.getSerializableExtra("feedData") as ArrayList<FeedData>
-        position = intent.getIntExtra("position", 0).toString()
-        comeData.toList()
-        Log.d("comeData", "${comeData}")
+        position = intent.getIntExtra("position", 0)
         _feedData.postValue(comeData)
-
     }
-
-
 }
