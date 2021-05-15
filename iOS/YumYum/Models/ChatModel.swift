@@ -9,7 +9,6 @@ import Foundation
 
 
 struct Chat: Codable {
-    var userId: Int?
     var message: String?
     var geohash: String?
     var lat: Double?

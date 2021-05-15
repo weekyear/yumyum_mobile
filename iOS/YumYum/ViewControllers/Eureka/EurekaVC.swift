@@ -86,14 +86,10 @@ class EurekaVC: UIViewController {
         
         let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         let hash = GFUtils.geoHash(forLocation: location)
-        
-        
 
-        let chat: Chat = Chat(userId: user!["id"].intValue, message: message, geohash: hash, lat: latitude, lng: longitude)
+        let chat: Chat = Chat(message: message, geohash: hash, lat: latitude, lng: longitude)
         
-        
-        
-        FirestoreManager.shared.createChat(userId: 24, chat: chat)
+        FirestoreManager.shared.createChat(userId: user!["id"].intValue, chat: chat)
         myChatLabel.text = message
         myChatLabel.isHidden = false
         eurekaTextField.text = ""
