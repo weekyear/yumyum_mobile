@@ -50,6 +50,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>위치를 알려주세요?!</string>
 	<key>NSCameraUsageDescription</key>
 	<string>카메라 좀 쓴다</string>
 	<key>NSMicrophoneUsageDescription</key>
