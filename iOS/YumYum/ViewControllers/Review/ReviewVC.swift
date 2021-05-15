@@ -59,18 +59,28 @@ class ReviewVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
-        
         // delegate 설정
         titleTextField.delegate = self
         contentTextField.delegate = self
+        titleTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .editingChanged)
+        contentTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .editingChanged)
+        locationTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .valueChanged)
         
+    }
+    
+    @objc func textFieldDidChange(_sender: UITextField) {
+        if titleTextField.text == "" || contentTextField.text == "" || locationTextField.text == "" || emojiLabel.text == "Label"{
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "임시저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
+        } else {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
+            self.feed.isCompleted = true
+        }
     }
     
     func setLayout() {
         // navigationBar
         self.navigationController?.navigationBar.isHidden = false
         self.navigationItem.title = "리뷰쓰기"
-        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "임시저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
     }
@@ -94,9 +104,6 @@ class ReviewVC: UIViewController {
             self.feed.place = self.place
             
             dump(self.feed)
-            
-            
-            
             
             WebApiManager.shared.createFeed(feed: self.feed) { (result) in
                 print("feed생성: \(result)")

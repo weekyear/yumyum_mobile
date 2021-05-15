@@ -53,7 +53,8 @@ class PeopleVC: UIViewController {
         WebApiManager.shared.getMyFeedList(userId: userId!, authorId: userId!) {(result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.peopleFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                let list = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.peopleFeedList = list.filter { $0.isCompleted == true }
                 self.collectionView.reloadData()
             }
             

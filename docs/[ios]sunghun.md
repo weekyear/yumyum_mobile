@@ -750,9 +750,6 @@ final class ElonMusk {
 > 유저의 이벤트가 event queue로 부터 무시되고 삭제됐는지 판단하는 Bool값이다.
 
 - false : view를 위한 touch, press, keyboard 이벤트가 무시되고 삭제된다.
-<<<<<<< HEAD
-- true : true로 set해야 이벤트가 정상적으로 view에 전달되게 된다. 기본적으로 value는 true이다.
-=======
 - true : true로 set해야 이벤트가 정상적으로 view에 전달되게 된다. 기본적으로 value는 true이다.
 
 
@@ -762,6 +759,128 @@ final class ElonMusk {
 > 테이블 뷰와 컬렉션 뷰를 설계할때 그냥 셀을 사용하지 않고 재사용셀을 사용한다. 메모리에 1만개의 셀을 다 갖고 있어야하기 때문에 메모리 관리 차원에서 비효율적인데 그래서 이 셀을 재활용하는데 셀의  UI(이미지, 버튼, 레이블) 그리고 속성들이 중첩되거나 반복되는 경우가 생기게 된다.
 
 - 발생한 문제는 현재 평점에 따라 애니메이션 아이콘이 동작해야하는데 재사용 셀을 사용하다보니 중첩되는 경우가 발생했다.
+- 이 문제를 해결하기 위해서는 해당 인덱스의 상태를 기억하고 있어야한다. 델리게이트로 값을 넘기는  방법으로 해결
+- VideoCollectionViewCell.swift
 
-- 이 문제를 해결하기 위해서는 해당 인덱스의 상태를 기억하고 있어야한다.
->>>>>>> feature/iOS/Main
+```swift
+var index : Int = 0
+var delegate: userProfileBtnDelegate?
+.....//델리게이트 변수에 프로토콜을 지정하고
+@IBAction func userBtnPress(_ sender: Any) {
+  	self.delegate?.userBtnPress(index: index, nowfeed: nowFeed)
+}// 버튼을 클랙했을때 collectionviewCell.델리게이트 안의 함수를 호출해서 값을 넘겨준다.
+.....
+protocol userProfileBtnDelegate {
+    func userBtnPress(index: Int, nowfeed : Feed)
+    func saveScoreState(index: Int, nowfeed: Feed)
+}
+```
+
+- HomeVc.swift
+
+```swift
+//값을 전달받을 viewController에서 프로토콜을 채택하고 전달 받은 값을 사용해주면된다.
+extension HomeVC:userProfileBtnDelegate {
+    func saveScoreState(index: Int, nowfeed: Feed) {
+        switch nowfeed.score! {
+        case 1:
+            Scores[index] = 1
+        case 2:
+            Scores[index] = 2
+        case 3:
+            Scores[index] = 3
+        case 4:
+            Scores[index] = 4
+        case 5:
+            Scores[index] = 5
+        default:
+            print("평점값이 없어요!")
+        }
+    }
+   func userBtnPress(index: Int, nowfeed: Feed) {
+        let storyboard: UIStoryboard? = UIStoryboard(name: "Home", bundle: nil)
+        
+        guard let peopleVC = storyboard?.instantiateViewController(withIdentifier: "PeopleVC") as? PeopleVC else {
+            return
+        }
+        
+        peopleVC.userId = nowfeed.user?.id!
+        peopleVC.username = nowfeed.user?.nickname!
+        
+        WebApiManager.shared.getUserInfo(userId: (nowfeed.user?.id!)!) { (result) in
+            if result["status"] == "200"{
+                let results = result["data"]
+                peopleVC.userData = User(json: results)
+                self.navigationController?.pushViewController(peopleVC, animated: true)
+            }
+        } failure: { (error) in
+            print(error)
+        }
+    }
+```
+
+### **더 쉬운 방법이 있었다.**
+
+> 참고 : https://sihyungyou.github.io/iOS-dequeueReusableCell/
+
+- 테이블 뷰 셀은 `prepareForReuse` 함수ㅡㄹㄹ 제공하는데 여기서 셀 뷰 측면의 속성들을 초기화 시켜주면 된다.
+- ![image-20210515145523152]([ios]sunghun.assets/image-20210515145523152.png)
+
+- 위의 그림을 보면 좀 더 명확하게 이해가 가는데 코드적으로`prepareForReuse()`로 들어가서 한번 초기화가 되고 셀을 구성하는 `cellForRowAt indexPath`로 들어가게된다.
+
+- 즉 `prepareForReuse()`에서 재사용되는 셀의 속성을 초기화시켜주면된다.
+- 애니메이션을 스탑시키고 매번, 그리고 그다음에 `cellForRowAt` 에 들어가서 애니메이션 플레이 효과를 주면 된다.
+
+ ```swift
+ //videoCollectionViewCell.swift
+ override func prepareForReuse() {
+         super.prepareForReuse()
+         animationview.stop()
+         animationview2.stop()
+         animationview3.stop()
+         animationview4.stop()
+         animationview5.stop()
+     }
+ 
+ //HomeVC.swift
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    ...
+      switch feed.score! {
+         case 1:
+             cell.animationview.play()
+             cell.animationview.loopMode = .loop
+ //            animationview.setValueProvider(colorProvider, keypath: keypath)
+             break
+         case 2:
+             cell.animationview2.play()
+             cell.animationview2.loopMode = .loop
+ //            animationview2.setValueProvider(colorProvider, keypath: keypath)
+             break
+         case 3:
+             cell.animationview3.play()
+             cell.animationview3.loopMode = .loop
+ //            animationview3.setValueProvider(colorProvider, keypath: keypath)
+             break
+         case 4:
+             cell.animationview4.play()
+             cell.animationview4.loopMode = .loop
+ //            animationview4.setValueProvider(colorProvider, keypath: keypath)
+             break
+         case 5:
+             cell.animationview5.play()
+             cell.animationview5.loopMode = .loop
+ //            animationview5.setValueProvider(colorProvider, keypath: keypath)
+             break
+         default:
+             print("평점 값이 없습니다.")
+             cell.animationview.pause()
+             cell.animationview2.pause()
+             cell.animationview3.pause()
+             cell.animationview4.pause()
+             cell.animationview5.pause()
+         }
+         return cell
+    
+    
+ ```
+

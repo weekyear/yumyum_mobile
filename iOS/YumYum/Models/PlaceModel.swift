@@ -17,12 +17,11 @@ struct Place: Codable {
     
     
     init(json: JSON) {
-        self.address = json["address"].stringValue
+        self.address = json["address_name"].stringValue
         self.locationX = json["x"].doubleValue
         self.locationY = json["y"].doubleValue
         self.phone = json["phone"].stringValue
-        self.name = json["name"].stringValue
-
+        self.name = json["place_name"].stringValue
     }
     
     init(address: String, locationX: Double, locationY: Double, name: String, phone: String) {
