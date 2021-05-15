@@ -17,7 +17,7 @@ class SelectedAllViewModel(application: Application) : BaseViewModel(application
     lateinit var position : String
 
     fun getData(intent: Intent) {
-        val comeData = intent.getSerializableExtra("FeedData") as ArrayList<FeedData>
+        val comeData = intent.getSerializableExtra("feedData") as ArrayList<FeedData>
         position = intent.getIntExtra("position", 0).toString()
         comeData.toList()
         Log.d("comeData", "${comeData}")

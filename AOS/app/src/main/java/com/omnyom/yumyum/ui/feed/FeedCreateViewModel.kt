@@ -47,15 +47,6 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     val editData = MutableLiveData<FeedData>().apply {
     }
 
-
-    fun getEditData(myIntent: Intent) {
-        val feedData = myIntent.getSerializableExtra("FeedData") as FeedData
-        if (feedData != null) {
-            isEdit = true
-        }
-        editData.value = feedData
-    }
-
     // 비디오 데이터를 보냅니다!
     fun sendVideo(body: MultipartBody.Part?) {
         retrofitService.sendVideo(body!!).enqueue(object : Callback<SendVideoResponse> {

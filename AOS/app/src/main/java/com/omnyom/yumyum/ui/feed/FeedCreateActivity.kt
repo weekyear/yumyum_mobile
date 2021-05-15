@@ -17,6 +17,7 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
+import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
@@ -49,7 +50,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     }
 
     override fun setup() {
-        feedCreateVM.getEditData(intent)
+        initEditFeedData()
     }
 
     override fun setupViews() {
@@ -207,6 +208,14 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     private fun checkAllFeedRequest(): Boolean {
         feedCreateVM.run {
             return !(title.value.isNullOrBlank() || content.value.isNullOrBlank() || score.value == 0 || placeRequest.value?.name.isNullOrBlank())
+        }
+    }
+
+    private fun initEditFeedData() {
+        if (intent.hasExtra("feedData")) {
+            val feedData = intent.getSerializableExtra("feedData") as FeedData
+            feedCreateVM.isEdit = true
+            feedCreateVM.editData.value = feedData
         }
     }
 }

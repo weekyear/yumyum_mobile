@@ -80,7 +80,7 @@ class FlipFeedAdapter(val context: Context) : BaseRecyclerAdapter<FlipFeedAdapte
         fun goEditFeed() {
             val intent = Intent(context, FeedCreateActivity::class.java)
             val nowFeedData : FeedData = items[position]
-            intent.putExtra("FeedData", nowFeedData)
+            intent.putExtra("feedData", nowFeedData)
             context?.startActivity(intent)
         }
 

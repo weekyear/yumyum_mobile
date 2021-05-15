@@ -24,13 +24,12 @@ class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAd
         Glide.with(context)
             .load(items[position].thumbnailPath)
             .transform(RotateTransformation(context, 90f))
-            .thumbnail(0.1f)
             .into(holder.thumbnail)
 
         holder.thumbnail.setOnClickListener {
             val sendData : ArrayList<FeedData> = ArrayList(items.map { item -> item })
             val intent = Intent(context, SelectedAllActivity::class.java)
-            intent.putExtra("FeedData", sendData)
+            intent.putExtra("feedData", sendData)
             intent.putExtra("position", position)
             context.startActivity(intent)
         }

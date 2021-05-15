@@ -59,7 +59,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
     // 피드 수정
     fun goEditFeed() {
         Intent(context, FeedCreateActivity::class.java).run {
-            putExtra("FeedData", curFeed)
+            putExtra("feedData", curFeed)
             context?.startActivity(this)
         }
     }

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.ms.square.android.expandabletextview.ExpandableTextView
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
+import com.omnyom.yumyum.helper.KakaoLinkUtils
 import com.omnyom.yumyum.helper.RotateTransformation
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.model.feed.FeedData
@@ -37,6 +38,7 @@ class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewMode
     private lateinit var ivThumbnail : ImageView
     private lateinit var progressBar : ProgressBar
     private lateinit var btnEdit : ImageButton
+    private lateinit var btnSend : ImageButton
     private lateinit var avStar : LottieAnimationView
     private var isLikeAnimating : Boolean = false
 
@@ -60,6 +62,7 @@ class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewMode
         ivThumbnail = binding.ivThumbnail
         progressBar = binding.progressBar
         avStar = binding.avStar
+        btnSend = binding.btnSend
     }
 
     override fun onResume() {
@@ -86,6 +89,7 @@ class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewMode
         initTVUserName()
         initTVLikeNum()
         initLikeBtn()
+        initSendBtn()
         initVideoFood()
     }
 
@@ -197,6 +201,12 @@ class FeedFragment(private var feed: FeedData, private val homeVM : HomeViewMode
                 thumbUp.playAnimation()
                 isLikeAnimating = false
             }
+        }
+    }
+
+    private fun initSendBtn() {
+        btnSend.setOnClickListener {
+            KakaoLinkUtils.kakaoLink(requireActivity(), feed)
         }
     }
 
