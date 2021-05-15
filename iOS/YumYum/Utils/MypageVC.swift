@@ -75,7 +75,7 @@ class MypageVC: UIViewController {
             (result) in
             if result["status"] == "200" {
                 let results = result["data"]
-                self.myLikeFeedList = results.arrayValue.compactMap({Feed(json: $0)})
+                self.myLikeFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
             } else {
                 print("좋아요 피드 설정 오류 ")
             }
@@ -125,25 +125,47 @@ extension MypageVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let reverseMyFeedList = Array(self.myFeedList.reversed())
-        let myfeed = reverseMyFeedList[indexPath.item]
-        let imageurl:URL = myfeed.thumbnailPath!
+        let reverseMyLikeFeedList = Array(self.myLikeFeedList.reversed())
+//        let myfeed = reverseMyFeedList[indexPath.item]
+//        let imageurl:URL = myfeed.thumbnailPath!
         let cell: MyCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifire, for: indexPath) as! MyCollectionViewCell
         
         var image: UIImage?
-
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageurl)
-            DispatchQueue.main.async {
-                let beforeimage = UIImage(data: data!)
-                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-                if myfeed.isCompleted! == false {
-                    let opacityimage = image?.image(alpha: 0.3)
-                    cell.foodImageView.image = opacityimage
-                } else {
-                    cell.foodImageView.image = image
+        
+        if isCheckFeedList == false {
+            let myfeed = reverseMyFeedList[indexPath.item]
+            let imageurl:URL = myfeed.thumbnailPath!
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageurl)
+                DispatchQueue.main.async {
+                    let beforeimage = UIImage(data: data!)
+                    image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    if myfeed.isCompleted! == false {
+                        let opacityimage = image?.image(alpha: 0.3)
+                        cell.foodImageView.image = opacityimage
+                    } else {
+                        cell.foodImageView.image = image
+                    }
+                }
+            }
+        } else {
+            let myfeed = reverseMyLikeFeedList[indexPath.item]
+            let imageurl:URL = myfeed.thumbnailPath!
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageurl)
+                DispatchQueue.main.async {
+                    let beforeimage = UIImage(data: data!)
+                    image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    if myfeed.isCompleted! == false {
+                        let opacityimage = image?.image(alpha: 0.3)
+                        cell.foodImageView.image = opacityimage
+                    } else {
+                        cell.foodImageView.image = image
+                    }
                 }
             }
         }
+
         return cell
     }
 }
@@ -153,20 +175,34 @@ extension MypageVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You tepped me \(indexPath.item)")
-//        delegate?.sendData(self, feedList: tempList)
-//        let myFeedVC = MyFeedVC.instance()
-//        self.delegate = myFeedVC
-        let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
         
+        let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
+        // 내가 쓴 피드와 좋아요 피드를 구분한다.
         if isCheckFeedList == false {
             vc.myFeedList = myFeedList
+            vc.itemId = indexPath.item
+            let reverseMyFeedList = Array(self.myFeedList.reversed())
+            let nowMyFeed = reverseMyFeedList[indexPath.item]
+            // 임시저장된 피드면 다시 리뷰작성 피드로 이동
+            if nowMyFeed.isCompleted == false {
+                defaultalert("피드를 계속 작성하시겠어요?"){() in
+                    let reviewVC = UIStoryboard(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVC
+                    reviewVC.tempfeed = nowMyFeed
+                    self.navigationController?.pushViewController(reviewVC, animated: true)
+                } failure: {
+                    print("취소")
+                }
+            } else {
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+            // 좋아요 피드 전달
         } else {
             vc.myFeedList = myLikeFeedList
+            vc.itemId = indexPath.item
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
-        vc.itemId = indexPath.item
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
-        
         }
     
     }

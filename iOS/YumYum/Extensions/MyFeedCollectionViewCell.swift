@@ -89,6 +89,7 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     
     private func loadData(feed:Feed) {
         myFoodLabel.text = feed.title
+        print(feed.user?.nickname)
         myNameLabel.text = "@" + (feed.user?.nickname)! as String
         myReviewLabel.text = feed.content
         

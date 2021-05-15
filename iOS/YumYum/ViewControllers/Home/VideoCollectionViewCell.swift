@@ -86,7 +86,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     }
     
     @IBAction func likeBtnPress(_ sender: Any) {
-        print(nowFeed)
         if checkLike == true {
             checkLike = false
             likeButton.tintColor = .white
@@ -170,5 +169,4 @@ class VideoCollectionViewCell: UICollectionViewCell{
 
 protocol userProfileBtnDelegate {
     func userBtnPress(index: Int, nowfeed : Feed)
-    func saveScoreState(index:Int, nowfeed: Feed)
 }
