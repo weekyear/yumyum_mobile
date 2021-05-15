@@ -11,7 +11,7 @@
         <!--유레카-->
         <scene sceneID="wTR-4q-Acj">
             <objects>
-                <viewController id="pZ1-1H-eTq" sceneMemberID="viewController">
+                <viewController id="pZ1-1H-eTq" customClass="EurekaVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebn-Fy-WKF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

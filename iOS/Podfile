@@ -12,7 +12,12 @@ target 'YumYum' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'  
   pod 'GoogleSignIn'
+  pod 'GeoFire/Utils'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
   pod 'lottie-ios'
+
 	
   target 'YumYumTests' do
     inherit! :search_paths
