@@ -37,6 +37,9 @@
 		54E4D369264C4CB9006CC665 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E4D368264C4CB9006CC665 /* MypageVC.swift */; };
 		5FE9A28FA160C665CBC61AB2 /* Pods_YumYumTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E748F51A7196099FB67267 /* Pods_YumYumTests.framework */; };
 		C5A3452B51F98A7115513DBD /* Pods_YumYum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7EA1CC62D0494979A62708 /* Pods_YumYum.framework */; };
+		E51291A326501763002B064C /* EurekaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291A226501763002B064C /* EurekaVC.swift */; };
+		E51291AB26502A1A002B064C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291AA26502A1A002B064C /* ChatModel.swift */; };
+		E51291B126502AB1002B064C /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291B026502AB1002B064C /* FirestoreManager.swift */; };
 		E516C096264125CA00B8F4E0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C095264125CA00B8F4E0 /* OpenGLES.framework */; };
 		E516C098264125D700B8F4E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C097264125D700B8F4E0 /* SystemConfiguration.framework */; };
 		E516C09A264125E800B8F4E0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C099264125E800B8F4E0 /* CoreLocation.framework */; };
@@ -175,6 +178,9 @@
 		843970AD8155E7CF31EF0110 /* Pods-YumYum-YumYumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A93E4C0E82BCBDA8F90B5A0F /* Pods_YumYum_YumYumUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumYum_YumYumUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E748F51A7196099FB67267 /* Pods_YumYumTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YumYumTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51291A226501763002B064C /* EurekaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EurekaVC.swift; sourceTree = "<group>"; };
+		E51291AA26502A1A002B064C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		E51291B026502AB1002B064C /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		E516C095264125CA00B8F4E0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E516C097264125D700B8F4E0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E516C099264125E800B8F4E0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -353,6 +359,22 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		E51291A12650174D002B064C /* Eureka */ = {
+			isa = PBXGroup;
+			children = (
+				E51291A226501763002B064C /* EurekaVC.swift */,
+			);
+			path = Eureka;
+			sourceTree = "<group>";
+		};
+		E51291AF26502A9D002B064C /* FirestoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				E51291B026502AB1002B064C /* FirestoreManager.swift */,
+			);
+			path = FirestoreManager;
+			sourceTree = "<group>";
+		};
 		E516C0AE264129DF00B8F4E0 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,6 +507,7 @@
 		E548AAE8263869570049AA0B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E51291AF26502A9D002B064C /* FirestoreManager */,
 				E548AAE9263869600049AA0B /* WebApiManager */,
 			);
 			path = Managers;
@@ -540,6 +563,7 @@
 				5488E21526394F640096C35B /* UserModel.swift */,
 				E548AB15263AB51B0049AA0B /* FeedModel.swift */,
 				E536EBB6263BFDCD00791E7C /* PlaceModel.swift */,
+				E51291AA26502A1A002B064C /* ChatModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -561,6 +585,7 @@
 		E5920A152627C19400836123 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E51291A12650174D002B064C /* Eureka */,
 				E5C2B06E264B74C6008BB747 /* Search */,
 				54D5B2DD26366AD5004F0BBB /* Home */,
 				54D5B2DC26366AA3004F0BBB /* Login */,
@@ -977,6 +1002,7 @@
 				E5969688264BE361009B64A3 /* UITabBarExtension.swift in Sources */,
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
+				E51291AB26502A1A002B064C /* ChatModel.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
@@ -1016,6 +1042,7 @@
 				E5B30F7D264434C1000D8934 /* PlaceSearchVC.swift in Sources */,
 				5488E21626394F640096C35B /* UserModel.swift in Sources */,
 				54B8246E263C0EC1001F6A17 /* MyCollectionViewCell.swift in Sources */,
+				E51291B126502AB1002B064C /* FirestoreManager.swift in Sources */,
 				54B1E223263713150030C832 /* UIViewControllerExtension.swift in Sources */,
 				54B30C84264C4EF900E2F801 /* PeopleVC.swift in Sources */,
 				548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */,
@@ -1025,6 +1052,7 @@
 				54DA816A264816530029FC92 /* UIImage.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
+				E51291A326501763002B064C /* EurekaVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
