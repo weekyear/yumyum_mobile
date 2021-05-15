@@ -40,7 +40,23 @@ class EurekaVC: UIViewController {
             print("위치 서비스 Off 상태")
         }
         
-
+        // Subscribe to Keyboard Will Show notifications
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        // Subscribe to Keyboard Will Hide notifications
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+        
+        
         let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         
         let hash = GFUtils.geoHash(forLocation: location)
@@ -55,6 +71,69 @@ class EurekaVC: UIViewController {
         FirestoreManager.shared.createChat(userId: 24, chat: chat)
         
         
+    }
+    
+    // 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
+    
+    
+    @objc
+    dynamic func keyboardWillShow(
+        _ notification: NSNotification
+    ) {        
+        animateWithKeyboard(notification: notification) {
+            (keyboardFrame) in
+            let constant = -keyboardFrame.height + (self.tabBarController?.tabBar.frame.size.height)!
+            self.view.frame.origin.y = constant
+            
+        }
+    }
+    
+    @objc
+    dynamic func keyboardWillHide(
+        _ notification: NSNotification
+    ) {
+        animateWithKeyboard(notification: notification) {
+            (keyboardFrame) in
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    func animateWithKeyboard(
+        notification: NSNotification,
+        animations: ((_ keyboardFrame: CGRect) -> Void)?
+    ) {
+        // Extract the duration of the keyboard animation
+        let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
+        let duration = notification.userInfo![durationKey] as! Double
+        
+        // Extract the final frame of the keyboard
+        let frameKey = UIResponder.keyboardFrameEndUserInfoKey
+        let keyboardFrameValue = notification.userInfo![frameKey] as! NSValue
+        
+        // Extract the curve of the iOS keyboard animation
+        let curveKey = UIResponder.keyboardAnimationCurveUserInfoKey
+        let curveValue = notification.userInfo![curveKey] as! Int
+        let curve = UIView.AnimationCurve(rawValue: curveValue)!
+        
+        // Create a property animator to manage the animation
+        let animator = UIViewPropertyAnimator(
+            duration: duration,
+            curve: curve
+        ) {
+            // Perform the necessary animation layout updates
+            animations?(keyboardFrameValue.cgRectValue)
+            
+            // Required to trigger NSLayoutConstraint changes
+            // to animate
+            self.view?.layoutIfNeeded()
+        }
+        
+        // Start the animation
+        animator.startAnimation()
     }
     
     

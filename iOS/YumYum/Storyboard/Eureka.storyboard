@@ -15,8 +15,40 @@
                     <view key="view" contentMode="scaleToFill" id="ebn-Fy-WKF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJr-6Y-UEi">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="유레카를 외쳐보세요!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RbF-IQ-01e">
+                                        <rect key="frame" x="10" y="8" width="340" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5p-kg-ong">
+                                        <rect key="frame" x="360" y="10" width="44" height="30"/>
+                                        <state key="normal" title="유레카!">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="n5p-kg-ong" secondAttribute="trailing" constant="10" id="1hU-PQ-dDD"/>
+                                    <constraint firstItem="n5p-kg-ong" firstAttribute="centerY" secondItem="ZJr-6Y-UEi" secondAttribute="centerY" id="1wk-UG-4r4"/>
+                                    <constraint firstItem="RbF-IQ-01e" firstAttribute="leading" secondItem="ZJr-6Y-UEi" secondAttribute="leading" constant="10" id="LoW-Hw-eWG"/>
+                                    <constraint firstItem="RbF-IQ-01e" firstAttribute="centerY" secondItem="ZJr-6Y-UEi" secondAttribute="centerY" id="NcA-b5-Kob"/>
+                                    <constraint firstItem="n5p-kg-ong" firstAttribute="leading" secondItem="RbF-IQ-01e" secondAttribute="trailing" constant="10" id="lb3-Iy-zI6"/>
+                                    <constraint firstAttribute="height" constant="50" id="sOb-KH-hrM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iZQ-Vk-RfL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ZJr-6Y-UEi" firstAttribute="leading" secondItem="iZQ-Vk-RfL" secondAttribute="leading" id="EmF-tW-GWB"/>
+                            <constraint firstItem="iZQ-Vk-RfL" firstAttribute="bottom" secondItem="ZJr-6Y-UEi" secondAttribute="bottom" id="IfD-fc-XZp"/>
+                            <constraint firstItem="iZQ-Vk-RfL" firstAttribute="trailing" secondItem="ZJr-6Y-UEi" secondAttribute="trailing" id="Xkd-r2-M47"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="유레카" image="ellipsis.bubble" catalog="system" id="HpO-Pv-1GK"/>
                 </viewController>
