@@ -21,6 +21,10 @@ class KakaoMapUtils {
             locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }
 
+        fun initLocationFragmentManager(context: Context?) {
+            locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        }
+
         fun getMyPosition(context: Context): List<Double> {
             var latitude = ""
             var longitude = ""

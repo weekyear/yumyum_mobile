@@ -12,6 +12,11 @@
         android:title="피드작성" />
 
     <item
+        android:id="@+id/navigation_eureka"
+        android:icon="@drawable/ic_plus"
+        android:title="Eureka" />
+
+    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_user"
         android:title="@string/title_profile" />
