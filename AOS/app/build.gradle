@@ -75,6 +75,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.3.2'
     implementation 'com.google.android.gms:play-services-auth:18.1.0'
 
+    // firebase
+    implementation 'com.google.firebase:firebase-core:17.2.3'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.1.1'
+    implementation 'com.google.firebase:firebase-database-ktx:19.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.2'
+    implementation 'com.firebase:geofire-android-common:3.1.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
     // video-cache
     implementation 'com.danikula:videocache:2.7.1'
 
@@ -127,4 +135,5 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

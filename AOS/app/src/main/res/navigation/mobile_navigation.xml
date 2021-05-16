@@ -11,6 +11,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/navigation_eureka"
+        android:name="com.omnyom.yumyum.ui.eureka.EurekaFragment"
+        android:label="Eureka"
+        tools:layout="@layout/fragment_eureka" />
 
     <fragment
         android:id="@+id/navigation_profile"
