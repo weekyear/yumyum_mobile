@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.signup.SignUpRequest
 import com.omnyom.yumyum.model.signup.SignUpResponse
@@ -21,7 +22,6 @@ import retrofit2.Response
 
 class UserInfoEditViewModel(application: Application) : BaseViewModel(application)  {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
-    val userId = PreferencesManager.getLong(getApplication(), "userId")
 
     init {
         getUserData()
@@ -90,7 +90,7 @@ class UserInfoEditViewModel(application: Application) : BaseViewModel(applicatio
     }
 
     fun getUserData() {
-        var myFeedCall = retrofitService.getUserData(userId!!)
+        var myFeedCall = retrofitService.getUserData(userId)
         myFeedCall.enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {

@@ -32,3 +32,4 @@ data class PlaceRequest(
         var name: String,
         var phone: String
 )
+

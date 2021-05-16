@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.FeedResponse
@@ -23,7 +24,6 @@ import retrofit2.Response
 
 class UserFeedViewModel(application: Application) : AndroidViewModel(application) {
     private var retrofitService: RetrofitService = RetrofitBuilder.buildService(RetrofitService::class.java)
-    val userId = PreferencesManager.getLong(getApplication(), "userId")
 
     private val _foodData = MutableLiveData<List<FeedData>>().apply {
         value = ArrayList()
@@ -36,7 +36,7 @@ class UserFeedViewModel(application: Application) : AndroidViewModel(application
     val authorData : LiveData<UserData> = _authorData
 
     fun getAuthorFeed(authorId:Long) {
-        var call = retrofitService.getUserFeeds(authorId, userId!!)
+        var call = retrofitService.getUserFeeds(authorId, userId)
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
