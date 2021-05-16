@@ -12,7 +12,7 @@ import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
 import com.omnyom.yumyum.ui.myinfo.SelectedAllActivity
 
-class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAdapter.AuthorFeedViewHolder, FeedData>() {
+class AuthorFeedAdapter(val context: Context, val isLikeFeed: Boolean) : BaseRecyclerAdapter<AuthorFeedAdapter.AuthorFeedViewHolder, FeedData>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : AuthorFeedViewHolder {
         val itemBinding = ListItemFeedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AuthorFeedViewHolder(itemBinding)
@@ -30,6 +30,7 @@ class AuthorFeedAdapter(val context: Context) : BaseRecyclerAdapter<AuthorFeedAd
             val sendData : ArrayList<FeedData> = ArrayList(items.map { item -> item })
             val intent = Intent(context, SelectedAllActivity::class.java)
             intent.putExtra("feedData", sendData)
+            intent.putExtra("isLikeFeed", isLikeFeed)
             intent.putExtra("position", position)
             context.startActivity(intent)
         }

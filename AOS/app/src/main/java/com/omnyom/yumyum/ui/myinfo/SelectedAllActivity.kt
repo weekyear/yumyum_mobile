@@ -1,21 +1,25 @@
 package com.omnyom.yumyum.ui.myinfo
 
-import android.app.AlertDialog
 import android.content.Intent
-import android.view.ContextThemeWrapper
+import android.util.Log
 import android.widget.PopupMenu
 import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.auth.api.Auth
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivitySelectedAllBinding
+import com.omnyom.yumyum.helper.GoogleLoginHelper
+import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.recycler.FeedFragment
 import com.omnyom.yumyum.helper.recycler.FeedFragment.Companion.deleteAlert
 import com.omnyom.yumyum.helper.recycler.FeedFragment.Companion.goEditFeed
-import com.omnyom.yumyum.helper.recycler.FlipFeedAdapter
 import com.omnyom.yumyum.helper.recycler.FlipFeedPagerAdapter
+import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.model.feed.Place
+import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.feed.FeedCreateActivity
+import okhttp3.internal.notify
 
 
 class SelectedAllActivity : BaseBindingActivity<ActivitySelectedAllBinding>(R.layout.activity_selected_all) {
@@ -69,4 +73,17 @@ class SelectedAllActivity : BaseBindingActivity<ActivitySelectedAllBinding>(R.la
     }
 
     override fun release() { }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+        Log.e("RESULT", result?.status.toString())
+
+        if (resultCode == RESULT_OK && requestCode == FeedFragment.EDIT_FEED) {
+            selectedAllVM.editFeed(data)
+        }
+    }
+
+
 }

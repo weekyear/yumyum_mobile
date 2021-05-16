@@ -7,6 +7,7 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieProperty
 import com.airbnb.lottie.SimpleColorFilter
@@ -35,4 +36,8 @@ fun LottieAnimationView.changeLayersColor(@ColorRes colorRes: Int) {
 
 fun getVideoCacheDir(context: Context): File {
     return File(context.externalCacheDir, "video-cache")
+}
+
+fun <T> MutableLiveData<T>.notifyObserver() {
+    this.value = this.value
 }

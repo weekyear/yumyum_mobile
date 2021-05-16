@@ -32,6 +32,8 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     companion object {
         lateinit var curFeed : FeedData
 
+        const val EDIT_FEED = 1234
+
         fun deleteAlert(activity: Activity) {
             AlertDialog.Builder(ContextThemeWrapper(activity, R.style.Theme_AppCompat_Light_Dialog)).apply {
                 setTitle("피드 삭제")
@@ -60,7 +62,7 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         fun goEditFeed(activity: Activity) {
             Intent(activity, FeedCreateActivity::class.java).run {
                 putExtra("feedData", curFeed)
-                activity.startActivity(this)
+                activity.startActivityForResult(this, EDIT_FEED)
             }
         }
     }
@@ -109,6 +111,11 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     override fun onResume() {
         initProgressBar()
         initAVStar()
+        initTVPlace()
+        initTVTitle()
+        initTVContent()
+        initTVUserName()
+        initTVLikeNum()
         curFeed = feed
 
         super.onResume()
@@ -124,11 +131,6 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         initIsCompleted()
         initIVThumbnail()
         initExpandable()
-        initTVPlace()
-        initTVTitle()
-        initTVContent()
-        initTVUserName()
-        initTVLikeNum()
         initLikeBtn()
         initSendBtn()
         initVideoFood()
@@ -182,10 +184,9 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     private fun initTVTitle() {
         if (feed.title == "") {
             foodName.text = "음식명를 입력해주세요"
+        } else {
+            foodName.text = feed.title
         }
-//        else {
-//            foodName.text = feed.title
-//        }
     }
 
     private fun initTVPlace() {
@@ -200,21 +201,20 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     private fun initTVContent() {
         if (feed.content == "") {
             detail.text = "내용을 입력해주세요"
+        } else {
+            detail.text = feed.content
         }
-//        else {
-//            detail.text = feed.content
-//        }
     }
 
     private fun initTVUserName() {
-//        userName.text = "@" + feed.user.nickname
+        userName.text = "@" + feed.user.nickname
         userName.setOnClickListener{
             goUserFeed()
         }
     }
 
     private fun initTVLikeNum() {
-//        likeNum.text = feed.likeCount.toString()
+        likeNum.text = feed.likeCount.toString()
     }
 
     private fun initLikeBtn() {
@@ -280,7 +280,7 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         context?.startActivity(intent)
     }
 
-    fun likeFeed(feedId: Long) {
+    private fun likeFeed(feedId: Long) {
         var call = RetrofitManager.retrofitService.feedLike(LikeRequest(feedId, PreferencesManager.userId).get())
         call.enqueue(object : Callback<LikeResponse> {
             override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
@@ -295,7 +295,7 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     }
 
     // 안좋아요!
-    fun unlikeFeed(feedId: Long) {
+    private fun unlikeFeed(feedId: Long) {
         var call = RetrofitManager.retrofitService.cancelFeedLike(feedId, PreferencesManager.userId)
         call.enqueue(object : Callback<LikeResponse> {
             override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {

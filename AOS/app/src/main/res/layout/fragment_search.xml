@@ -14,11 +14,23 @@
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchFragment">
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="22dp"
+            android:text="피드 검색"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:iconifiedByDefault="false"
@@ -32,12 +44,32 @@
             android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_view"
             tools:layout="@layout/fragment_search_inner_tab" />
 
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="140dp"
+            android:src="@drawable/illust_search_02"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_view" />
 
-
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/please_search"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/iv_search"
+            app:layout_constraintEnd_toEndOf="@id/iv_search"
+            app:layout_constraintTop_toBottomOf="@id/iv_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

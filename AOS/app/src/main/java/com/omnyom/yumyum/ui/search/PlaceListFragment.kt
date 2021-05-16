@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.search
 
 import android.app.Activity
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,8 +33,23 @@ class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout
                 setItems(it)
                 notifyDataSetChanged()
             }
+            if (searchVM.isSearched && it?.count() == 0) {
+                showSearchImageView()
+            } else {
+                hideSearchImageView()
+            }
         })
     }
 
     override fun release() { }
+
+    private fun showSearchImageView() {
+        binding.ivSearch.visibility = View.VISIBLE
+        binding.tvSearch.visibility = View.VISIBLE
+    }
+
+    private fun hideSearchImageView() {
+        binding.ivSearch.visibility = View.GONE
+        binding.tvSearch.visibility = View.GONE
+    }
 }

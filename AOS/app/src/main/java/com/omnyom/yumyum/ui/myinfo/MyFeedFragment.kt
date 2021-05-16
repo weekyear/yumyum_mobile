@@ -24,7 +24,7 @@ class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragm
 
     override fun setupViews() {
         binding.rvMyFeed.apply {
-            adapter = AuthorFeedAdapter(context)
+            adapter = AuthorFeedAdapter(context, false)
             layoutManager = GridLayoutManager(context, 3)
         }
         binding.btnGoMap.setOnClickListener {

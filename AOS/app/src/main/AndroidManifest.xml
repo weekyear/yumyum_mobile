@@ -55,7 +55,8 @@
         <activity android:name=".ui.userfeed.UserFeedActivity" />
         <activity android:name=".ui.useroption.UserInfoEditActivity" />
         <activity android:name=".ui.useroption.MyOptionActivity" />
-        <activity android:name=".ui.feed.SearchPlaceActivity">
+        <activity android:name=".ui.feed.SearchPlaceActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -84,7 +85,8 @@
             android:name=".ui.feed.CameraActivity"
             android:label="@string/title_activity_camera"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>

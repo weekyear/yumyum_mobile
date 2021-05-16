@@ -18,17 +18,13 @@ import com.omnyom.yumyum.ui.base.BaseViewModel
 import retrofit2.*
 
 class HomeViewModel(application: Application) : BaseViewModel(application) {
-    init {
-//        getAllFeeds()
-    }
-
     // FoodList를 LiveData 객채로 생성
     private val _foodData = MutableLiveData<List<FeedData>>().apply {
     }
     val foodData : LiveData<List<FeedData>> = _foodData
 
     fun getAllFeeds() {
-        var call = retrofitService.getAllFeeds(28)
+        var call = retrofitService.getAllFeeds(userId!!)
         call.enqueue(object : Callback<FeedResponse> {
             override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {

@@ -19,6 +19,8 @@ class SearchPlaceViewModel(application: Application) : BaseViewModel(application
     }
     val searchPlaceResults : LiveData<List<SearchPlaceResult>> = _searchPlaceResults
 
+    var isSearched : Boolean = false
+
     fun searchPlace(searchText: String) {
         val positions = KakaoMapUtils.getMyPosition(getApplication())
         var call = RetrofitManager.kakaoApiService.placeSearch(kakaoApi.API_KEY, searchText, positions[0], positions[1], 1, 7)
@@ -31,7 +33,7 @@ class SearchPlaceViewModel(application: Application) : BaseViewModel(application
             }
 
             override fun onFailure(call: Call<SearchKakaoMapResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                t
             }
 
         })

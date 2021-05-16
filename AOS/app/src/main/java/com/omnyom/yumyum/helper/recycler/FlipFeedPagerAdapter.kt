@@ -20,7 +20,7 @@ class FlipFeedPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAd
         this.items.clear()
         val tempList = mutableListOf<Fragment>()
         for (feed in feedList) {
-            tempList.add(FeedFragment(feed).apply {  })
+            tempList.add(FeedFragment(feed))
         }
         items.addAll(tempList)
     }

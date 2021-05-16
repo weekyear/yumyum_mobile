@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.feed
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.text.Editable
@@ -25,6 +26,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.io.Serializable
 
 
 class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layout.activity_feed_create) {
@@ -52,17 +54,25 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
 
     override fun setupViews() {
         supportActionBar?.hide()
-        if (feedCreateVM.isEdit) {
-            binding.btnSubmit.setOnClickListener {
-                feedCreateVM.editFeed()
-                finish()
-            }
 
-        } else {
-            binding.btnSubmit.setOnClickListener {
+        binding.btnSubmit.setOnClickListener {
+
+            if (feedCreateVM.isEdit) {
+                val intent = Intent().apply {
+                    putExtra("id", feedCreateVM.id.value)
+                    putExtra("title", feedCreateVM.title.value)
+                    putExtra("content", feedCreateVM.content.value)
+                    putExtra("score", feedCreateVM.score.value)
+                    putExtra("placeRequest", feedCreateVM.placeRequest.value as Serializable)
+                }
+                feedCreateVM.editFeed()
+                setResult(Activity.RESULT_OK, intent)
+            } else {
                 feedCreateVM.sendVideo(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
                 startMainActivity()
             }
+
+            finish()
         }
 
         binding.btnGoBack.setOnClickListener { finish() }
@@ -93,21 +103,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 })
             }
         }
-//        if (feedCreateVM.isEdit) {
-//            feedCreateVM.editData.observe(this) {
-//                val feedData = feedCreateVM.editData.value!!
-//                binding.tvTitle.text = "피드 수정"
-//                binding.editTextContent.setText(feedData.content)
-//                binding.editTextTitle.setText(feedData.title)
-//                if (feedData.score != 0) {
-//                    changeAvStarColor(avStars[feedData.score - 1].id)
-//                    changeAvStarSize(avStars[feedData.score - 1].id)
-//                }
-//                if (feedData.place != null) {
-//                    binding.editTextPlace.setText(feedData.place.name)
-//                }
-//            }
-//        }
     }
 
     override fun release() {
@@ -235,8 +230,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 changeAvStarColor(avStars[feedData.score - 1].id)
                 changeAvStarSize(avStars[feedData.score - 1].id)
             }
-
-//            feedCreateVM.editData.value = feedData
         }
     }
 }

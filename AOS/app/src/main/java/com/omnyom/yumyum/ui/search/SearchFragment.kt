@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.search
 
 import android.content.Context
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -21,8 +22,10 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     override fun setupViews() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                searchVM.isSearched = true
                 searchVM.searchFeed(query!!)
                 searchVM.searchPlace(query!!)
+                hidePleaseSearch()
                 return false
             }
 
@@ -48,4 +51,8 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
+    private fun hidePleaseSearch() {
+        binding.ivSearch.visibility = View.GONE
+        binding.tvSearch.visibility = View.GONE
+    }
 }

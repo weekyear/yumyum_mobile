@@ -1,5 +1,7 @@
 package com.omnyom.yumyum.model.feed
 
+import java.io.Serializable
+
 
 class CreateFeedRequest(
         private val content: String?,
@@ -31,4 +33,4 @@ data class PlaceRequest(
         var locationY: Double,
         var name: String,
         var phone: String
-)
+) : Serializable

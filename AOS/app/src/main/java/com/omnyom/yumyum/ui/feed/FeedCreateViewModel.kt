@@ -89,6 +89,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
 
         retrofitService.editFeed(editFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
+                response
             }
             override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
                 t

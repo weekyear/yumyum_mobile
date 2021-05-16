@@ -41,8 +41,23 @@ class FoodListFragment : BaseBindingFragment<FragmentFoodListBinding>(R.layout.f
                 setItems(it)
                 notifyDataSetChanged()
             }
+            if (searchVM.isSearched && it?.count() == 0) {
+                showNotFound()
+            } else {
+                hideNotFound()
+            }
         })
     }
 
     override fun release() { }
+
+    private fun showNotFound() {
+        binding.ivSearch.visibility = View.VISIBLE
+        binding.tvSearch.visibility = View.VISIBLE
+    }
+
+    private fun hideNotFound() {
+        binding.ivSearch.visibility = View.GONE
+        binding.tvSearch.visibility = View.GONE
+    }
 }

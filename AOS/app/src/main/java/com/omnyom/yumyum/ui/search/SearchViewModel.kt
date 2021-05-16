@@ -23,6 +23,8 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     }
     val searchFeedResults : LiveData<List<SearchFeedData>> = _searchFeedResults
 
+    var isSearched : Boolean = false
+
     fun searchFeed(searchText: String) {
         var call = retrofitService.getSearchFeedListByTitle(searchText, userId)
         call.enqueue(object : Callback<SearchFeedListResponse> {
