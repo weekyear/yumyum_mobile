@@ -18,10 +18,6 @@ import com.omnyom.yumyum.ui.base.BaseViewModel
 import retrofit2.*
 
 class HomeViewModel(application: Application) : BaseViewModel(application) {
-    init {
-        getAllFeeds()
-    }
-
     // FoodList를 LiveData 객채로 생성
     private val _foodData = MutableLiveData<List<FeedData>>().apply {
     }
@@ -37,7 +33,9 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                             feed -> feed.isCompleted
                     }
 
-                    _foodData.postValue(filteredFeeds)
+                    if (filteredFeeds.count() != _foodData.value?.count()) {
+                        _foodData.postValue(filteredFeeds)
+                    }
                 }
             }
 
@@ -45,47 +43,6 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
                 t
             }
 
-        })
-    }
-
-    fun likeFeed(feedId: Long) {
-        var call = retrofitService.feedLike(LikeRequest(feedId, userId).get())
-        call.enqueue(object : Callback<LikeResponse> {
-            override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
-                if (response.isSuccessful) {
-                }
-            }
-
-            override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
-                t
-            }
-        })
-    }
-
-    // 안좋아요!
-    fun unlikeFeed(feedId: Long) {
-        var call = retrofitService.cancelFeedLike(feedId, userId)
-        call.enqueue(object : Callback<LikeResponse> {
-            override fun onResponse(call: Call<LikeResponse>, response: Response<LikeResponse>) {
-                if (response.isSuccessful) {
-                }
-            }
-            override fun onFailure(call: Call<LikeResponse>, t: Throwable) {
-                t
-            }
-
-        })
-    }
-
-    // 피드 삭제
-    fun deleteFeed(feedId: Long) {
-        retrofitService.deleteFeed(feedId).enqueue(object : Callback<CreateFeedResponse> {
-            override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
-                Log.d("delete", "$response")
-            }
-            override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
-                t
-            }
         })
     }
 }

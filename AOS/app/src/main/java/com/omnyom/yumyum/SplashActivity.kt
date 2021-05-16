@@ -1,10 +1,16 @@
 package com.omnyom.yumyum
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Handler
+import android.util.Base64
+import android.util.Log
 import android.widget.Toast
+import com.kakao.sdk.common.KakaoSdk
+import com.kakao.util.maps.helper.Utility
 import com.omnyom.yumyum.databinding.ActivitySplashBinding
 import com.omnyom.yumyum.helper.GoogleLoginHelper
 import com.omnyom.yumyum.helper.KakaoMapUtils
@@ -16,6 +22,8 @@ import com.omnyom.yumyum.ui.login.LoginActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class SplashActivity : BaseBindingActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -24,7 +32,26 @@ class SplashActivity : BaseBindingActivity<ActivitySplashBinding>(R.layout.activ
     override fun extraSetupBinding() { }
 
     override fun setup() {
+        //카카오링크
+        KakaoSdk.init(this, getString(R.string.kakao_app_key))
         startSplash()
+        getKeyHashBase64(this)
+    }
+
+    fun getKeyHashBase64(context: Context): String {
+        val packageInfo = Utility.getPackageInfo(context, PackageManager.GET_SIGNATURES)
+        if (packageInfo == null) return ""
+        for (signature in packageInfo.signatures) {
+            try {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+                return Base64.encodeToString(md.digest(), Base64.DEFAULT)
+            } catch (e: PackageManager.NameNotFoundException) {
+                e.printStackTrace();
+            }
+        }
+        return ""
     }
 
     override fun setupViews() {

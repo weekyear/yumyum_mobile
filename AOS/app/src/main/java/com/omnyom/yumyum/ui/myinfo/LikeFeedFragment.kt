@@ -24,7 +24,7 @@ class LikeFeedFragment : BaseBindingFragment<FragmentLikeFeedBinding>(R.layout.f
 
     override fun setupViews() {
         binding.rvLikeFeed.apply {
-            adapter = AuthorFeedAdapter(context)
+            adapter = AuthorFeedAdapter(context, true)
             layoutManager = GridLayoutManager(context, 3)
         }
         binding.btnGoMarker.setOnClickListener {
@@ -42,6 +42,5 @@ class LikeFeedFragment : BaseBindingFragment<FragmentLikeFeedBinding>(R.layout.f
         }
     }
 
-    override fun release() {
-    }
+    override fun release() { }
 }

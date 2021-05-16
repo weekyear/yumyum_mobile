@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.feed
 
 import android.Manifest
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.observe
@@ -40,6 +41,8 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                searchPlaceVM.isSearched = true
+                hidePleaseSearch()
                 searchPlaceVM.searchPlace(query!!)
                 return false
             }
@@ -58,11 +61,28 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
                 setItems(it)
                 notifyDataSetChanged()
             }
+            if (searchPlaceVM.isSearched && it?.count() == 0) {
+                showNotFound()
+            } else {
+                hideNotFound()
+            }
         })
     }
 
-    override fun release() {
+    override fun release() { }
+
+    private fun showNotFound() {
+        binding.ivNotFound.visibility = View.VISIBLE
+        binding.tvNotFound.visibility = View.VISIBLE
     }
 
+    private fun hideNotFound() {
+        binding.ivNotFound.visibility = View.GONE
+        binding.tvNotFound.visibility = View.GONE
+    }
 
+    private fun hidePleaseSearch() {
+        binding.ivSearch.visibility = View.GONE
+        binding.tvSearch.visibility = View.GONE
+    }
 }

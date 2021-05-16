@@ -26,8 +26,8 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(R.layout.activity_
                 R.id.navigation_home, R.id.navigation_profile))
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
-        binding.navView.menu.findItem(R.id.navigation_search).setCheckable(false)
-        binding.navView.menu.findItem(R.id.navigation_search).setOnMenuItemClickListener {
+        binding.navView.menu.findItem(R.id.navigation_write).isCheckable = false
+        binding.navView.menu.findItem(R.id.navigation_write).setOnMenuItemClickListener {
             val intent = Intent(this, CameraActivity::class.java)
             startActivity(intent)
             true
