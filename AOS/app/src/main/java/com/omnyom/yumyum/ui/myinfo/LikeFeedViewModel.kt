@@ -39,7 +39,7 @@ class LikeFeedViewModel(application: Application) : BaseViewModel(application) {
                 if (response.isSuccessful) {
                     val list : List<FeedData> = response.body()?.data!!.reversed()
                     _likeFeedData.postValue(list)
-                    placeData = ArrayList(list.map { item -> item.place })
+                    placeData = ArrayList(list.map { item -> item.place ?: Place("", 0, 0.0, 0.0, "", "") })
                 }
             }
             override fun onFailure(call: Call<FeedResponse>, t: Throwable) {

@@ -9,19 +9,19 @@ data class FeedResponse(
 )
 
 data class FeedData(
-        val content: String,
+        var content: String,
         val createdDate: String,
         val isCompleted: Boolean,
         val id: Int,
         var isLike: Boolean,
         val likeCount: Int,
         val modifiedDate: String,
-        val place: Place,
+        var place: Place?,
         val thumbnailPath: String,
-        val title: String,
+        var title: String,
         val user: User,
         val videoPath: String,
-        val score: Int
+        var score: Int
 ) : Serializable
 
 data class User(

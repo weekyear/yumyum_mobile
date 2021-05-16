@@ -1,34 +1,25 @@
 package com.omnyom.yumyum.ui.useroption
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.text.Editable
-import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.bumptech.glide.Glide
-import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityUserInfoEditBinding
-import com.omnyom.yumyum.helper.GoogleLoginHelper
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import com.omnyom.yumyum.ui.myinfo.URLtoBitmapTask
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.net.URL
 
 class UserInfoEditActivity : BaseBindingActivity<ActivityUserInfoEditBinding>(R.layout.activity_user_info_edit) {
     private companion object {

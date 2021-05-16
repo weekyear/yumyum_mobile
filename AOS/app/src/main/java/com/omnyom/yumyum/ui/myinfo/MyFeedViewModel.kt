@@ -32,7 +32,7 @@ class MyFeedViewModel(application: Application) : BaseViewModel(application) {
                 if (response.isSuccessful) {
                     val list : List<FeedData> = response.body()?.data!!.toMutableList().reversed()
                     _myFeedData.postValue(list)
-                    placeData = ArrayList(list.map { item -> item.place })
+                    placeData = ArrayList(list.map { item -> item.place ?: Place("", 0, 0.0, 0.0, "", "") })
                 }
             }
 

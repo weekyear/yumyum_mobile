@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="feed"
+            type="com.omnyom.yumyum.model.feed.FeedData" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,6 +50,7 @@
             app:animDuration="200"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:text="내용"
             app:layout_goneMarginBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="5dp"
-            android:text="AshOil"
+            android:text="유저이름"
             android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/text_name"
             android:textColor="@color/white"
@@ -87,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="10dp"
-            android:text="감자탕"
+            android:text="음식 이름"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/text_placename"
@@ -98,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="염이네 감자탕"
+            android:text="주소/가게이름"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:layout_marginBottom="15dp"
@@ -106,14 +112,28 @@
             app:layout_constraintBottom_toTopOf="@+id/text_detail"
             tools:layout_editor_absoluteY="685dp" />
 
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="18dp"
+            android:tint="@color/white"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_send" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_thumb_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toStartOf="@id/btn_send"
             app:layout_constraintBottom_toTopOf="@id/tv_like_num"
+            app:layout_constraintEnd_toEndOf="@id/btn_send"
             app:lottie_colorFilter="@color/white"
             app:lottie_fileName="ic_thumb_up.json" />
 
@@ -121,13 +141,13 @@
             android:id="@+id/tv_like_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="12dp"
             android:textColor="@color/white"
             android:text="0"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@id/av_thumb_up"
-            app:layout_constraintBottom_toTopOf="@id/text_detail"
-            app:layout_constraintEnd_toEndOf="@id/av_thumb_up" />
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/btn_send"
+            app:layout_constraintBottom_toTopOf="@id/btn_send"
+            app:layout_constraintEnd_toEndOf="@id/btn_send" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star"

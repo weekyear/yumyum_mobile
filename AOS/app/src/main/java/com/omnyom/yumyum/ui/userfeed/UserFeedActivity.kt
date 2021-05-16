@@ -28,7 +28,7 @@ class UserFeedActivity : BaseBindingActivity<ActivityUserFeedBinding>(R.layout.a
     override fun setupViews() {
         supportActionBar?.hide()
         binding.rvAuthorFeed.apply {
-            adapter = AuthorFeedAdapter(this@UserFeedActivity)
+            adapter = AuthorFeedAdapter(this@UserFeedActivity, false)
             layoutManager = GridLayoutManager(this@UserFeedActivity, 3)
         }
     }

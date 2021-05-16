@@ -36,28 +36,17 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     val placeRequest = MutableLiveData<PlaceRequest>().apply {
         value = null
     }
-    val editPlaceRequest = MutableLiveData<EditPlaceRequest>().apply {
-        value = null
-    }
     val content = MutableLiveData<String>().apply {
         value = ""
+    }
+    val id = MutableLiveData<Long>().apply {
+        value = 0
     }
     val score = MutableLiveData<Int>().apply {
         value = 0
     }
     val title = MutableLiveData<String>().apply {
         value = ""
-    }
-    val editData = MutableLiveData<FeedData>().apply {
-    }
-
-
-    fun getEditData(myIntent: Intent) {
-        val feedData = myIntent.getSerializableExtra("FeedData") as FeedData
-        if (feedData != null) {
-            isEdit = true
-        }
-        editData.value = feedData
     }
 
     // 비디오 데이터를 보냅니다!
@@ -94,17 +83,16 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
         })
     }
 
-    fun editFeed(id: Long) {
-        val editFeedRequest = EditFeedRequest(content.value?:"",id , isCompleted, editPlaceRequest.value, score.value?:0,  title.value?:"", )
+    fun editFeed() {
+        val editFeedRequest = EditFeedRequest(content.value?:"", id.value?:-1, isCompleted, placeRequest.value, score.value?:0,  title.value?:"", )
 
         retrofitService.editFeed(editFeedRequest.get()).enqueue(object : Callback<CreateFeedResponse> {
             override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
+                response
             }
             override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
                 t
             }
         })
     }
-
-
 }
