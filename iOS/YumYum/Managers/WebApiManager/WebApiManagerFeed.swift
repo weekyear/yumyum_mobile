@@ -104,12 +104,31 @@ extension WebApiManager {
         }
         
     }
-    
+    //MARK: - 좋아요한 피드들 가져오기
     func getMyLikeFeed(userId : Int, success: @escaping (JSON) -> Void, faliure: @escaping (Error) -> Void) {
         
         let url = "\(domainUrl)\(feedUrl)list/like/\(userId)"
         
         AF.request(url, method: .get).responseJSON{ (response) in
+            switch response.result {
+            case .success(_):
+                let json = JSON(response.value!)
+                success(json)
+                break
+            case .failure(_):
+                let error: Error = response.error!
+                faliure(error)
+                break
+            }
+        }
+    }
+    
+    //MARK: - 피드 삭제하기
+    func deleteMyFeed(feedId: Int, success: @escaping (JSON) -> Void, faliure: @escaping (Error) -> Void) {
+        
+        let url = "\(domainUrl)\(feedUrl)\(feedId)"
+        
+        AF.request(url, method: .delete).responseJSON{(response) in
             switch response.result {
             case .success(_):
                 let json = JSON(response.value!)
