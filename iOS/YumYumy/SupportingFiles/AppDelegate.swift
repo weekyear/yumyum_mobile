@@ -11,13 +11,15 @@ import Firebase
 import GoogleSignIn
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // 파이어 베이스에 로그인 정보를 저장하기 위함
         FirebaseApp.configure()
-        
+
         GIDSignIn.sharedInstance().clientID = "334733871859-co97jbrabgv16u8h0u10feqav8hqad76.apps.googleusercontent.com"
+
         return true
     }
     
