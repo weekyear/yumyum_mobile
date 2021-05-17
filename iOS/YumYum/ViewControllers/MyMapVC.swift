@@ -35,6 +35,7 @@ class MyMapVC: UIViewController, MTMapViewDelegate {
         // 모든 지도 마커 기준으로 레벨 및 위치 정렬
     }
     
+    //마커 저장해서 넣기
     func markOnMap() {
         let mapfeedList = feedList?.map({ (feed:Feed) -> Feed in
             var poitItem = MTMapPOIItem()
@@ -47,7 +48,9 @@ class MyMapVC: UIViewController, MTMapViewDelegate {
         })
     }
 
-    func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {        myMapView.setMapCenter(poiItem.mapPoint, animated: true)
+    func mapView(_ mapView: MTMapView!, selectedPOIItem poiItem: MTMapPOIItem!) -> Bool {
+        myMapView.setZoomLevel(3, animated: true)
+        myMapView.setMapCenter(poiItem.mapPoint, animated: true)
         return true
     }
 

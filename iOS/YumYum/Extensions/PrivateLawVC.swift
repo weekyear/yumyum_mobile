@@ -18,6 +18,4 @@ class PrivateLawVC: UIViewController {
         let req = URLRequest(url: weburl!)
         self.webView.load(req)
     }
-    
-
 }

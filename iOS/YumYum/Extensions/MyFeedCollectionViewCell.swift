@@ -23,15 +23,18 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     
     var player: AVPlayer?
     var feedInfo : Feed = Feed()
-    
+    var delegate : myFeedCellDelegate?
     var checkLike: Bool = false
     var userData = UserDefaults.getLoginedUserInfo()!
+    var isCheckView: Bool = false
     
     @IBOutlet var backMyPageBtn: UIButton!
     
+    @IBOutlet var threeDotView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        threeDotView.isHidden = true
     }
     
     override func prepareForReuse() {
@@ -39,6 +42,31 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         print("넘어갈떄마다 호출")
         player?.play()
     }
+    
+    @IBAction func pressDot(_ sender: Any) {
+        if isCheckView == false  {
+            isCheckView = true
+            threeDotView.isHidden = true
+        } else {
+            isCheckView = false
+            threeDotView.isHidden = false
+        }
+    }
+    
+    @IBAction func deleteFeed(_ sender: Any) {
+        self.delegate?.deleteFeedToMove(feedId: feedInfo.id!)
+        WebApiManager.shared.deleteMyFeed(feedId: feedInfo.id!){
+            (result) in
+            if result["status"] == "200" {
+                print("피드가 삭제 되었습니다.")
+            } else {
+                print("피드 삭제 오류")
+            }
+        } faliure: { (error) in
+            print(error)
+        }
+    }
+    
     @IBAction func myLikeBtnPressed(_ sender: Any) {
         if checkLike == true {
             checkLike = false
@@ -96,7 +124,6 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     
     private func loadData(feed:Feed) {
         myFoodLabel.text = feed.title
-        print(feed.user?.nickname)
         myNameLabel.text = "@" + (feed.user?.nickname)! as String
         myReviewLabel.text = feed.content
         
@@ -118,4 +145,8 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         
     }
     
+}
+
+protocol myFeedCellDelegate {
+    func deleteFeedToMove(feedId:Int)
 }

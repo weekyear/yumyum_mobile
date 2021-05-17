@@ -24,6 +24,7 @@ class MyFeedVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setLayout()
     }
     
@@ -55,6 +56,8 @@ extension MyFeedVC: UICollectionViewDataSource  {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mycell", for: indexPath) as! MyFeedCollectionViewCell
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backMyPage))
+        
+        cell.delegate = self
 
         cell.backMyPageBtn.isUserInteractionEnabled = true
         cell.backMyPageBtn.tag = indexPath.item
@@ -77,10 +80,12 @@ extension MyFeedVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//extension MyFeedVC: SendDataDelegate {
-//    func sendData(_ viewController: MypageVC, feedList: [Feed]) {
-//        self.myFeedList = feedList
-//        print(myFeedList)
-//        viewController.delegate = self
-//    }
-//}
+extension MyFeedVC: myFeedCellDelegate {
+    func deleteFeedToMove(feedId: Int) {
+        defaultalert("정말 삭제하시겠어요?"){ () in
+            self.dismiss(animated: true)
+        }failure: {
+            return
+        }
+    }
+}
