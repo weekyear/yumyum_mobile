@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fv1-7X-dE1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fv1-7X-dE1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--LoginVC-->
         <scene sceneID="9KO-57-mvy">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="Fv1-7X-dE1" customClass="LoginVC" customModule="YumYum" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="Fv1-7X-dE1" customClass="LoginVC" customModule="YumYumy" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RpT-wG-zdj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,19 +35,19 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWZ-2C-CAz">
-                                        <rect key="frame" x="166.5" y="346.5" width="81" height="41"/>
+                                        <rect key="frame" x="170" y="346.5" width="74" height="37"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YUMYUM에 오신것을 환영합니다. 서비스를 이용하기 위해서는 로그인이 필요해요!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kR-sh-CKZ">
-                                        <rect key="frame" x="83" y="395.5" width="248" height="61.5"/>
+                                        <rect key="frame" x="83" y="391.5" width="248" height="34"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                         <color key="textColor" red="0.61960784313725492" green="0.61960784313725492" blue="0.61960784313725492" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="200" translatesAutoresizingMaskIntoConstraints="NO" id="bhG-gC-4F6">
-                                        <rect key="frame" x="83" y="465" width="248" height="227"/>
+                                        <rect key="frame" x="83" y="433.5" width="248" height="258.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="OwV-W7-k4t"/>
@@ -98,8 +99,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="appleLoginView" destination="Nd0-on-6Im" id="2eT-k0-0pB"/>
-                        <outlet property="googleLoginView" destination="0dJ-z6-4Yz" id="8EJ-wS-J3o"/>
+                        <outlet property="appleLoginBtn" destination="Nd0-on-6Im" id="4xT-Qf-O43"/>
+                        <outlet property="googleLoginBtn" destination="0dJ-z6-4Yz" id="ORh-0K-beb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jy-5o-mEB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -109,33 +110,33 @@
         <!--SignupVC-->
         <scene sceneID="yWs-vn-gLI">
             <objects>
-                <viewController storyboardIdentifier="SignupVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d0X-vC-QzQ" customClass="SignupVC" customModule="YumYum" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d0X-vC-QzQ" customClass="SignupVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S6G-Sj-2es">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원가입" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7V-Ks-572">
-                                <rect key="frame" x="20" y="64" width="374" height="41"/>
+                                <rect key="frame" x="20" y="64" width="374" height="37"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2G-WF-VlQ" customClass="SignUpButton" customModule="YumYum" customModuleProvider="target">
-                                <rect key="frame" x="30" y="508.5" width="354" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2G-WF-VlQ" customClass="SignUpButton" customModule="YumYumy" customModuleProvider="target">
+                                <rect key="frame" x="30" y="504.5" width="354" height="30"/>
                                 <state key="normal" title="회원가입 완료"/>
                                 <connections>
                                     <action selector="completeSignUp:" destination="d0X-vC-QzQ" eventType="touchUpInside" id="gvi-v7-2UM"/>
                                 </connections>
                             </button>
                             <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_profile" translatesAutoresizingMaskIntoConstraints="NO" id="BCz-kZ-zYk">
-                                <rect key="frame" x="83" y="125" width="248" height="248.5"/>
+                                <rect key="frame" x="83" y="121" width="248" height="248.5"/>
                                 <color key="tintColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BCz-kZ-zYk" secondAttribute="height" multiplier="1:1" id="H3A-4D-TEa"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="wD4-X3-9sa">
-                                <rect key="frame" x="30" y="393.5" width="354" height="85"/>
+                                <rect key="frame" x="30" y="389.5" width="354" height="85"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="4gh-uK-n8C">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="34"/>

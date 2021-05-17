@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E52F57EF2625B746002C2637"
-               BuildableName = "YumYum.app"
-               BlueprintName = "YumYum"
-               ReferencedContainer = "container:YumYum.xcodeproj">
+               BuildableName = "YumYumy.app"
+               BlueprintName = "YumYumy"
+               ReferencedContainer = "container:YumYumy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E52F58082625B746002C2637"
-               BuildableName = "YumYumTests.xctest"
-               BlueprintName = "YumYumTests"
-               ReferencedContainer = "container:YumYum.xcodeproj">
+               BuildableName = "YumYumyTests.xctest"
+               BlueprintName = "YumYumyTests"
+               ReferencedContainer = "container:YumYumy.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E52F58132625B746002C2637"
-               BuildableName = "YumYumUITests.xctest"
-               BlueprintName = "YumYumUITests"
-               ReferencedContainer = "container:YumYum.xcodeproj">
+               BuildableName = "YumYumyUITests.xctest"
+               BlueprintName = "YumYumyUITests"
+               ReferencedContainer = "container:YumYumy.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E52F57EF2625B746002C2637"
-            BuildableName = "YumYum.app"
-            BlueprintName = "YumYum"
-            ReferencedContainer = "container:YumYum.xcodeproj">
+            BuildableName = "YumYumy.app"
+            BlueprintName = "YumYumy"
+            ReferencedContainer = "container:YumYumy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E52F57EF2625B746002C2637"
-            BuildableName = "YumYum.app"
-            BlueprintName = "YumYum"
-            ReferencedContainer = "container:YumYum.xcodeproj">
+            BuildableName = "YumYumy.app"
+            BlueprintName = "YumYumy"
+            ReferencedContainer = "container:YumYumy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -13,11 +13,12 @@ import Firebase
 import Alamofire
 
 class LoginVC : UIViewController, GIDSignInDelegate {
-    @IBOutlet weak var googleLoginView : GIDSignInButton!
-    @IBOutlet var appleLoginView: UIView!
     
     let plist = UserDefaults.standard
-
+    
+    @IBOutlet var appleLoginBtn: UIView!
+    @IBOutlet var googleLoginBtn: GIDSignInButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().delegate = self
@@ -25,7 +26,7 @@ class LoginVC : UIViewController, GIDSignInDelegate {
          // 자동로그인을 설정헌다.
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
          // 버튼 스타일지정
-        googleLoginView.style = .wide
+        googleLoginBtn.style = .wide
         addButton()
 //        checkLogin()
         // 구글 로그인되어있는지 안되어 있는지 확인
@@ -57,14 +58,14 @@ class LoginVC : UIViewController, GIDSignInDelegate {
 
         button.translatesAutoresizingMaskIntoConstraints = false
 
-        appleLoginView.addSubview(button)
-        button.centerXAnchor.constraint(equalTo:appleLoginView.centerXAnchor)
+        appleLoginBtn.addSubview(button)
+        button.centerXAnchor.constraint(equalTo:appleLoginBtn.centerXAnchor)
                 .isActive = true
-        button.centerYAnchor.constraint(equalTo:appleLoginView.centerYAnchor)
+        button.centerYAnchor.constraint(equalTo:appleLoginBtn.centerYAnchor)
                 .isActive = true
-        button.heightAnchor.constraint(equalTo: appleLoginView.heightAnchor)
+        button.heightAnchor.constraint(equalTo: appleLoginBtn.heightAnchor)
                     .isActive = true
-        button.widthAnchor.constraint(equalTo: appleLoginView.widthAnchor)
+        button.widthAnchor.constraint(equalTo: appleLoginBtn.widthAnchor)
                     .isActive = true
 
     }
