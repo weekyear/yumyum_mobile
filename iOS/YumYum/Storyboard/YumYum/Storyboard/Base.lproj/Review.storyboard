@@ -322,58 +322,47 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6T0-wx-Ks9">
                                 <rect key="frame" x="20" y="152" width="374" height="100"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="COv-Nm-OoL">
-                                        <rect key="frame" x="64" y="0.0" width="246" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-I3-3SA">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="1"/>
-                                                <connections>
-                                                    <action selector="TabEmoji1:" destination="6uF-eu-xOF" eventType="touchUpInside" id="wmd-Wf-R86"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjd-fU-Ju4">
-                                                <rect key="frame" x="54" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="2"/>
-                                                <connections>
-                                                    <action selector="TabEmoji2:" destination="6uF-eu-xOF" eventType="touchUpInside" id="9L5-CF-dYe"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aic-Yv-JFG">
-                                                <rect key="frame" x="108" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="3"/>
-                                                <connections>
-                                                    <action selector="TabEmoji3:" destination="6uF-eu-xOF" eventType="touchUpInside" id="GaL-Wo-kEh"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZv-jc-BUJ">
-                                                <rect key="frame" x="162" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="4"/>
-                                                <connections>
-                                                    <action selector="TabEmoji4:" destination="6uF-eu-xOF" eventType="touchUpInside" id="BDp-QZ-TMW"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1Y-hl-byI">
-                                                <rect key="frame" x="216" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="5"/>
-                                                <connections>
-                                                    <action selector="TabEmoji5:" destination="6uF-eu-xOF" eventType="touchUpInside" id="d4n-XT-b96"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztb-Xc-Liz">
                                         <rect key="frame" x="166.5" y="79.5" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="eUq-GN-8P6">
+                                        <rect key="frame" x="26.5" y="27.5" width="321" height="45"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QJ-vb-OoJ" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="626-ow-E5c"/>
+                                                    <constraint firstAttribute="width" constant="45" id="t5M-4c-QeE"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uD-0q-Jco" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="69" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDa-r3-czl" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="138" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DC-8l-Hwh" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="207" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcz-X1-sJT" customClass="AnimationView" customModule="Lottie">
+                                                <rect key="frame" x="276" y="0.0" width="45" height="45"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="eUq-GN-8P6" firstAttribute="centerY" secondItem="6T0-wx-Ks9" secondAttribute="centerY" id="78O-Io-zrF"/>
                                     <constraint firstItem="Ztb-Xc-Liz" firstAttribute="centerX" secondItem="6T0-wx-Ks9" secondAttribute="centerX" id="8Mp-e8-KEh"/>
-                                    <constraint firstItem="COv-Nm-OoL" firstAttribute="centerX" secondItem="6T0-wx-Ks9" secondAttribute="centerX" id="FPA-I6-PoB"/>
-                                    <constraint firstItem="COv-Nm-OoL" firstAttribute="top" secondItem="6T0-wx-Ks9" secondAttribute="top" id="VYe-dR-EAw"/>
+                                    <constraint firstItem="eUq-GN-8P6" firstAttribute="centerX" secondItem="6T0-wx-Ks9" secondAttribute="centerX" id="h1J-Xu-PZH"/>
                                     <constraint firstAttribute="height" constant="100" id="qKf-8y-b1m"/>
                                     <constraint firstAttribute="bottom" secondItem="Ztb-Xc-Liz" secondAttribute="bottom" id="sUn-Ox-Zo0"/>
                                 </constraints>
@@ -441,12 +430,17 @@
                         <outlet property="contentTextField" destination="6BD-EM-C1d" id="UyT-fa-EXg"/>
                         <outlet property="emojiLabel" destination="Ztb-Xc-Liz" id="jkF-Ic-Zxx"/>
                         <outlet property="locationTextField" destination="Fyf-Th-Ju1" id="59D-7e-0qB"/>
+                        <outlet property="scoreFiveView" destination="vcz-X1-sJT" id="fMO-2x-hEc"/>
+                        <outlet property="scoreFourView" destination="8DC-8l-Hwh" id="9wx-JZ-qGe"/>
+                        <outlet property="scoreOneView" destination="5QJ-vb-OoJ" id="M0A-7v-AgZ"/>
+                        <outlet property="scoreThreeView" destination="xDa-r3-czl" id="g4e-wd-cI3"/>
+                        <outlet property="scoreTwoView" destination="2uD-0q-Jco" id="XNi-a4-NXH"/>
                         <outlet property="titleTextField" destination="jEv-Ti-3rX" id="f7Q-i6-0gC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHj-as-rdq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2659" y="1069"/>
+            <point key="canvasLocation" x="2657.971014492754" y="1068.75"/>
         </scene>
         <!--작성-->
         <scene sceneID="G9p-b3-lqh">
@@ -468,6 +462,13 @@
             <point key="canvasLocation" x="66.666666666666671" y="1069.4196428571429"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="2uD-0q-Jco"/>
+        <designable name="5QJ-vb-OoJ"/>
+        <designable name="8DC-8l-Hwh"/>
+        <designable name="vcz-X1-sJT"/>
+        <designable name="xDa-r3-czl"/>
+    </designables>
     <resources>
         <image name="arrow.right" catalog="system" width="128" height="98"/>
         <image name="ic_plus" width="32" height="32"/>
