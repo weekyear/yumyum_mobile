@@ -36,7 +36,7 @@ class EurekaVC: UIViewController {
         
         // 아이폰 설정에서의 위치 서비스가 켜진 상태라면
         if CLLocationManager.locationServicesEnabled() {
-            print("위치 서비스 On 상태")
+//            print("위치 서비스 On 상태")
             locationManager.startUpdatingLocation() //위치 정보 업데이트
             // 위도 경도 가져오기
             let coor = locationManager.location?.coordinate
@@ -64,6 +64,8 @@ class EurekaVC: UIViewController {
         
         myChatLabel.isHidden = true
         
+        
+        
     }
     
     // 키보드 내리기
@@ -74,7 +76,7 @@ class EurekaVC: UIViewController {
     func createChat(message: String) {
         // 아이폰 설정에서의 위치 서비스가 켜진 상태라면
         if CLLocationManager.locationServicesEnabled() {
-            print("위치 서비스 On 상태")
+//            print("위치 서비스 On 상태")
             locationManager.startUpdatingLocation() //위치 정보 업데이트
             // 위도 경도 가져오기
             let coor = locationManager.location?.coordinate
@@ -95,6 +97,8 @@ class EurekaVC: UIViewController {
         myChatLabel.isHidden = false
         eurekaTextField.text = ""
         self.view.endEditing(true)
+        
+        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!)
         
     }
     
@@ -170,10 +174,10 @@ class EurekaVC: UIViewController {
 extension EurekaVC: CLLocationManagerDelegate {
     // 위치 정보 계속 업데이트 -> 위도 경도 받아옴
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations")
+//        print("didUpdateLocations")
         if let location = locations.first {
-            print("위도: \(location.coordinate.latitude)")
-            print("경도: \(location.coordinate.longitude)")
+//            print("위도: \(location.coordinate.latitude)")
+//            print("경도: \(location.coordinate.longitude)")
         }
     }
     
