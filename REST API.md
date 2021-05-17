@@ -2,24 +2,24 @@
 
 ### 1. 회원가입
 
-```kotlin
+```
 POST ("/user/signup")
 
 1) **프로필 사진을 업로드 할 때**
-**{
+{
 	"email": "ssafy@gmail.com"
 	"nickname": "김싸피"
 	"introduction": "한줄로 자신을 소개해주세요"
 	"profilePath": "http://k4b206.p.ssafy.io/resources/profile/1620693596780my_profile.jpg"
 }
 
-2) 프로필 사진을 업로드 하지 않을 때
+2) **프로필 사진을 업로드 하지 않을 때**
 {
 	"email": "ssafy@gmail.com"
 	"nickname": "김싸피"
 	"introduction": "안녕하세요"
 	"profilePath": null
-}**
+}
 ```
 
 ```kotlin
