@@ -28,9 +28,16 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     var userData = UserDefaults.getLoginedUserInfo()!
     
     @IBOutlet var backMyPageBtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("넘어갈떄마다 호출")
+        player?.play()
     }
     @IBAction func myLikeBtnPressed(_ sender: Any) {
         if checkLike == true {

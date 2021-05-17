@@ -44,6 +44,19 @@ class MypageVC: UIViewController {
         self.loadData()
     }
     
+    @IBAction func goToMap(_ sender: Any) {
+        let myMapVC = MyMapVC.instance()
+        
+        if isCheckFeedList == false {
+            myMapVC.feedList = myFeedList
+        } else {
+            myMapVC.feedList = myLikeFeedList
+        }
+        
+        self.navigationController?.pushViewController(myMapVC, animated: true)
+        
+    }
+    
     @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             isCheckFeedList = false

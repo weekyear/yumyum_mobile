@@ -94,6 +94,18 @@
                                     <action selector="didChangeSegment:" destination="MEu-kw-Ax3" eventType="valueChanged" id="U62-rf-vM9"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0nR-9J-ouz">
+                                <rect key="frame" x="333" y="791" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Hqy-0C-PPs"/>
+                                    <constraint firstAttribute="width" constant="60" id="Ybx-eB-ubT"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button" image="ic_place"/>
+                                <connections>
+                                    <action selector="goToMap:" destination="MEu-kw-Ax3" eventType="touchUpInside" id="YPg-27-0xe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="efk-pb-r7A"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -105,6 +117,8 @@
                             <constraint firstItem="wJ7-PF-cuj" firstAttribute="leading" secondItem="efk-pb-r7A" secondAttribute="leading" id="bf4-WD-f9m"/>
                             <constraint firstItem="4d2-Wf-CG0" firstAttribute="top" secondItem="wJ7-PF-cuj" secondAttribute="bottom" constant="2" id="fAy-L1-vr4"/>
                             <constraint firstItem="efk-pb-r7A" firstAttribute="trailing" secondItem="wJ7-PF-cuj" secondAttribute="trailing" id="gfP-Zj-IQI"/>
+                            <constraint firstItem="efk-pb-r7A" firstAttribute="trailing" secondItem="0nR-9J-ouz" secondAttribute="trailing" constant="21" id="mtS-WK-jcA"/>
+                            <constraint firstItem="efk-pb-r7A" firstAttribute="bottom" secondItem="0nR-9J-ouz" secondAttribute="bottom" constant="11" id="o0c-C5-bjV"/>
                             <constraint firstItem="9C7-6G-MvU" firstAttribute="trailing" secondItem="efk-pb-r7A" secondAttribute="trailing" constant="-10" id="qe2-dA-w9i"/>
                             <constraint firstItem="efk-pb-r7A" firstAttribute="trailing" secondItem="4d2-Wf-CG0" secondAttribute="trailing" constant="10" id="wEI-hJ-R7I"/>
                             <constraint firstItem="4d2-Wf-CG0" firstAttribute="leading" secondItem="efk-pb-r7A" secondAttribute="leading" constant="10" id="zbO-We-60Z"/>
@@ -523,6 +537,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bub-yu-21m" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5673.913043478261" y="1072.7678571428571"/>
+        </scene>
+        <!--My MapVC-->
+        <scene sceneID="LQo-Vi-wpF">
+            <objects>
+                <viewController storyboardIdentifier="MyMapVC" id="ZMJ-3A-sx6" customClass="MyMapVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ouk-ss-6C9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfq-Bl-8Yd" userLabel="MapView" customClass="MTMapView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mU2-X0-0z5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yfq-Bl-8Yd" firstAttribute="top" secondItem="mU2-X0-0z5" secondAttribute="top" id="EoL-XO-yEZ"/>
+                            <constraint firstItem="mU2-X0-0z5" firstAttribute="trailing" secondItem="Yfq-Bl-8Yd" secondAttribute="trailing" id="Nga-FD-ZCa"/>
+                            <constraint firstItem="mU2-X0-0z5" firstAttribute="bottom" secondItem="Yfq-Bl-8Yd" secondAttribute="bottom" id="lFi-eJ-ujW"/>
+                            <constraint firstItem="Yfq-Bl-8Yd" firstAttribute="leading" secondItem="mU2-X0-0z5" secondAttribute="leading" id="vQ2-Hu-Ucg"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myMapView" destination="Yfq-Bl-8Yd" id="taR-Ws-miR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zaW-gE-Gtx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6584" y="1073"/>
         </scene>
     </scenes>
     <resources>
