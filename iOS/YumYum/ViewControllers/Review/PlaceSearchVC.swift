@@ -55,6 +55,7 @@ extension PlaceSearchVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchKey = searchBar.text!
         WebApiManager.shared.searchPlace(searchKey: searchKey) { (result) in
+            dump(result["documents"])
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
             self.resultTableView.reloadData()
         } failure: { (error) in

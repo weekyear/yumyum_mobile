@@ -8,6 +8,7 @@
 import UIKit
 import GoogleSignIn
 import SwiftyJSON
+import Lottie
 
 class HomeVC: UIViewController {
     
@@ -21,7 +22,7 @@ class HomeVC: UIViewController {
     
     var feedList: [Feed] = []
     var myLikeFeedList: [Feed] = []
-    
+    var Scores : [Int] = []
     let userData = UserDefaults.getLoginedUserInfo()!
         
     
@@ -30,13 +31,13 @@ class HomeVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         setLayout()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+
         
         let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
         
@@ -93,7 +94,7 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let feedReverse = Array(feedList.reversed())
-        let feed = feedReverse[indexPath.row]
+        let feed = feedReverse[indexPath.item]
         var myLikeFeed : Feed = Feed()
         
         for myfeed in myLikeFeedList {
@@ -104,7 +105,40 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
         
+        cell.index = indexPath.item
+        cell.delegate = self
+        cell.nowFeed = feed
         cell.configureVideo(with: feed, myLikeFeed: myLikeFeed)
+        
+        switch feed.score! {
+        case 1:
+            cell.animationview.play()
+            cell.animationview.loopMode = .loop
+            break
+        case 2:
+            cell.animationview2.play()
+            cell.animationview2.loopMode = .loop
+            break
+        case 3:
+            cell.animationview3.play()
+            cell.animationview3.loopMode = .loop
+            break
+        case 4:
+            cell.animationview4.play()
+            cell.animationview4.loopMode = .loop
+            break
+        case 5:
+            cell.animationview5.play()
+            cell.animationview5.loopMode = .loop
+            break
+        default:
+            print("평점 값이 없습니다.")
+            cell.animationview.pause()
+            cell.animationview2.pause()
+            cell.animationview3.pause()
+            cell.animationview4.pause()
+            cell.animationview5.pause()
+        }
         
         return cell
     }
@@ -112,5 +146,28 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cvRect = self.collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)
+    }
+}
+
+extension HomeVC:userProfileBtnDelegate {
+    func userBtnPress(index: Int, nowfeed: Feed) {
+        let storyboard: UIStoryboard? = UIStoryboard(name: "Home", bundle: nil)
+        
+        guard let peopleVC = storyboard?.instantiateViewController(withIdentifier: "PeopleVC") as? PeopleVC else {
+            return
+        }
+        
+        peopleVC.userId = nowfeed.user?.id!
+        peopleVC.username = nowfeed.user?.nickname!
+        
+        WebApiManager.shared.getUserInfo(userId: (nowfeed.user?.id!)!) { (result) in
+            if result["status"] == "200"{
+                let results = result["data"]
+                peopleVC.userData = User(json: results)
+                self.navigationController?.pushViewController(peopleVC, animated: true)
+            }
+        } failure: { (error) in
+            print(error)
+        }
     }
 }

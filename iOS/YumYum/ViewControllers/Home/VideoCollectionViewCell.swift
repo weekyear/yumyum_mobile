@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class VideoCollectionViewCell: UICollectionViewCell{
     
@@ -14,10 +15,25 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var foodLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     @IBOutlet weak var reviewLabel: UILabel!
-    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var userBtn: UIButton!
     @IBOutlet var likeCountLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    
+    var index : Int = 0
+    var delegate: userProfileBtnDelegate?
+
+    @IBOutlet weak var scoreOneView: UIView!
+    @IBOutlet weak var scoreTwoView: UIView!
+    @IBOutlet weak var scoreThreeView: AnimationView!
+    @IBOutlet weak var scoreFourView: AnimationView!
+    @IBOutlet weak var scoreFiveView: AnimationView!
+    
+    let animationview = AnimationView(name: "ic_vomited")
+    let animationview2 = AnimationView(name: "ic_confused")
+    let animationview3 = AnimationView(name: "ic_neutral")
+    let animationview4 = AnimationView(name: "ic_lol")
+    let animationview5 = AnimationView(name: "ic_inloveface")
 
     let yumyumYellow: ColorSet = .yumyumYellow
     
@@ -31,10 +47,42 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpAnimation()
     }
     
-    func setLayout() {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        animationview.stop()
+        animationview2.stop()
+        animationview3.stop()
+        animationview4.stop()
+        animationview5.stop()
+    }
+    
+    public func setUpAnimation() {
+        animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview.contentMode = .scaleAspectFit
+        scoreOneView.addSubview(animationview)
+    
+        animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview2.contentMode = .scaleAspectFit
+        scoreTwoView.addSubview(animationview2)
         
+        animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview3.contentMode = .scaleAspectFit
+        scoreThreeView.addSubview(animationview3)
+        
+        animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview4.contentMode = .scaleAspectFit
+        scoreFourView.addSubview(animationview4)
+
+        animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview5.contentMode = .scaleAspectFit
+        scoreFiveView.addSubview(animationview5)
+    }
+    
+    @IBAction func userBtnPress(_ sender: Any) {
+        self.delegate?.userBtnPress(index: index, nowfeed: nowFeed)
     }
     
     @IBAction func likeBtnPress(_ sender: Any) {
@@ -94,7 +142,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     private func loadData(feed:Feed, myLikeFeed: Feed) {
         nowFeed = feed
         foodLabel.text = feed.title
-        userLabel.text = "@" + (feed.user?.nickname)! as String
+        userBtn.setTitle("@" + (feed.user?.nickname!)! , for: .normal)
         reviewLabel.text = feed.content
         
         
@@ -119,3 +167,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
 }
 
+protocol userProfileBtnDelegate {
+    func userBtnPress(index: Int, nowfeed : Feed)
+}
