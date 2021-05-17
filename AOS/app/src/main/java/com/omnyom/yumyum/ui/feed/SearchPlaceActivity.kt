@@ -25,7 +25,7 @@ class SearchPlaceActivity : BaseBindingActivity<ActivitySearchPlaceBinding> (R.l
     }
 
     override fun setup() {
-        KakaoMapUtils.initLocationManager(this)
+//        KakaoMapUtils.initLocationManager(this)
         requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), PERM_FINE_LOCATION)
     }
 

@@ -1,46 +1,47 @@
 package com.omnyom.yumyum.ui.useroption
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.omnyom.yumyum.MainActivity
+import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMyOptionBinding
 import com.omnyom.yumyum.helper.GoogleLoginHelper
+import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import com.omnyom.yumyum.ui.login.LoginActivity
 
-class MyOptionActivity : AppCompatActivity() {
+class MyOptionActivity : BaseBindingActivity<ActivityMyOptionBinding>(R.layout.activity_my_option) {
+    override fun extraSetupBinding() { }
 
-    val binding by lazy { ActivityMyOptionBinding.inflate(layoutInflater) }
+    override fun setup() { }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun setupViews() {
         binding.btnLogout.setOnClickListener { signOut() }
         binding.btnEditProfile.setOnClickListener { goUserEdit() }
         binding.btnInfoAgreement.setOnClickListener { goInfoAgreement() }
-
-
+        supportActionBar?.hide()
     }
 
+    override fun onSubscribe() { }
+
+    override fun release() { }
+
     private fun goInfoAgreement() {
-        binding.wvInfoAgreement.loadUrl("https://week-year.tistory.com/190?category=891710")
+        binding.wvInfoAgreement.loadUrl(getString(R.string.privacy_policy_site))
     }
 
     private fun signOut() {
         GoogleLoginHelper.firebaseAuth.signOut()
-        GoogleLoginHelper.googleSignOut(this, { startLoginActivity() })
+        GoogleLoginHelper.googleSignOut(this) { startLoginActivity() }
     }
 
     private fun startLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+        Intent(this, LoginActivity::class.java).let {
+            startActivity(it)
+        }
         this.finish()
     }
 
-    fun goUserEdit() {
-        val intent = Intent(this, UserInfoEditActivity::class.java)
-        startActivity(intent)
+    private fun goUserEdit() {
+        Intent(this, UserInfoEditActivity::class.java).let {
+            startActivity(it)
+        }
     }
 }
