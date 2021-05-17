@@ -38,15 +38,17 @@ class SelectedAllViewModel(application: Application) : BaseViewModel(application
             it.title = data?.getStringExtra("title") ?: ""
             it.content = data?.getStringExtra("content") ?: ""
             it.score = data?.getIntExtra("score", -1) ?: -1
-            val placeRequest = data?.getSerializableExtra("placeRequest") as PlaceRequest
-            it.place = Place(
-                    placeRequest.address,
-                    0,
-                    placeRequest.locationX,
-                    placeRequest.locationY,
-                    placeRequest.name,
-                    placeRequest.phone
-            )
+            if (data?.hasExtra("placeRequest")!!) {
+                val placeRequest = data?.getSerializableExtra("placeRequest") as PlaceRequest
+                it.place = Place(
+                        placeRequest.address,
+                        0,
+                        placeRequest.locationX,
+                        placeRequest.locationY,
+                        placeRequest.name,
+                        placeRequest.phone
+                )
+            }
         }
         _feedData.notifyObserver()
     }

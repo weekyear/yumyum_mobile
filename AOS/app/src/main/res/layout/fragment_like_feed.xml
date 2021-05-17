@@ -12,32 +12,22 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_like_feed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <ImageButton
-            android:id="@+id/btn_go_marker"
+            android:id="@+id/btn_go_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
-            android:background="@null"
-            android:src="@drawable/ic_place"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout2" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".ui.myinfo.LikeFeedFragment">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_like_feed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-        </LinearLayout>
+            android:background="@drawable/btn_circle"
+            android:tint="@color/white"
+            android:src="@drawable/ic_map"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

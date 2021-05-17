@@ -62,10 +62,10 @@
 
         <ImageButton
             android:id="@+id/btn_go_options"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="18dp"
             android:background="@null"
             android:scaleType="fitXY"
             android:src="@drawable/ic_threedots"

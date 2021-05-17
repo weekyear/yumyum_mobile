@@ -27,6 +27,7 @@ import com.omnyom.yumyum.ui.userfeed.UserFeedActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.abs
 
 class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
     companion object {
@@ -82,7 +83,6 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     private lateinit var progressBar : ProgressBar
     private lateinit var btnSend : ImageButton
     private lateinit var avStar : LottieAnimationView
-    private var isLikeAnimating : Boolean = false
 
     override fun extraSetupBinding() { }
 
@@ -227,23 +227,20 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
         }
 
         thumbUp.setOnClickListener {
-            if (!isLikeAnimating) {
-                isLikeAnimating = true
-                if (feed.isLike) {
-                    unlikeFeed(feed.id.toLong())
-                    likeNum.text = feed.likeCount.toString()
-                    thumbUp.setMinAndMaxProgress(0.5f, 1.0f)
-                    thumbUp.changeLayersColor(R.color.white)
-                } else {
-                    likeFeed(feed.id.toLong())
-                    likeNum.text = (feed.likeCount + 1).toString()
-                    thumbUp.setMinAndMaxProgress(0.0f, 0.5f)
-                    thumbUp.changeLayersColor(R.color.colorPrimary)
-                }
-                feed.isLike = !feed.isLike
-                thumbUp.playAnimation()
-                isLikeAnimating = false
+            if (feed.isLike && abs(0.5f - thumbUp.progress) < 0.0005) {
+                unlikeFeed(feed.id.toLong())
+                feed.likeCount -= 1
+                thumbUp.setMinAndMaxProgress(0.5f, 1.0f)
+                thumbUp.changeLayersColor(R.color.white)
+            } else if (!feed.isLike && (abs(1.0f - thumbUp.progress) < 0.0005 || abs(thumbUp.progress - 0.0f) < 0.0005)) {
+                likeFeed(feed.id.toLong())
+                feed.likeCount += 1
+                thumbUp.setMinAndMaxProgress(0.0f, 0.5f)
+                thumbUp.changeLayersColor(R.color.colorPrimary)
             }
+            likeNum.text = feed.likeCount.toString()
+            feed.isLike = !feed.isLike
+            thumbUp.playAnimation()
         }
     }
 

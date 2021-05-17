@@ -1,19 +1,21 @@
 package com.omnyom.yumyum.ui.markermap
 
 import android.Manifest
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.widget.Toast
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityMarkerMapBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.model.feed.Place
-import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+
 
 class MarkerMapActivity : BaseBindingActivity<ActivityMarkerMapBinding>(R.layout.activity_marker_map) {
 
@@ -24,7 +26,7 @@ class MarkerMapActivity : BaseBindingActivity<ActivityMarkerMapBinding>(R.layout
 
     override fun setup() {
         requirePermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-            KakaoMapUtils.PERM_FINE_LOCATION
+                KakaoMapUtils.PERM_FINE_LOCATION
         )
         placeData = intent.getSerializableExtra("placeData") as ArrayList<Place>
     }
@@ -33,8 +35,9 @@ class MarkerMapActivity : BaseBindingActivity<ActivityMarkerMapBinding>(R.layout
         var mapViewInput = MapView(this).apply {
             currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeadingWithoutMapMoving
             setShowCurrentLocationMarker(true)
-            // val mapPoint = MapPoint.mapPointWithGeoCoord(myPosition[1]?:0.0, myPosition[0]?:0.0)
-            setZoomLevel(3, true)
+            val myPosition = KakaoMapUtils.getMyPosition(this@MarkerMapActivity)
+            val mapPoint = MapPoint.mapPointWithGeoCoord(myPosition[1], myPosition[0])
+            setMapCenterPointAndZoomLevel(mapPoint, 0, true)
         }
         binding.mapView.addView(mapViewInput)
 
@@ -45,11 +48,17 @@ class MarkerMapActivity : BaseBindingActivity<ActivityMarkerMapBinding>(R.layout
 
         binding.btnMyLocation.setOnClickListener {
             val myPosition = KakaoMapUtils.getMyPosition(this)
-            val uNowPosition = MapPoint.mapPointWithGeoCoord(myPosition[1]?:0.0, myPosition[0]?:0.0)
+            val uNowPosition = MapPoint.mapPointWithGeoCoord(myPosition[1], myPosition[0])
             mapViewInput.setMapCenterPoint(uNowPosition, true)
         }
 
-        supportActionBar?.hide()
+        // bar 백그라운드 색상 변경
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+
+        // 타이틀 색상 변경
+        val text: Spannable = SpannableString(getString(R.string.title_my_feed))
+        text.setSpan(ForegroundColorSpan(getColor(R.color.mainText)), 0, text.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        supportActionBar?.setTitle(text)
     }
 
     override fun onSubscribe() {

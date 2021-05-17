@@ -33,7 +33,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     var isCompleted: Boolean = false
     var isEdit: Boolean = false
 
-    val placeRequest = MutableLiveData<PlaceRequest>().apply {
+    val placeRequest = MutableLiveData<PlaceRequest?>().apply {
         value = null
     }
     val content = MutableLiveData<String>().apply {

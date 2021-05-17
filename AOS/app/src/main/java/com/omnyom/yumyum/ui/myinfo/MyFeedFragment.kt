@@ -18,9 +18,7 @@ class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragm
         }
     }
 
-    override fun setup() {
-        myFeedVM.getMyFeed()
-    }
+    override fun setup() { }
 
     override fun setupViews() {
         binding.rvMyFeed.apply {
@@ -43,6 +41,11 @@ class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragm
     }
 
     override fun release() {
+    }
+
+    override fun onResume() {
+        myFeedVM.getMyFeed()
+        super.onResume()
     }
 }
 

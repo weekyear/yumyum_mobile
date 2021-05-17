@@ -34,13 +34,8 @@ class KakaoLinkUtils {
                     Log.e(TAG, "카카오링크 보내기 실패", error)
                 }
                 else if (linkResult != null) {
-                    Log.d(TAG, "카카오링크 보내기 성공 ${linkResult.intent}")
 
                     activity.startActivity(linkResult.intent)
-
-                    // 카카오링크 보내기에 성공했지만 아래 경고 메시지가 존재할 경우 일부 컨텐츠가 정상 동작하지 않을 수 있습니다.
-                    Log.w(TAG, "Warning Msg: ${linkResult.warningMsg}")
-                    Log.w(TAG, "Argument Msg: ${linkResult.argumentMsg}")
                 }
             }
         }
