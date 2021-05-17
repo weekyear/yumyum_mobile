@@ -14,7 +14,7 @@ data class FeedData(
         val isCompleted: Boolean,
         val id: Int,
         var isLike: Boolean,
-        val likeCount: Int,
+        var likeCount: Int,
         val modifiedDate: String,
         var place: Place?,
         val thumbnailPath: String,

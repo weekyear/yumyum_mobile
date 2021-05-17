@@ -63,7 +63,9 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                     putExtra("title", feedCreateVM.title.value)
                     putExtra("content", feedCreateVM.content.value)
                     putExtra("score", feedCreateVM.score.value)
-                    putExtra("placeRequest", feedCreateVM.placeRequest.value as Serializable)
+                    if (feedCreateVM.placeRequest.value != null) {
+                        putExtra("placeRequest", feedCreateVM.placeRequest.value as Serializable)
+                    }
                 }
                 feedCreateVM.editFeed()
                 setResult(Activity.RESULT_OK, intent)
@@ -213,18 +215,20 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
             feedCreateVM.content.postValue(feedData.content)
             feedCreateVM.score.postValue(feedData.score)
 
-            val feedPlace = feedData.place ?: Place("", 0, 0.0, 0.0, "", "")
+            if (feedData.place != null) {
+                val feedPlace = feedData.place ?: Place("", 0, 0.0, 0.0, "", "")
 
-            PlaceRequest(
-                feedPlace.address,
-                    0,
-                feedPlace.locationX,
-                feedPlace.locationY,
-                feedPlace.name,
-                feedPlace.phone
-            ).let {
-                feedCreateVM.placeRequest.postValue(it)
-                binding.editTextPlace.setText(it.name)
+                PlaceRequest(
+                        feedPlace.address,
+                        0,
+                        feedPlace.locationX,
+                        feedPlace.locationY,
+                        feedPlace.name,
+                        feedPlace.phone
+                ).let {
+                    feedCreateVM.placeRequest.postValue(it)
+                    binding.editTextPlace.setText(it.name)
+                }
             }
 
             if (feedData.score != 0) {

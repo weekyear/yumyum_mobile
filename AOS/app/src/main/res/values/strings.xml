@@ -25,12 +25,22 @@
     <string name="title_user_edit">회원 정보 수정</string>
     <string name="please_search">원하는 피드를 찾아보세요~</string>
     <string name="not_found">피드 검색 결과가 없어요\nㅠ_ㅠ</string>
+    <string name="preferences">설정 및 개인정보</string>
+    <string name="account">계정</string>
+    <string name="manage_account">계정 관리</string>
+    <string name="information">정보</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="privacy_policy">개인정보 보호정책</string>
+    <string name="privacy_policy_site">https://week-year.tistory.com/190?category=891710</string>
 
     <string name="location_hint">식당 이름을 알려주세요.</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_my_feed">내 피드</string>
+    <string name="title_like_feed">좋아요한 피드</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

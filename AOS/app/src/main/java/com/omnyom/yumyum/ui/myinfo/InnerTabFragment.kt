@@ -37,9 +37,9 @@ class InnerTabFragment : Fragment() {
         viewPager.adapter = pagerAdapters
 
         tabs.setupWithViewPager(viewPager)
-        tabs.getTabAt(0)?.setIcon(R.drawable.ic_profile)
+        tabs.getTabAt(0)?.setIcon(R.drawable.ic_dashboard_black_24dp)
         tabs.getTabAt(0)?.text =null
-        tabs.getTabAt(1)?.setIcon(R.drawable.ic_dashboard_black_24dp)
+        tabs.getTabAt(1)?.setIcon(R.drawable.ic_heart)
         tabs.getTabAt(1)?.text =null
 
         return binding.root
