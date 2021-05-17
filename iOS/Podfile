@@ -1,12 +1,12 @@
-
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'YumYum' do
+target 'YumYumy' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  project 'YumYumy.xcodeproj'  
 
-  # Pods for YumYum
+  # Pods for YumYumy
   pod 'Alamofire', '~> 5.2'
   pod 'SwiftyJSON', '~> 4.0'
   pod 'Firebase/Core'
@@ -20,12 +20,12 @@ target 'YumYum' do
   pod 'lottie-ios'
 
 	
-  target 'YumYumTests' do
+  target 'YumYumyTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'YumYumUITests' do
+  target 'YumYumyUITests' do
     # Pods for testing
   end
 
