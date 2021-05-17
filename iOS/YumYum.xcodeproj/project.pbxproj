@@ -30,6 +30,7 @@
 		54B8246F263C0EC1001F6A17 /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */; };
 		54B82479263C921A001F6A17 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B82478263C921A001F6A17 /* SettingVC.swift */; };
 		54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B9F131263ACBC700027590 /* CommenResponse.swift */; };
+		54C2B7D8265204190067BE14 /* MyMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C2B7D7265204190067BE14 /* MyMapVC.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeVC.swift */; };
 		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
 		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
@@ -165,6 +166,7 @@
 		54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = YumYum/MyCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		54B82478263C921A001F6A17 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingVC.swift; path = YumYum/Models/SettingVC.swift; sourceTree = SOURCE_ROOT; };
 		54B9F131263ACBC700027590 /* CommenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommenResponse.swift; sourceTree = "<group>"; };
+		54C2B7D7265204190067BE14 /* MyMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyMapVC.swift; path = YumYum/ViewControllers/MyMapVC.swift; sourceTree = SOURCE_ROOT; };
 		54C6DA5B262B1965006C8D96 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYum/Models/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
 		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 				543648E726481EF600392C12 /* PrivateLawVC.swift */,
 				5439717D264982FE005FD966 /* MyFeedVC.swift */,
 				54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */,
+				54C2B7D7265204190067BE14 /* MyMapVC.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1023,6 +1026,7 @@
 				E5969652264BC61A009B64A3 /* CustomMenuBar.swift in Sources */,
 				E548AB16263AB51B0049AA0B /* FeedModel.swift in Sources */,
 				54DA816A264816530029FC92 /* UIImage.swift in Sources */,
+				54C2B7D8265204190067BE14 /* MyMapVC.swift in Sources */,
 				E548AB0C2639ECC70049AA0B /* ReviewVC.swift in Sources */,
 				E548AAF026386A9F0049AA0B /* WebApiManagerUser.swift in Sources */,
 			);

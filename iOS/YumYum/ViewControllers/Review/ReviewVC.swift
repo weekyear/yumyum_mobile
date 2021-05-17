@@ -49,22 +49,6 @@ class ReviewVC: UIViewController {
     @IBOutlet var locationTextField: UITextField!
     @IBOutlet weak var emojiLabel: UILabel!
     
-//    @IBAction func TabEmoji1(_ sender: Any) {
-//        setEmoji(value: .one)
-//    }
-//    @IBAction func TabEmoji2(_ sender: Any) {
-//        setEmoji(value: .two)
-//    }
-//    @IBAction func TabEmoji3(_ sender: Any) {
-//        setEmoji(value: .three)
-//    }
-//    @IBAction func TabEmoji4(_ sender: Any) {
-//        setEmoji(value: .four)
-//    }
-//    @IBAction func TabEmoji5(_ sender: Any) {
-//        setEmoji(value: .five)
-//    }
-    
     @IBAction func didTabLocationButton(_ sender: Any) {
         let vc = PlaceSearchVC.instance()
         vc.delegate = self
