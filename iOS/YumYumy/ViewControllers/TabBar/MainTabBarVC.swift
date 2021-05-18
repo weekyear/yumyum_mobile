@@ -24,7 +24,6 @@ class MainTabBarVC: UITabBarController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("tabbar", #function)
     }
 }
 

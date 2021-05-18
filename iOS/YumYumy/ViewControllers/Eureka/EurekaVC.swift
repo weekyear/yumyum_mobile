@@ -63,9 +63,7 @@ class EurekaVC: UIViewController {
         )
         
         myChatLabel.isHidden = true
-        
-        
-        
+        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!)
     }
     
     // 키보드 내리기
@@ -97,8 +95,6 @@ class EurekaVC: UIViewController {
         myChatLabel.isHidden = false
         eurekaTextField.text = ""
         self.view.endEditing(true)
-        
-        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!)
         
     }
     
