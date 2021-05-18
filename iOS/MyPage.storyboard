@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mT8-Qs-aO0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +14,7 @@
         <!--MypageVC-->
         <scene sceneID="EV4-L8-Sud">
             <objects>
-                <viewController storyboardIdentifier="MypageVC" id="MEu-kw-Ax3" customClass="MypageVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageVC" id="MEu-kw-Ax3" customClass="MypageVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ro-oY-bXo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +56,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CgZ-kU-YgE" customClass="MyCollectionViewCell" customModule="YumYum" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CgZ-kU-YgE" customClass="MyCollectionViewCell" customModule="YumYumy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wiw-Fa-yfg">
@@ -144,7 +145,7 @@
         <!--설정 및 개인정보-->
         <scene sceneID="E9L-3J-ZyF">
             <objects>
-                <viewController id="qfF-xF-Q9e" customClass="SettingVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qfF-xF-Q9e" customClass="SettingVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vHE-zl-iKX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,12 +211,12 @@
         <!--Edit ProfileVC-->
         <scene sceneID="WEM-zO-3tX">
             <objects>
-                <viewController storyboardIdentifier="EditProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="evt-06-RVW" customClass="EditProfileVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="evt-06-RVW" customClass="EditProfileVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oqX-ZP-eK5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-Ct-jsq" customClass="SignUpButton" customModule="YumYum" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-Ct-jsq" customClass="SignUpButton" customModule="YumYumy" customModuleProvider="target">
                                 <rect key="frame" x="20" y="462" width="374" height="30"/>
                                 <state key="normal" title="프로필 변경 완료"/>
                                 <connections>
@@ -304,7 +305,7 @@
         <!--Private LawVC-->
         <scene sceneID="ezN-oV-iEp">
             <objects>
-                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" customClass="PrivateLawVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" customClass="PrivateLawVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yF3-ga-NMW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,12 +334,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHW-Yg-LqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4766.666666666667" y="1072.7678571428571"/>
+            <point key="canvasLocation" x="4838" y="1073"/>
+        </scene>
+        <!--ReviewVC-->
+        <scene sceneID="jF4-sD-NPI">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ReviewVC" storyboardName="Review" referencedIdentifier="ReviewVC" id="Frg-xz-iZD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IQg-CA-cbv"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Svd-qo-sd4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3805.0724637681164" y="1713.6160714285713"/>
         </scene>
         <!--My FeedVC-->
         <scene sceneID="Zux-k8-XtT">
             <objects>
-                <viewController storyboardIdentifier="MyFeedVC" id="aHT-uq-TK2" customClass="MyFeedVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFeedVC" modalPresentationStyle="fullScreen" id="aHT-uq-TK2" customClass="MyFeedVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="enX-ml-lg4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,7 +364,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="mycell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="mycell" id="x9F-gA-2NI" userLabel="MyCell" customClass="MyFeedCollectionViewCell" customModule="YumYum" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="mycell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="mycell" id="x9F-gA-2NI" userLabel="MyCell" customClass="MyFeedCollectionViewCell" customModule="YumYumy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="819"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EAJ-gW-Ich">
@@ -505,6 +516,9 @@
                                                             <state key="normal" title="수정">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="updateFeedPress:" destination="x9F-gA-2NI" eventType="touchUpInside" id="afi-PR-4Dg"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRg-4l-8Wb">
                                                             <rect key="frame" x="0.0" y="30" width="90" height="30"/>
@@ -513,7 +527,7 @@
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="deleteFeed:" destination="x9F-gA-2NI" eventType="touchUpInside" id="v9L-3Q-jFu"/>
+                                                                <action selector="deleteFeedPress:" destination="x9F-gA-2NI" eventType="touchUpInside" id="v9L-3Q-jFu"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -559,6 +573,7 @@
                                             <outlet property="myPlaceLabel" destination="vOT-sD-cLh" id="M41-iu-UfQ"/>
                                             <outlet property="myReviewLabel" destination="2UQ-Lq-nJL" id="N9V-zg-Gz8"/>
                                             <outlet property="myVideoView" destination="rJL-5c-apX" id="zBS-Sa-Brc"/>
+                                            <outlet property="threeDotBtn" destination="OIA-Bx-Iwb" id="0KK-V6-Lj3"/>
                                             <outlet property="threeDotView" destination="SS6-Fy-Yjg" id="a67-ty-cBE"/>
                                         </connections>
                                     </collectionViewCell>
@@ -585,12 +600,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bub-yu-21m" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5673.913043478261" y="1072.7678571428571"/>
+            <point key="canvasLocation" x="2052" y="1761"/>
         </scene>
         <!--My MapVC-->
         <scene sceneID="LQo-Vi-wpF">
             <objects>
-                <viewController storyboardIdentifier="MyMapVC" id="ZMJ-3A-sx6" customClass="MyMapVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyMapVC" id="ZMJ-3A-sx6" customClass="MyMapVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ouk-ss-6C9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -615,7 +630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zaW-gE-Gtx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6584" y="1073"/>
+            <point key="canvasLocation" x="8405.7971014492759" y="1062.7232142857142"/>
         </scene>
     </scenes>
     <resources>

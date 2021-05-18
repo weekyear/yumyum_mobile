@@ -18,6 +18,9 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet var myLikeCountLabel: UILabel!
     @IBOutlet var myLikeBtn: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    @IBOutlet var backMyPageBtn: UIButton!
+    @IBOutlet var threeDotView: UIView!
+    @IBOutlet var threeDotBtn: UIButton!
     
     let yumyumYellow: ColorSet = .yumyumYellow
     
@@ -27,10 +30,6 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     var checkLike: Bool = false
     var userData = UserDefaults.getLoginedUserInfo()!
     var isCheckView: Bool = false
-    
-    @IBOutlet var backMyPageBtn: UIButton!
-    
-    @IBOutlet var threeDotView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,18 +52,13 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func deleteFeed(_ sender: Any) {
+    @IBAction func deleteFeedPress(_ sender: Any) {
         self.delegate?.deleteFeedToMove(feedId: feedInfo.id!)
-        WebApiManager.shared.deleteMyFeed(feedId: feedInfo.id!){
-            (result) in
-            if result["status"] == "200" {
-                print("피드가 삭제 되었습니다.")
-            } else {
-                print("피드 삭제 오류")
-            }
-        } faliure: { (error) in
-            print(error)
-        }
+        
+    }
+    
+    @IBAction func updateFeedPress(_ sender: Any) {
+        self.delegate?.updateFeedToMove(feed : feedInfo)
     }
     
     @IBAction func myLikeBtnPressed(_ sender: Any) {
@@ -149,4 +143,5 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
 
 protocol myFeedCellDelegate {
     func deleteFeedToMove(feedId:Int)
+    func updateFeedToMove(feed:Feed)
 }

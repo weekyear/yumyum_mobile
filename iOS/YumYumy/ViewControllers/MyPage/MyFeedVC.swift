@@ -14,22 +14,22 @@ class MyFeedVC: UIViewController {
         return vc
     }
     
-    var myFeedList: [Feed] = []
-//    var myLikeFeedList: [Feed] = []
-    
     @IBOutlet var collectionView: UICollectionView!
     
+    var myFeedList: [Feed] = []
+//    var myLikeFeedList: [Feed] = []
     let userData = UserDefaults.getLoginedUserInfo()!
     var itemId: Int?
+    var feedLikeOrNot:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func setLayout() {
@@ -58,6 +58,12 @@ extension MyFeedVC: UICollectionViewDataSource  {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backMyPage))
         
         cell.delegate = self
+        
+        if feedLikeOrNot {
+            cell.threeDotBtn.isHidden = true
+        } else {
+            cell.threeDotBtn.isHidden = false
+        }
 
         cell.backMyPageBtn.isUserInteractionEnabled = true
         cell.backMyPageBtn.tag = indexPath.item
@@ -81,11 +87,34 @@ extension MyFeedVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension MyFeedVC: myFeedCellDelegate {
+    
     func deleteFeedToMove(feedId: Int) {
         defaultalert("정말 삭제하시겠어요?"){ () in
+            WebApiManager.shared.deleteMyFeed(feedId: feedId){
+                (result) in
+                if result["status"] == "200" {
+                    print("피드가 삭제 되었습니다.")
+                } else {
+                    print("피드 삭제 오류")
+                }
+            } faliure: { (error) in
+                print(error)
+            }
             self.dismiss(animated: true)
         }failure: {
             return
         }
     }
+    
+    func updateFeedToMove(feed : Feed) {
+        defaultalert("피드를 수정하시겠습니까?"){ () in
+            let reviewVC = UIStoryboard(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVC
+            reviewVC.updatefeed = feed
+            self.navigationController?.pushViewController(reviewVC, animated: true)
+            return
+        } failure: {
+            return
+        }
+    }
+    
 }

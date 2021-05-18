@@ -463,16 +463,16 @@ PUT ("/feed")
 {
 	"id": 1,
   "**title": "족발",
-  "content": "정말 맛있어요~",
+  "content": "",
 	"score": 5,
 	"userId": 1,
 	"placeResponse": {
 		"id": 0,
-		"address": "대전 유성구 덕명동",
-    "phone": "010-8282-5353",
-    "name": "대전 족발",
-    "locationY": 213.453532,
-    "locationX": 24.25235
+		"address": ""
+    "phone": "",
+    "name": "",
+    "locationY": ""
+    "locationX": ""
 	},
 	"isCompleted": true**
 }

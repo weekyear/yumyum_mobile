@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qNj-uN-sWj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,12 +12,12 @@
         <!--CameraVC-->
         <scene sceneID="W6e-ZH-S9M">
             <objects>
-                <viewController storyboardIdentifier="CameraVC" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4r9-9L-Eci" customClass="CameraVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CameraVC" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4r9-9L-Eci" customClass="CameraVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rZw-FG-23O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-9I-XNC" customClass="PreviewView" customModule="YumYum" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-9I-XNC" customClass="PreviewView" customModule="YumYumy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LrG-ON-CqT">
@@ -89,7 +90,7 @@
         <!--Video Play BackVC-->
         <scene sceneID="zWk-L0-Mxv">
             <objects>
-                <viewController storyboardIdentifier="VideoPlayBackVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xw1-m5-Egb" customClass="VideoPlayBackVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VideoPlayBackVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xw1-m5-Egb" customClass="VideoPlayBackVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J7D-mr-oj4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,7 +145,7 @@
         <!--MapVC-->
         <scene sceneID="SYH-ro-x7r">
             <objects>
-                <viewController storyboardIdentifier="MapVC" id="Kdg-EE-aiH" customClass="MapVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapVC" id="Kdg-EE-aiH" customClass="MapVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wqf-cL-OPd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,7 +206,7 @@
         <!--Place SearchVC-->
         <scene sceneID="oWL-VN-MCH">
             <objects>
-                <viewController storyboardIdentifier="PlaceSearchVC" id="xzy-pK-lb4" customClass="PlaceSearchVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaceSearchVC" id="xzy-pK-lb4" customClass="PlaceSearchVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZ3-ht-hBg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,7 +215,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaceSearchCell" rowHeight="150" id="AgV-tE-YqY" customClass="PlaceSearchCell" customModule="YumYum" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaceSearchCell" rowHeight="150" id="AgV-tE-YqY" customClass="PlaceSearchCell" customModule="YumYumy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AgV-tE-YqY" id="tYo-46-eVO">
@@ -314,7 +315,7 @@
         <!--Title-->
         <scene sceneID="tHz-q8-ScB">
             <objects>
-                <viewController storyboardIdentifier="ReviewVC" id="6uF-eu-xOF" customClass="ReviewVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewVC" id="6uF-eu-xOF" customClass="ReviewVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pdx-mw-k01">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,7 +446,7 @@
         <!--작성-->
         <scene sceneID="G9p-b3-lqh">
             <objects>
-                <navigationController storyboardIdentifier="ReviewNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" customClass="ReviewNavigationVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ReviewNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="qNj-uN-sWj" customClass="ReviewNavigationVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="작성" image="ic_plus" id="HvN-Vx-kaX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Kji-5d-IY0">

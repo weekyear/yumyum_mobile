@@ -30,6 +30,7 @@ class ReviewVC: UIViewController {
     var score: Score = .five
     var place: Place?
     var tempfeed: Feed?
+    var updatefeed: Feed?
     
     
     @IBOutlet var scoreOneView: AnimationView!
@@ -57,7 +58,6 @@ class ReviewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpAnimation()
         setAnimationGesture()
         setLayout()
@@ -67,8 +67,11 @@ class ReviewVC: UIViewController {
         contentTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .editingChanged)
         locationTextField.addTarget(self, action: #selector(textFieldDidChange(_sender:)), for: .valueChanged)
         
+        // 피드가 임시저장 피드일떄랑 완성본 수정일떄랑 두개로 나눈다.
         if tempfeed != nil {
             loadTempData()
+        } else if updatefeed != nil {
+            loadUpdateData()
         }
     }
     
@@ -194,9 +197,20 @@ class ReviewVC: UIViewController {
         }
     }
     
+    //임시피드를 받아오는 부분
     private func loadTempData() {
+        print(tempfeed!)
         feed = tempfeed!
         feed.userId = tempfeed?.user?.id
+        setEmoji(value: Score(rawValue: feed.score!)!)
+        titleTextField.text = feed.title
+        contentTextField.text = feed.content
+        locationTextField.text = feed.place?.name
+    }
+    
+    private func loadUpdateData() {
+        feed = updatefeed!
+        feed.userId = updatefeed?.user?.id
         setEmoji(value: Score(rawValue: feed.score!)!)
         titleTextField.text = feed.title
         contentTextField.text = feed.content
@@ -252,12 +266,30 @@ class ReviewVC: UIViewController {
             } failure: { (error) in
                 print("error: \(error)")
             }
-        } else {
-            print(self.feed)
+        // 임시저장으로 들어왔을떄 실행되는 로직
+        } else if self.videoUrl == nil && tempfeed != nil {
             print("임시저장시 들아오는 피드 생성부분")
-            WebApiManager.shared.createFeed(feed: self.feed) { (result) in
-                print("feed생성: \(result)")
+            WebApiManager.shared.updateFeed(feed: self.feed) { (result) in
+                print("feed 임시저장 수정!: \(result)")
                 if result["status"] == "200" {
+                    self.alertConfirm("수정 완료")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } failure: { (error) in
+                print("feed생성에러: \(error)")
+            }
+        //
+        } else if self.videoUrl == nil && updatefeed != nil {
+            print("업데이트 피드 수정해요!!")
+            self.feed.content = self.contentTextField.text
+            self.feed.title = self.titleTextField.text
+            self.feed.score = self.score.rawValue
+            dump(feed)
+            WebApiManager.shared.updateFeed(feed: self.feed) { (result) in
+                print("feed 업데이트 피드 수정!: \(result)")
+                if result["status"] == "200" {
+                    self.alertConfirm("수정 완료")
+                    let myFeedVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
                     self.navigationController?.popViewController(animated: true)
                 }
             } failure: { (error) in
@@ -270,13 +302,13 @@ class ReviewVC: UIViewController {
         self.score = value
         switch value {
         case .one:
-            emojiLabel.text = "웩맛"
+            emojiLabel.text = "우웩"
         case .two:
             emojiLabel.text = "노맛"
         case .three:
-            emojiLabel.text = "중맛"
+            emojiLabel.text = "쏘쏘"
         case .four:
-            emojiLabel.text = "맛맛"
+            emojiLabel.text = "마싰다"
         case .five:
             emojiLabel.text = "쫀맛"
         }

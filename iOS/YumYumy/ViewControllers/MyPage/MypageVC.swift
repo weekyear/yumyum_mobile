@@ -178,7 +178,6 @@ extension MypageVC: UICollectionViewDataSource {
                 }
             }
         }
-
         return cell
     }
 }
@@ -192,6 +191,7 @@ extension MypageVC: UICollectionViewDelegate {
         let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
         // 내가 쓴 피드와 좋아요 피드를 구분한다.
         if isCheckFeedList == false {
+            vc.feedLikeOrNot = false
             vc.myFeedList = myFeedList
             vc.itemId = indexPath.item
             let reverseMyFeedList = Array(self.myFeedList.reversed())
@@ -206,11 +206,13 @@ extension MypageVC: UICollectionViewDelegate {
                     print("취소")
                 }
             } else {
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+                let navigationController = UINavigationController(rootViewController: vc)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true)
             }
             // 좋아요 피드 전달
         } else {
+            vc.feedLikeOrNot = true
             vc.myFeedList = myLikeFeedList
             vc.itemId = indexPath.item
             vc.modalPresentationStyle = .fullScreen

@@ -884,3 +884,18 @@ extension HomeVC:userProfileBtnDelegate {
     
  ```
 
+## 화면전환
+
+> 그냥 화면전환은 쉬웠다. 근대 모달로 한번 화면이 띄워지고 또 다른 스토리보드의 네비게이션 바로 이동을 해야할떄 문제가 발생했다. 
+
+1) 먼저 모달 Viewcontroller(MyFeedVC.swift)에  present될때 navigationController를 같이보내서 넣어줘야한다. 왜냐하면 navigationConroller가 전달되지 않으면 모달은 띄워지지만 모달(MyFeedVC)에서 버튼을 클릭해서 다른 네비게이션 컨트롤러(ReviewVC)로 이동할 수가 없음 왜냐? `self.navigationController` 가 널값이기 떄문이다. 따라서 아래와 같이 넣어줘야한다.
+
+- MyPageVC.swift
+
+```swift
+// 현재 
+let navigationController = UINavigationController(rootViewController: vc)
+navigationController.modalPresentationStyle = .fullScreen
+self.present(navigationController, animated: true)
+```
+
