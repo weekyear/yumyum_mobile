@@ -48,6 +48,7 @@
     <string name="hello_world">Hello Square World!</string>
 
     <string name="saved_google_email">google_email_saved</string>
+    <string name="saved_eureka_distance">5</string>
     <string name="edit">수정</string>
     <string name="delete">삭제</string>
     <string name="kakao_app_key">4b26437470764b65d5fe1a130e93346c</string>

@@ -8,14 +8,18 @@ import android.util.DisplayMetrics
 import android.util.Log.d
 import android.util.TypedValue
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.net.toUri
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.messengerapp.Notifications.EurekaData
 import com.example.messengerapp.Notifications.Sender
@@ -29,6 +33,10 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentEurekaBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
+import com.omnyom.yumyum.helper.RotateTransformation
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
+import com.omnyom.yumyum.helper.recycler.EurekaAdapter
+import com.omnyom.yumyum.helper.recycler.SearchKakaoPlaceAdapter
 import com.omnyom.yumyum.interfaces.APISerivce
 import com.omnyom.yumyum.model.eureka.Chat
 import com.omnyom.yumyum.model.eureka.Client
@@ -38,6 +46,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.math.*
 
 
 class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.fragment_eureka) {
@@ -52,6 +61,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
     override fun setup() {
         KakaoMapUtils.initLocationFragmentManager(context)
+        eurekaVM.getMyFeed(userId)
 
         val chatsRef = db.collection("Chats")
         chatsRef.addSnapshotListener { snapshot, e ->
@@ -61,6 +71,15 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
     }
 
     override fun setupViews() {
+        binding.rvEurekaFeedList.apply {
+            val _adapter = EurekaAdapter(context).apply {
+                setVM(eurekaVM)
+            }
+            adapter = _adapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        }
+
         binding.btnSendMessage.setOnClickListener {
             val message = binding.editTextMessage.text.toString()
             val userId = userId.toString().toInt()
@@ -72,26 +91,48 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
             binding.editTextMessage.setText("")
         }
 
+        binding.btnEurekaFeedClose.setOnClickListener {
+            binding.clEurekaFeed.visibility = View.GONE
+        }
+        binding.btnSendFeed.setOnClickListener {
+            if (binding.rvEurekaFeedList.visibility == View.VISIBLE) {
+                binding.rvEurekaFeedList.visibility = View.GONE
+            } else {
+                binding.rvEurekaFeedList.visibility = View.VISIBLE
+            }
 
+        }
 
     }
 
     override fun onSubscribe() {
+        eurekaVM.myFeedData.observe(this) {
+            val adapter = binding.rvEurekaFeedList.adapter as EurekaAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
+            }
+        }
+
         eurekaVM.matchingDocs.observe(this) {
             val constraintLayout : ConstraintLayout = binding.clMessage
             val docs = eurekaVM.matchingDocs.value!!
             constraintLayout.removeAllViews()
-
-
+            binding.rvEurekaFeedList.visibility = View.GONE
             for (doc in docs){
-//                val authorId = doc.userId.toString().toLong()
-//                d("author", "$authorId")
-//                eurekaVM.getMessageAuthor(authorId)
-//                val userData = eurekaVM.authorData.value!!
-//                d("author", "$userData")
-                viewChat(requireContext(), doc)
+                if (doc.feedId == -1) {
+                    viewChat(requireContext(), doc)
+                } else {
+                    viewFeed(requireContext(), doc)
+                }
             }
 
+        }
+        eurekaVM.feedData.observe(this) {
+            binding.tvEurekaFoodName.text = eurekaVM.feedData.value!!.title
+            binding.tvEurekaPlace.text = eurekaVM.feedData.value!!.place!!.name + " | "+eurekaVM.feedData.value!!.place!!.address
+            binding.tvEurekaContent.text = eurekaVM.feedData.value!!.content
+            binding.tvEurekaLikeNum.text = eurekaVM.feedData.value!!.likeCount.toString()
         }
     }
 
@@ -112,7 +153,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 android.R.style.TextAppearance_DeviceDefault_Large
         )
         message.typeface = Typeface.MONOSPACE
-        message.background = ColorDrawable(Color.parseColor("#9FD3FA"))
+        message.setBackgroundResource(R.drawable.rounded_corner)
         message.setPadding(
                 5.toDp(context),
                 3.toDp(context),
@@ -143,21 +184,13 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
         profile.id = View.generateViewId()
         constraintLayout.addView(profile)
 
-        //
-        val displayMetrics = DisplayMetrics()
-        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val height = displayMetrics.heightPixels;
-        val width = displayMetrics.widthPixels
-
         // constraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
         val leftGap = random.nextInt(340) + 30
         val bottomGap = random.nextInt(500) + 50
-        val leftBylat : Double = (lat - doc.lat) * 100000
-        val bottomBylng : Double = (lng - doc.lng) * 100000
-        d("geoeeeleftBylat", "$leftBylat")
-        d("geoeeebottomBylng", "$bottomBylng")
+        val leftBylat : Int = ((lat - doc.lat)*10000).roundToInt() *2
+        val bottomBylng : Int = ((lng - doc.lng)*1000).roundToInt()*2
 
         if (doc.userId == userId.toString().toInt()) {
             constraintSet.connect(
@@ -258,6 +291,147 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
         constraintSet.applyTo(constraintLayout)
     }
 
+    fun viewFeed(context: Context, doc: Chat) {
+        val constraintLayout : ConstraintLayout = binding.clMessage
+        val random = Random()
+        val lng = eurekaVM.positions!![0]
+        val lat = eurekaVM.positions!![1]
+
+
+        // 유저네임
+        val username = TextView(context)
+        username.text = doc.userId.toString()
+        TextViewCompat.setTextAppearance(
+                username,
+                android.R.style.TextAppearance_DeviceDefault_Large
+        )
+        username.typeface = Typeface.MONOSPACE
+        username.setTextColor(Color.parseColor("#26428B"))
+        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10F)
+        username.id = View.generateViewId()
+        constraintLayout.addView(username)
+
+        //프로필
+        val profile = ImageView(context)
+        Glide.with(context).load(R.drawable.ic_profile).override(50, 50).into(profile)
+        profile.id = View.generateViewId()
+        constraintLayout.addView(profile)
+
+        // 땀네일
+        val thumbnail = ImageView(context)
+        Glide.with(context).load(doc.thumbnail).override(100, 100).centerCrop().transform(RotateTransformation(context, 90f)).into(thumbnail)
+        thumbnail.id = View.generateViewId()
+        thumbnail.setOnClickListener {
+            eurekaVM.getFeedData(doc.feedId.toString().toLong(), userId)
+            binding.clEurekaFeed.visibility = View.VISIBLE
+            Glide.with(context).load(doc.thumbnail).centerCrop().transform(RotateTransformation(context, 90f)).into(binding.ivEurekaThumbnail)
+        }
+        constraintLayout.addView(thumbnail)
+
+        // constraint
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintLayout)
+        val leftGap = random.nextInt(340) + 30
+        val bottomGap = random.nextInt(500) + 50
+
+        if (doc.userId == userId.toString().toInt()) {
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.START,
+                    R.id.cl_message,
+                    ConstraintSet.START,
+                    0.toDp(context)
+            )
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.BOTTOM,
+                    R.id.cl_message,
+                    ConstraintSet.BOTTOM,
+                    0.toDp(context)
+            )
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.END,
+                    R.id.cl_message,
+                    ConstraintSet.END,
+                    0.toDp(context)
+            )
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.TOP,
+                    R.id.cl_message,
+                    ConstraintSet.TOP,
+                    0.toDp(context)
+            )
+
+        } else {
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.START,
+                    R.id.cl_message,
+                    ConstraintSet.START,
+                    leftGap.toDp(context)
+            )
+            constraintSet.connect(
+                    thumbnail.id,
+                    ConstraintSet.BOTTOM,
+                    R.id.cl_message,
+                    ConstraintSet.BOTTOM,
+                    bottomGap.toDp(context)
+            )
+        }
+
+        constraintSet.connect(
+                profile.id,
+                ConstraintSet.START,
+                thumbnail.id,
+                ConstraintSet.START,
+                0.toDp(context)
+        )
+
+        constraintSet.connect(
+                profile.id,
+                ConstraintSet.END,
+                thumbnail.id,
+                ConstraintSet.END,
+                0.toDp(context)
+        )
+
+
+        constraintSet.connect(
+                profile.id,
+                ConstraintSet.TOP,
+                thumbnail.id,
+                ConstraintSet.BOTTOM,
+                10.toDp(context)
+        )
+
+        constraintSet.connect(
+                username.id,
+                ConstraintSet.START,
+                thumbnail.id,
+                ConstraintSet.START,
+                0.toDp(context)
+        )
+
+        constraintSet.connect(
+                username.id,
+                ConstraintSet.END,
+                thumbnail.id,
+                ConstraintSet.END,
+                0.toDp(context)
+        )
+
+        constraintSet.connect(
+                username.id,
+                ConstraintSet.TOP,
+                profile.id,
+                ConstraintSet.BOTTOM,
+                10.toDp(context)
+        )
+
+        constraintSet.applyTo(constraintLayout)
+    }
 
     fun Int.toDp(context: Context):Int = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,this.toFloat(),context.resources.displayMetrics
