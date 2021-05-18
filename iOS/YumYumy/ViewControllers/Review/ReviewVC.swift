@@ -73,6 +73,18 @@ class ReviewVC: UIViewController {
         } else if updatefeed != nil {
             loadUpdateData()
         }
+        
+        //MARK: - TODO 나중에 호출하는거 확인할것~
+//        loadAIVideo()
+    }
+    
+    private func loadAIVideo() {
+        WebApiManager.shared.postAiVdieo(mediaUrl: self.videoUrl){ (result) in
+            print("호출성공?")
+            print(result)
+        } failure: { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     func setUpAnimation() {
@@ -98,6 +110,7 @@ class ReviewVC: UIViewController {
         scoreFiveView.addSubview(animationview5)
 
     }
+    
     
     func setAnimationGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))

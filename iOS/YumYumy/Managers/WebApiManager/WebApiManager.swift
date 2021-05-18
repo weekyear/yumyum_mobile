@@ -15,6 +15,7 @@ class WebApiManager: NSObject {
     let userUrl = "user/"
     let signUpUrl = "user/signup/"
     let feedUrl = "feed/"
+    let AiDomainUrl = "http://k4b206.p.ssafy.io:5000/"
 
     override private init() {
         super.init()

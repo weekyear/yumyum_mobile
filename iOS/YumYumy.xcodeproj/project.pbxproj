@@ -12,6 +12,7 @@
 		540F22BD264C073F00F7581D /* ic_confused.json in Resources */ = {isa = PBXBuildFile; fileRef = 540F22BC264C073F00F7581D /* ic_confused.json */; };
 		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
 		542340CA264BE0720052F04B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 542340C9264BE0720052F04B /* Lottie */; };
+		5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430F9B1265423DC00863992 /* WebApiManagerAI.swift */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		544ED8DB2652BA6600B0F7CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */; };
@@ -154,6 +155,7 @@
 		540F22B7264C072F00F7581D /* ic_inloveface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_inloveface.json; sourceTree = "<group>"; };
 		540F22BC264C073F00F7581D /* ic_confused.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_confused.json; sourceTree = "<group>"; };
 		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYumy/ViewControllers/MyPage/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		5430F9B1265423DC00863992 /* WebApiManagerAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerAI.swift; sourceTree = "<group>"; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYumy/ViewControllers/MyPage/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYumy/ViewControllers/MyPage/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
 				E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */,
 				E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */,
+				5430F9B1265423DC00863992 /* WebApiManagerAI.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -1025,6 +1028,7 @@
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
+				5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */,
 				E596967A264BD4B7009B64A3 /* PlaceTableViewCell.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */,
