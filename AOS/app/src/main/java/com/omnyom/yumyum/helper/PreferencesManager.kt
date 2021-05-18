@@ -13,6 +13,8 @@ class PreferencesManager {
 
         // MainActivity에서 값을 부여함
         var userId : Long = 0
+        var eurekaDistance : Long = 4
+        var pushOn : Long = 1
 
         private fun getPreferences(context: Context): SharedPreferences {
             return context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)

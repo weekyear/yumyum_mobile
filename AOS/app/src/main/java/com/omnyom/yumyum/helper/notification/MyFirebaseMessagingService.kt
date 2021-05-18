@@ -6,13 +6,16 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.net.toUri
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
+import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.ui.eureka.EurekaFragment
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -50,7 +53,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         }
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        sendNotification()
+        if (PreferencesManager.pushOn == 1.toString().toLong()) {
+            sendNotification()
+        }
     }
 
     override fun onNewToken(token: String) {
@@ -73,10 +78,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_ONE_SHOT)
-
         val channelId = "987"
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
+                .setSound("https://firebasestorage.googleapis.com/v0/b/yumyum-52542.appspot.com/o/yumyum.wav?alt=media&token=60e9c7af-48c2-409d-a3a9-a13b9194ce60".toUri())
                 .setSmallIcon(R.drawable.ic_nut_yellow)
                 .setContentTitle("YUMYUM")
                 .setContentText("주변이 시끄러워요!?")

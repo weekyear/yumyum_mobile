@@ -3,6 +3,7 @@ package com.omnyom.yumyum.helper.recycler
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.View
@@ -10,13 +11,32 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.net.toUri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.bumptech.glide.Glide
+import com.example.messengerapp.Notifications.EurekaData
+import com.example.messengerapp.Notifications.Sender
+import com.firebase.geofire.GeoFireUtils
+import com.firebase.geofire.GeoLocation
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.ms.square.android.expandabletextview.ExpandableTextView
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemFoodBinding
 import com.omnyom.yumyum.helper.*
+import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
+import com.omnyom.yumyum.interfaces.APISerivce
+import com.omnyom.yumyum.model.eureka.Chat
+import com.omnyom.yumyum.model.eureka.Client
+import com.omnyom.yumyum.model.eureka.EurekaResponse
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.like.LikeRequest
@@ -30,7 +50,10 @@ import retrofit2.Response
 import kotlin.math.abs
 
 class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
+
     companion object {
+
+
         lateinit var curFeed : FeedData
 
         const val EDIT_FEED = 1234
@@ -66,6 +89,8 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
                 activity.startActivityForResult(this, EDIT_FEED)
             }
         }
+
+
     }
 
     private lateinit var clkRotate : Animation
@@ -305,4 +330,6 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
 
         })
     }
+
+
 }
