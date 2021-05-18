@@ -33,7 +33,7 @@ class PlaceListFragment : BaseBindingFragment<FragmentPlaceListBinding>(R.layout
                 setItems(it)
                 notifyDataSetChanged()
             }
-            if (searchVM.isSearched && it?.count() == 0) {
+            if (searchVM.isSearched.value == true && it?.count() == 0) {
                 showSearchImageView()
             } else {
                 hideSearchImageView()

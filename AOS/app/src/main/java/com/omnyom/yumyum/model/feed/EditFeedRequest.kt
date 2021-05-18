@@ -4,7 +4,7 @@ class EditFeedRequest (
     private val content: String?,
     private val id  : Long,
     private val isCompleted: Boolean,
-    private val placeResponse: PlaceRequest?,
+    private val placeRequest: PlaceRequest?,
     private val score : Int?,
     private val title : String?,
     ) {
@@ -13,7 +13,7 @@ class EditFeedRequest (
                 "content" to content,
                 "id" to id,
                 "isCompleted" to isCompleted,
-                "placeResponse" to placeResponse,
+                "placeRequest" to placeRequest,
                 "score" to score,
                 "title" to title
         )

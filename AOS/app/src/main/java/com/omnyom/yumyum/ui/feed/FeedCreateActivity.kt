@@ -5,16 +5,20 @@ import android.content.Intent
 import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.net.toUri
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.omnyom.yumyum.MainActivity
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
+import com.omnyom.yumyum.helper.recycler.RecommendTitleAdapter
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.Place
 import com.omnyom.yumyum.model.feed.PlaceRequest
@@ -40,6 +44,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 binding.avStar5
         )
     }
+    private val avStarText: List<String> = listOf("우웩", "노맛", "쏘쏘", "마싰따", "쫀맛")
 
     override fun extraSetupBinding() {
         binding.apply {
@@ -50,13 +55,17 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
 
     override fun setup() {
         initFeedDataWhenEdit()
+        if (!feedCreateVM.isEdit) {
+            feedCreateVM.feedAi(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
+        } else {
+            binding.calculatingGroup.visibility = View.INVISIBLE
+        }
     }
 
     override fun setupViews() {
         supportActionBar?.hide()
 
         binding.btnSubmit.setOnClickListener {
-
             if (feedCreateVM.isEdit) {
                 val intent = Intent().apply {
                     putExtra("id", feedCreateVM.id.value)
@@ -85,9 +94,17 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 avStar.playAnimation()
                 feedCreateVM.score.value = idx + 1
                 changeAvStarColor(avStar.id)
+                changeAvStarText(idx)
                 changeAvStarSize(avStar.id)
             }
         }
+
+        binding.rvRecommendTitle.apply {
+            adapter = RecommendTitleAdapter(binding)
+            layoutManager = LinearLayoutManager(this@FeedCreateActivity, LinearLayoutManager.HORIZONTAL, false)
+        }
+        binding.avDotsLoading.repeatCount = LottieDrawable.INFINITE
+        binding.avDotsLoading.playAnimation()
 
         textWatcher()
     }
@@ -105,6 +122,23 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 })
             }
         }
+
+        feedCreateVM.recommendTitles.observe(this, {
+            val adapter = binding.rvRecommendTitle.adapter as RecommendTitleAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
+            }
+            if (!it.elementAtOrNull(0).isNullOrBlank()) {
+                binding.rvRecommendTitle.visibility = View.VISIBLE
+                binding.calculatingGroup.visibility = View.INVISIBLE
+            } else if (feedCreateVM.isCalculated) {
+                binding.rvRecommendTitle.visibility = View.INVISIBLE
+                binding.tvCalculatingVideo.visibility = View.VISIBLE
+                binding.avDotsLoading.scale = 0.0f
+                binding.tvCalculatingVideo.text = "영상을 알아보지 못 하겠어요ㅠ_ㅠ \n 직접 입력해주세요!"
+            }
+        })
     }
 
     override fun release() {
@@ -116,7 +150,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         if (requestCode == SearchPlaceActivity.PLACE_CODE) {
             if (resultCode == RESULT_OK) {
                 val placeResult = data?.getSerializableExtra("placeResult") as SearchPlaceResult
-                PlaceRequest(placeResult.address_name, 0, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
+                PlaceRequest(placeResult.address_name, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
                     feedCreateVM.placeRequest.postValue(it)
                 }
 
@@ -179,6 +213,11 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         }
     }
 
+    private fun changeAvStarText(idx: Int) {
+        binding.tvStar.text = avStarText[idx]
+        binding.tvStar.setTextColor(getColor(R.color.colorPrimary))
+    }
+
     private fun changeAvStarSize(avStarId: Int) {
         for (avStar in avStars) {
             if (avStar.id == avStarId) {
@@ -220,7 +259,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
 
                 PlaceRequest(
                         feedPlace.address,
-                        0,
                         feedPlace.locationX,
                         feedPlace.locationY,
                         feedPlace.name,
@@ -233,6 +271,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
 
             if (feedData.score != 0) {
                 changeAvStarColor(avStars[feedData.score - 1].id)
+                changeAvStarText(feedData.score - 1)
                 changeAvStarSize(avStars[feedData.score - 1].id)
             }
         }

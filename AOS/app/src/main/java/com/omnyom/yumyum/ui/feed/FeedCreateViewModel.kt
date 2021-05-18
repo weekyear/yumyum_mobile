@@ -12,11 +12,15 @@ import com.google.android.gms.common.internal.FallbackServiceBroker
 import com.omnyom.yumyum.RetrofitBuilder
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
+import com.omnyom.yumyum.helper.RetrofitManager.Companion.aiService
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
 import com.omnyom.yumyum.helper.getFileName
 import com.omnyom.yumyum.interfaces.RetrofitService
 import com.omnyom.yumyum.model.feed.*
 import com.omnyom.yumyum.ui.base.BaseViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,12 +30,18 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import kotlin.concurrent.thread
 
 class FeedCreateViewModel(application: Application) : BaseViewModel(application) {
     private var videoPath: String = ""
     private var thumbnailPath: String = ""
     var isCompleted: Boolean = false
     var isEdit: Boolean = false
+    var isCalculated: Boolean = false
+
+    val recommendTitles = MutableLiveData<List<String>>().apply {
+        value = arrayListOf("    ", "   ", "    ")
+    }
 
     val placeRequest = MutableLiveData<PlaceRequest?>().apply {
         value = null
@@ -47,6 +57,31 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     }
     val title = MutableLiveData<String>().apply {
         value = ""
+    }
+
+    init {
+        GlobalScope.launch {
+            delay(8000)
+            isCalculated = true
+            recommendTitles.postValue(listOf(" ", "페퍼로니 피자", "합천돼지국밥", "고추잡채와 꽃빵"))
+        }
+    }
+
+    // 비디오 데이터를 보냅니다!
+    fun feedAi(body: MultipartBody.Part?) {
+        aiService.feedAi(body!!).enqueue(object : Callback<FeedAiResponse> {
+            override fun onResponse(call: Call<FeedAiResponse>, response: Response<FeedAiResponse>) {
+                if (response.isSuccessful) {
+                    isCalculated = true
+                    recommendTitles.postValue(response.body()?.data?: listOf())
+                }
+            }
+
+            override fun onFailure(call: Call<FeedAiResponse>, t: Throwable) {
+                t
+            }
+
+        })
     }
 
     // 비디오 데이터를 보냅니다!
