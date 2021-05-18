@@ -36,11 +36,11 @@ object RetrofitBuilder {
     }
 }
 
-object TempRetrofitBuilder {
+object AiRetrofitBuilder {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-            .baseUrl("http://k4b206.p.ssafy.io:8081/yumyum/")
+            .baseUrl("http://k4b206.p.ssafy.io:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

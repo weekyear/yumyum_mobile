@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:text="취소"
+            android:text="이전"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:background="@drawable/btn_transparent"
@@ -79,6 +79,47 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recommend_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginHorizontal="12dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_layout_title"/>
+
+        <TextView
+            android:id="@+id/tv_calculating_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/calculating_video"
+            android:textAlignment="center"
+            android:textColor="@color/mainText"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/input_layout_title"
+            app:layout_constraintEnd_toEndOf="@id/input_layout_title"
+            app:layout_constraintTop_toTopOf="@id/rv_recommend_title"
+            app:layout_constraintBottom_toBottomOf="@id/rv_recommend_title"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/av_dots_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@id/tv_calculating_video"
+            app:layout_constraintTop_toTopOf="@id/tv_calculating_video"
+            app:layout_constraintBottom_toBottomOf="@id/tv_calculating_video"
+            app:lottie_fileName="ic_dots_loading.json" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/calculating_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="tv_calculating_video,av_dots_loading" />
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/av_star_1"
             android:layout_width="32dp"
@@ -107,7 +148,7 @@
             android:layout_marginHorizontal="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_layout_title"
+            app:layout_constraintTop_toBottomOf="@id/rv_recommend_title"
             app:lottie_colorFilter="@color/black"
             app:lottie_fileName="ic_neutral.json" />
 
@@ -132,11 +173,22 @@
             app:lottie_colorFilter="@color/black"
             app:lottie_fileName="ic_inloveface.json" />
 
+        <TextView
+            android:id="@+id/tv_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="별점을 입력해주세요~"
+            android:textSize="22sp"
+            android:textColor="@color/mainText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/av_star_3" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:layout_marginHorizontal="24dp"
             android:hint="어떠셨나요?"
             app:boxBackgroundColor="@android:color/transparent"
@@ -147,7 +199,7 @@
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/av_star_3">
+            app:layout_constraintTop_toBottomOf="@id/tv_star">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_content"

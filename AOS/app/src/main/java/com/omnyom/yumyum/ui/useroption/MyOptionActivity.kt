@@ -16,6 +16,7 @@ class MyOptionActivity : BaseBindingActivity<ActivityMyOptionBinding>(R.layout.a
         binding.btnLogout.setOnClickListener { signOut() }
         binding.btnEditProfile.setOnClickListener { goUserEdit() }
         binding.btnInfoAgreement.setOnClickListener { goInfoAgreement() }
+        binding.btnBack.setOnClickListener { finish() }
         supportActionBar?.hide()
     }
 

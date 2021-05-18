@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentFoodListBinding
 import com.omnyom.yumyum.databinding.FragmentSearchInnerTabBinding
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.helper.recycler.SearchFeedAdapter
 import com.omnyom.yumyum.helper.recycler.SearchPlaceAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
@@ -41,7 +43,7 @@ class FoodListFragment : BaseBindingFragment<FragmentFoodListBinding>(R.layout.f
                 setItems(it)
                 notifyDataSetChanged()
             }
-            if (searchVM.isSearched && it?.count() == 0) {
+            if (searchVM.isSearched.value == true && it?.count() == 0) {
                 showNotFound()
             } else {
                 hideNotFound()

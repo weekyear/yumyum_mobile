@@ -5,8 +5,11 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 import com.omnyom.yumyum.ui.home.HomeFragment
 
@@ -17,15 +20,17 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     override fun extraSetupBinding() { }
 
     override fun setup() {
+        searchVM.getRecommendedFeeds()
     }
 
     override fun setupViews() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                searchVM.isSearched = true
+                searchVM.isSearched.value = !query.isNullOrBlank()
                 searchVM.searchFeed(query!!)
                 searchVM.searchPlace(query!!)
                 hidePleaseSearch()
+
                 return false
             }
 
@@ -52,7 +57,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     }
 
     private fun hidePleaseSearch() {
-        binding.ivSearch.visibility = View.GONE
-        binding.tvSearch.visibility = View.GONE
+//        binding.ivSearch.visibility = View.GONE
+//        binding.tvSearch.visibility = View.GONE
     }
 }
