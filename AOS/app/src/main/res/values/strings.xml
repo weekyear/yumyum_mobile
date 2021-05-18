@@ -55,4 +55,5 @@
     <string name="kakaolink_host">kakaolink</string>
     <string name="kakao_scheme">kakao4b26437470764b65d5fe1a130e93346c</string>
     <string name="kakao_link_template_id">53643</string>
+    <string name="calculating_video">음식 영상을 판별중입니다</string>
 </resources>

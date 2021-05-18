@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_eureka"
-        android:icon="@drawable/ic_eureka"
+        android:icon="@drawable/ic_chat_bubble"
         android:title="Eureka" />
 
     <item

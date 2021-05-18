@@ -17,6 +17,8 @@ class MyOptionActivity : BaseBindingActivity<ActivityMyOptionBinding>(R.layout.a
         binding.btnEditProfile.setOnClickListener { goUserEdit() }
         binding.btnInfoAgreement.setOnClickListener { goInfoAgreement() }
         binding.btnEurekaOption.setOnClickListener { goEurekaOption() }
+        binding.btnBack.setOnClickListener { finish() }
+
         supportActionBar?.hide()
     }
 

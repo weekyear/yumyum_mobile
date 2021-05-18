@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.interfaces
 
 import com.omnyom.yumyum.model.feed.CreateFeedResponse
+import com.omnyom.yumyum.model.feed.FeedAiResponse
 import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.feed.SendVideoResponse
 import com.omnyom.yumyum.model.feed.SingleFeedResponse
@@ -43,6 +44,9 @@ interface RetrofitService {
     // 모든 피드 불러오기
     @GET("feed/list/{userId}")
     fun getAllFeeds(@Path("userId") userId: Long): Call<FeedResponse>
+
+    @GET("feed/list/recommend/{userId}")
+    fun getAllRecommendedFeeds(@Path("userId") userId: Long): Call<FeedResponse>
 
     // 특정 유저 피드 불러오기
     @GET("feed/list/{authorId}/{userId}")
@@ -92,5 +96,4 @@ interface RetrofitService {
     // 키워드로 장소, 주소 검색
     @GET("place/list/{type}/{keyword}")
     fun getSearchPlaceList(@Path("type") type: String, @Path("keyword") keyword: String) : Call <SearchPlaceListResponse>
-
 }
