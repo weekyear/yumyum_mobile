@@ -8,8 +8,4 @@
         android:id="@+id/delete_feed"
         android:title="@string/delete" />
 
-    <item
-        android:id="@+id/share_feed"
-        android:title="공유" />
-
 </menu>

@@ -39,7 +39,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.YumYum"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.eureka.EurekaSingleFeedActivity"></activity>
+        <activity android:name=".ui.search.SearchSingleFeedActivity"></activity>
+        <activity android:name=".ui.search.SinglePlaceActivity"></activity>
+        <activity android:name=".ui.eureka.EurekaSingleFeedActivity" />
         <activity android:name=".ui.useroption.EurekaOptionActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

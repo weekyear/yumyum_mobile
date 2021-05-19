@@ -44,7 +44,7 @@ class UserFeedActivity : BaseBindingActivity<ActivityUserFeedBinding>(R.layout.a
         userFeedVM.authorData.observe(this) {
             binding.tvUsername.text = it.nickname
             binding.tvIntroduction.text = it.introduction
-            Glide.with(this).load(it.profilePath).override(120,120).circleCrop().into(binding.ivAvatar)
+            Glide.with(this).load(it.profilePath).circleCrop().into(binding.ivAvatar)
         }
     }
 
