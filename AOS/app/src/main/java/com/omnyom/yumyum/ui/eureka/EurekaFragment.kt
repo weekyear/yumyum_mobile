@@ -127,15 +127,19 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                     viewFeed(requireContext(), doc)
                 }
             }
-
         }
+
+        binding.clMessage.setOnClickListener {
+            binding.clEurekaFeed.visibility = View.GONE
+        }
+
         eurekaVM.feedData.observe(this) {
             val feedData = eurekaVM.feedData.value
             binding.tvEurekaFoodName.text = feedData!!.title
             binding.tvEurekaPlace.text = feedData!!.place!!.name + " | "+feedData!!.place!!.address
             binding.tvEurekaContent.text = feedData!!.content
             binding.tvEurekaLikeNum.text = feedData!!.likeCount.toString()
-            binding.ivEurekaThumbnail.setOnClickListener {
+            binding.clEurekaFeed.setOnClickListener {
                 val intent = Intent(context, EurekaSingleFeedActivity::class.java)
                 intent.putExtra("feedData", feedData)
                 startActivity(intent)
@@ -167,8 +171,8 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 5.toDp(context),
                 3.toDp(context)
         )
-        message.setTextColor(Color.parseColor("#26428B"))
-        message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10F)
+        message.setTextColor(Color.parseColor("#000000"))
+        message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
         message.id = View.generateViewId()
         constraintLayout.addView(message)
 
@@ -180,14 +184,14 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 android.R.style.TextAppearance_DeviceDefault_Large
         )
         username.typeface = Typeface.MONOSPACE
-        username.setTextColor(Color.parseColor("#26428B"))
-        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10F)
+        username.setTextColor(Color.parseColor("#000000"))
+        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12F)
         username.id = View.generateViewId()
         constraintLayout.addView(username)
 
         //프로필
         val profile = ImageView(context)
-        Glide.with(context).load(doc.profile).override(70, 70).circleCrop().into(profile)
+        Glide.with(context).load(doc.profile).override(100, 100).circleCrop().into(profile)
         profile.id = View.generateViewId()
         constraintLayout.addView(profile)
 
@@ -196,8 +200,6 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
         constraintSet.clone(constraintLayout)
         val leftGap = random.nextInt(340) + 30
         val bottomGap = random.nextInt(500) + 50
-        val leftBylat : Int = ((lat - doc.lat)*10000).roundToInt() *2
-        val bottomBylng : Int = ((lng - doc.lng)*1000).roundToInt()*2
 
         if (doc.userId == userId.toString().toInt()) {
             constraintSet.connect(
@@ -313,14 +315,14 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 android.R.style.TextAppearance_DeviceDefault_Large
         )
         username.typeface = Typeface.MONOSPACE
-        username.setTextColor(Color.parseColor("#26428B"))
-        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10F)
+        username.setTextColor(Color.parseColor("#000000"))
+        username.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12F)
         username.id = View.generateViewId()
         constraintLayout.addView(username)
 
         //프로필
         val profile = ImageView(context)
-        Glide.with(context).load(doc.profile).override(70, 70).circleCrop().into(profile)
+        Glide.with(context).load(doc.profile).override(100, 100).circleCrop().into(profile)
         profile.id = View.generateViewId()
         constraintLayout.addView(profile)
 

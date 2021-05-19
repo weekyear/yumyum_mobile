@@ -18,11 +18,11 @@
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
             app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:queryHint="검색어를 입력하시오" />
 
         <fragment
@@ -30,12 +30,22 @@
             android:name="com.omnyom.yumyum.ui.search.SearchInnerTabFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_view"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recommend_info"
             tools:layout="@layout/fragment_search_inner_tab" />
+
+        <TextView
+            android:id="@+id/tv_recommend_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="추천피드"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

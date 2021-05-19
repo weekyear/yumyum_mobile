@@ -20,41 +20,45 @@
             android:id="@+id/tv_place_list_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:text="@{data.name}"
             android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_place"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_place_list_item_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:paddingBottom="12dp"
             android:text="@{data.address}"
             android:textSize="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_place_list_item_name"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/btn_place"
+            app:layout_constraintTop_toBottomOf="@id/tv_place_list_item_name" />
 
         <ImageButton
             android:id="@+id/btn_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
+            android:layout_marginStart="10dp"
             android:backgroundTint="#FFFFFF"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_place" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginHorizontal="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_place"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@android:color/darker_gray"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_place_list_item_address" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -33,7 +33,6 @@ class MainActivity : BaseBindingActivity<ActivityMainBinding>(R.layout.activity_
                     if (!task.isSuccessful) {
                         msg = "실패"
                     }
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                 }
     }
 
