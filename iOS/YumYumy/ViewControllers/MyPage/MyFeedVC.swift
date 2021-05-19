@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 class MyFeedVC: UIViewController {
     
@@ -52,6 +53,10 @@ extension MyFeedVC: UICollectionViewDataSource  {
         
         let feedReverse = Array(self.myFeedList.reversed())
         let feed = feedReverse[indexPath.item]
+        let yumyumYellow = Color(r: (246/255), g: (215/255), b: (5/255), a: 1)
+        let yumyumColorValueProvider = ColorValueProvider(yumyumYellow)
+        let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
+        let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mycell", for: indexPath) as! MyFeedCollectionViewCell
 
@@ -63,6 +68,51 @@ extension MyFeedVC: UICollectionViewDataSource  {
             cell.threeDotBtn.isHidden = true
         } else {
             cell.threeDotBtn.isHidden = false
+        }
+        
+        switch feed.score! {
+        case 1:
+            cell.animationview.play()
+            cell.animationview.loopMode = .loop
+            cell.scoreOneView.addSubview(cell.animationview)
+            cell.animationview.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
+            break
+        case 2:
+            cell.animationview2.play()
+            cell.animationview2.loopMode = .loop
+            cell.scoreOneView.addSubview(cell.animationview2)
+            cell.animationview2.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview2.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
+            break
+        case 3:
+            cell.animationview3.play()
+            cell.animationview3.loopMode = .loop
+            cell.scoreOneView.addSubview(cell.animationview3)
+            cell.animationview3.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview3.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
+            break
+        case 4:
+            cell.animationview4.play()
+            cell.animationview4.loopMode = .loop
+            cell.scoreOneView.addSubview(cell.animationview4)
+            cell.animationview4.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview4.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
+            break
+        case 5:
+            cell.animationview5.play()
+            cell.animationview5.loopMode = .loop
+            cell.scoreOneView.addSubview(cell.animationview5)
+            cell.animationview5.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview5.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
+            break
+        default:
+            print("평점 값이 없습니다.")
+            cell.animationview.pause()
+            cell.animationview2.pause()
+            cell.animationview3.pause()
+            cell.animationview4.pause()
+            cell.animationview5.pause()
         }
 
         cell.backMyPageBtn.isUserInteractionEnabled = true

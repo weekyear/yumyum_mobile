@@ -32,13 +32,9 @@ class VideoCollectionViewCell: UICollectionViewCell{
     let animationview5 = AnimationView(name: "ic_inloveface")
 
     let yumyumYellow: ColorSet = .yumyumYellow
-    
     let userData = UserDefaults.getLoginedUserInfo()!
-    
     var checkLike: Bool = false
-    
     var nowFeed: Feed = Feed()
-    
     var player: AVPlayer?
     
     override func awakeFromNib() {
@@ -56,7 +52,7 @@ class VideoCollectionViewCell: UICollectionViewCell{
     }
     
     public func setUpAnimation() {
-        animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         animationview.contentMode = .scaleAspectFit
     }
     

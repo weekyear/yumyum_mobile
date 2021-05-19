@@ -16,6 +16,7 @@ class PeopleVC: UIViewController {
     var userId: Int?
     var username : String?
     var userData: User?
+    var likeFeedCheck = false
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -23,6 +24,7 @@ class PeopleVC: UIViewController {
     
     @IBOutlet weak var IntroduceLabel : UILabel!
 
+    @IBOutlet var userNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,9 +44,11 @@ class PeopleVC: UIViewController {
     
     @IBAction func changeLikeSegment(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            self.likeFeedCheck = false
             self.feedList = peopleFeedList
             self.collectionView.reloadData()
         } else if sender.selectedSegmentIndex == 1 {
+            self.likeFeedCheck = true
             self.feedList = peopleLikeList
             self.collectionView.reloadData()
         }
@@ -55,7 +59,7 @@ class PeopleVC: UIViewController {
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = username
+        nTitle.text = "유저페이지"
         self.navigationItem.titleView = nTitle
     }
     
@@ -88,6 +92,7 @@ class PeopleVC: UIViewController {
     
     func presentUserData() {
         self.IntroduceLabel.text = userData?.introduction!
+        self.userNameLabel.text = userData?.nickname!
         
         if let url = URL(string: (userData?.profilePath)!) {
             var image : UIImage?
@@ -105,6 +110,19 @@ class PeopleVC: UIViewController {
             self.ProfileImgView.image = image
         }
         
+    }
+}
+
+extension PeopleVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("You tepped me \(indexPath.item)")
+        
+        let peopleFeedVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(identifier: "PeopleFeedVC") as! PeopleFeedVC
+        
+        peopleFeedVC.peopleFeedList = feedList
+        peopleFeedVC.itemId = indexPath.item
+        peopleFeedVC.modalPresentationStyle = .fullScreen
+        self.present(peopleFeedVC, animated: true)
     }
 }
 
