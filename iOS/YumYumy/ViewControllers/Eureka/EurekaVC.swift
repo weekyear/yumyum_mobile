@@ -22,7 +22,7 @@ class EurekaVC: UIViewController {
     var latitude: Double?
     var longitude: Double?
     
-    var neighbor: [String]?
+    var neighbor: [Chat]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,7 @@ class EurekaVC: UIViewController {
         FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) {
             res in
             print("======neightbor ====")
+            self.neighbor = res
             print(res)
         }
         
@@ -103,13 +104,14 @@ class EurekaVC: UIViewController {
         
         FirestoreManager.shared.createChat(userId: userId, chat: chat)
         
-        print(neighbor)
-        
-        FirestoreManager.shared.sendMessage(to: "24", message: "h2") { res in
-            print(res)
-        } failure: { err in
-            print(err)
-        }
+        neighbor?.forEach({ chat in
+            FirestoreManager.shared.sendMessage(to: chat.userId!, message: message) { res in
+                print(res)
+            } failure: { err in
+                print(err)
+            }
+        })
+
         
         myChatLabel.text = message
         myChatLabel.isHidden = false

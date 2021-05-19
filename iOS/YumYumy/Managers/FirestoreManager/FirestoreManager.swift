@@ -42,12 +42,12 @@ struct FirestoreManager {
         }
     }
     
-    func deleteChat(userId: String) {
-        let ref = db.document(userId)
-    }
+//    func deleteChat(userId: String) {
+//        let ref = db.document(userId)
+//    }
     
     
-    func getNeighbors(latitude: Double, longitude: Double , completionHandler: @escaping ([String])-> Void) {
+    func getNeighbors(latitude: Double, longitude: Double , completionHandler: @escaping ([Chat])-> Void) {
         // Find cities within 50km of London
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let radiusInKilometers: Double = 500
@@ -67,43 +67,50 @@ struct FirestoreManager {
                 .end(at: [bound.endValue])
         }
         
-        var matchingDocs = [QueryDocumentSnapshot]()
-        var testArr = [String]()
+
+        var neighbors = [Chat]()
         
         // Collect all the query results together into a single list
         for query in queries {
 
             query.addSnapshotListener { snapshot, error in
                 
-                guard let documents = snapshot?.documents else {
-                    print("Unable to fetch snapshot data. \(String(describing: error))")
+                guard let querySnapshot = snapshot else {
+                    print("Error fetching snapshots: \(error!)")
                     return
                 }
                 
-                for document in documents {
-                    let lat = document.data()["lat"] as? Double ?? 0
-                    let lng = document.data()["lng"] as? Double ?? 0
-                    let userId = document.data()["userId"] as? Int ?? 0
-                    let message = document.data()["message"] as? String ?? " "
-                    
-                    
+                querySnapshot.documentChanges.forEach { diff in
+                    let lat = diff.document.data()["lat"] as? Double ?? 0
+                    let lng = diff.document.data()["lng"] as? Double ?? 0
                     let coordinates = CLLocation(latitude: lat, longitude: lng)
                     let centerPoint = CLLocation(latitude: center.latitude, longitude: center.longitude)
-                    
-                    // We have to filter out a few false positives due to GeoHash accuracy, but
-                    // most will match
                     let distance = GFUtils.distance(from: centerPoint, to: coordinates)
              
                     if distance <= radiusInKilometers {
-
-                        print(1)
-                        print("여기서왔니?", userId, message)
-                        matchingDocs.append(document)
-                        testArr.append(message)
+                        let userId = diff.document.data()["userId"] as? Int ?? 0
+                        let message = diff.document.data()["message"] as? String ?? " "
+                        let geohash = diff.document.data()["geohash"] as? String ?? " "
+                        let profilePath = diff.document.data()["profilePath"] as? String ?? " "
+                        let nickname = diff.document.data()["nickname"] as? String ?? " "
+                        
+                        let chat = Chat(userId: userId, message: message, geohash: geohash, lat: lat, lng: lng, profilePath: profilePath, nickname: nickname)
+                        
+                        if (diff.type == .added) {
+                            neighbors.append(chat)
+                            print("New: \(userId)", message)
+                        }
+                        else if (diff.type == .modified) {
+                            neighbors.removeAll(where: { $0.userId == userId })
+                            neighbors.append(chat)
+                            print("Modified: \(userId)", message)
+                        }
                     }
                     
+
                 }
-                completionHandler(testArr)
+
+                completionHandler(neighbors)
             }
             
         }
@@ -111,10 +118,10 @@ struct FirestoreManager {
 
     }
     
-    func sendMessage(to: String, message: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+    func sendMessage(to: Int, message: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+        print(to, "에게 보냅니다")
         let url = "https://fcm.googleapis.com/fcm/send"
-        print("제발...")
-        
+
         let headers: HTTPHeaders = [
             "Authorization": "key=\(fcmServerKey)",
             "Content-Type": "application/json"
