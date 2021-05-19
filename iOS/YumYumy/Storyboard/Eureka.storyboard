@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pZ1-1H-eTq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -11,7 +12,7 @@
         <!--유레카-->
         <scene sceneID="wTR-4q-Acj">
             <objects>
-                <viewController id="pZ1-1H-eTq" customClass="EurekaVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pZ1-1H-eTq" customClass="EurekaVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebn-Fy-WKF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -61,7 +62,7 @@
                             <constraint firstItem="Eb2-oJ-ZHc" firstAttribute="centerY" secondItem="ebn-Fy-WKF" secondAttribute="centerY" id="xjP-Kc-ZUa"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="유레카" image="ellipsis.bubble" catalog="system" id="HpO-Pv-1GK"/>
+                    <tabBarItem key="tabBarItem" title="유레카" image="ic_chat_bubble" id="HpO-Pv-1GK"/>
                     <connections>
                         <outlet property="eurekaTextField" destination="RbF-IQ-01e" id="6E4-Xz-Qb2"/>
                         <outlet property="myChatLabel" destination="Eb2-oJ-ZHc" id="YNS-YE-mHa"/>
@@ -73,7 +74,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
+        <image name="ic_chat_bubble" width="28" height="28"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -31,7 +31,7 @@ class ReviewVC: UIViewController {
     var place: Place?
     var tempfeed: Feed?
     var updatefeed: Feed?
-    let dummyList = ["피자", "탕수육", "치킨", "고구마", "감자", "몰라나도", "뭐", "혼날래", "몰라나도","몰라나도","몰라나도","몰라나도","몰라나도","몰라나도",]
+    var foodAiData : [String] = []
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -81,13 +81,17 @@ class ReviewVC: UIViewController {
         }
         
         //MARK: - TODO 나중에 호출하는거 확인할것~
-//        loadAIVideo()
+        if videoUrl != nil {
+            loadAIVideo()
+        }
     }
     
     private func loadAIVideo() {
         WebApiManager.shared.postAiVdieo(mediaUrl: self.videoUrl){ (result) in
-            print("호출성공?")
-            print(result)
+            if result["success"] == true {
+                self.foodAiData = (result["predictions"].arrayObject! as? [String])!
+                self.collectionView.reloadData()
+            }
         } failure: { (error) in
             print(error.localizedDescription)
         }
@@ -275,7 +279,6 @@ class ReviewVC: UIViewController {
     
     //임시피드를 받아오는 부분
     private func loadTempData() {
-        print(tempfeed!)
         feed = tempfeed!
         feed.userId = tempfeed?.user?.id
         setEmoji(value: Score(rawValue: feed.score!)!)
@@ -417,14 +420,15 @@ extension ReviewVC: PlaceDelegate {
 
 extension ReviewVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dummyList.count
+        return self.foodAiData.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: AiFoodNameCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AiFoodNameCell", for: indexPath) as! AiFoodNameCell
         
-        cell.foodNameLabel.text = dummyList[indexPath.item]
+        cell.foodNameLabel.text = foodAiData[indexPath.item]
         cell.wrapFoodName.layer.borderWidth = 2
         cell.wrapFoodName.layer.cornerRadius = 10
         cell.wrapFoodName.layer.masksToBounds = true
@@ -440,6 +444,7 @@ extension ReviewVC: UICollectionViewDataSource {
 extension ReviewVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("You tepped me \(indexPath.item)")
+        self.titleTextField.text = foodAiData[indexPath.item]
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftyJSON
 
 class PeopleVC: UIViewController {
     let cellIdentifire : String  = "peopleCell"
+    var feedList : [Feed] = []
     var peopleFeedList: [Feed] = []
     var peopleLikeList: [Feed] = []
     var userId: Int?
@@ -39,6 +40,15 @@ class PeopleVC: UIViewController {
         presentUserData()
     }
     
+    @IBAction func changeLikeSegment(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.feedList = peopleFeedList
+            self.collectionView.reloadData()
+        } else if sender.selectedSegmentIndex == 1 {
+            self.feedList = peopleLikeList
+            self.collectionView.reloadData()
+        }
+    }
     
     func initTitle() {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))

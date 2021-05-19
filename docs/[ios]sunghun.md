@@ -899,3 +899,12 @@ navigationController.modalPresentationStyle = .fullScreen
 self.present(navigationController, animated: true)
 ```
 
+
+
+## tabbar Icon Size
+
+- svg파일로 탭바 아이콘을 변경할때, 즉 내가 원하는 이미지로 바꿔줄때 발생했는데 사이즈가 탭바에 들어가면 줄지 않는다는 것이다. 우선 ios에서는 13.0이상 버전부터 svg파일을 적용시킬 수 있기 때문에 같은 벡터 파일인 pdf파일로 변환시켜 적용하는 것이 중요하다!
+
+- https://developer.apple.com/design/human-interface-guidelines/glyphs/overview/ 그리고 이 가이드라인에 맞춰서 pdf파일의 크기를 줄여줘야한다. 
+- 파일  변환  URL: https://cloudconvert.com/svg-to-pdf
+- 파일 다운로드 URL : https://www.iloveimg.com/ko/download/Agf8zjr4rz728b3AmkhlztvshAmjjzl9v8ffqqnsAml88gfcvq3fnp810Aknt6qb230tlyf8mpv2j5n41ApvgjA0w5tst68s2d5wmcbmbtwyw7gAf7775dtfsbl0wydAlfA5yx4hf43prmdgxtcsflqtx8gn4fc65ph7A3A05178f8nts9n1/6

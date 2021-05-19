@@ -34,9 +34,9 @@ extension WebApiManager {
             }
         }, to: url, method: .post, headers: headers)
         .response { (response) in
+            print(response)
             switch response.result {
             case .success(_):
-                print("말이 되는 소리를해!!!")
                 dump(response.data!)
                 let json = JSON(response.data! as Any)
                 success(json)

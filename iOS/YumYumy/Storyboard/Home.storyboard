@@ -72,8 +72,8 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="ic_send"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xn-YG-Tmc">
-                                                            <rect key="frame" x="16" y="135.5" width="8" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xn-YG-Tmc">
+                                                            <rect key="frame" x="9.5" y="135.5" width="21" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -326,12 +326,15 @@
                                 </connections>
                             </collectionView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="brL-54-goA">
-                                <rect key="frame" x="10" y="300" width="394" height="32"/>
+                                <rect key="frame" x="10" y="299" width="394" height="32"/>
                                 <segments>
                                     <segment title="" image="square.grid.3x3.fill" catalog="system"/>
                                     <segment title="" image="heart.fill" catalog="system"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" systemColor="systemYellowColor"/>
+                                <connections>
+                                    <action selector="changeLikeSegment:" destination="ZJg-PB-WhG" eventType="valueChanged" id="Ts8-Uz-6hr"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IcE-jg-Mzs"/>
@@ -360,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AdF-dV-Pk9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="804" y="1065"/>
+            <point key="canvasLocation" x="833" y="1065"/>
         </scene>
     </scenes>
     <designables>

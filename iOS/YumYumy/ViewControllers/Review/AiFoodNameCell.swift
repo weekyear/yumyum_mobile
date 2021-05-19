@@ -15,5 +15,4 @@ class AiFoodNameCell: UICollectionViewCell {
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
-    
 }
