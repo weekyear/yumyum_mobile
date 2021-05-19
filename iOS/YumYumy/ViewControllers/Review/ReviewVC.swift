@@ -31,7 +31,9 @@ class ReviewVC: UIViewController {
     var place: Place?
     var tempfeed: Feed?
     var updatefeed: Feed?
+    let dummyList = ["피자", "탕수육", "치킨", "고구마", "감자", "몰라나도", "뭐", "혼날래", "몰라나도","몰라나도","몰라나도","몰라나도","몰라나도","몰라나도",]
     
+    @IBOutlet var collectionView: UICollectionView!
     
     @IBOutlet var scoreOneView: AnimationView!
     @IBOutlet var scoreTwoView: AnimationView!
@@ -58,6 +60,10 @@ class ReviewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        self.collectionView.collectionViewLayout = flowLayout
+        
         setUpAnimation()
         setAnimationGesture()
         setLayout()
@@ -86,7 +92,6 @@ class ReviewVC: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
     func setUpAnimation() {
         
         animationview.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
@@ -136,60 +141,118 @@ class ReviewVC: UIViewController {
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        let fillKeypath = AnimationKeypath(keypath: "**.**.Color" )
-        let redValueProvider = ColorValueProvider(Color(r: 1, g: 0.2, b: 0.3, a: 1))
+        let yumyumYellow = Color(r: (246/255), g: (215/255), b: (5/255), a: 1)
+        let yellowColorValueProvider = ColorValueProvider(yumyumYellow)
+        let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
+        let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
+        let black = Color(r: (0/255), g: (0/255), b: (0/255), a: 1)
+        let blackColorValueProvider = ColorValueProvider(black)
         
         
         switch sender.view?.tag {
         case 1:
             animationview.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-            animationview.setValueProvider(redValueProvider, keypath: fillKeypath)
+            animationview.setValueProvider(yellowColorValueProvider, keypath: keyPath)
+            animationview.setValueProvider(yellowColorValueProvider, keypath: keyPathEyes)
             animationview.play()
             animationview.loopMode = .loop
             animationview2.stop()
             animationview3.stop()
             animationview4.stop()
             animationview5.stop()
+
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
             setEmoji(value: .one)
         case 2:
             animationview2.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-            animationview2.setValueProvider(redValueProvider, keypath: fillKeypath)
+            animationview2.setValueProvider(yellowColorValueProvider, keypath: keyPath)
+            animationview2.setValueProvider(yellowColorValueProvider, keypath: keyPathEyes)
             animationview.stop()
             animationview3.stop()
             animationview4.stop()
             animationview5.stop()
             animationview2.play()
             animationview2.loopMode = .loop
+            
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
             setEmoji(value: .two)
+            
+            
         case 3:
             animationview3.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-            animationview3.setValueProvider(redValueProvider, keypath: fillKeypath)
+            animationview3.setValueProvider(yellowColorValueProvider, keypath: keyPath)
+            animationview3.setValueProvider(yellowColorValueProvider, keypath: keyPathEyes)
             animationview3.loopMode = .loop
             animationview2.stop()
             animationview.stop()
             animationview4.stop()
             animationview5.stop()
             animationview3.play()
+            
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
             setEmoji(value: .three)
         case 4:
             animationview4.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-            animationview4.setValueProvider(redValueProvider, keypath: fillKeypath)
+            animationview4.setValueProvider(yellowColorValueProvider, keypath: keyPath)
+            animationview4.setValueProvider(yellowColorValueProvider, keypath: keyPathEyes)
             animationview4.loopMode = .loop
             animationview4.play()
             animationview2.stop()
             animationview3.stop()
             animationview.stop()
             animationview5.stop()
+            
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            
             setEmoji(value: .four)
         case 5:
             animationview5.frame = CGRect(x: 0, y: 0, width: 45, height: 45)
-            animationview5.setValueProvider(redValueProvider, keypath: fillKeypath)
+            animationview5.setValueProvider(yellowColorValueProvider, keypath: keyPath)
+            animationview5.setValueProvider(yellowColorValueProvider, keypath: keyPathEyes)
             animationview5.play()
             animationview5.loopMode = .loop
             animationview2.stop()
             animationview3.stop()
             animationview4.stop()
             animationview.stop()
+            
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
+            animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+            
             setEmoji(value: .five)
         default:
             break
@@ -245,6 +308,7 @@ class ReviewVC: UIViewController {
         self.navigationItem.title = "리뷰쓰기"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(leftBarButtonAction))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "임시저장", style: .plain, target: self, action: #selector(rightBarButtonAction))
+        
     }
     
     @objc
@@ -348,5 +412,52 @@ extension ReviewVC: PlaceDelegate {
         self.locationTextField.text = place.name
         self.place = place
         self.feed.place = place
+    }
+}
+
+extension ReviewVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.dummyList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: AiFoodNameCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AiFoodNameCell", for: indexPath) as! AiFoodNameCell
+        
+        cell.foodNameLabel.text = dummyList[indexPath.item]
+        cell.wrapFoodName.layer.borderWidth = 2
+        cell.wrapFoodName.layer.cornerRadius = 10
+        cell.wrapFoodName.layer.masksToBounds = true
+        cell.wrapFoodName.layer.borderColor = UIColor.systemYellow.cgColor
+        
+        
+        
+        return cell
+    }
+    
+}
+
+extension ReviewVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("You tepped me \(indexPath.item)")
+    }
+}
+
+extension ReviewVC: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let CvRect = collectionView.frame
+        
+        return CGSize(width: (CvRect.width/3)-3,
+                      height: (CvRect.height)-3)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
 }

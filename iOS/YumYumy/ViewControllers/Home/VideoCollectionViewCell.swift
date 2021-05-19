@@ -52,18 +52,39 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
+        let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
+        let black = Color(r: (0/255), g: (0/255), b: (0/255), a: 1)
+        let blackColorValueProvider = ColorValueProvider(black)
         animationview.stop()
         animationview2.stop()
         animationview3.stop()
         animationview4.stop()
         animationview5.stop()
+        
+        animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
+        animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+        animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
+        animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+        animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
+        animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+        animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
+        animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+        animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
+        animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
+        
+        animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
     }
     
     public func setUpAnimation() {
         animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview.contentMode = .scaleAspectFit
         scoreOneView.addSubview(animationview)
-    
+
         animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview2.contentMode = .scaleAspectFit
         scoreTwoView.addSubview(animationview2)
