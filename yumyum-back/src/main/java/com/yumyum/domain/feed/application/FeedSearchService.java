@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,6 +54,18 @@ public class FeedSearchService {
     public List<FeedResponse> findByLike(final Long userId){
         final List<Like> lList = likeDao.findByUserId(userId);
         final List<FeedResponse> list = feedResponseService.entityToDto(lList);
+        return list;
+    }
+
+    public List<FeedResponse> findByPlace(final Long placeId, final Long userId){
+        final List<Feed> fList = feedDao.findAll();
+        final List<FeedResponse> list = new ArrayList<>();
+        for(Feed feed : fList){
+            if(feed.getPlace() == null) continue;
+            if(feed.getPlace().getId() == placeId){
+                list.add(feedResponseService.entityToDto(feed, userId));
+            }
+        }
         return list;
     }
 }
