@@ -24,10 +24,6 @@ class VideoCollectionViewCell: UICollectionViewCell{
     var delegate: userProfileBtnDelegate?
 
     @IBOutlet weak var scoreOneView: UIView!
-    @IBOutlet weak var scoreTwoView: UIView!
-    @IBOutlet weak var scoreThreeView: AnimationView!
-    @IBOutlet weak var scoreFourView: AnimationView!
-    @IBOutlet weak var scoreFiveView: AnimationView!
     
     let animationview = AnimationView(name: "ic_vomited")
     let animationview2 = AnimationView(name: "ic_confused")
@@ -52,54 +48,16 @@ class VideoCollectionViewCell: UICollectionViewCell{
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
-        let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
-        let black = Color(r: (0/255), g: (0/255), b: (0/255), a: 1)
-        let blackColorValueProvider = ColorValueProvider(black)
-        animationview.stop()
-        animationview2.stop()
-        animationview3.stop()
-        animationview4.stop()
-        animationview5.stop()
-        
-        animationview.setValueProvider(blackColorValueProvider, keypath: keyPath)
-        animationview.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
-        animationview2.setValueProvider(blackColorValueProvider, keypath: keyPath)
-        animationview2.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
-        animationview3.setValueProvider(blackColorValueProvider, keypath: keyPath)
-        animationview3.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
-        animationview4.setValueProvider(blackColorValueProvider, keypath: keyPath)
-        animationview4.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
-        animationview5.setValueProvider(blackColorValueProvider, keypath: keyPath)
-        animationview5.setValueProvider(blackColorValueProvider, keypath: keyPathEyes)
-        
-        animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        animationview.removeFromSuperview()
+        animationview2.removeFromSuperview()
+        animationview3.removeFromSuperview()
+        animationview4.removeFromSuperview()
+        animationview5.removeFromSuperview()
     }
     
     public func setUpAnimation() {
         animationview.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         animationview.contentMode = .scaleAspectFit
-        scoreOneView.addSubview(animationview)
-
-        animationview2.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview2.contentMode = .scaleAspectFit
-        scoreTwoView.addSubview(animationview2)
-        
-        animationview3.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview3.contentMode = .scaleAspectFit
-        scoreThreeView.addSubview(animationview3)
-        
-        animationview4.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview4.contentMode = .scaleAspectFit
-        scoreFourView.addSubview(animationview4)
-
-        animationview5.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        animationview5.contentMode = .scaleAspectFit
-        scoreFiveView.addSubview(animationview5)
     }
     
     @IBAction func userBtnPress(_ sender: Any) {

@@ -97,7 +97,7 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         let feed = feedReverse[indexPath.item]
         var myLikeFeed : Feed = Feed()
         let yumyumYellow = Color(r: (246/255), g: (215/255), b: (5/255), a: 1)
-        let orangeColorValueProvider = ColorValueProvider(yumyumYellow)
+        let yumyumColorValueProvider = ColorValueProvider(yumyumYellow)
         let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
         let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
         
@@ -118,37 +118,37 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         case 1:
             cell.animationview.play()
             cell.animationview.loopMode = .loop
-            cell.animationview.setValueProvider(orangeColorValueProvider, keypath: keyPath)
-            cell.animationview.setValueProvider(orangeColorValueProvider, keypath: keyPathEyes)
-            cell.animationview.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.scoreOneView.addSubview(cell.animationview)
+            cell.animationview.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
             break
         case 2:
             cell.animationview2.play()
             cell.animationview2.loopMode = .loop
-            cell.animationview2.setValueProvider(orangeColorValueProvider, keypath: keyPath)
-            cell.animationview2.setValueProvider(orangeColorValueProvider, keypath: keyPathEyes)
-            cell.animationview2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.scoreOneView.addSubview(cell.animationview2)
+            cell.animationview2.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview2.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
             break
         case 3:
             cell.animationview3.play()
             cell.animationview3.loopMode = .loop
-            cell.animationview3.setValueProvider(orangeColorValueProvider, keypath: keyPath)
-            cell.animationview3.setValueProvider(orangeColorValueProvider, keypath: keyPathEyes)
-            cell.animationview3.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.scoreOneView.addSubview(cell.animationview3)
+            cell.animationview3.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview3.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
             break
         case 4:
             cell.animationview4.play()
             cell.animationview4.loopMode = .loop
-            cell.animationview4.setValueProvider(orangeColorValueProvider, keypath: keyPath)
-            cell.animationview4.setValueProvider(orangeColorValueProvider, keypath: keyPathEyes)
-            cell.animationview4.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.scoreOneView.addSubview(cell.animationview4)
+            cell.animationview4.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview4.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
             break
         case 5:
             cell.animationview5.play()
             cell.animationview5.loopMode = .loop
-            cell.animationview5.setValueProvider(orangeColorValueProvider, keypath: keyPath)
-            cell.animationview5.setValueProvider(orangeColorValueProvider, keypath: keyPathEyes)
-            cell.animationview5.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            cell.scoreOneView.addSubview(cell.animationview5)
+            cell.animationview5.setValueProvider(yumyumColorValueProvider ,keypath: keyPath)
+            cell.animationview5.setValueProvider(yumyumColorValueProvider ,keypath: keyPathEyes)
             break
         default:
             print("평점 값이 없습니다.")
