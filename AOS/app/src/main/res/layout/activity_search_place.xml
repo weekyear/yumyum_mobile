@@ -13,33 +13,22 @@
         android:layout_height="match_parent"
         tools:context=".ui.feed.SearchPlaceActivity">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="22dp"
-            android:text="장소 검색"
-            android:textSize="22sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
             app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:queryHint="검색어를 입력하시오" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_place"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,12 +50,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/please_search"
+            android:text="식당 이름을 입력하세요~"
             android:textAlignment="center"
-            android:textSize="22sp"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@id/iv_search"
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="@id/iv_search"
+            app:layout_constraintStart_toStartOf="@id/iv_search"
             app:layout_constraintTop_toBottomOf="@id/iv_search" />
 
         <ImageView

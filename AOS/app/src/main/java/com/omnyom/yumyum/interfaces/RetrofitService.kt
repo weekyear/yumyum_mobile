@@ -93,6 +93,10 @@ interface RetrofitService {
     @GET("place/{placeId}")
     fun getPlaceData(@Path("placeId") placeId: Long) : Call<GetPlaceDataResponse>
 
+    // 식당 피드 불러오기
+    @GET("feed/list/place/{placeId}/{userId}")
+    fun getPlaceFeed(@Path("placeId") placeId: Long, @Path("userId") userId: Long) : Call<FeedResponse>
+
     // 키워드로 장소, 주소 검색
     @GET("place/list/{type}/{keyword}")
     fun getSearchPlaceList(@Path("type") type: String, @Path("keyword") keyword: String) : Call <SearchPlaceListResponse>

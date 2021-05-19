@@ -3,14 +3,14 @@ package com.omnyom.yumyum.ui.eureka
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.net.toUri
 import com.airbnb.lottie.LottieDrawable
+import com.bumptech.glide.Glide
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityEurekaSingleFeedBinding
-import com.omnyom.yumyum.helper.KakaoLinkUtils
-import com.omnyom.yumyum.helper.PreferencesManager
-import com.omnyom.yumyum.helper.RetrofitManager
-import com.omnyom.yumyum.helper.changeLayersColor
+import com.omnyom.yumyum.helper.*
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.like.LikeRequest
 import com.omnyom.yumyum.model.like.LikeResponse
@@ -22,30 +22,53 @@ import kotlin.math.abs
 
 class EurekaSingleFeedActivity : BaseBindingActivity<ActivityEurekaSingleFeedBinding>(R.layout.activity_eureka_single_feed) {
     var feedData : FeedData? = null
+    private lateinit var clkRotate : Animation
 
     override fun extraSetupBinding() {
         feedData = intent.getSerializableExtra("feedData") as FeedData
     }
 
     override fun setup() {
+        clkRotate = AnimationUtils.loadAnimation(this, R.anim.rotate_clockwise)
+    }
+    override fun onPause() {
+        binding.eurekaInnerLayout.foodVideo.pause()
+        binding.eurekaInnerLayout.ivThumbnail.visibility = View.VISIBLE
+        super.onPause()
     }
 
     override fun setupViews() {
         supportActionBar?.hide()
+        binding.eurekaInnerLayout.progressBar.visibility = View.VISIBLE
+        binding.eurekaInnerLayout.progressBar.startAnimation(clkRotate)
+        Glide.with(this)
+                .load(feedData!!.thumbnailPath)
+                .centerCrop()
+                .transform(RotateTransformation(this, 90f))
+                .into(binding.eurekaInnerLayout.ivThumbnail)
         binding.eurekaInnerLayout.foodVideo.apply {
             setVideoURI(feedData!!.videoPath.toUri())
             setOnPreparedListener { mp ->
                 binding.eurekaInnerLayout.foodVideo.start()
                 mp.setVolume(0f,0f)
                 mp!!.isLooping = true;
+                binding.eurekaInnerLayout.foodVideo.visibility = View.VISIBLE
+                binding.eurekaInnerLayout.progressBar.clearAnimation()
+                binding.eurekaInnerLayout.progressBar.visibility = View.INVISIBLE
+                binding.eurekaInnerLayout.ivThumbnail.visibility = View.INVISIBLE
+            }
+            setOnCompletionListener {
+                binding.eurekaInnerLayout.progressBar.clearAnimation()
+                binding.eurekaInnerLayout.progressBar.visibility = View.INVISIBLE
+                binding.eurekaInnerLayout.ivThumbnail.visibility = View.INVISIBLE
             }
         }
+
         binding.eurekaInnerLayout.textName.text = feedData!!.title
         binding.eurekaInnerLayout.textDetail.text = feedData!!.content
         binding.eurekaInnerLayout.textPlacename.text = feedData!!.place!!.name +" | "+feedData!!.place!!.address
         binding.eurekaInnerLayout.textUser.text = "@"+feedData!!.user!!.nickname
-        binding.eurekaInnerLayout.ivThumbnail.visibility = View.GONE
-        binding.eurekaInnerLayout.progressBar.visibility = View.GONE
+        binding.eurekaInnerLayout.tvLikeNum.text = feedData!!.likeCount.toString()
 
         when(feedData!!.score) {
             0 -> binding.eurekaInnerLayout.avStar.visibility = View.INVISIBLE

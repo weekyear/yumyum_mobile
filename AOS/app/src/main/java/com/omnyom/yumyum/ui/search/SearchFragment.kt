@@ -26,6 +26,7 @@ class SearchFragment : BaseBindingFragment<FragmentSearchBinding>(R.layout.fragm
     override fun setupViews() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.tvRecommendInfo.visibility = View.GONE
                 searchVM.isSearched.value = !query.isNullOrBlank()
                 searchVM.searchFeed(query!!)
                 searchVM.searchPlace(query!!)

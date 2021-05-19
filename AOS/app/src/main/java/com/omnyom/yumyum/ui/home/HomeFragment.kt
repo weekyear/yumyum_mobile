@@ -1,5 +1,6 @@
 package com.omnyom.yumyum.ui.home
 
+import android.view.View
 import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -23,6 +24,7 @@ class HomeFragment : BaseBindingFragment<FragmentHomeBinding>(R.layout.fragment_
             orientation = ViewPager2.ORIENTATION_VERTICAL
             adapter = FlipFeedPagerAdapter(requireActivity())
         }
+        binding.btnPopup.visibility = View.GONE
 
         binding.btnPopup.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it)
