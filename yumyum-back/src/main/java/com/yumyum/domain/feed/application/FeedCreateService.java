@@ -26,22 +26,34 @@ public class FeedCreateService {
         final User user = userFindDao.findById(dto.getUserId());
         final PlaceRequest placeRequest = dto.getPlaceRequest();
 
-        if(dto.getIsCompleted() == null) dto.setIsCompleted(false);
-
-        if(!dto.getIsCompleted()){
-            if(dto.getTitle() == null) dto.setTitle("");
-            if(dto.getContent() == null) dto.setContent("");
-            if(dto.getScore() == null) dto.setScore(0L);
-        }else{
-            regexChecker.stringCheck("Title", dto.getTitle());
-            regexChecker.stringCheck("Content", dto.getContent());
-        }
-
-        if(placeRequest != null){
+        if(!placeRequest.getName().equals("")){
             final Place place = placeCreateService.createPlace(placeRequest);
             feedDao.save(dto.toEntity(user, place));
         }else{
             feedDao.save(dto.toEntity(user, null));
         }
     }
+
+//    public void createFeed(final CreateFeedRequest dto){
+//        final User user = userFindDao.findById(dto.getUserId());
+//        final PlaceRequest placeRequest = dto.getPlaceRequest();
+//
+//        if(dto.getIsCompleted() == null) dto.setIsCompleted(false);
+//
+//        if(!dto.getIsCompleted()){
+//            if(dto.getTitle() == null) dto.setTitle("");
+//            if(dto.getContent() == null) dto.setContent("");
+//            if(dto.getScore() == null) dto.setScore(0L);
+//        }else{
+//            regexChecker.stringCheck("Title", dto.getTitle());
+//            regexChecker.stringCheck("Content", dto.getContent());
+//        }
+//
+//        if(placeRequest != null){
+//            final Place place = placeCreateService.createPlace(placeRequest);
+//            feedDao.save(dto.toEntity(user, place));
+//        }else{
+//            feedDao.save(dto.toEntity(user, null));
+//        }
+//    }
 }
