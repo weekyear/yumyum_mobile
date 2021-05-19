@@ -46,7 +46,7 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     }
 
     val placeRequest = MutableLiveData<PlaceRequest?>().apply {
-        value = null
+        value = PlaceRequest("", 0.0, 0.0, "", "")
     }
     val content = MutableLiveData<String>().apply {
         value = ""
