@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="50dp"
                 android:layout_marginBottom="15dp"
                 android:text="내용"
                 app:animDuration="200"
@@ -87,10 +87,10 @@
                 android:id="@+id/text_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginBottom="5dp"
                 android:text="유저이름"
-                android:textColor="@color/white"
+                android:textColor="#C8C8C8"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toTopOf="@+id/text_name"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -103,7 +103,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="음식 이름"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@+id/text_placename"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -127,6 +127,8 @@
                 android:layout_marginBottom="8dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_send"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:tint="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/tv_share_info"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -141,7 +143,6 @@
                 app:layout_constraintBottom_toTopOf="@id/tv_like_num"
                 app:layout_constraintEnd_toEndOf="@id/btn_send"
                 app:layout_constraintStart_toStartOf="@id/btn_send"
-                app:layout_constraintTop_toTopOf="parent"
                 app:lottie_colorFilter="@color/white"
                 app:lottie_fileName="ic_thumb_up.json" />
 
@@ -161,7 +162,7 @@
                 android:id="@+id/av_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/text_name"
                 app:layout_constraintStart_toEndOf="@+id/text_name"
                 app:layout_constraintTop_toTopOf="@+id/text_name"

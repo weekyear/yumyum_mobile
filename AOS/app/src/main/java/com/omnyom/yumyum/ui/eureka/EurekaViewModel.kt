@@ -57,7 +57,6 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
     val db = Firebase.firestore
     var positions : List<Double>? = null
     var geoHash : String? = null
-//    var authorData : UserData? = null
 
     private val _feedData = MutableLiveData<FeedData>().apply {
     }
@@ -72,12 +71,15 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
     }
     val authorData : LiveData<UserData> = _authorData
 
+    private val _myData = MutableLiveData<UserData>().apply {
+
+    }
+    val myData : LiveData<UserData> = _myData
+
     private val _matchingDocs = MutableLiveData<List<Chat>>().apply {
         value = arrayListOf()
     }
     val matchingDocs : LiveData<List<Chat>> = _matchingDocs
-
-
 
     fun getLocation() {
         positions = KakaoMapUtils.getMyPosition(getApplication())
@@ -104,7 +106,6 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
                     messageHashMap["profilePath"] = response.body()!!.data.profilePath
                     messageHashMap["nickname"] = response.body()!!.data.nickname
 
-
                     val locationRef: DocumentReference = db.collection("Chats").document("$userId")
                     locationRef.set(messageHashMap).addOnCompleteListener {
                         getGeoHashes()
@@ -121,8 +122,6 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
                 t
             }
         })
-
-
     }
 
     fun getGeoHashes() {
@@ -214,6 +213,16 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
                 _myFeedData.postValue(response.body()!!.data)
             }
             override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
+            }
+        })
+    }
+
+    fun getMyData(userId: Long) {
+        retrofitService.getUserData(userId).enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                _myData.postValue(response.body()!!.data)
+            }
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
             }
         })
     }

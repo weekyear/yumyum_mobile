@@ -28,7 +28,7 @@ class AuthorFeedAdapter(val context: Context, val isLikeFeed: Boolean) : BaseRec
             .into(holder.thumbnail)
 
         if (!items[position].isCompleted) {
-            holder.thumbnail.setColorFilter(Color.parseColor("#70ffffff"))
+            holder.thumbnail.setColorFilter(Color.parseColor("#90ffffff"))
         }
 
         holder.thumbnail.setOnClickListener {

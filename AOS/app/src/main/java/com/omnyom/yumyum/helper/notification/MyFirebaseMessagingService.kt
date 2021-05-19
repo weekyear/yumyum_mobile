@@ -39,11 +39,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val pendingIntent = PendingIntent.getActivity(this, 0, Intent(this, EurekaFragment::class.java), 0)
 
             val bulider = NotificationCompat.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentText(messageTitle)
-                    .setContentText(messageBody)
-                    .setAutoCancel(true)
-                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSound("https://firebasestorage.googleapis.com/v0/b/yumyum-52542.appspot.com/o/yumyum.wav?alt=media&token=60e9c7af-48c2-409d-a3a9-a13b9194ce60".toUri())
+                .setContentText(messageTitle)
+                .setContentText(messageBody)
+                .setAutoCancel(true)
 
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -79,15 +79,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent,PendingIntent.FLAG_ONE_SHOT)
         val channelId = "987"
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-                .setSound("https://firebasestorage.googleapis.com/v0/b/yumyum-52542.appspot.com/o/yumyum.wav?alt=media&token=60e9c7af-48c2-409d-a3a9-a13b9194ce60".toUri())
-                .setSmallIcon(R.drawable.ic_nut_yellow)
-                .setContentTitle("YUMYUM")
-                .setContentText("주변이 시끄러워요!?")
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent)
+            .setSmallIcon(R.drawable.ic_nut_yellow)
+            .setContentTitle("YUMYUM")
+            .setContentText("주변이 시끄러워요!?")
+            .setAutoCancel(true)
+            .setSound("https://firebasestorage.googleapis.com/v0/b/yumyum-52542.appspot.com/o/yumyum.wav?alt=media&token=60e9c7af-48c2-409d-a3a9-a13b9194ce60".toUri())
+            .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
