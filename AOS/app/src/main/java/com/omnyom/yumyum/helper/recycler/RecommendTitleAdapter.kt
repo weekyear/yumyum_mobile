@@ -7,6 +7,7 @@ import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.databinding.ListItemRecommendTitleBinding
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
+import com.omnyom.yumyum.ui.feed.FeedCreateViewModel
 
 class RecommendTitleAdapter(private val binding: ActivityFeedCreateBinding) : BaseRecyclerAdapter<RecommendTitleAdapter.RecommendTitleViewHolder, String>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendTitleViewHolder {
@@ -23,7 +24,8 @@ class RecommendTitleAdapter(private val binding: ActivityFeedCreateBinding) : Ba
     inner class RecommendTitleViewHolder(private val itemBinding: ListItemRecommendTitleBinding) : BaseViewHolder(itemBinding.root) {
         init {
             itemBinding.btnRecommend.setOnClickListener {
-                binding.tvTitle.text = itemBinding.btnRecommend.text
+                val feedCreateVM = vm as FeedCreateViewModel
+                feedCreateVM?.title.postValue(itemBinding.btnRecommend.text.toString())
             }
         }
 
