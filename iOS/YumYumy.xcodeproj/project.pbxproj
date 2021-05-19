@@ -15,6 +15,7 @@
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		544ED8DB2652BA6600B0F7CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */; };
+		54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54754BE92652CB8300DE12AF /* MypageVC.swift */; };
 		5488E21626394F640096C35B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488E21526394F640096C35B /* UserModel.swift */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
 		548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */; };
@@ -34,7 +35,6 @@
 		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
 		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
 		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
-		54E4D369264C4CB9006CC665 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E4D368264C4CB9006CC665 /* MypageVC.swift */; };
 		858998D182D6A6EAADEF8691 /* Pods_YumYumyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924DF94EB0D3B4F6C31F54B /* Pods_YumYumyTests.framework */; };
 		967B4ABD31A13515CAF618F2 /* Pods_YumYumy_YumYumyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0650D6C2A42B31E5E84872FE /* Pods_YumYumy_YumYumyUITests.framework */; };
 		E51291A326501763002B064C /* EurekaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291A226501763002B064C /* EurekaVC.swift */; };
@@ -157,6 +157,7 @@
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYumy/ViewControllers/MyPage/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYumy/ViewControllers/MyPage/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		54754BE92652CB8300DE12AF /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = "<group>"; };
 		5488E21526394F640096C35B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
 		548F40E0262EB7A20008B612 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoCollectionViewCell.swift; path = YumYumy/ViewControllers/Home/VideoCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -177,7 +178,6 @@
 		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYumy/ViewControllers/MyPage/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
 		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		54E4D368264C4CB9006CC665 /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MypageVC.swift; path = /Users/ahyeonway/Documents/projects/s04p31b206/iOS/YumYumy/ViewControllers/MyPage/MypageVC.swift; sourceTree = "<absolute>"; };
 		58F7FDC285FAFDB4FFFBDAB3 /* Pods-YumYumy-YumYumyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumy-YumYumyUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumy-YumYumyUITests/Pods-YumYumy-YumYumyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		660FBCDD88D6F913501CB333 /* Pods-YumYum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum.release.xcconfig"; path = "Target Support Files/Pods-YumYum/Pods-YumYum.release.xcconfig"; sourceTree = "<group>"; };
 		843970AD8155E7CF31EF0110 /* Pods-YumYum-YumYumUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYum-YumYumUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYum-YumYumUITests/Pods-YumYum-YumYumUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -542,7 +542,7 @@
 		E56663E9263347E2003A503F /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				54E4D368264C4CB9006CC665 /* MypageVC.swift */,
+				54754BE92652CB8300DE12AF /* MypageVC.swift */,
 				54C78FB2264001C200E1F600 /* EditProfileVC.swift */,
 				54B8246C263C0EC1001F6A17 /* MyCollectionViewCell.swift */,
 				54B8246D263C0EC1001F6A17 /* MyCollectionViewCell.xib */,
@@ -1021,7 +1021,6 @@
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
-				54E4D369264C4CB9006CC665 /* MypageVC.swift in Sources */,
 				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
@@ -1048,6 +1047,7 @@
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
+				54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */,
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E596965D264BC6A0009B64A3 /* PageCell.swift in Sources */,
 				E548AAE42638656C0049AA0B /* UserDefaultsExtension.swift in Sources */,
@@ -1252,7 +1252,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
+				CODE_SIGN_ENTITLEMENTS = YumYumy;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M527AM6YJ5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1264,7 +1264,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYumy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1279,7 +1279,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
-				CODE_SIGN_ENTITLEMENTS = YumYum/YumYum.entitlements;
+				CODE_SIGN_ENTITLEMENTS = YumYumy;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M527AM6YJ5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1291,7 +1291,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYumy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

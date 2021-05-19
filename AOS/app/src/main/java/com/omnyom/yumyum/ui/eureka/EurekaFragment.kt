@@ -1,6 +1,7 @@
 package com.omnyom.yumyum.ui.eureka
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
@@ -129,10 +130,16 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         }
         eurekaVM.feedData.observe(this) {
-            binding.tvEurekaFoodName.text = eurekaVM.feedData.value!!.title
-            binding.tvEurekaPlace.text = eurekaVM.feedData.value!!.place!!.name + " | "+eurekaVM.feedData.value!!.place!!.address
-            binding.tvEurekaContent.text = eurekaVM.feedData.value!!.content
-            binding.tvEurekaLikeNum.text = eurekaVM.feedData.value!!.likeCount.toString()
+            val feedData = eurekaVM.feedData.value
+            binding.tvEurekaFoodName.text = feedData!!.title
+            binding.tvEurekaPlace.text = feedData!!.place!!.name + " | "+feedData!!.place!!.address
+            binding.tvEurekaContent.text = feedData!!.content
+            binding.tvEurekaLikeNum.text = feedData!!.likeCount.toString()
+            binding.ivEurekaThumbnail.setOnClickListener {
+                val intent = Intent(context, EurekaSingleFeedActivity::class.java)
+                intent.putExtra("feedData", feedData)
+                startActivity(intent)
+            }
         }
     }
 
@@ -167,7 +174,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         // 유저네임
         val username = TextView(context)
-        username.text = doc.userId.toString()
+        username.text = doc.nickname
         TextViewCompat.setTextAppearance(
                 username,
                 android.R.style.TextAppearance_DeviceDefault_Large
@@ -180,7 +187,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         //프로필
         val profile = ImageView(context)
-        Glide.with(context).load(R.drawable.ic_profile).override(50, 50).into(profile)
+        Glide.with(context).load(doc.profile).override(70, 70).circleCrop().into(profile)
         profile.id = View.generateViewId()
         constraintLayout.addView(profile)
 
@@ -300,7 +307,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         // 유저네임
         val username = TextView(context)
-        username.text = doc.userId.toString()
+        username.text = doc.nickname
         TextViewCompat.setTextAppearance(
                 username,
                 android.R.style.TextAppearance_DeviceDefault_Large
@@ -313,7 +320,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         //프로필
         val profile = ImageView(context)
-        Glide.with(context).load(R.drawable.ic_profile).override(50, 50).into(profile)
+        Glide.with(context).load(doc.profile).override(70, 70).circleCrop().into(profile)
         profile.id = View.generateViewId()
         constraintLayout.addView(profile)
 

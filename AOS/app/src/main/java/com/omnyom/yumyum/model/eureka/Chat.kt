@@ -10,7 +10,7 @@ data class Chat(
     val message: String,
     val thumbnail: Uri,
     val feedId: Int,
-//    val profile: Uri,
-//    val nickname: String
+    val profile: Uri,
+    val nickname: String
 
 )
