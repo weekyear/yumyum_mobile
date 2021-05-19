@@ -68,6 +68,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_inner_head" />
 
+        <Button
+            android:id="@+id/btn_eureka_option"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/white"
+            android:text="알림 설정"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
+
         <TextView
             android:id="@+id/tv_inner_head2"
             android:layout_width="wrap_content"
@@ -76,7 +86,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/information"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_edit_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_eureka_option" />
 
         <Button
             android:id="@+id/btn_info_agreement"
@@ -121,8 +131,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="105dp" />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+        </WebView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

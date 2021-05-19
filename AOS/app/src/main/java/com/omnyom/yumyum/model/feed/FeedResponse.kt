@@ -8,6 +8,12 @@ data class FeedResponse(
     val status: String
 )
 
+data class SingleFeedResponse(
+        val `data`: FeedData,
+        val message: String,
+        val status: String
+)
+
 data class FeedData(
         var content: String,
         val createdDate: String,

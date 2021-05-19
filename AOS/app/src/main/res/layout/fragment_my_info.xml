@@ -14,28 +14,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:id="@+id/line6"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_marginTop="25dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+            tools:layout_editor_absoluteX="0dp" />
+
         <TextView
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="AshOil"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_go_options"
+            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
 
         <ImageView
             android:id="@+id/iv_avatar"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toTopOf="@+id/tv_introduction"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_username"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_user" />
 
         <TextView
@@ -44,9 +51,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="감자탕과 뼈해장국"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintEnd_toEndOf="@+id/tv_username"
+            app:layout_constraintStart_toStartOf="@+id/tv_username"
+            app:layout_constraintTop_toBottomOf="@+id/tv_username" />
 
         <fragment
             android:id="@+id/fragment_inner_tab"
@@ -57,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_introduction"
+            app:layout_constraintTop_toBottomOf="@+id/line6"
             tools:layout="@layout/fragment_inner_tab" />
 
         <ImageButton
