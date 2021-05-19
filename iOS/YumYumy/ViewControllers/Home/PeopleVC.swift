@@ -65,6 +65,7 @@ class PeopleVC: UIViewController {
                 let results = result["data"]
                 let list = results.arrayValue.compactMap({Feed(feedJson: $0)})
                 self.peopleFeedList = list.filter { $0.isCompleted == true }
+                self.feedList = self.peopleFeedList
                 self.collectionView.reloadData()
             }
             
@@ -109,11 +110,11 @@ class PeopleVC: UIViewController {
 
 extension PeopleVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.peopleFeedList.count
+        return self.feedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reversePeopleFeedList = Array(self.peopleFeedList.reversed())
+        let reversePeopleFeedList = Array(self.feedList.reversed())
         let peolplefeed = reversePeopleFeedList[indexPath.item]
         let imageurl:URL = peolplefeed.thumbnailPath!
         
