@@ -121,6 +121,8 @@
 		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
 		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
 		E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */; };
+		E5EA3EEF2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */; };
+		E5EA3EF126551D020011321C /* FCM-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EF026551D020011321C /* FCM-Info.plist */; };
 		E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBC2BD264C69B40026CB82 /* SearchVC.swift */; };
 		F18A956BE6B349B551C9A819 /* Pods_YumYumy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF87780344A05C78E008B2D /* Pods_YumYumy.framework */; };
 /* End PBXBuildFile section */
@@ -284,6 +286,8 @@
 		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
 		E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerSearch.swift; sourceTree = "<group>"; };
 		E5EA3EED265394860011321C /* YumYumy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYumy.entitlements; sourceTree = "<group>"; };
+		E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json"; sourceTree = "<group>"; };
+		E5EA3EF026551D020011321C /* FCM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCM-Info.plist"; sourceTree = "<group>"; };
 		E5FBC2BD264C69B40026CB82 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F43A3A769D15F3E28032AFBC /* Pods-YumYumyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumyTests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumyTests/Pods-YumYumyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -630,6 +634,7 @@
 		E5920A172627C1A800836123 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */,
 				544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */,
 				E52F57F32625B746002C2637 /* AppDelegate.swift */,
 				E52F57F52625B746002C2637 /* SceneDelegate.swift */,
@@ -638,6 +643,7 @@
 				E52F57FC2625B746002C2637 /* YumYum.xcdatamodeld */,
 				E536EBBC263C7E2600791E7C /* Utils.swift */,
 				E5B30F7726441129000D8934 /* KAKAO-Info.plist */,
+				E5EA3EF026551D020011321C /* FCM-Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -822,6 +828,7 @@
 				E596966C264BC7EC009B64A3 /* PageCell.xib in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
 				E521F3B9264132B50083957B /* noimage256.png in Resources */,
+				E5EA3EF126551D020011321C /* FCM-Info.plist in Resources */,
 				540F22BD264C073F00F7581D /* ic_confused.json in Resources */,
 				E521F3A6264132B50083957B /* map_pinup_custom@3x.png in Resources */,
 				E521F3BA264132B50083957B /* map_present_direction.png in Resources */,
@@ -846,6 +853,7 @@
 				E521F3C0264132B50083957B /* map_pin_shadow.png in Resources */,
 				E521F3B8264132B50083957B /* info_box_tail.png in Resources */,
 				E596967B264BD4B7009B64A3 /* PlaceTableViewCell.xib in Resources */,
+				E5EA3EEF2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json in Resources */,
 				E521F3AF264132B50083957B /* th_line.png in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 				E521F3AA264132B50083957B /* detail_button.png in Resources */,

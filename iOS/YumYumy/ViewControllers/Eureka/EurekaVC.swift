@@ -22,6 +22,8 @@ class EurekaVC: UIViewController {
     var latitude: Double?
     var longitude: Double?
     
+    var neighbor: [String]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +65,13 @@ class EurekaVC: UIViewController {
         )
         
         myChatLabel.isHidden = true
-        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!)
+
+        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) {
+            res in
+            print("======neightbor ====")
+            print(res)
+        }
+        
     }
     
     // 키보드 내리기
@@ -87,10 +95,22 @@ class EurekaVC: UIViewController {
         let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         let hash = GFUtils.geoHash(forLocation: location)
         let userId = user!["id"].intValue
+        
+        
 
-        let chat: Chat = Chat(userId: userId, message: message, geohash: hash, lat: latitude, lng: longitude)
+        let chat: Chat = Chat(userId: userId, message: message, geohash: hash, lat: latitude, lng: longitude, profilePath: user!["profilePath"].stringValue, nickname: user!["nickname"].stringValue
+        )
         
         FirestoreManager.shared.createChat(userId: userId, chat: chat)
+        
+        print(neighbor)
+        
+        FirestoreManager.shared.sendMessage(to: "24", message: "h2") { res in
+            print(res)
+        } failure: { err in
+            print(err)
+        }
+        
         myChatLabel.text = message
         myChatLabel.isHidden = false
         eurekaTextField.text = ""
@@ -102,7 +122,9 @@ class EurekaVC: UIViewController {
         let message = eurekaTextField.text!
         if message.count > 0 {
             createChat(message: message)
+
         }
+
  
     }
     
