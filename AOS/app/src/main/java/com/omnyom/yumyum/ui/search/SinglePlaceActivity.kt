@@ -12,7 +12,9 @@ import com.omnyom.yumyum.databinding.ActivitySinglePlaceBinding
 import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.model.search.SearchPlaceData
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import com.omnyom.yumyum.ui.feed.MapActivity
 import com.omnyom.yumyum.ui.userfeed.UserFeedViewModel
+import java.io.Serializable
 
 class SinglePlaceActivity : BaseBindingActivity<ActivitySinglePlaceBinding>(R.layout.activity_single_place) {
     var placeData : SearchPlaceData? = null
@@ -42,6 +44,13 @@ class SinglePlaceActivity : BaseBindingActivity<ActivitySinglePlaceBinding>(R.la
             val dialIntent = Intent(Intent.ACTION_DIAL)
             dialIntent.data = Uri.parse("tel:" + "${placeData!!.phone}")
             startActivity(dialIntent)
+        }
+
+        binding.tvSinglePlaceAddress.setOnClickListener {
+            val placeIntent = Intent(this, MapActivity::class.java).apply {
+                putExtra("placeResult", placeData)
+            }
+            this.startActivity(placeIntent)
         }
     }
 

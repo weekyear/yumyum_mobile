@@ -121,6 +121,9 @@ dependencies {
     //expendable text
     implementation 'com.ms-square:expandableTextView:0.1.4'
 
+    //circle wave
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'

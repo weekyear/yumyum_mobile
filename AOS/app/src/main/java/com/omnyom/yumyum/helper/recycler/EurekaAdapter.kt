@@ -70,13 +70,15 @@ class EurekaAdapter(val context: Context) : BaseRecyclerAdapter<EurekaViewHolder
 
     override fun onBindViewHolder(holder: EurekaViewHolder, position: Int) {
         holder.bind(items[position])
-        Glide.with(context)
+        if (items[position].isCompleted) {
+            Glide.with(context)
                 .load(items[position].thumbnailPath)
                 .transform(RotateTransformation(context, 90f))
                 .override(280, 280)
                 .into(holder.thumbnail)
-        holder.thumbnail.setOnClickListener {
-            shareFeed(items[position])
+            holder.thumbnail.setOnClickListener {
+                shareFeed(items[position])
+            }
         }
     }
 

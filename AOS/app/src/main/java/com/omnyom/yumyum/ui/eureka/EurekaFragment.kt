@@ -4,30 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
-import android.util.DisplayMetrics
-import android.util.Log.d
+import android.os.Handler
 import android.util.TypedValue
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.messengerapp.Notifications.EurekaData
-import com.example.messengerapp.Notifications.Sender
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.omnyom.yumyum.R
@@ -35,24 +25,18 @@ import com.omnyom.yumyum.databinding.FragmentEurekaBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RotateTransformation
-import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.helper.recycler.EurekaAdapter
-import com.omnyom.yumyum.helper.recycler.SearchKakaoPlaceAdapter
-import com.omnyom.yumyum.interfaces.APISerivce
 import com.omnyom.yumyum.model.eureka.Chat
-import com.omnyom.yumyum.model.eureka.Client
-import com.omnyom.yumyum.model.eureka.EurekaResponse
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.skyfishjy.library.RippleBackground
 import java.util.*
-import kotlin.math.*
 
 
 class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.fragment_eureka) {
     private val eurekaVM: EurekaViewModel by viewModels()
     val db = Firebase.firestore
+    var myFeedId : View? = null
+    var myMessageId : View? = null
 
     override fun extraSetupBinding() {
         binding.apply {
@@ -63,6 +47,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
     override fun setup() {
         KakaoMapUtils.initLocationFragmentManager(context)
         eurekaVM.getMyFeed(userId)
+        eurekaVM.getMyData(userId)
 
         val chatsRef = db.collection("Chats")
         chatsRef.addSnapshotListener { snapshot, e ->
@@ -88,6 +73,10 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 Toast.makeText(context, "메세지를 입력하세요", Toast.LENGTH_SHORT).show()
             } else {
                 eurekaVM.sendMessage(message, userId)
+                binding.eurekaCircleWave.startRippleAnimation()
+                Handler().postDelayed({
+                    binding.eurekaCircleWave.stopRippleAnimation()
+                }, 3000)
             }
             binding.editTextMessage.setText("")
         }
@@ -107,6 +96,11 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
     }
 
     override fun onSubscribe() {
+        eurekaVM.myData.observe(this) {
+            Glide.with(this).load(eurekaVM.myData.value!!.profilePath.toUri()).override(100, 100).circleCrop().into(binding.ivEurekaMyProfile)
+        }
+
+
         eurekaVM.myFeedData.observe(this) {
             val adapter = binding.rvEurekaFeedList.adapter as EurekaAdapter
             adapter.run {
@@ -122,9 +116,18 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
             binding.rvEurekaFeedList.visibility = View.GONE
             for (doc in docs){
                 if (doc.feedId == -1) {
-                    viewChat(requireContext(), doc)
+                    if (doc.userId == userId.toString().toInt()) {
+                        viewMyChat(requireContext(), doc)
+                    } else {
+                        viewChat(requireContext(), doc)
+                    }
                 } else {
-                    viewFeed(requireContext(), doc)
+                    if (doc.userId == userId.toString().toInt()) {
+                        viewMyFeed(requireContext(), doc)
+                    } else {
+                        viewFeed(requireContext(), doc)
+                    }
+
                 }
             }
         }
@@ -148,6 +151,123 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
     }
 
     override fun release() {
+    }
+
+    fun viewMyChat(context: Context, doc: Chat) {
+        val constraintLayout : ConstraintLayout = binding.clEurekaMain
+        val message = TextView(context)
+        if ( myFeedId != null ) {
+            constraintLayout.removeView(myFeedId)
+        }
+        if ( myMessageId != null ) {
+            constraintLayout.removeView(myMessageId)
+        }
+        message.text = doc.message
+        TextViewCompat.setTextAppearance(
+                message,
+                android.R.style.TextAppearance_DeviceDefault_Large
+        )
+        message.typeface = Typeface.MONOSPACE
+        message.setBackgroundResource(R.drawable.rounded_corner)
+        message.setPadding(
+                5.toDp(context),
+                3.toDp(context),
+                5.toDp(context),
+                3.toDp(context)
+        )
+        message.setTextColor(Color.parseColor("#000000"))
+        message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 15F)
+        message.id = View.generateViewId()
+        myMessageId = message
+        constraintLayout.addView(message)
+
+        // constraint
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintLayout)
+
+        constraintSet.connect(
+                message.id,
+                ConstraintSet.START,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.START,
+                0.toDp(context)
+        )
+        constraintSet.connect(
+                message.id,
+                ConstraintSet.BOTTOM,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.TOP,
+                10.toDp(context)
+        )
+        constraintSet.connect(
+                message.id,
+                ConstraintSet.END,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.END,
+                0.toDp(context)
+        )
+
+        constraintSet.applyTo(constraintLayout)
+    }
+
+    fun viewMyFeed(context: Context, doc: Chat) {
+        val constraintLayout : ConstraintLayout = binding.clEurekaMain
+        if ( myFeedId != null ) {
+            constraintLayout.removeView(myFeedId)
+        }
+        if ( myMessageId != null ) {
+            constraintLayout.removeView(myMessageId)
+        }
+        val thumbnail = ImageView(context)
+        val layoutParams = ConstraintLayout.LayoutParams(130, 130)
+        thumbnail.setLayoutParams(layoutParams)
+        thumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
+        Glide.with(context).load(doc.thumbnail).transform(RotateTransformation(context, 90f)).into(thumbnail)
+        thumbnail.id = View.generateViewId()
+        myFeedId = thumbnail
+        thumbnail.setPadding(
+                3.toDp(context),
+                3.toDp(context),
+                3.toDp(context),
+                3.toDp(context)
+        )
+        thumbnail.setBackgroundResource(R.drawable.transparent_border)
+        thumbnail.setOnClickListener {
+            eurekaVM.getFeedData(doc.feedId.toString().toLong(), userId)
+            binding.clEurekaFeed.visibility = View.VISIBLE
+            Glide.with(context).load(doc.thumbnail).fitCenter().transform(RotateTransformation(context, 90f)).into(binding.ivEurekaThumbnail)
+        }
+        constraintLayout.addView(thumbnail)
+
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(constraintLayout)
+
+        constraintSet.connect(
+                thumbnail.id,
+                ConstraintSet.START,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.START,
+                0.toDp(context)
+        )
+
+        constraintSet.connect(
+                thumbnail.id,
+                ConstraintSet.END,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.END,
+                0.toDp(context)
+        )
+
+
+        constraintSet.connect(
+                thumbnail.id,
+                ConstraintSet.BOTTOM,
+                R.id.iv_eureka_my_profile,
+                ConstraintSet.TOP,
+                10.toDp(context)
+        )
+
+        constraintSet.applyTo(constraintLayout)
     }
 
 
@@ -198,8 +318,8 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
         // constraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
-        val leftGap = random.nextInt(340) + 30
-        val bottomGap = random.nextInt(500) + 50
+        val leftGap = random.nextInt(300) + 30
+        val bottomGap = random.nextInt(570) + 50
 
         if (doc.userId == userId.toString().toInt()) {
             constraintSet.connect(
@@ -328,20 +448,30 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
 
         // 땀네일
         val thumbnail = ImageView(context)
-        Glide.with(context).load(doc.thumbnail).override(100, 100).centerCrop().transform(RotateTransformation(context, 90f)).into(thumbnail)
+        val layoutParams = ConstraintLayout.LayoutParams(130, 130)
+        thumbnail.setLayoutParams(layoutParams)
+        thumbnail.scaleType = ImageView.ScaleType.CENTER_CROP
+        Glide.with(context).load(doc.thumbnail).transform(RotateTransformation(context, 90f)).into(thumbnail)
         thumbnail.id = View.generateViewId()
+        thumbnail.setPadding(
+            3.toDp(context),
+            3.toDp(context),
+            3.toDp(context),
+            3.toDp(context)
+        )
+        thumbnail.setBackgroundResource(R.drawable.transparent_border)
         thumbnail.setOnClickListener {
             eurekaVM.getFeedData(doc.feedId.toString().toLong(), userId)
             binding.clEurekaFeed.visibility = View.VISIBLE
-            Glide.with(context).load(doc.thumbnail).centerCrop().transform(RotateTransformation(context, 90f)).into(binding.ivEurekaThumbnail)
+            Glide.with(context).load(doc.thumbnail).fitCenter().transform(RotateTransformation(context, 90f)).into(binding.ivEurekaThumbnail)
         }
         constraintLayout.addView(thumbnail)
 
         // constraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
-        val leftGap = random.nextInt(340) + 30
-        val bottomGap = random.nextInt(500) + 50
+        val leftGap = random.nextInt(300) + 30
+        val bottomGap = random.nextInt(550) + 50
 
         if (doc.userId == userId.toString().toInt()) {
             constraintSet.connect(

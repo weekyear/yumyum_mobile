@@ -28,7 +28,7 @@ class CreateFeedRequest(
     }
 }
 
-data class PlaceRequest(
+data class      PlaceRequest(
         var address: String,
         var locationX: Double,
         var locationY: Double,
