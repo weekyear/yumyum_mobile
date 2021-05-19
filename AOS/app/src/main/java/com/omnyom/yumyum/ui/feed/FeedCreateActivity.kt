@@ -24,8 +24,10 @@ import com.omnyom.yumyum.model.feed.Place
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
+import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileInputStream
@@ -56,7 +58,8 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
     override fun setup() {
         initFeedDataWhenEdit()
         if (!feedCreateVM.isEdit) {
-            feedCreateVM.feedAi(getMultipartBodyOfVideo(intent.getStringExtra("videoUri")!!.toUri()))
+//            feedCreateVM.feedAi(getVideoFileForAi(intent.getStringExtra("videoUri")!!.toUri()))
+            feedCreateVM.feedAi(getMultipartBodyOfVideoForAi(intent.getStringExtra("videoUri")!!.toUri()))
         } else {
             binding.calculatingGroup.visibility = View.INVISIBLE
         }
@@ -100,7 +103,9 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         }
 
         binding.rvRecommendTitle.apply {
-            adapter = RecommendTitleAdapter(binding)
+            adapter = RecommendTitleAdapter(binding).apply {
+                setVM(feedCreateVM)
+            }
             layoutManager = LinearLayoutManager(this@FeedCreateActivity, LinearLayoutManager.HORIZONTAL, false)
         }
         binding.avDotsLoading.repeatCount = LottieDrawable.INFINITE
@@ -190,6 +195,28 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
             it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(it)
         }
+    }
+
+    private fun getVideoFileForAi(videoUri: Uri?): RequestBody? {
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(videoUri!!, "r", null) ?: return null
+        val file = File(cacheDir, contentResolver.getFileName(videoUri!!))
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+        return file.asRequestBody("video/mp4".toMediaTypeOrNull())
+//        return MultipartBody.Part.createFormData("video", file.name, requestFile)
+    }
+
+    private fun getMultipartBodyOfVideoForAi(videoUri: Uri?): MultipartBody.Part? {
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(videoUri!!, "r", null) ?: return null
+        val file = File(cacheDir, contentResolver.getFileName(videoUri!!))
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
+        val requestFile = file.asRequestBody("video/mp4".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("video", file.name, requestFile)
     }
 
     private fun getMultipartBodyOfVideo(videoUri: Uri?): MultipartBody.Part? {

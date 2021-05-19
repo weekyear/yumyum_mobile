@@ -84,34 +84,44 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun sendMessage(message: String, userId: Int) {
-        getMessageAuthor(userId.toString().toLong())
-        getLocation()
-        val lng = positions!![0]
-        val lat = positions!![1]
-        val geoLocation = GeoLocation(lat, lng)
-        geoHash = GeoFireUtils.getGeoHashForLocation(geoLocation)
-        val messageHashMap = HashMap<String, Any?>()
-        messageHashMap["userId"] = userId
-        messageHashMap["lat"] = lat
-        messageHashMap["lng"] = lng
-        messageHashMap["message"] = message
-        messageHashMap["geohash"] = geoHash
-        messageHashMap["feedId"] = -1
-        messageHashMap["thumbnailPath"] = ""
-//        messageHashMap["profilePath"] = authorData.value!!.profilePath
-//        messageHashMap["nickname"] = authorData.value!!.nickname
+        var Call = retrofitService.getUserData(userId.toString().toLong())
+        Call.enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                if (response.isSuccessful) {
+                    getLocation()
+                    val lng = positions!![0]
+                    val lat = positions!![1]
+                    val geoLocation = GeoLocation(lat, lng)
+                    geoHash = GeoFireUtils.getGeoHashForLocation(geoLocation)
+                    val messageHashMap = HashMap<String, Any?>()
+                    messageHashMap["userId"] = userId
+                    messageHashMap["lat"] = lat
+                    messageHashMap["lng"] = lng
+                    messageHashMap["message"] = message
+                    messageHashMap["geohash"] = geoHash
+                    messageHashMap["feedId"] = -1
+                    messageHashMap["thumbnailPath"] = ""
+                    messageHashMap["profilePath"] = response.body()!!.data.profilePath
+                    messageHashMap["nickname"] = response.body()!!.data.nickname
 
 
-        val locationRef: DocumentReference = db.collection("Chats").document("$userId")
-        locationRef.set(messageHashMap).addOnCompleteListener {
-            getGeoHashes()
-        }
-        val docs = matchingDocs.value!!
-        for (doc in docs) {
-            if (doc.userId != userId) {
-                sendNoti(doc.userId.toString())
+                    val locationRef: DocumentReference = db.collection("Chats").document("$userId")
+                    locationRef.set(messageHashMap).addOnCompleteListener {
+                        getGeoHashes()
+                    }
+                    val docs = matchingDocs.value!!
+                    for (doc in docs) {
+                        if (doc.userId != userId) {
+                            sendNoti(doc.userId.toString())
+                        }
+                    }
+                }
             }
-        }
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                t
+            }
+        })
+
 
     }
 
@@ -143,10 +153,10 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
                         if (distanceInM <= radiusInM) {
                             val inner = doc.getData() as Map<String, Any>
                             if (inner["feedId"] == null) {
-                                val chat = Chat(inner["userId"].toString().toInt(), inner["geohash"] as String, inner["lat"] as Double, inner["lng"] as Double, inner["message"] as String, "".toUri(), -1)
+                                val chat = Chat(inner["userId"].toString().toInt(), inner["geohash"] as String, inner["lat"] as Double, inner["lng"] as Double, inner["message"] as String, "".toUri(), -1, inner["profilePath"].toString().toUri(), inner["nickname"] as String)
                                 matchingDocs.add(chat)
                             } else {
-                                val chat = Chat(inner["userId"].toString().toInt(), inner["geohash"] as String, inner["lat"] as Double, inner["lng"] as Double, inner["message"] as String, inner["thumbnailPath"].toString().toUri(), inner["feedId"].toString().toInt())
+                                val chat = Chat(inner["userId"].toString().toInt(), inner["geohash"] as String, inner["lat"] as Double, inner["lng"] as Double, inner["message"] as String, inner["thumbnailPath"].toString().toUri(), inner["feedId"].toString().toInt(), inner["profilePath"].toString().toUri(), inner["nickname"] as String)
                                 matchingDocs.add(chat)
                             }
                         }
@@ -195,7 +205,6 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 t
             }
-
         })
     }
 
