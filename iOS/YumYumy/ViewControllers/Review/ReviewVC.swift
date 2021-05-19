@@ -8,6 +8,7 @@
 import UIKit
 import SwiftyJSON
 import Lottie
+import NVActivityIndicatorView
 
 enum Score: Int {
     case one = 1
@@ -17,13 +18,15 @@ enum Score: Int {
     case five = 5
 }
 
-class ReviewVC: UIViewController {
+class ReviewVC: UIViewController{
     
     static func instance(videoUrl: URL) -> ReviewVC {
         let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVC
         vc.videoUrl = videoUrl
         return vc
     }
+    
+    let indicator = NVActivityIndicatorView(frame: CGRect(x: 185, y: 450 , width: 50, height: 50), type: .ballRotateChase, color: .black, padding: 0)
     
     var videoUrl: URL!
     var feed: Feed = Feed()
@@ -63,7 +66,7 @@ class ReviewVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         self.collectionView.collectionViewLayout = flowLayout
-        
+        self.view.addSubview(indicator)
         setUpAnimation()
         setAnimationGesture()
         setLayout()
@@ -83,6 +86,7 @@ class ReviewVC: UIViewController {
         //MARK: - TODO 나중에 호출하는거 확인할것~
         if videoUrl != nil {
             loadAIVideo()
+            indicator.startAnimating()
         }
     }
     
@@ -91,6 +95,7 @@ class ReviewVC: UIViewController {
             if result["success"] == true {
                 self.foodAiData = (result["predictions"].arrayObject! as? [String])!
                 self.collectionView.reloadData()
+                self.indicator.stopAnimating()
             }
         } failure: { (error) in
             print(error.localizedDescription)
