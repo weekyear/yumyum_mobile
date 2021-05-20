@@ -19,11 +19,8 @@ class PeopleVC: UIViewController {
     var likeFeedCheck = false
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var ProfileImgView: UIImageView!
-    
     @IBOutlet weak var IntroduceLabel : UILabel!
-
     @IBOutlet var userNameLabel: UILabel!
     
     
@@ -34,6 +31,7 @@ class PeopleVC: UIViewController {
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
         imageMakeRouded(imageview: ProfileImgView)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,8 +57,8 @@ class PeopleVC: UIViewController {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
-        nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = "유저페이지"
+        nTitle.font = UIFont.systemFont(ofSize: 20) // 폰트크기
+//        nTitle.text = "유저페이지"
         self.navigationItem.titleView = nTitle
     }
     
@@ -93,7 +91,12 @@ class PeopleVC: UIViewController {
     
     func presentUserData() {
         self.IntroduceLabel.text = userData?.introduction!
-        self.userNameLabel.text = userData?.nickname!
+        
+        guard let nickname = userData?.nickname else {
+            return
+        }
+        self.userNameLabel.text = "@\(nickname)"
+        userNameLabel.font = .boldSystemFont(ofSize: 20)
         
         if let url = URL(string: (userData?.profilePath)!) {
             var image : UIImage?
