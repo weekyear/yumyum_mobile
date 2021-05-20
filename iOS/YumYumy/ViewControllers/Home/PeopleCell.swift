@@ -16,6 +16,6 @@ class PeopleCell: UICollectionViewCell {
         
         foodImgView.contentMode = .scaleAspectFill
     }
-    
+
     
 }

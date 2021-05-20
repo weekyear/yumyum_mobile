@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -91,7 +91,7 @@
                             <constraint firstItem="ZJr-6Y-UEi" firstAttribute="top" secondItem="ebn-Fy-WKF" secondAttribute="top" id="zwT-HI-m4D"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="유레카" image="ellipsis.bubble" catalog="system" id="HpO-Pv-1GK"/>
+                    <tabBarItem key="tabBarItem" title="유레카" image="ic_chat_bubble" id="HpO-Pv-1GK"/>
                     <connections>
                         <outlet property="backgroundView" destination="K4r-qa-JmT" id="0wF-6j-vAs"/>
                         <outlet property="eurekaTextField" destination="RbF-IQ-01e" id="6E4-Xz-Qb2"/>
@@ -107,7 +107,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipsis.bubble" catalog="system" width="128" height="110"/>
+        <image name="ic_chat_bubble" width="28" height="28"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

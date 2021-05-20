@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class MyFeedCollectionViewCell: UICollectionViewCell {
     
@@ -18,9 +19,18 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet var myLikeCountLabel: UILabel!
     @IBOutlet var myLikeBtn: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    @IBOutlet var backMyPageBtn: UIButton!
+    @IBOutlet var threeDotView: UIView!
+    @IBOutlet var threeDotBtn: UIButton!
+    @IBOutlet var scoreOneView: AnimationView!
+    
+    let animationview = AnimationView(name: "ic_vomited")
+    let animationview2 = AnimationView(name: "ic_confused")
+    let animationview3 = AnimationView(name: "ic_neutral")
+    let animationview4 = AnimationView(name: "ic_lol")
+    let animationview5 = AnimationView(name: "ic_inloveface")
     
     let yumyumYellow: ColorSet = .yumyumYellow
-    
     var player: AVPlayer?
     var feedInfo : Feed = Feed()
     var delegate : myFeedCellDelegate?
@@ -28,19 +38,23 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
     var userData = UserDefaults.getLoginedUserInfo()!
     var isCheckView: Bool = false
     
-    @IBOutlet var backMyPageBtn: UIButton!
-    
-    @IBOutlet var threeDotView: UIView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         threeDotView.isHidden = true
+        setUpAnimation()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        print("넘어갈떄마다 호출")
-        player?.play()
+        animationview.removeFromSuperview()
+        animationview2.removeFromSuperview()
+        animationview3.removeFromSuperview()
+        animationview4.removeFromSuperview()
+        animationview5.removeFromSuperview()
+    }
+    public func setUpAnimation() {
+        animationview.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        animationview.contentMode = .scaleAspectFit
     }
     
     @IBAction func pressDot(_ sender: Any) {
@@ -53,18 +67,12 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func deleteFeed(_ sender: Any) {
+    @IBAction func deleteFeedPress(_ sender: Any) {
         self.delegate?.deleteFeedToMove(feedId: feedInfo.id!)
-        WebApiManager.shared.deleteMyFeed(feedId: feedInfo.id!){
-            (result) in
-            if result["status"] == "200" {
-                print("피드가 삭제 되었습니다.")
-            } else {
-                print("피드 삭제 오류")
-            }
-        } faliure: { (error) in
-            print(error)
-        }
+    }
+    
+    @IBAction func updateFeedPress(_ sender: Any) {
+        self.delegate?.updateFeedToMove(feed : feedInfo)
     }
     
     @IBAction func myLikeBtnPressed(_ sender: Any) {
@@ -142,11 +150,11 @@ class MyFeedCollectionViewCell: UICollectionViewCell {
         } else {
             myLikeBtn.tintColor = .white
         }
-        
     }
     
 }
 
 protocol myFeedCellDelegate {
     func deleteFeedToMove(feedId:Int)
+    func updateFeedToMove(feed:Feed)
 }

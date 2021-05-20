@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mT8-Qs-aO0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,7 +14,7 @@
         <!--MypageVC-->
         <scene sceneID="EV4-L8-Sud">
             <objects>
-                <viewController storyboardIdentifier="MypageVC" id="MEu-kw-Ax3" customClass="MypageVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageVC" id="MEu-kw-Ax3" customClass="MypageVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2ro-oY-bXo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +56,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CgZ-kU-YgE" customClass="MyCollectionViewCell" customModule="YumYum" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="CgZ-kU-YgE" customClass="MyCollectionViewCell" customModule="YumYumy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wiw-Fa-yfg">
@@ -144,7 +145,7 @@
         <!--설정 및 개인정보-->
         <scene sceneID="E9L-3J-ZyF">
             <objects>
-                <viewController id="qfF-xF-Q9e" customClass="SettingVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qfF-xF-Q9e" customClass="SettingVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vHE-zl-iKX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,12 +211,12 @@
         <!--Edit ProfileVC-->
         <scene sceneID="WEM-zO-3tX">
             <objects>
-                <viewController storyboardIdentifier="EditProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="evt-06-RVW" customClass="EditProfileVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="evt-06-RVW" customClass="EditProfileVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oqX-ZP-eK5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-Ct-jsq" customClass="SignUpButton" customModule="YumYum" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM6-Ct-jsq" customClass="SignUpButton" customModule="YumYumy" customModuleProvider="target">
                                 <rect key="frame" x="20" y="462" width="374" height="30"/>
                                 <state key="normal" title="프로필 변경 완료"/>
                                 <connections>
@@ -304,7 +305,7 @@
         <!--Private LawVC-->
         <scene sceneID="ezN-oV-iEp">
             <objects>
-                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" customClass="PrivateLawVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrivateLawVC" id="NFt-l0-He5" customClass="PrivateLawVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yF3-ga-NMW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,12 +334,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tHW-Yg-LqH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4766.666666666667" y="1072.7678571428571"/>
+            <point key="canvasLocation" x="3862" y="1760"/>
         </scene>
         <!--My FeedVC-->
         <scene sceneID="Zux-k8-XtT">
             <objects>
-                <viewController storyboardIdentifier="MyFeedVC" id="aHT-uq-TK2" customClass="MyFeedVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyFeedVC" modalPresentationStyle="fullScreen" id="aHT-uq-TK2" customClass="MyFeedVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="enX-ml-lg4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,7 +354,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="mycell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="mycell" id="x9F-gA-2NI" userLabel="MyCell" customClass="MyFeedCollectionViewCell" customModule="YumYum" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="mycell" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="mycell" id="x9F-gA-2NI" userLabel="MyCell" customClass="MyFeedCollectionViewCell" customModule="YumYumy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="819"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EAJ-gW-Ich">
@@ -418,8 +419,8 @@
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="ic_send"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djU-FY-ure">
-                                                            <rect key="frame" x="16" y="135.5" width="8" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="공유" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djU-FY-ure">
+                                                            <rect key="frame" x="9.5" y="135.5" width="21" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -441,40 +442,47 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7c8-Gl-LC7">
-                                                    <rect key="frame" x="8" y="623" width="338" height="166"/>
+                                                    <rect key="frame" x="8" y="633.5" width="338" height="155.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저이름" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccp-Y8-LTQ">
-                                                            <rect key="frame" x="10" y="0.0" width="318" height="24"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                            <rect key="frame" x="10" y="0.0" width="318" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="음식명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ddb-Bc-4b6">
-                                                            <rect key="frame" x="10" y="32" width="318" height="33.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                            <rect key="frame" x="10" y="28.5" width="57.5" height="26.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="253" text="음식점" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOT-sD-cLh">
-                                                            <rect key="frame" x="38" y="73.5" width="290" height="20"/>
+                                                            <rect key="frame" x="38" y="63" width="290" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰리뷰" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2UQ-Lq-nJL">
-                                                            <rect key="frame" x="10" y="101.5" width="318" height="64.5"/>
+                                                            <rect key="frame" x="10" y="91" width="318" height="64.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_place" translatesAutoresizingMaskIntoConstraints="NO" id="87j-XC-Nrs">
-                                                            <rect key="frame" x="10" y="73.5" width="20" height="20"/>
+                                                            <rect key="frame" x="10" y="63" width="20" height="20"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="BBh-s1-x4q"/>
                                                                 <constraint firstAttribute="width" constant="20" id="eVm-54-ira"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="7lm-vV-Tad" customClass="AnimationView" customModule="Lottie">
+                                                            <rect key="frame" x="75" y="27" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="30" id="HKh-rB-lCU"/>
+                                                                <constraint firstAttribute="height" constant="30" id="rps-X6-gyp"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -485,12 +493,15 @@
                                                         <constraint firstAttribute="trailing" secondItem="Ccp-Y8-LTQ" secondAttribute="trailing" constant="10" id="CSC-1E-aKB"/>
                                                         <constraint firstItem="Ccp-Y8-LTQ" firstAttribute="leading" secondItem="7c8-Gl-LC7" secondAttribute="leading" constant="10" id="EvH-T7-BlQ"/>
                                                         <constraint firstItem="Ddb-Bc-4b6" firstAttribute="leading" secondItem="7c8-Gl-LC7" secondAttribute="leading" constant="10" id="HQt-aw-Dqf"/>
+                                                        <constraint firstItem="7lm-vV-Tad" firstAttribute="centerY" secondItem="Ddb-Bc-4b6" secondAttribute="centerY" id="P3j-0m-zgK"/>
+                                                        <constraint firstItem="7lm-vV-Tad" firstAttribute="leading" secondItem="Ddb-Bc-4b6" secondAttribute="trailing" constant="7.5" id="Syy-Zh-pzo"/>
                                                         <constraint firstAttribute="trailing" secondItem="vOT-sD-cLh" secondAttribute="trailing" constant="10" id="TIC-l2-7hL"/>
                                                         <constraint firstItem="vOT-sD-cLh" firstAttribute="leading" secondItem="87j-XC-Nrs" secondAttribute="trailing" constant="8" id="W5a-lm-Wm1"/>
                                                         <constraint firstItem="Ddb-Bc-4b6" firstAttribute="top" secondItem="Ccp-Y8-LTQ" secondAttribute="bottom" constant="8" id="X9E-c2-4rZ"/>
                                                         <constraint firstItem="vOT-sD-cLh" firstAttribute="top" secondItem="Ddb-Bc-4b6" secondAttribute="bottom" constant="8" id="a2o-A9-1GM"/>
                                                         <constraint firstAttribute="bottom" secondItem="2UQ-Lq-nJL" secondAttribute="bottom" id="aG7-4u-Y1Z"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Ddb-Bc-4b6" secondAttribute="trailing" constant="10" id="hgM-i0-us1"/>
+                                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="7lm-vV-Tad" secondAttribute="trailing" constant="233" id="bQH-nU-Mjg"/>
+                                                        <constraint firstItem="vOT-sD-cLh" firstAttribute="top" secondItem="Ddb-Bc-4b6" secondAttribute="bottom" constant="8" symbolic="YES" id="i1x-ZQ-5xw"/>
                                                         <constraint firstItem="87j-XC-Nrs" firstAttribute="top" secondItem="Ddb-Bc-4b6" secondAttribute="bottom" constant="8" id="jYT-SR-pUd"/>
                                                         <constraint firstItem="2UQ-Lq-nJL" firstAttribute="leading" secondItem="7c8-Gl-LC7" secondAttribute="leading" constant="10" id="qNi-vr-aJX"/>
                                                         <constraint firstItem="Ccp-Y8-LTQ" firstAttribute="top" secondItem="7c8-Gl-LC7" secondAttribute="top" id="qoh-xo-aAD"/>
@@ -505,6 +516,9 @@
                                                             <state key="normal" title="수정">
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="updateFeedPress:" destination="x9F-gA-2NI" eventType="touchUpInside" id="afi-PR-4Dg"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRg-4l-8Wb">
                                                             <rect key="frame" x="0.0" y="30" width="90" height="30"/>
@@ -513,7 +527,7 @@
                                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <connections>
-                                                                <action selector="deleteFeed:" destination="x9F-gA-2NI" eventType="touchUpInside" id="v9L-3Q-jFu"/>
+                                                                <action selector="deleteFeedPress:" destination="x9F-gA-2NI" eventType="touchUpInside" id="v9L-3Q-jFu"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -559,6 +573,8 @@
                                             <outlet property="myPlaceLabel" destination="vOT-sD-cLh" id="M41-iu-UfQ"/>
                                             <outlet property="myReviewLabel" destination="2UQ-Lq-nJL" id="N9V-zg-Gz8"/>
                                             <outlet property="myVideoView" destination="rJL-5c-apX" id="zBS-Sa-Brc"/>
+                                            <outlet property="scoreOneView" destination="7lm-vV-Tad" id="WcG-8w-q32"/>
+                                            <outlet property="threeDotBtn" destination="OIA-Bx-Iwb" id="0KK-V6-Lj3"/>
                                             <outlet property="threeDotView" destination="SS6-Fy-Yjg" id="a67-ty-cBE"/>
                                         </connections>
                                     </collectionViewCell>
@@ -585,12 +601,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bub-yu-21m" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5673.913043478261" y="1072.7678571428571"/>
+            <point key="canvasLocation" x="2050.7246376811595" y="1760.4910714285713"/>
         </scene>
         <!--My MapVC-->
         <scene sceneID="LQo-Vi-wpF">
             <objects>
-                <viewController storyboardIdentifier="MyMapVC" id="ZMJ-3A-sx6" customClass="MyMapVC" customModule="YumYum" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyMapVC" id="ZMJ-3A-sx6" customClass="MyMapVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ouk-ss-6C9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -615,9 +631,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zaW-gE-Gtx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6584" y="1073"/>
+            <point key="canvasLocation" x="2980" y="1750"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="7lm-vV-Tad"/>
+    </designables>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>

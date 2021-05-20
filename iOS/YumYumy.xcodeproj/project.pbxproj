@@ -12,9 +12,13 @@
 		540F22BD264C073F00F7581D /* ic_confused.json in Resources */ = {isa = PBXBuildFile; fileRef = 540F22BC264C073F00F7581D /* ic_confused.json */; };
 		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
 		542340CA264BE0720052F04B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 542340C9264BE0720052F04B /* Lottie */; };
+		5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430F9B1265423DC00863992 /* WebApiManagerAI.swift */; };
+		5430F9B72654552600863992 /* AiFoodNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430F9B62654552600863992 /* AiFoodNameCell.swift */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		544ED8DB2652BA6600B0F7CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */; };
+		5450E5DB26553F33008609CD /* PeopleFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E5DA26553F33008609CD /* PeopleFeedCell.swift */; };
+		5452F4DA2655251500481459 /* PeopleFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5452F4D92655251500481459 /* PeopleFeedVC.swift */; };
 		54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54754BE92652CB8300DE12AF /* MypageVC.swift */; };
 		5488E21626394F640096C35B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488E21526394F640096C35B /* UserModel.swift */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
@@ -157,9 +161,13 @@
 		540F22B7264C072F00F7581D /* ic_inloveface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_inloveface.json; sourceTree = "<group>"; };
 		540F22BC264C073F00F7581D /* ic_confused.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_confused.json; sourceTree = "<group>"; };
 		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYumy/ViewControllers/MyPage/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		5430F9B1265423DC00863992 /* WebApiManagerAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerAI.swift; sourceTree = "<group>"; };
+		5430F9B62654552600863992 /* AiFoodNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFoodNameCell.swift; sourceTree = "<group>"; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYumy/ViewControllers/MyPage/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYumy/ViewControllers/MyPage/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5450E5DA26553F33008609CD /* PeopleFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleFeedCell.swift; sourceTree = "<group>"; };
+		5452F4D92655251500481459 /* PeopleFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleFeedVC.swift; sourceTree = "<group>"; };
 		54754BE92652CB8300DE12AF /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = "<group>"; };
 		5488E21526394F640096C35B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
@@ -375,6 +383,8 @@
 				54C6DA5B262B1965006C8D96 /* HomeVC.swift */,
 				54B30C83264C4EF900E2F801 /* PeopleVC.swift */,
 				54B30C88264C567500E2F801 /* PeopleCell.swift */,
+				5452F4D92655251500481459 /* PeopleFeedVC.swift */,
+				5450E5DA26553F33008609CD /* PeopleFeedCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -543,6 +553,7 @@
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
 				E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */,
 				E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */,
+				5430F9B1265423DC00863992 /* WebApiManagerAI.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -574,6 +585,7 @@
 				E521F3CD264375890083957B /* ReviewNavigationVC.swift */,
 				E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */,
 				E5B30F812644C061000D8934 /* PlaceSearchCell.swift */,
+				5430F9B62654552600863992 /* AiFoodNameCell.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -1028,6 +1040,7 @@
 				E5969688264BE361009B64A3 /* UITabBarExtension.swift in Sources */,
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
+				5452F4DA2655251500481459 /* PeopleFeedVC.swift in Sources */,
 				E51291AB26502A1A002B064C /* ChatModel.swift in Sources */,
 				E5CDA51A2655876E00DD951F /* ChatView.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
@@ -1039,6 +1052,7 @@
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
+				5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */,
 				E596967A264BD4B7009B64A3 /* PlaceTableViewCell.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */,
@@ -1053,6 +1067,7 @@
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
 				54B30C89264C567500E2F801 /* PeopleCell.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
+				5430F9B72654552600863992 /* AiFoodNameCell.swift in Sources */,
 				E5969657264BC66D009B64A3 /* CustomCell.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
 				54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */,
@@ -1061,6 +1076,7 @@
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
+				5450E5DB26553F33008609CD /* PeopleFeedCell.swift in Sources */,
 				54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */,
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E596965D264BC6A0009B64A3 /* PageCell.swift in Sources */,
@@ -1269,6 +1285,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumYumy/YumYumy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1299,6 +1316,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumYumy/YumYumy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (

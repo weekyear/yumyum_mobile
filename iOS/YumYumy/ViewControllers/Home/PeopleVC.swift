@@ -10,11 +10,13 @@ import SwiftyJSON
 
 class PeopleVC: UIViewController {
     let cellIdentifire : String  = "peopleCell"
+    var feedList : [Feed] = []
     var peopleFeedList: [Feed] = []
     var peopleLikeList: [Feed] = []
     var userId: Int?
     var username : String?
     var userData: User?
+    var likeFeedCheck = false
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,6 +24,7 @@ class PeopleVC: UIViewController {
     
     @IBOutlet weak var IntroduceLabel : UILabel!
 
+    @IBOutlet var userNameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +42,24 @@ class PeopleVC: UIViewController {
         presentUserData()
     }
     
+    @IBAction func changeLikeSegment(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            self.likeFeedCheck = false
+            self.feedList = peopleFeedList
+            self.collectionView.reloadData()
+        } else if sender.selectedSegmentIndex == 1 {
+            self.likeFeedCheck = true
+            self.feedList = peopleLikeList
+            self.collectionView.reloadData()
+        }
+    }
     
     func initTitle() {
         let nTitle = UILabel(frame:CGRect(x:0, y:0, width: 200, height: 40))
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = username
+        nTitle.text = "유저페이지"
         self.navigationItem.titleView = nTitle
     }
     
@@ -55,6 +69,7 @@ class PeopleVC: UIViewController {
                 let results = result["data"]
                 let list = results.arrayValue.compactMap({Feed(feedJson: $0)})
                 self.peopleFeedList = list.filter { $0.isCompleted == true }
+                self.feedList = self.peopleFeedList
                 self.collectionView.reloadData()
             }
             
@@ -77,6 +92,7 @@ class PeopleVC: UIViewController {
     
     func presentUserData() {
         self.IntroduceLabel.text = userData?.introduction!
+        self.userNameLabel.text = userData?.nickname!
         
         if let url = URL(string: (userData?.profilePath)!) {
             var image : UIImage?
@@ -97,13 +113,26 @@ class PeopleVC: UIViewController {
     }
 }
 
+extension PeopleVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("You tepped me \(indexPath.item)")
+        
+        let peopleFeedVC = UIStoryboard(name: "Home", bundle: nil).instantiateViewController(identifier: "PeopleFeedVC") as! PeopleFeedVC
+        
+        peopleFeedVC.peopleFeedList = feedList
+        peopleFeedVC.itemId = indexPath.item
+        peopleFeedVC.modalPresentationStyle = .fullScreen
+        self.present(peopleFeedVC, animated: true)
+    }
+}
+
 extension PeopleVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.peopleFeedList.count
+        return self.feedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reversePeopleFeedList = Array(self.peopleFeedList.reversed())
+        let reversePeopleFeedList = Array(self.feedList.reversed())
         let peolplefeed = reversePeopleFeedList[indexPath.item]
         let imageurl:URL = peolplefeed.thumbnailPath!
         

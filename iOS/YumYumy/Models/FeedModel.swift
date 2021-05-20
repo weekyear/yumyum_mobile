@@ -100,5 +100,6 @@ extension Feed: Encodable {
         try container.encode(videoPath, forKey: .videoPath)
         try container.encode(place, forKey: .place)
         try container.encode(isCompleted, forKey: .isCompleted)
+        try container.encode(id, forKey: .id)
     }
 }
