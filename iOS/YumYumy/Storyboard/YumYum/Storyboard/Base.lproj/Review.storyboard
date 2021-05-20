@@ -244,7 +244,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" translatesAutoresizingMaskIntoConstraints="NO" id="MJh-8z-weF">
-                                                    <rect key="frame" x="35" y="0.0" width="309" height="150"/>
+                                                    <rect key="frame" x="35" y="0.0" width="41.5" height="150"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwN-pk-iQ9">
                                                             <rect key="frame" x="0.0" y="5" width="42" height="21"/>
@@ -253,13 +253,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1H-BK-R6o">
-                                                            <rect key="frame" x="0.0" y="22" width="309" height="21"/>
+                                                            <rect key="frame" x="0.0" y="22" width="41.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="742" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulF-Lb-ID3">
-                                                            <rect key="frame" x="0.0" y="5" width="309" height="145"/>
+                                                            <rect key="frame" x="0.0" y="5" width="41.5" height="145"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -279,28 +279,25 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="700" verticalCompressionResistancePriority="700" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGa-bg-OMB">
-                                                    <rect key="frame" x="354" y="64.5" width="30" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="mKg-Ji-QC4"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="328.5" y="64.5" width="41.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="lGa-bg-OMB" firstAttribute="centerY" secondItem="tYo-46-eVO" secondAttribute="centerY" id="1v7-Qn-1Vv"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="lGa-bg-OMB" secondAttribute="trailing" constant="10" id="2G0-Kv-95p"/>
                                                 <constraint firstAttribute="bottom" secondItem="MJh-8z-weF" secondAttribute="bottom" id="DKN-fB-xmP"/>
                                                 <constraint firstItem="MJh-8z-weF" firstAttribute="top" secondItem="tYo-46-eVO" secondAttribute="top" id="FXF-5w-1s3"/>
                                                 <constraint firstItem="0mE-ac-ekb" firstAttribute="leading" secondItem="tYo-46-eVO" secondAttribute="leading" constant="10" id="G4u-Y4-fMX"/>
-                                                <constraint firstItem="lGa-bg-OMB" firstAttribute="leading" secondItem="MJh-8z-weF" secondAttribute="trailing" constant="10" id="R4i-AJ-I2N"/>
                                                 <constraint firstItem="0mE-ac-ekb" firstAttribute="centerY" secondItem="tYo-46-eVO" secondAttribute="centerY" id="V6B-rJ-0YR"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lGa-bg-OMB" secondAttribute="trailing" constant="24" id="lsV-00-rgv"/>
+                                                <constraint firstItem="lGa-bg-OMB" firstAttribute="centerY" secondItem="tYo-46-eVO" secondAttribute="centerY" id="rhD-GN-QUg"/>
                                                 <constraint firstItem="MJh-8z-weF" firstAttribute="leading" secondItem="0mE-ac-ekb" secondAttribute="trailing" constant="10" id="xr4-4L-L6G"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="Q1H-BK-R6o" id="j2y-tN-a39"/>
+                                            <outlet property="distanceLabel" destination="lGa-bg-OMB" id="znX-Gk-0Ah"/>
                                             <outlet property="nameLabel" destination="fwN-pk-iQ9" id="zQL-3G-La0"/>
                                             <outlet property="reviewLabel" destination="ulF-Lb-ID3" id="9Bo-an-UTG"/>
                                         </connections>

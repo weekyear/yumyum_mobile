@@ -25,6 +25,7 @@ class PlaceSearchVC: UIViewController, CLLocationManagerDelegate {
     
     var latitude : Double?
     var longitude  : Double?
+    var distance : [Double] = []
 
     @IBOutlet var resultTableView: UITableView!
     
@@ -55,9 +56,6 @@ class PlaceSearchVC: UIViewController, CLLocationManagerDelegate {
         let coor = locationManager.location?.coordinate
         latitude = coor?.latitude
         longitude = coor?.longitude
-        
-        print(latitude)
-        print(longitude)
         setSearchBar()
     }
     
@@ -79,10 +77,19 @@ class PlaceSearchVC: UIViewController, CLLocationManagerDelegate {
 
 extension PlaceSearchVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.resultTableView.reloadData()
         let searchKey = searchBar.text!
         WebApiManager.shared.searchPlace(searchKey: searchKey, logitudeX: longitude!, latitudeY: latitude!) { (result) in
             dump(result["documents"])
+            self.distance = []
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
+            self.results.map({(place:Place) -> Place in
+                var userLocation = CLLocation(latitude: self.latitude!, longitude: self.longitude!)
+                var secondLocation = CLLocation(latitude: place.locationY, longitude: place.locationX)
+                let distancePlace:CLLocationDistance = userLocation.distance(from: secondLocation)
+                self.distance.append(distancePlace)
+                return place
+            })
             self.resultTableView.reloadData()
         } failure: { (error) in
             print(#function, "error: \(error)")
@@ -110,7 +117,7 @@ extension PlaceSearchVC: UITableViewDelegate, UITableViewDataSource {
         cell.nameLabel.text = self.results[indexPath.row].name
         cell.addressLabel.text = self.results[indexPath.row].address
         cell.reviewLabel.text = self.results[indexPath.row].phone
-        
+        cell.distanceLabel.text = String(ceil(self.distance[indexPath.row])) + "m"
         return cell
     }
     
