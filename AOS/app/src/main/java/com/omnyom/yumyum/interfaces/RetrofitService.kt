@@ -82,7 +82,7 @@ interface RetrofitService {
 
     // 키워드로 장소, 주소 검색
     @GET("feed/list/title/{title}/{userId}")
-    fun getSearchFeedListByTitle(@Path("title") title: String, @Path("userId") userId: Long?) : Call <SearchFeedListResponse>
+    fun getSearchFeedListByTitle(@Path("title") title: String, @Path("userId") userId: Long?) : Call <FeedResponse>
 
     // 좋아요 피드 불러오기
     @GET("feed/list/like/{userId}")
