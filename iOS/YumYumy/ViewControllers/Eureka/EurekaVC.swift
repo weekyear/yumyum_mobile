@@ -74,7 +74,7 @@ class EurekaVC: UIViewController {
         
         
 
-        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) { neighbor in
+        FirestoreManager.shared.getNeighbors(myId: user!["id"].intValue, latitude: latitude!, longitude: longitude!) { neighbor in
             self.backgroundView.subviews.map({ $0.removeFromSuperview() })
             self.neighbor = []
             self.neighbor = neighbor

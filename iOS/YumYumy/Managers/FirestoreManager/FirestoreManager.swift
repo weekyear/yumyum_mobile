@@ -43,7 +43,7 @@ struct FirestoreManager {
     }
     
     
-    func getNeighbors(latitude: Double, longitude: Double , completionHandler: @escaping ([Chat])-> Void) {
+    func getNeighbors(myId: Int, latitude: Double, longitude: Double , completionHandler: @escaping ([Chat])-> Void) {
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let radiusInKilometers: Double = 5000
         
@@ -76,6 +76,12 @@ struct FirestoreManager {
                 }
                 
                 querySnapshot.documentChanges.forEach { diff in
+                    let userId = diff.document.data()["userId"] as? Int ?? 0
+                    
+                    if userId == myId {
+                        return
+                    }
+                    
                     let lat = diff.document.data()["lat"] as? Double ?? 0
                     let lng = diff.document.data()["lng"] as? Double ?? 0
                     let coordinates = CLLocation(latitude: lat, longitude: lng)
@@ -83,7 +89,7 @@ struct FirestoreManager {
                     let distance = GFUtils.distance(from: centerPoint, to: coordinates)
              
                     if distance <= radiusInKilometers {
-                        let userId = diff.document.data()["userId"] as? Int ?? 0
+                        
                         let message = diff.document.data()["message"] as? String ?? " "
                         let geohash = diff.document.data()["geohash"] as? String ?? " "
                         let profilePath = diff.document.data()["profilePath"] as? String ?? " "
