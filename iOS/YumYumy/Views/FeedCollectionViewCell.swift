@@ -19,6 +19,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         thumbnailView.contentMode = .scaleToFill
+        imageMakeRouded(imageview: userProfileView)
     }
-
 }

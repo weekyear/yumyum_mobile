@@ -39,6 +39,7 @@
 		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
 		54C9DDD52655A80400F6BA39 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DDD32655A80400F6BA39 /* FeedCollectionViewCell.swift */; };
 		54C9DDD62655A80400F6BA39 /* FeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C9DDD42655A80400F6BA39 /* FeedCollectionViewCell.xib */; };
+		54C9DDFF2656312000F6BA39 /* UIcollectionViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */; };
 		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
 		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
 		858998D182D6A6EAADEF8691 /* Pods_YumYumyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924DF94EB0D3B4F6C31F54B /* Pods_YumYumyTests.framework */; };
@@ -188,6 +189,7 @@
 		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYumy/ViewControllers/MyPage/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
 		54C9DDD32655A80400F6BA39 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		54C9DDD42655A80400F6BA39 /* FeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCollectionViewCell.xib; sourceTree = "<group>"; };
+		54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcollectionViewCellExtension.swift; sourceTree = "<group>"; };
 		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		58F7FDC285FAFDB4FFFBDAB3 /* Pods-YumYumy-YumYumyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumy-YumYumyUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumy-YumYumyUITests/Pods-YumYumy-YumYumyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				54DA8169264816530029FC92 /* UIImage.swift */,
 				E5969661264BC6D7009B64A3 /* NSObjectExtension.swift */,
 				E5969687264BE361009B64A3 /* UITabBarExtension.swift */,
+				54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1041,6 +1044,7 @@
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
+				54C9DDFF2656312000F6BA39 /* UIcollectionViewCellExtension.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
 				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,

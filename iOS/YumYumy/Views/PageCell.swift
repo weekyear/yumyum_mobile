@@ -25,7 +25,6 @@ class PageCell: UICollectionViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: FeedCollectionViewCell.reusableIdentifier, bundle: nil), forCellWithReuseIdentifier:FeedCollectionViewCell.reusableIdentifier)
-        
         setupCollectionView()
     }
     
@@ -73,22 +72,48 @@ extension PageCell: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.userNameLabel.text = feedResult?[indexPath.item].user?.nickname
         cell.titleLabel.text = feedResult?[indexPath.item].title
         
-        let imageUrl:URL = (feedResult?[indexPath.item].thumbnailPath)!
-//        let profileUrl:URL? = URL(string: (feedResult?[indexPath.item].user?.profilePath!)!)!
-        var image: UIImage?
-//        var profileImg : UIImage?
-        
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: imageUrl)
-//            let profileData = try? Data(contentsOf: profileUrl!)
-            DispatchQueue.main.async {
-                let beforeimage = UIImage(data: data!)
-                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-//                profileImg = UIImage(data: profileData!)
-                cell.thumbnailView.image = image
-//                cell.userProfileView.image = profileImg
+        if let profileUrl:URL = URL(string: (feedResult?[indexPath.item].user?.profilePath!)!) {
+            let imageUrl:URL = (feedResult?[indexPath.item].thumbnailPath)!
+            var image: UIImage?
+            var profileImg : UIImage?
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageUrl)
+                let profileData = try? Data(contentsOf: profileUrl)
+                DispatchQueue.main.async {
+                    let beforeimage = UIImage(data: data!)
+                    image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    profileImg = UIImage(data: profileData!)
+                    cell.thumbnailView.image = image
+                    cell.userProfileView.image = profileImg
+                }
+            }
+        } else {
+            let imageUrl:URL = (feedResult?[indexPath.item].thumbnailPath)!
+            var image: UIImage?
+            var profileImg : UIImage?
+            profileImg = UIImage(named: "ic_profile")
+            cell.userProfileView.image = profileImg
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: imageUrl)
+                DispatchQueue.main.async {
+                    let beforeimage = UIImage(data: data!)
+                    image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+                    cell.thumbnailView.image = image
+                }
             }
         }
+        
+//        DispatchQueue.global().async {
+//            let data = try? Data(contentsOf: imageUrl)
+//            let profileData = try? Data(contentsOf: profileUrl!)
+//            DispatchQueue.main.async {
+//                let beforeimage = UIImage(data: data!)
+//                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
+//                profileImg = UIImage(data: profileData!)
+//                cell.thumbnailView.image = image
+//                cell.userProfileView.image = profileImg
+//            }
+//        }
         
         return cell
     }
