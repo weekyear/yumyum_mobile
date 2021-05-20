@@ -13,6 +13,7 @@ import SnapKit
 
 class EurekaVC: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
     @IBOutlet var textFieldView: UIView!
     @IBOutlet var eurekaTextField: UITextField!
     @IBOutlet var myChatLabel: UILabel!
@@ -74,6 +75,7 @@ class EurekaVC: UIViewController {
         
 
         FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) { neighbor in
+            self.backgroundView.subviews.map({ $0.removeFromSuperview() })
             self.neighbor = []
             self.neighbor = neighbor
             self.neighbor?.forEach({ chat in
@@ -120,8 +122,6 @@ class EurekaVC: UIViewController {
     }
     
     func showOtherMessage(chat: Chat) {
-        print(chat)
-        print("whyrano")
         let width = Int(self.view.frame.size.width) - 100
         let height  = Int(self.view.frame.size.height) - Int(self.tabBarController?.tabBar.frame.size.height ?? 0) - 100
         
@@ -130,7 +130,7 @@ class EurekaVC: UIViewController {
         
         // container
         let container = UIView()
-        self.view.addSubview(container)
+        backgroundView.addSubview(container)
         container.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(50)
             make.top.equalToSuperview().offset(topOffset)

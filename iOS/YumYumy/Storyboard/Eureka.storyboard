@@ -34,13 +34,21 @@
                                             <action selector="didTapEurekaButton:" destination="pZ1-1H-eTq" eventType="touchUpInside" id="tyC-1e-Lyd"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K4r-qa-JmT">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="823"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="n5p-kg-ong" secondAttribute="trailing" constant="10" id="1hU-PQ-dDD"/>
                                     <constraint firstItem="RbF-IQ-01e" firstAttribute="leading" secondItem="ZJr-6Y-UEi" secondAttribute="leading" constant="10" id="LoW-Hw-eWG"/>
+                                    <constraint firstItem="K4r-qa-JmT" firstAttribute="top" secondItem="ZJr-6Y-UEi" secondAttribute="top" id="NLg-aL-BLf"/>
                                     <constraint firstItem="n5p-kg-ong" firstAttribute="centerY" secondItem="RbF-IQ-01e" secondAttribute="centerY" id="Yve-KQ-pTO"/>
+                                    <constraint firstItem="K4r-qa-JmT" firstAttribute="leading" secondItem="ZJr-6Y-UEi" secondAttribute="leading" id="cGO-gu-8Yv"/>
+                                    <constraint firstAttribute="trailing" secondItem="K4r-qa-JmT" secondAttribute="trailing" id="dqD-NY-6BW"/>
                                     <constraint firstAttribute="bottom" secondItem="RbF-IQ-01e" secondAttribute="bottom" constant="5" id="ejh-zF-JaL"/>
+                                    <constraint firstItem="RbF-IQ-01e" firstAttribute="top" secondItem="K4r-qa-JmT" secondAttribute="bottom" id="gmB-G5-olh"/>
                                     <constraint firstItem="n5p-kg-ong" firstAttribute="leading" secondItem="RbF-IQ-01e" secondAttribute="trailing" constant="10" id="lb3-Iy-zI6"/>
                                 </constraints>
                             </view>
@@ -85,6 +93,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="유레카" image="ellipsis.bubble" catalog="system" id="HpO-Pv-1GK"/>
                     <connections>
+                        <outlet property="backgroundView" destination="K4r-qa-JmT" id="0wF-6j-vAs"/>
                         <outlet property="eurekaTextField" destination="RbF-IQ-01e" id="6E4-Xz-Qb2"/>
                         <outlet property="myChatBubbleView" destination="KSA-mX-4aF" id="fNF-n3-2n7"/>
                         <outlet property="myChatImage" destination="ZqF-ez-QaD" id="89V-Yh-lcB"/>
