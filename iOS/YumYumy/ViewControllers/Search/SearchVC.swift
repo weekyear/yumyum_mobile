@@ -128,6 +128,8 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         cell.collectionView.reloadData()
         cell.delegate = self
+        cell.placedelegate = self
+        
         switch indexPath.row {
         case 0:
             cell.tableView.isHidden = true
@@ -174,5 +176,27 @@ extension SearchVC: pageCellDelegate {
         searchFeedVC.feedList = feedList
         searchFeedVC.modalPresentationStyle = .fullScreen
         self.present(searchFeedVC, animated: true)
+    }
+}
+
+extension SearchVC : pageCellPlaceDelegate {
+    func sendToSearchPlaceFeed(itemId: Int, place: Place) {
+        let searchPlaceVC = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(identifier: "SearchPlaceVC") as! SearchPlaceVC
+        
+        searchPlaceVC.place = place
+        let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+        WebApiManager.shared.getPlaceFeedList(placeId: place.id!, userId: userId){
+            (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                searchPlaceVC.placeFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.navigationController?.pushViewController(searchPlaceVC, animated: true)
+            } else {
+                print("장소 피드 리스트 오류!")
+            }
+        }faliure: { (error) in
+            print(error)
+        }
+        
     }
 }

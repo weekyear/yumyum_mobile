@@ -16,6 +16,7 @@ class PageCell: UICollectionViewCell {
     var feedResult: [Feed]?
     var placeResult: [Place]?
     var delegate: pageCellDelegate?
+    var placedelegate : pageCellPlaceDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,10 +40,14 @@ class PageCell: UICollectionViewCell {
         collectionView.isPagingEnabled = true
         collectionView.reloadData()
     }
-
 }
 
 extension PageCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tab \(indexPath.row)")
+        self.placedelegate?.sendToSearchPlaceFeed(itemId: indexPath.row, place:(placeResult?[indexPath.row])!)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return placeResult?.count ?? 0
     }
@@ -125,4 +130,8 @@ extension PageCell: UICollectionViewDelegateFlowLayout {
 
 protocol pageCellDelegate{
     func sendToSearchFeed(itemId:Int, feedList:[Feed])
+}
+
+protocol pageCellPlaceDelegate {
+    func sendToSearchPlaceFeed(itemId: Int, place:Place)
 }
