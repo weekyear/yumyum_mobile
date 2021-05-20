@@ -19,6 +19,8 @@ target 'YumYumy' do
   pod 'lottie-ios'
   pod 'NVActivityIndicatorView'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'KakaoSDKLink'  # 메시지(카카오링크)
+  pod 'KakaoSDKTemplate'  # 메시지 템플릿 
 	
   target 'YumYumyTests' do
     inherit! :search_paths

@@ -9,12 +9,15 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        KakaoSDKCommon.initSDK(appKey: "a12244adcd7cc604a09ce7f405cb8137")
+        
         // 파이어 베이스에 로그인 정보를 저장하기 위함
         FirebaseApp.configure()
         

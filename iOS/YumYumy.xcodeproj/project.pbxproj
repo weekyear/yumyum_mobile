@@ -47,6 +47,7 @@
 		E51291A326501763002B064C /* EurekaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291A226501763002B064C /* EurekaVC.swift */; };
 		E51291AB26502A1A002B064C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291AA26502A1A002B064C /* ChatModel.swift */; };
 		E51291B126502AB1002B064C /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51291B026502AB1002B064C /* FirestoreManager.swift */; };
+		E514BC2C265683FA002F0B94 /* KakaoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E514BC2B265683FA002F0B94 /* KakaoManager.swift */; };
 		E516C096264125CA00B8F4E0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C095264125CA00B8F4E0 /* OpenGLES.framework */; };
 		E516C098264125D700B8F4E0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C097264125D700B8F4E0 /* SystemConfiguration.framework */; };
 		E516C09A264125E800B8F4E0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E516C099264125E800B8F4E0 /* CoreLocation.framework */; };
@@ -204,6 +205,7 @@
 		E51291A226501763002B064C /* EurekaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EurekaVC.swift; sourceTree = "<group>"; };
 		E51291AA26502A1A002B064C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		E51291B026502AB1002B064C /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		E514BC2B265683FA002F0B94 /* KakaoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoManager.swift; sourceTree = "<group>"; };
 		E516C095264125CA00B8F4E0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		E516C097264125D700B8F4E0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E516C099264125E800B8F4E0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -545,6 +547,7 @@
 			children = (
 				E51291AF26502A9D002B064C /* FirestoreManager */,
 				E548AAE9263869600049AA0B /* WebApiManager */,
+				E514BC2B265683FA002F0B94 /* KakaoManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
 				54C9DDFF2656312000F6BA39 /* UIcollectionViewCellExtension.swift in Sources */,
+				E514BC2C265683FA002F0B94 /* KakaoManager.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
 				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
@@ -1297,7 +1301,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1307,7 +1311,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYumy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
@@ -1326,7 +1330,7 @@
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M527AM6YJ5;
+				DEVELOPMENT_TEAM = 25WJPJB95F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DaumMap.embeddedframework",
@@ -1336,7 +1340,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYumy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
