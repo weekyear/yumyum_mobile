@@ -100,28 +100,38 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5C-0p-LxF">
-                                        <rect key="frame" x="20" y="774" width="22" height="22"/>
+                                        <rect key="frame" x="30" y="746" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NI3-tV-vfs"/>
+                                            <constraint firstAttribute="width" constant="50" id="nUy-Ln-TH1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="return" catalog="system"/>
+                                        <state key="normal" image="ic_retry">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="10"/>
+                                        </state>
                                         <connections>
                                             <action selector="didTapPrevButton:" destination="xw1-m5-Egb" eventType="touchUpInside" id="31G-Uo-FHC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGp-i4-mNd">
-                                        <rect key="frame" x="374" y="774" width="20" height="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.right" catalog="system"/>
+                                        <rect key="frame" x="334" y="746" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Ptt-BC-XXg"/>
+                                            <constraint firstAttribute="height" constant="50" id="U6A-2H-wNE"/>
+                                        </constraints>
+                                        <state key="normal" image="ic_next"/>
                                         <connections>
                                             <segue destination="6uF-eu-xOF" kind="show" id="bmX-aF-6a1"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="wGp-i4-mNd" secondAttribute="trailing" constant="20" id="Dtf-lJ-0tM"/>
+                                    <constraint firstAttribute="trailing" secondItem="wGp-i4-mNd" secondAttribute="trailing" constant="30" id="Dtf-lJ-0tM"/>
                                     <constraint firstAttribute="bottom" secondItem="wGp-i4-mNd" secondAttribute="bottom" constant="100" id="Me0-He-s7V"/>
                                     <constraint firstAttribute="bottom" secondItem="o5C-0p-LxF" secondAttribute="bottom" constant="100" id="pge-6p-wwN"/>
-                                    <constraint firstItem="o5C-0p-LxF" firstAttribute="leading" secondItem="Rkb-dQ-SUT" secondAttribute="leading" constant="20" id="th5-dO-BfS"/>
+                                    <constraint firstItem="o5C-0p-LxF" firstAttribute="leading" secondItem="Rkb-dQ-SUT" secondAttribute="leading" constant="30" id="th5-dO-BfS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -136,6 +146,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="ewv-YL-Lty"/>
                     <connections>
+                        <outlet property="nextBtn" destination="wGp-i4-mNd" id="p9e-Eb-soA"/>
+                        <outlet property="retryBtn" destination="o5C-0p-LxF" id="i2W-Eo-Afv"/>
                         <outlet property="videoView" destination="Rkb-dQ-SUT" id="dph-p2-qdJ"/>
                     </connections>
                 </viewController>
@@ -532,10 +544,10 @@
         <designable name="xDa-r3-czl"/>
     </designables>
     <resources>
-        <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="ic_next" width="75" height="75"/>
         <image name="ic_plus" width="32" height="32"/>
+        <image name="ic_retry" width="75" height="75"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
-        <image name="return" catalog="system" width="128" height="101"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
