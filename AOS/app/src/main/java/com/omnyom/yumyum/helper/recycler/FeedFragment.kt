@@ -52,8 +52,6 @@ import kotlin.math.abs
 class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoodBinding>(R.layout.list_item_food)  {
 
     companion object {
-
-
         lateinit var curFeed : FeedData
 
         const val EDIT_FEED = 1234
@@ -169,8 +167,10 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
     override fun release() { }
 
     private fun initProgressBar() {
-        progressBar.visibility = View.VISIBLE
-        progressBar.startAnimation(clkRotate)
+        if (!foodVideo.isPlaying) {
+            progressBar.visibility = View.VISIBLE
+            progressBar.startAnimation(clkRotate)
+        }
     }
 
     private fun initAVStar() {
@@ -285,12 +285,6 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
             mp.setVolume(0f,0f)
             mp!!.isLooping = true;
             foodVideo.visibility = View.VISIBLE
-            progressBar.clearAnimation()
-            progressBar.visibility = View.INVISIBLE
-            ivThumbnail.visibility = View.INVISIBLE
-        }
-
-        foodVideo.setOnCompletionListener {
             progressBar.clearAnimation()
             progressBar.visibility = View.INVISIBLE
             ivThumbnail.visibility = View.INVISIBLE
