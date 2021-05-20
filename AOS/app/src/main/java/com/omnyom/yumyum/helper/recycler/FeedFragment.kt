@@ -64,6 +64,7 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
                 setMessage("정말 삭제하시겠습니까?")
                 setPositiveButton("삭제") { _, _ ->
                     deleteFeed(curFeed.id.toLong())
+                    activity.finish()
                 }
                 setNegativeButton("취소") { _, _ -> }
                 show()
@@ -76,6 +77,7 @@ class FeedFragment(private var feed: FeedData) : BaseBindingFragment<ListItemFoo
                 Callback<CreateFeedResponse> {
                 override fun onResponse(call: Call<CreateFeedResponse>, response: Response<CreateFeedResponse>) {
                     Log.d("delete", "$response")
+
                 }
                 override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
                     t

@@ -168,7 +168,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 android.R.style.TextAppearance_DeviceDefault_Large
         )
         message.typeface = Typeface.MONOSPACE
-        message.setBackgroundResource(R.drawable.rounded_corner)
+        message.setBackgroundResource(R.drawable.transparent_border_my_chat)
         message.setPadding(
                 5.toDp(context),
                 3.toDp(context),
@@ -284,7 +284,7 @@ class EurekaFragment : BaseBindingFragment<FragmentEurekaBinding> (R.layout.frag
                 android.R.style.TextAppearance_DeviceDefault_Large
         )
         message.typeface = Typeface.MONOSPACE
-        message.setBackgroundResource(R.drawable.rounded_corner)
+        message.setBackgroundResource(R.drawable.transparent_border_chat)
         message.setPadding(
                 5.toDp(context),
                 3.toDp(context),
