@@ -7,9 +7,6 @@
 
 import UIKit
 
-//protocol SendDataDelegate {
-//    func sendData(_ viewController: MypageVC, feedList: [Feed])
-//}
 
 class MypageVC: UIViewController {
     
@@ -28,9 +25,11 @@ class MypageVC: UIViewController {
     @IBOutlet weak var myProfileImgView: UIImageView!
     @IBOutlet weak var myIntroduceLabel: UILabel!
     @IBOutlet var myNameLabel: UILabel!
+    @IBOutlet var segmentControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         self.collectionView.collectionViewLayout = flowLayout
     }
@@ -41,6 +40,10 @@ class MypageVC: UIViewController {
         self.presentuserData()
         imageMakeRouded(imageview: myProfileImgView)
         self.loadData()
+    }
+    
+    func initUI() {
+
     }
     
     @IBAction func goToMap(_ sender: Any) {
@@ -109,7 +112,9 @@ class MypageVC: UIViewController {
     func presentuserData(){
         let userData  = UserDefaults.getLoginedUserInfo()
         self.myIntroduceLabel.text = userData!["introduction"].stringValue
-        self.myNameLabel.text = userData!["nickname"].stringValue
+        
+        myNameLabel.font = .boldSystemFont(ofSize: 20)
+        self.myNameLabel.text = "@\(userData!["nickname"].stringValue)"
         if let url = URL(string: userData!["profilePath"].stringValue) {
             var image: UIImage?
             
