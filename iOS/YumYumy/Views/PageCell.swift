@@ -36,7 +36,7 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PlaceTableViewCell.reusableIdentifier, for: indexPath) as! PlaceTableViewCell
         cell.placeNameLabel.text = placeResult?[indexPath.row].name
-        cell.placeAddressLabel.text = placeResult?[indexPath.row].address
+        cell.placeAddressLabel.text =  placeResult?[indexPath.row].address
         return cell
     }
     
