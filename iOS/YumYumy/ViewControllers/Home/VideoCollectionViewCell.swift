@@ -21,6 +21,11 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet var mapIcon: UIImageView!
     @IBOutlet weak var scoreOneView: UIView!
     
+    @IBAction func didTapShareButton(_ sender: Any) {
+        print(nowFeed)
+        KakaoManager.shared.shareFeed(feed: self.nowFeed)
+    }
+    
     var index : Int = 0
     var delegate: userProfileBtnDelegate?
 

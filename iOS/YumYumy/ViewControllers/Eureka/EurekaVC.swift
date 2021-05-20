@@ -72,8 +72,11 @@ class EurekaVC: UIViewController {
             object: nil
         )
         
-        
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setLayout()
         FirestoreManager.shared.getNeighbors(myId: user!["id"].intValue, latitude: latitude!, longitude: longitude!) { neighbor in
             self.backgroundView.subviews.map({ $0.removeFromSuperview() })
             self.neighbor = []
@@ -82,12 +85,6 @@ class EurekaVC: UIViewController {
                 self.showOtherMessage(chat: chat)
             })
         }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setLayout()
     }
     
     func setLayout() {
