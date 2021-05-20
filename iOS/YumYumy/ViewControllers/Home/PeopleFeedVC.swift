@@ -1,36 +1,27 @@
 //
-//  MyFeedVC.swift
-//  YumYum
+//  PeopleFeedVC.swift
+//  YumYumy
 //
-//  Created by 염성훈 on 2021/05/11.
+//  Created by 염성훈 on 2021/05/19.
 //
 
 import UIKit
 import Lottie
 
-class MyFeedVC: UIViewController {
-    
-    static func instance() -> MyFeedVC{
-        let vc = UIStoryboard.init(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
-        return vc
-    }
-    
+class PeopleFeedVC: UIViewController {
+
     @IBOutlet var collectionView: UICollectionView!
-    
-    var myFeedList: [Feed] = []
-//    var myLikeFeedList: [Feed] = []
-    let userData = UserDefaults.getLoginedUserInfo()!
-    var itemId: Int?
-    var feedLikeOrNot:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
     }
     
+    var peopleFeedList: [Feed] = []
+    var itemId : Int?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     func setLayout() {
@@ -44,31 +35,20 @@ class MyFeedVC: UIViewController {
     }
 }
 
-extension MyFeedVC: UICollectionViewDataSource  {
+extension PeopleFeedVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.myFeedList.count
+        return self.peopleFeedList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let feedReverse = Array(self.myFeedList.reversed())
+        let feedReverse = Array(self.peopleFeedList.reversed())
         let feed = feedReverse[indexPath.item]
         let yumyumYellow = Color(r: (246/255), g: (215/255), b: (5/255), a: 1)
         let yumyumColorValueProvider = ColorValueProvider(yumyumYellow)
         let keyPath = AnimationKeypath(keypath: "**.Stroke 1.Color")
         let keyPathEyes = AnimationKeypath(keypath: "**.Fill 1.Color")
-
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mycell", for: indexPath) as! MyFeedCollectionViewCell
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backMyPage))
         
-        cell.delegate = self
-        
-        if feedLikeOrNot {
-            cell.threeDotBtn.isHidden = true
-        } else {
-            cell.threeDotBtn.isHidden = false
-        }
+        let cell:PeopleFeedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "peopleFeedCell", for: indexPath) as! PeopleFeedCell
         
         switch feed.score! {
         case 1:
@@ -114,60 +94,30 @@ extension MyFeedVC: UICollectionViewDataSource  {
             cell.animationview4.pause()
             cell.animationview5.pause()
         }
-
-        cell.backMyPageBtn.isUserInteractionEnabled = true
-        cell.backMyPageBtn.tag = indexPath.item
-        cell.backMyPageBtn.addGestureRecognizer(tapGestureRecognizer)
-
+        
         cell.configureVideo(with: feed)
+        cell.delegate = self
         
         return cell
     }
-    
-    @objc func backMyPage() {
-        self.dismiss(animated: true)
-    }
 }
 
-extension MyFeedVC: UICollectionViewDelegateFlowLayout {
+extension PeopleFeedVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cvRect = self.collectionView.frame
         return CGSize(width: cvRect.width, height: cvRect.height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 
-extension MyFeedVC: myFeedCellDelegate {
-    
-    func deleteFeedToMove(feedId: Int) {
-        defaultalert("정말 삭제하시겠어요?"){ () in
-            WebApiManager.shared.deleteMyFeed(feedId: feedId){
-                (result) in
-                if result["status"] == "200" {
-                    print("피드가 삭제 되었습니다.")
-                } else {
-                    print("피드 삭제 오류")
-                }
-            } faliure: { (error) in
-                print(error)
-            }
-            self.dismiss(animated: true)
-        }failure: {
-            return
-        }
+extension PeopleFeedVC: peopleFeedDelegate{
+    func backToPeopleFeed() {
+        self.dismiss(animated: true)
     }
-    
-    func updateFeedToMove(feed : Feed) {
-        defaultalert("피드를 수정하시겠습니까?"){ () in
-            let reviewVC = UIStoryboard(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "ReviewVC") as! ReviewVC
-            reviewVC.updatefeed = feed
-            self.navigationController?.pushViewController(reviewVC, animated: true)
-            return
-        } failure: {
-            print("취소했어요!")
-            
-            return
-        }
-    }
-    
-    
 }

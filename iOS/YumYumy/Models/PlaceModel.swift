@@ -25,7 +25,6 @@ struct Place: Codable {
     }
     
     init(address: String, locationX: Double, locationY: Double, name: String, phone: String) {
-        
         self.address = address
         self.locationX = locationX
         self.locationY = locationY
@@ -39,6 +38,5 @@ struct Place: Codable {
         self.locationY = feedJson["place"]["locationY"].doubleValue
         self.name = feedJson["place"]["name"].stringValue
         self.phone = feedJson["place"]["phone"].stringValue
-
     }
 }

@@ -3,6 +3,7 @@ package com.omnyom.yumyum.ui.search
 import android.app.Activity
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,6 +39,7 @@ class FoodListFragment : BaseBindingFragment<FragmentFoodListBinding>(R.layout.f
 
     override fun onSubscribe() {
         searchVM.searchFeedResults.observe(viewLifecycleOwner, {
+            d("size", "${searchVM.searchFeedResults.value!!}")
             val adapter = binding.rvFood.adapter as SearchFeedAdapter
             adapter.run {
                 setItems(it)

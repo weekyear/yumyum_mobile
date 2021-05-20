@@ -12,9 +12,13 @@
 		540F22BD264C073F00F7581D /* ic_confused.json in Resources */ = {isa = PBXBuildFile; fileRef = 540F22BC264C073F00F7581D /* ic_confused.json */; };
 		54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */; };
 		542340CA264BE0720052F04B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 542340C9264BE0720052F04B /* Lottie */; };
+		5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430F9B1265423DC00863992 /* WebApiManagerAI.swift */; };
+		5430F9B72654552600863992 /* AiFoodNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5430F9B62654552600863992 /* AiFoodNameCell.swift */; };
 		543648E826481EF600392C12 /* PrivateLawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543648E726481EF600392C12 /* PrivateLawVC.swift */; };
 		5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439717D264982FE005FD966 /* MyFeedVC.swift */; };
 		544ED8DB2652BA6600B0F7CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */; };
+		5450E5DB26553F33008609CD /* PeopleFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E5DA26553F33008609CD /* PeopleFeedCell.swift */; };
+		5452F4DA2655251500481459 /* PeopleFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5452F4D92655251500481459 /* PeopleFeedVC.swift */; };
 		54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54754BE92652CB8300DE12AF /* MypageVC.swift */; };
 		5488E21626394F640096C35B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488E21526394F640096C35B /* UserModel.swift */; };
 		548AB7E6262AA1BC0093215D /* SignUpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AB7E5262AA1BC0093215D /* SignUpButton.swift */; };
@@ -33,6 +37,9 @@
 		54C2B7D8265204190067BE14 /* MyMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C2B7D7265204190067BE14 /* MyMapVC.swift */; };
 		54C6DA5C262B1965006C8D96 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C6DA5B262B1965006C8D96 /* HomeVC.swift */; };
 		54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C78FB2264001C200E1F600 /* EditProfileVC.swift */; };
+		54C9DDD52655A80400F6BA39 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DDD32655A80400F6BA39 /* FeedCollectionViewCell.swift */; };
+		54C9DDD62655A80400F6BA39 /* FeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C9DDD42655A80400F6BA39 /* FeedCollectionViewCell.xib */; };
+		54C9DDFF2656312000F6BA39 /* UIcollectionViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */; };
 		54DA816A264816530029FC92 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DA8169264816530029FC92 /* UIImage.swift */; };
 		54E0EEE4262835950006D49D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0EEE3262835950006D49D /* LoginVC.swift */; };
 		858998D182D6A6EAADEF8691 /* Pods_YumYumyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924DF94EB0D3B4F6C31F54B /* Pods_YumYumyTests.framework */; };
@@ -121,6 +128,9 @@
 		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
 		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
 		E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */; };
+		E5CDA51A2655876E00DD951F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDA5192655876E00DD951F /* ChatView.swift */; };
+		E5EA3EEF2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */; };
+		E5EA3EF126551D020011321C /* FCM-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EF026551D020011321C /* FCM-Info.plist */; };
 		E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBC2BD264C69B40026CB82 /* SearchVC.swift */; };
 		F18A956BE6B349B551C9A819 /* Pods_YumYumy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DF87780344A05C78E008B2D /* Pods_YumYumy.framework */; };
 /* End PBXBuildFile section */
@@ -154,9 +164,13 @@
 		540F22B7264C072F00F7581D /* ic_inloveface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_inloveface.json; sourceTree = "<group>"; };
 		540F22BC264C073F00F7581D /* ic_confused.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ic_confused.json; sourceTree = "<group>"; };
 		54225A80264A48F600720DFE /* MyFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedCollectionViewCell.swift; path = YumYumy/ViewControllers/MyPage/MyFeedCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		5430F9B1265423DC00863992 /* WebApiManagerAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerAI.swift; sourceTree = "<group>"; };
+		5430F9B62654552600863992 /* AiFoodNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiFoodNameCell.swift; sourceTree = "<group>"; };
 		543648E726481EF600392C12 /* PrivateLawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateLawVC.swift; path = YumYumy/ViewControllers/MyPage/PrivateLawVC.swift; sourceTree = SOURCE_ROOT; };
 		5439717D264982FE005FD966 /* MyFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyFeedVC.swift; path = YumYumy/ViewControllers/MyPage/MyFeedVC.swift; sourceTree = SOURCE_ROOT; };
 		544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5450E5DA26553F33008609CD /* PeopleFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleFeedCell.swift; sourceTree = "<group>"; };
+		5452F4D92655251500481459 /* PeopleFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleFeedVC.swift; sourceTree = "<group>"; };
 		54754BE92652CB8300DE12AF /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = "<group>"; };
 		5488E21526394F640096C35B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		548AB7E5262AA1BC0093215D /* SignUpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButton.swift; sourceTree = "<group>"; };
@@ -176,6 +190,9 @@
 		54C2B7D7265204190067BE14 /* MyMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyMapVC.swift; path = YumYumy/ViewControllers/MyPage/MyMapVC.swift; sourceTree = SOURCE_ROOT; };
 		54C6DA5B262B1965006C8D96 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		54C78FB2264001C200E1F600 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileVC.swift; path = YumYumy/ViewControllers/MyPage/EditProfileVC.swift; sourceTree = SOURCE_ROOT; };
+		54C9DDD32655A80400F6BA39 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		54C9DDD42655A80400F6BA39 /* FeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedCollectionViewCell.xib; sourceTree = "<group>"; };
+		54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIcollectionViewCellExtension.swift; sourceTree = "<group>"; };
 		54DA8169264816530029FC92 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		54E0EEE3262835950006D49D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		58F7FDC285FAFDB4FFFBDAB3 /* Pods-YumYumy-YumYumyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumy-YumYumyUITests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumy-YumYumyUITests/Pods-YumYumy-YumYumyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -283,6 +300,10 @@
 		E5C2B061264B0031008BB747 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
 		E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerSearch.swift; sourceTree = "<group>"; };
+		E5CDA5192655876E00DD951F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		E5EA3EED265394860011321C /* YumYumy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYumy.entitlements; sourceTree = "<group>"; };
+		E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json"; sourceTree = "<group>"; };
+		E5EA3EF026551D020011321C /* FCM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCM-Info.plist"; sourceTree = "<group>"; };
 		E5FBC2BD264C69B40026CB82 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		F43A3A769D15F3E28032AFBC /* Pods-YumYumyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YumYumyTests.debug.xcconfig"; path = "Target Support Files/Pods-YumYumyTests/Pods-YumYumyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -368,6 +389,8 @@
 				54C6DA5B262B1965006C8D96 /* HomeVC.swift */,
 				54B30C83264C4EF900E2F801 /* PeopleVC.swift */,
 				54B30C88264C567500E2F801 /* PeopleCell.swift */,
+				5452F4D92655251500481459 /* PeopleFeedVC.swift */,
+				5450E5DA26553F33008609CD /* PeopleFeedCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -480,6 +503,7 @@
 		E52F57F22625B746002C2637 /* YumYumy */ = {
 			isa = PBXGroup;
 			children = (
+				E5EA3EED265394860011321C /* YumYumy.entitlements */,
 				E5969650264BC5FC009B64A3 /* Views */,
 				549A6275264BBF3500B0B905 /* ic_vomited.json */,
 				549A627A264BC5B600B0B905 /* ic_neutral.json */,
@@ -535,6 +559,7 @@
 				E536EBB1263BF87800791E7C /* WebApiManagerMedia.swift */,
 				E5B30F7226440C91000D8934 /* WebApiManagerKakao.swift */,
 				E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */,
+				5430F9B1265423DC00863992 /* WebApiManagerAI.swift */,
 			);
 			path = WebApiManager;
 			sourceTree = "<group>";
@@ -566,6 +591,7 @@
 				E521F3CD264375890083957B /* ReviewNavigationVC.swift */,
 				E5B30F7C264434C1000D8934 /* PlaceSearchVC.swift */,
 				E5B30F812644C061000D8934 /* PlaceSearchCell.swift */,
+				5430F9B62654552600863992 /* AiFoodNameCell.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -591,6 +617,7 @@
 				54DA8169264816530029FC92 /* UIImage.swift */,
 				E5969661264BC6D7009B64A3 /* NSObjectExtension.swift */,
 				E5969687264BE361009B64A3 /* UITabBarExtension.swift */,
+				54C9DDFE2656312000F6BA39 /* UIcollectionViewCellExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -628,6 +655,7 @@
 		E5920A172627C1A800836123 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */,
 				544ED8DA2652BA6600B0F7CB /* GoogleService-Info.plist */,
 				E52F57F32625B746002C2637 /* AppDelegate.swift */,
 				E52F57F52625B746002C2637 /* SceneDelegate.swift */,
@@ -636,6 +664,7 @@
 				E52F57FC2625B746002C2637 /* YumYum.xcdatamodeld */,
 				E536EBBC263C7E2600791E7C /* Utils.swift */,
 				E5B30F7726441129000D8934 /* KAKAO-Info.plist */,
+				E5EA3EF026551D020011321C /* FCM-Info.plist */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -646,10 +675,13 @@
 				E5969651264BC61A009B64A3 /* CustomMenuBar.swift */,
 				E5969656264BC66D009B64A3 /* CustomCell.swift */,
 				E596965C264BC6A0009B64A3 /* PageCell.swift */,
+				54C9DDD32655A80400F6BA39 /* FeedCollectionViewCell.swift */,
+				54C9DDD42655A80400F6BA39 /* FeedCollectionViewCell.xib */,
 				E596966B264BC7EC009B64A3 /* PageCell.xib */,
 				E5969678264BD4B7009B64A3 /* PlaceTableViewCell.swift */,
 				E5969679264BD4B7009B64A3 /* PlaceTableViewCell.xib */,
 				E5969682264BD831009B64A3 /* CustomCell.xib */,
+				E5CDA5192655876E00DD951F /* ChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -820,12 +852,14 @@
 				E596966C264BC7EC009B64A3 /* PageCell.xib in Resources */,
 				E521F3B0264132B50083957B /* map_pin_red@3x.png in Resources */,
 				E521F3B9264132B50083957B /* noimage256.png in Resources */,
+				E5EA3EF126551D020011321C /* FCM-Info.plist in Resources */,
 				540F22BD264C073F00F7581D /* ic_confused.json in Resources */,
 				E521F3A6264132B50083957B /* map_pinup_custom@3x.png in Resources */,
 				E521F3BA264132B50083957B /* map_present_direction.png in Resources */,
 				E521F3BC264132B50083957B /* map_present.png in Resources */,
 				549A6280264BC6DA00B0B905 /* ic_lol.json in Resources */,
 				E52F58002625B746002C2637 /* Assets.xcassets in Resources */,
+				54C9DDD62655A80400F6BA39 /* FeedCollectionViewCell.xib in Resources */,
 				E5B30F7826441129000D8934 /* KAKAO-Info.plist in Resources */,
 				549A6276264BBF3500B0B905 /* ic_vomited.json in Resources */,
 				E52F57FB2625B746002C2637 /* Main.storyboard in Resources */,
@@ -844,6 +878,7 @@
 				E521F3C0264132B50083957B /* map_pin_shadow.png in Resources */,
 				E521F3B8264132B50083957B /* info_box_tail.png in Resources */,
 				E596967B264BD4B7009B64A3 /* PlaceTableViewCell.xib in Resources */,
+				E5EA3EEF2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json in Resources */,
 				E521F3AF264132B50083957B /* th_line.png in Resources */,
 				E5920A1C2627C2D800836123 /* Home.storyboard in Resources */,
 				E521F3AA264132B50083957B /* detail_button.png in Resources */,
@@ -1014,17 +1049,22 @@
 			files = (
 				E5969688264BE361009B64A3 /* UITabBarExtension.swift in Sources */,
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
+				54C9DDD52655A80400F6BA39 /* FeedCollectionViewCell.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
+				5452F4DA2655251500481459 /* PeopleFeedVC.swift in Sources */,
 				E51291AB26502A1A002B064C /* ChatModel.swift in Sources */,
+				E5CDA51A2655876E00DD951F /* ChatView.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
 				E536EBBD263C7E2600791E7C /* Utils.swift in Sources */,
+				54C9DDFF2656312000F6BA39 /* UIcollectionViewCellExtension.swift in Sources */,
 				E548AAEB2638699E0049AA0B /* WebApiManager.swift in Sources */,
 				54B82479263C921A001F6A17 /* SettingVC.swift in Sources */,
 				5439717E264982FE005FD966 /* MyFeedVC.swift in Sources */,
 				E5969662264BC6D7009B64A3 /* NSObjectExtension.swift in Sources */,
 				E5B071302634761E0094E880 /* PreviewView.swift in Sources */,
+				5430F9B2265423DC00863992 /* WebApiManagerAI.swift in Sources */,
 				E596967A264BD4B7009B64A3 /* PlaceTableViewCell.swift in Sources */,
 				54B9F132263ACBC700027590 /* CommenResponse.swift in Sources */,
 				E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */,
@@ -1039,6 +1079,7 @@
 				E536EBB2263BF87800791E7C /* WebApiManagerMedia.swift in Sources */,
 				54B30C89264C567500E2F801 /* PeopleCell.swift in Sources */,
 				E5B30F7326440C91000D8934 /* WebApiManagerKakao.swift in Sources */,
+				5430F9B72654552600863992 /* AiFoodNameCell.swift in Sources */,
 				E5969657264BC66D009B64A3 /* CustomCell.swift in Sources */,
 				540CAAF426314F7D0045917B /* SignupVC.swift in Sources */,
 				54225A81264A48F600720DFE /* MyFeedCollectionViewCell.swift in Sources */,
@@ -1047,6 +1088,7 @@
 				54C78FB3264001C200E1F600 /* EditProfileVC.swift in Sources */,
 				54E0EEE4262835950006D49D /* LoginVC.swift in Sources */,
 				E52F57F62625B746002C2637 /* SceneDelegate.swift in Sources */,
+				5450E5DB26553F33008609CD /* PeopleFeedCell.swift in Sources */,
 				54754BEA2652CB8300DE12AF /* MypageVC.swift in Sources */,
 				E521F3C92641398B0083957B /* MapVC.swift in Sources */,
 				E596965D264BC6A0009B64A3 /* PageCell.swift in Sources */,
@@ -1253,6 +1295,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M527AM6YJ5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1266,6 +1309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1280,6 +1324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = YumYumy;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M527AM6YJ5;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1293,6 +1338,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Omnyomnyom.YumYum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "YumYumy/Headers/KakaoMap-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

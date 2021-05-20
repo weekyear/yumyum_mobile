@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIViewController {
+    
     // MARK: - 알람 에러 메서드
     func alertError(_ message: String, completion: (()-> Void)? = nil) {
         // 메인 스레드에서 실행되도록한다.
@@ -15,6 +16,19 @@ extension UIViewController {
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: "확인", style: .cancel) {(_) in
+                completion?() // completion 매개 변수 값이 nil이 아닐때에만 실행되도록한다.
+            }
+            alert.addAction(okAction)
+            self.present(alert, animated: false)
+        }
+    }
+    
+    func alertConfirm(_ message: String, completion: (()-> Void)? = nil) {
+        // 메인 스레드에서 실행되도록한다.
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "확인", style: .default) {(_) in
                 completion?() // completion 매개 변수 값이 nil이 아닐때에만 실행되도록한다.
             }
             alert.addAction(okAction)
@@ -65,9 +79,11 @@ extension UIViewController {
     
     //MARK: - 이미지 뷰를 둥글게 만들기
     func imageMakeRouded(imageview:UIImageView) {
+        let yumyumYellow: ColorSet = .yumyumYellow
+        
         imageview.layer.borderWidth = 2
         imageview.layer.masksToBounds = false
-        imageview.layer.borderColor = UIColor.systemYellow.cgColor
+        imageview.layer.borderColor = yumyumYellow.toColor().cgColor
         imageview.layer.cornerRadius = imageview.frame.height/2
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleAspectFill

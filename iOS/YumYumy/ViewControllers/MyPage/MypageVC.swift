@@ -25,11 +25,10 @@ class MypageVC: UIViewController {
     }
  
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var myProfileImgView: UIImageView!
-    
     @IBOutlet weak var myIntroduceLabel: UILabel!
-
+    @IBOutlet var myNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -103,14 +102,14 @@ class MypageVC: UIViewController {
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = userData!["nickname"].stringValue
+//        nTitle.text = userData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
     }
     
     func presentuserData(){
         let userData  = UserDefaults.getLoginedUserInfo()
         self.myIntroduceLabel.text = userData!["introduction"].stringValue
-        
+        self.myNameLabel.text = userData!["nickname"].stringValue
         if let url = URL(string: userData!["profilePath"].stringValue) {
             var image: UIImage?
             
@@ -178,7 +177,6 @@ extension MypageVC: UICollectionViewDataSource {
                 }
             }
         }
-
         return cell
     }
 }
@@ -192,6 +190,7 @@ extension MypageVC: UICollectionViewDelegate {
         let vc = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "MyFeedVC") as! MyFeedVC
         // 내가 쓴 피드와 좋아요 피드를 구분한다.
         if isCheckFeedList == false {
+            vc.feedLikeOrNot = false
             vc.myFeedList = myFeedList
             vc.itemId = indexPath.item
             let reverseMyFeedList = Array(self.myFeedList.reversed())
@@ -206,11 +205,13 @@ extension MypageVC: UICollectionViewDelegate {
                     print("취소")
                 }
             } else {
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
+                let navigationController = UINavigationController(rootViewController: vc)
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true)
             }
             // 좋아요 피드 전달
         } else {
+            vc.feedLikeOrNot = true
             vc.myFeedList = myLikeFeedList
             vc.itemId = indexPath.item
             vc.modalPresentationStyle = .fullScreen

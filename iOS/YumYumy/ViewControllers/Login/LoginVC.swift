@@ -135,10 +135,13 @@ class LoginVC : UIViewController, GIDSignInDelegate {
                         if result["data"]["existence"] == true {
                             // 로그인
                             WebApiManager.shared.login(userEmail: userEmail) {(result) in
-//                                print("login: \(result)")
+                                print("login: \(result)")
                                 if result["status"] == "200" {
                                     UserDefaults.setUserInfo(json: result["data"])
                                     let storyboard: UIStoryboard? = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                    Messaging.messaging().subscribe(toTopic: result["data"]["id"].stringValue) { error in
+                                      print("Subscribed to Message \(result["data"]["id"].stringValue)")
+                                    }
                                     if let tabbarvc = storyboard?.instantiateViewController(identifier: "MainTabBarVC") as? UITabBarController {
                                         self.view.window?.rootViewController = tabbarvc
                                     } else {

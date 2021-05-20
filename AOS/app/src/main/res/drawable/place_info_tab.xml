@@ -8,8 +8,7 @@
             <stroke android:width="2dp" android:color="#30AEAEAE" />
 
             <!-- corner roundness -->
-            <corners android:bottomLeftRadius="20dp"/>
-            <corners android:bottomRightRadius="20dp"/>
+            <corners android:radius="20dp"/>
         </shape>
     </item>
 </selector>

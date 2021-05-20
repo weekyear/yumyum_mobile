@@ -884,3 +884,33 @@ extension HomeVC:userProfileBtnDelegate {
     
  ```
 
+## 화면전환
+
+> 그냥 화면전환은 쉬웠다. 근대 모달로 한번 화면이 띄워지고 또 다른 스토리보드의 네비게이션 바로 이동을 해야할떄 문제가 발생했다. 
+
+1) 먼저 모달 Viewcontroller(MyFeedVC.swift)에  present될때 navigationController를 같이보내서 넣어줘야한다. 왜냐하면 navigationConroller가 전달되지 않으면 모달은 띄워지지만 모달(MyFeedVC)에서 버튼을 클릭해서 다른 네비게이션 컨트롤러(ReviewVC)로 이동할 수가 없음 왜냐? `self.navigationController` 가 널값이기 떄문이다. 따라서 아래와 같이 넣어줘야한다.
+
+- MyPageVC.swift
+
+```swift
+// 현재 
+let navigationController = UINavigationController(rootViewController: vc)
+navigationController.modalPresentationStyle = .fullScreen
+self.present(navigationController, animated: true)
+```
+
+
+
+## tabbar Icon Size
+
+- svg파일로 탭바 아이콘을 변경할때, 즉 내가 원하는 이미지로 바꿔줄때 발생했는데 사이즈가 탭바에 들어가면 줄지 않는다는 것이다. 우선 ios에서는 13.0이상 버전부터 svg파일을 적용시킬 수 있기 때문에 같은 벡터 파일인 pdf파일로 변환시켜 적용하는 것이 중요하다!
+
+- https://developer.apple.com/design/human-interface-guidelines/glyphs/overview/ 그리고 이 가이드라인에 맞춰서 pdf파일의 크기를 줄여줘야한다. 
+- 파일  변환  URL: https://cloudconvert.com/svg-to-pdf
+- 파일 다운로드 URL : https://www.iloveimg.com/ko/download/Agf8zjr4rz728b3AmkhlztvshAmjjzl9v8ffqqnsAml88gfcvq3fnp810Aknt6qb230tlyf8mpv2j5n41ApvgjA0w5tst68s2d5wmcbmbtwyw7gAf7775dtfsbl0wydAlfA5yx4hf43prmdgxtcsflqtx8gn4fc65ph7A3A05178f8nts9n1/6
+
+
+
+## 서버로 비디오 및 이미지 요청 보낼시
+
+> 반드시 헤더랑, 바디에 뭘담아 줘야할지 생각하고 하자... 그리고 ios에서는 dump다 찍어보고 success로 오더라도 400에러로 bedrequest올수도 있으니까 꼭 확인 것

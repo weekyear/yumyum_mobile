@@ -9,18 +9,28 @@ import UIKit
 import CoreLocation
 import GeoFire
 import FirebaseFirestore
+import SnapKit
 
 class EurekaVC: UIViewController {
     
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet var textFieldView: UIView!
     @IBOutlet var eurekaTextField: UITextField!
     @IBOutlet var myChatLabel: UILabel!
+    @IBOutlet var myChatImage: UIImageView!
+    @IBOutlet var myChatBubbleView: UIView!
     
     var locationManager = CLLocationManager()
     let user = UserDefaults.getLoginedUserInfo()
     
+    let yumyumYellow: ColorSet = .yumyumYellow
+    
+    
     //위도와 경도
     var latitude: Double?
     var longitude: Double?
+    
+    var neighbor: [Chat]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +72,141 @@ class EurekaVC: UIViewController {
             object: nil
         )
         
-        myChatLabel.isHidden = true
+        
+
+        FirestoreManager.shared.getNeighbors(myId: user!["id"].intValue, latitude: latitude!, longitude: longitude!) { neighbor in
+            self.backgroundView.subviews.map({ $0.removeFromSuperview() })
+            self.neighbor = []
+            self.neighbor = neighbor
+            self.neighbor?.forEach({ chat in
+                self.showOtherMessage(chat: chat)
+            })
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setLayout()
+    }
+    
+    func setLayout() {
+        myChatLabel.textColor = yumyumYellow.toColor()
+        
+        myChatBubbleView.isHidden = true
+        myChatBubbleView.layer.borderWidth = 2
+        myChatBubbleView.backgroundColor = yumyumYellow.toColor().withAlphaComponent(0.1)
+        myChatBubbleView.layer.borderColor = yumyumYellow.toColor().cgColor
+        myChatBubbleView.layer.cornerRadius = 16
+        
+        myChatImage.layer.cornerRadius = 50
+        myChatImage.clipsToBounds = true
+        imageMakeRouded(imageview: myChatImage)
+        if let url = URL(string: user!["profilePath"].stringValue) {
+            var image: UIImage?
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    image = UIImage(data: data!)
+                    self.myChatImage.image = image
+                }
+            }
+        } else {
+            var image: UIImage?
+            image = UIImage(named: "ic_profile")
+            self.myChatImage.image = image
+        }
+        
+        myChatImage.layer.borderWidth = 3
+    }
+    
+    func showOtherMessage(chat: Chat) {
+        let width = Int(self.view.frame.size.width) - 100
+        let height  = Int(self.view.frame.size.height) - Int(self.tabBarController?.tabBar.frame.size.height ?? 0) - 100
+        
+        let topOffset = Int.random(in: 20..<height)
+        let leadingOffset = Int.random(in: 20..<width)
+        
+        // container
+        let container = UIView()
+        backgroundView.addSubview(container)
+        container.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50)
+            make.top.equalToSuperview().offset(topOffset)
+            make.leading.equalToSuperview().offset(leadingOffset)
+        }
+        
+        // profileImage
+        let yourProfileImage: UIImageView = {
+            let imageView = UIImageView()
+            imageView.layer.borderWidth = 2
+            imageView.layer.cornerRadius = 20
+            imageView.layer.borderColor = UIColor.gray.cgColor
+            imageView.clipsToBounds = true
+            return imageView
+        }()
+        
+        if let url = URL(string: chat.profilePath!) {
+            var image: UIImage?
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    image = UIImage(data: data!)
+                    yourProfileImage.image = image
+                }
+            }
+        } else {
+            var image: UIImage?
+            image = UIImage(named: "ic_profile")
+            yourProfileImage.image = image
+        }
+        container.addSubview(yourProfileImage)
+        yourProfileImage.snp.makeConstraints { (make) -> Void in
+            make.width.height.equalTo(40)
+            make.leading.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
         
         
+        //stackview
+        var stackView: UIStackView = {
+          let stackView = UIStackView()
+          stackView.translatesAutoresizingMaskIntoConstraints = false
+          stackView.axis = .vertical
+          stackView.distribution = .fillEqually
+          return stackView
+        }()
+        container.addSubview(stackView)
+        stackView.snp.makeConstraints { make -> Void in
+            make.leading.equalTo(yourProfileImage.snp.trailing).offset(8)
+            make.centerY.equalTo(yourProfileImage)
+            make.trailing.equalToSuperview()
+        }
+        // messageLabel
+        let messageLabel: UILabel = {
+            let label = UILabel()
+            label.font = UIFont.systemFont(ofSize: 10)
+            label.textColor = .gray
+            return label
+        }()
+        if let message = chat.message {
+            messageLabel.text = message
+        }
+        stackView.addArrangedSubview(messageLabel)
+
+        // nickname
+        let nicknameLabel: UILabel = {
+            let label = UILabel()
+            label.font = UIFont.systemFont(ofSize: 10)
+            label.textColor = .gray
+            return label
+        }()
+        if let nickname = chat.nickname {
+            nicknameLabel.text = "@\(nickname)"
+        }
+        stackView.addArrangedSubview(nicknameLabel)
         
     }
     
@@ -89,16 +231,27 @@ class EurekaVC: UIViewController {
         let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
         let hash = GFUtils.geoHash(forLocation: location)
         let userId = user!["id"].intValue
+        
+        
 
-        let chat: Chat = Chat(userId: userId, message: message, geohash: hash, lat: latitude, lng: longitude)
+        let chat: Chat = Chat(userId: userId, message: message, geohash: hash, lat: latitude, lng: longitude, profilePath: user!["profilePath"].stringValue, nickname: user!["nickname"].stringValue
+        )
         
         FirestoreManager.shared.createChat(userId: userId, chat: chat)
+        
+        neighbor?.forEach({ chat in
+            FirestoreManager.shared.sendMessage(to: chat.userId!, message: message) { res in
+                print(res)
+            } failure: { err in
+                print(err)
+            }
+        })
+
+        
         myChatLabel.text = message
-        myChatLabel.isHidden = false
+        myChatBubbleView.isHidden = false
         eurekaTextField.text = ""
         self.view.endEditing(true)
-        
-        FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!)
         
     }
     
@@ -107,9 +260,7 @@ class EurekaVC: UIViewController {
         if message.count > 0 {
             createChat(message: message)
         }
- 
     }
-    
     
     @objc
     dynamic func keyboardWillShow(
@@ -119,7 +270,6 @@ class EurekaVC: UIViewController {
             (keyboardFrame) in
             let constant = -keyboardFrame.height + (self.tabBarController?.tabBar.frame.size.height)!
             self.view.frame.origin.y = constant
-            
         }
     }
     
@@ -190,11 +340,8 @@ extension EurekaVC: CLLocationManagerDelegate {
 extension EurekaVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text!.count > 0 {
-            print("enter")
             createChat(message: textField.text!)
-            
             return true
-            
         }
         return false
     }

@@ -14,4 +14,6 @@ struct Chat: Codable {
     var geohash: String?
     var lat: Double?
     var lng: Double?
+    var profilePath: String?
+    var nickname: String?
 }
