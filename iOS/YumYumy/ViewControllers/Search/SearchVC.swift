@@ -72,6 +72,7 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
     }
     
     func setupPageCollectionView(){
+        pageCollectionView.backgroundColor = .black
         pageCollectionView.delegate = self
         pageCollectionView.dataSource = self
         pageCollectionView.showsHorizontalScrollIndicator = false

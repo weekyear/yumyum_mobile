@@ -23,6 +23,7 @@ class SearchPlaceVC: UIViewController {
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
         nTitle.text = place?.name
         self.navigationItem.titleView = nTitle
+        self.navigationController?.navigationBar.tintColor = .black
         
         collectionView.delegate = self
         collectionView.dataSource = self

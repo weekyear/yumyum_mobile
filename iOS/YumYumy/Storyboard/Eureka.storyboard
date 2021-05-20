@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pZ1-1H-eTq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pZ1-1H-eTq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--유레카-->
+        <!--채팅-->
         <scene sceneID="wTR-4q-Acj">
             <objects>
-                <viewController id="pZ1-1H-eTq" customClass="EurekaVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pZ1-1H-eTq" userLabel="채팅" customClass="EurekaVC" customModule="YumYumy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ebn-Fy-WKF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +91,7 @@
                             <constraint firstItem="ZJr-6Y-UEi" firstAttribute="top" secondItem="ebn-Fy-WKF" secondAttribute="top" id="zwT-HI-m4D"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="유레카" image="ic_chat_bubble" id="HpO-Pv-1GK"/>
+                    <tabBarItem key="tabBarItem" title="채팅" image="ic_chat_bubble" id="HpO-Pv-1GK" userLabel="채팅"/>
                     <connections>
                         <outlet property="backgroundView" destination="K4r-qa-JmT" id="0wF-6j-vAs"/>
                         <outlet property="eurekaTextField" destination="RbF-IQ-01e" id="6E4-Xz-Qb2"/>
