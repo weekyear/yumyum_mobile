@@ -14,6 +14,7 @@ struct Place: Codable {
     var locationY: Double
     var name: String
     var phone: String?
+    var id: Int?
     
     
     init(json: JSON) {
@@ -39,4 +40,15 @@ struct Place: Codable {
         self.name = feedJson["place"]["name"].stringValue
         self.phone = feedJson["place"]["phone"].stringValue
     }
+    
+    init(searchJson: JSON) {
+        self.address = searchJson["address"].stringValue
+        self.locationX = searchJson["locationX"].doubleValue
+        self.locationY = searchJson["locationY"].doubleValue
+        self.name = searchJson["name"].stringValue
+        self.phone = searchJson["phone"].stringValue
+        self.id = searchJson["id"].intValue
+    }
+    
+    
 }

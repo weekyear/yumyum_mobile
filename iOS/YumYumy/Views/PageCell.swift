@@ -15,6 +15,8 @@ class PageCell: UICollectionViewCell {
     
     var feedResult: [Feed]?
     var placeResult: [Place]?
+    var delegate: pageCellDelegate?
+    var placedelegate : pageCellPlaceDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,10 +40,14 @@ class PageCell: UICollectionViewCell {
         collectionView.isPagingEnabled = true
         collectionView.reloadData()
     }
-
 }
 
 extension PageCell: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tab \(indexPath.row)")
+        self.placedelegate?.sendToSearchPlaceFeed(itemId: indexPath.row, place:(placeResult?[indexPath.row])!)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return placeResult?.count ?? 0
     }
@@ -60,6 +66,11 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PageCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("you tap \(indexPath.item)")
+        self.delegate?.sendToSearchFeed(itemId: indexPath.item, feedList: feedResult!)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return feedResult?.count ?? 0
     }
@@ -103,18 +114,6 @@ extension PageCell: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
         
-//        DispatchQueue.global().async {
-//            let data = try? Data(contentsOf: imageUrl)
-//            let profileData = try? Data(contentsOf: profileUrl!)
-//            DispatchQueue.main.async {
-//                let beforeimage = UIImage(data: data!)
-//                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-//                profileImg = UIImage(data: profileData!)
-//                cell.thumbnailView.image = image
-//                cell.userProfileView.image = profileImg
-//            }
-//        }
-        
         return cell
     }
 }
@@ -127,4 +126,12 @@ extension PageCell: UICollectionViewDelegateFlowLayout {
                       height: (CvRect.width/1.25)-3)
     }
     
+}
+
+protocol pageCellDelegate{
+    func sendToSearchFeed(itemId:Int, feedList:[Feed])
+}
+
+protocol pageCellPlaceDelegate {
+    func sendToSearchPlaceFeed(itemId: Int, place:Place)
 }

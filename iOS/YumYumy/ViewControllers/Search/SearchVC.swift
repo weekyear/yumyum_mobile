@@ -15,6 +15,8 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
 
     var feedResult: [Feed]?
     var placeResult: [Place]?
+    var itemId : Int?
+
     
     var pageCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -96,7 +98,9 @@ extension SearchVC: UISearchBarDelegate {
         guard let searchKey = searchBar.text else { return }
         WebApiManager.shared.searchStore(searchKey: searchKey) { (result) in
             print(result["data"])
-            self.placeResult = result["data"].arrayValue.compactMap{Place(json: $0)}
+            self.placeResult = result["data"].arrayValue.compactMap{Place(searchJson: $0)}
+            print("나와뇽?")
+            print(self.placeResult)
             self.pageCollectionView.reloadData()
         } failure: { (error) in
             print(#function, error)
@@ -123,11 +127,14 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.feedResult = self.feedResult
         
         cell.collectionView.reloadData()
+        cell.delegate = self
+        cell.placedelegate = self
         
         switch indexPath.row {
         case 0:
             cell.tableView.isHidden = true
             cell.collectionView.isHidden = false
+            cell.collectionView.reloadData()
         case 1:
             cell.tableView.isHidden = false
             cell.collectionView.isHidden = true
@@ -159,5 +166,37 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension SearchVC: pageCellDelegate {
+    func sendToSearchFeed(itemId: Int, feedList:[Feed]) {
+        let searchFeedVC = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(identifier: "SearchFeedVC") as! SearchFeedVC
+        searchFeedVC.itemId = itemId
+        searchFeedVC.feedList = feedList
+        searchFeedVC.modalPresentationStyle = .fullScreen
+        self.present(searchFeedVC, animated: true)
+    }
+}
+
+extension SearchVC : pageCellPlaceDelegate {
+    func sendToSearchPlaceFeed(itemId: Int, place: Place) {
+        let searchPlaceVC = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(identifier: "SearchPlaceVC") as! SearchPlaceVC
+        
+        searchPlaceVC.place = place
+        let userId = UserDefaults.getLoginedUserInfo()!["id"].intValue
+        WebApiManager.shared.getPlaceFeedList(placeId: place.id!, userId: userId){
+            (result) in
+            if result["status"] == "200" {
+                let results = result["data"]
+                searchPlaceVC.placeFeedList = results.arrayValue.compactMap({Feed(feedJson: $0)})
+                self.navigationController?.pushViewController(searchPlaceVC, animated: true)
+            } else {
+                print("장소 피드 리스트 오류!")
+            }
+        }faliure: { (error) in
+            print(error)
+        }
+        
     }
 }
