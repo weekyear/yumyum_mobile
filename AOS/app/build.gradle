@@ -22,8 +22,8 @@ android {
         applicationId "com.omnyom.yumyum"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 11
-        versionName "1.1"
+        versionCode 12
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -120,6 +120,9 @@ dependencies {
 
     //expendable text
     implementation 'com.ms-square:expandableTextView:0.1.4'
+
+    //circle wave
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

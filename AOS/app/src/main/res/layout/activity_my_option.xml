@@ -13,10 +13,10 @@
             android:id="@+id/tv_my_option_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="32dp"
             android:text="@string/preferences"
             android:textColor="@color/mainText"
-            android:textSize="20sp"
+            android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/account"
-            android:textSize="13sp"
+            android:textSize="17sp"
             android:textColor="@color/gray_6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line" />
@@ -68,6 +68,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_inner_head" />
 
+        <Button
+            android:id="@+id/btn_eureka_option"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/white"
+            android:text="알림 설정"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/btn_edit_profile" />
+
         <TextView
             android:id="@+id/tv_inner_head2"
             android:layout_width="wrap_content"
@@ -75,8 +85,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/information"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_edit_profile" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_eureka_option" />
 
         <Button
             android:id="@+id/btn_info_agreement"
@@ -99,6 +110,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/login"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_info_agreement" />
 
@@ -121,8 +133,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="105dp" />
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+        </WebView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

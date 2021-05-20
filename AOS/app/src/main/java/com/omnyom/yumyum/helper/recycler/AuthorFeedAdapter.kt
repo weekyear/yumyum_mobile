@@ -2,6 +2,7 @@ package com.omnyom.yumyum.helper.recycler
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
@@ -25,6 +26,10 @@ class AuthorFeedAdapter(val context: Context, val isLikeFeed: Boolean) : BaseRec
             .load(items[position].thumbnailPath)
             .transform(RotateTransformation(context, 90f))
             .into(holder.thumbnail)
+
+        if (!items[position].isCompleted) {
+            holder.thumbnail.setColorFilter(Color.parseColor("#90ffffff"))
+        }
 
         holder.thumbnail.setOnClickListener {
             val sendData : ArrayList<FeedData> = ArrayList(items.map { item -> item })

@@ -1,6 +1,6 @@
 package com.yumyum.domain.feed.dto;
 
-import com.yumyum.domain.map.dto.PlaceResponse;
+import com.yumyum.domain.map.dto.PlaceRequest;
 import lombok.*;
 
 @Data
@@ -18,7 +18,7 @@ public class UpdateFeedRequest {
 
     private Long score;
 
-    private PlaceResponse placeResponse;
+    private PlaceRequest placeRequest;
 
     private Boolean isCompleted;
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.omnyom.yumyum.helper.PreferencesManager
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
+import com.omnyom.yumyum.model.feed.FeedData
+import com.omnyom.yumyum.model.feed.FeedResponse
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.model.search.SearchFeedData
 import com.omnyom.yumyum.model.search.SearchFeedListResponse
@@ -18,12 +20,40 @@ import retrofit2.Response
 
 class SearchViewModel(application: Application) : BaseViewModel(application) {
 
+    private val _recommendedFeeds = MutableLiveData<List<FeedData>>().apply {
+        value = arrayListOf()
+    }
+    val recommendedFeeds : LiveData<List<FeedData>> = _recommendedFeeds
+
     private val _searchFeedResults = MutableLiveData<List<SearchFeedData>>().apply {
         value = arrayListOf()
     }
     val searchFeedResults : LiveData<List<SearchFeedData>> = _searchFeedResults
 
-    var isSearched : Boolean = false
+    val isSearched = MutableLiveData<Boolean>().apply {
+       value = false
+    }
+
+    private val _searchPlaceResults = MutableLiveData<List<SearchPlaceData>>().apply {
+        value = arrayListOf()
+    }
+    val searchPlaceResults : LiveData<List<SearchPlaceData>> = _searchPlaceResults
+
+    fun getRecommendedFeeds() {
+        var call = retrofitService.getAllRecommendedFeeds(userId)
+        call.enqueue(object : Callback<FeedResponse> {
+            override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
+                if (response.isSuccessful) {
+                    val list : List<FeedData> = response.body()?.data!!
+                    _recommendedFeeds.postValue(list)
+                }
+            }
+
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
+                t
+            }
+        })
+    }
 
     fun searchFeed(searchText: String) {
         var call = retrofitService.getSearchFeedListByTitle(searchText, userId)
@@ -40,11 +70,6 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
             }
         })
     }
-
-    private val _searchPlaceResults = MutableLiveData<List<SearchPlaceData>>().apply {
-        value = arrayListOf()
-    }
-    val searchPlaceResults : LiveData<List<SearchPlaceData>> = _searchPlaceResults
 
     fun searchPlace(searchText: String) {
         var call = retrofitService.getSearchPlaceList("name", searchText)

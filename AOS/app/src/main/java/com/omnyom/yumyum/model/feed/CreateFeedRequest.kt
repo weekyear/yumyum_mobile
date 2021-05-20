@@ -17,6 +17,7 @@ class CreateFeedRequest(
     fun get() : HashMap<String, Any?> {
         return hashMapOf(
                 "content" to content,
+                "isCompleted" to isCompleted,
                 "placeRequest" to placeRequest,
                 "score" to score,
                 "thumbnailPath" to thumbnailPath,
@@ -27,9 +28,8 @@ class CreateFeedRequest(
     }
 }
 
-data class PlaceRequest(
+data class      PlaceRequest(
         var address: String,
-        var id: Int,
         var locationX: Double,
         var locationY: Double,
         var name: String,

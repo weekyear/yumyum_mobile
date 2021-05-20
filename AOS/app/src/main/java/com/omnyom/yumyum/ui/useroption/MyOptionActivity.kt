@@ -16,6 +16,9 @@ class MyOptionActivity : BaseBindingActivity<ActivityMyOptionBinding>(R.layout.a
         binding.btnLogout.setOnClickListener { signOut() }
         binding.btnEditProfile.setOnClickListener { goUserEdit() }
         binding.btnInfoAgreement.setOnClickListener { goInfoAgreement() }
+        binding.btnEurekaOption.setOnClickListener { goEurekaOption() }
+        binding.btnBack.setOnClickListener { finish() }
+
         supportActionBar?.hide()
     }
 
@@ -41,6 +44,12 @@ class MyOptionActivity : BaseBindingActivity<ActivityMyOptionBinding>(R.layout.a
 
     private fun goUserEdit() {
         Intent(this, UserInfoEditActivity::class.java).let {
+            startActivity(it)
+        }
+    }
+
+    private fun goEurekaOption() {
+        Intent(this, EurekaOptionActivity::class.java).let {
             startActivity(it)
         }
     }
