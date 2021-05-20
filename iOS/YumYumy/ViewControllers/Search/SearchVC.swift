@@ -31,9 +31,9 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setLayout()
     }
-    
     //MARK: Setup view
     func setLayout() {
         let searchController = UISearchController(searchResultsController: nil)
@@ -41,7 +41,7 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "검색"
         searchController.obscuresBackgroundDuringPresentation = false
-        
+    
         self.navigationItem.title = "Search"
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
