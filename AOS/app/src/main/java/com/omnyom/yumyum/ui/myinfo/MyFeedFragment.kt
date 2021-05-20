@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentMyFeedBinding
 import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
+import com.omnyom.yumyum.helper.recycler.MyFeedAdapter
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
 class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragment_my_feed) {
@@ -22,7 +23,7 @@ class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragm
 
     override fun setupViews() {
         binding.rvMyFeed.apply {
-            adapter = AuthorFeedAdapter(context, false)
+            adapter = MyFeedAdapter(context, false)
             layoutManager = GridLayoutManager(context, 3)
         }
         binding.btnGoMap.setOnClickListener {
@@ -32,7 +33,7 @@ class MyFeedFragment : BaseBindingFragment<FragmentMyFeedBinding>(R.layout.fragm
 
     override fun onSubscribe() {
         myFeedVM.myFeedData.observe(this) {
-            val adapter = binding.rvMyFeed.adapter as AuthorFeedAdapter
+            val adapter = binding.rvMyFeed.adapter as MyFeedAdapter
             adapter.run {
                 setItems(it)
                 notifyDataSetChanged()

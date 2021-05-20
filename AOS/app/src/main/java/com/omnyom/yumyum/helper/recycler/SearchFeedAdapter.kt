@@ -26,7 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.Serializable
 
-class SearchFeedAdapter(private val activity: Activity) : BaseRecyclerAdapter<SearchFeedAdapter.SearchFeedDataViewHolder, SearchFeedData>() {
+class SearchFeedAdapter(private val activity: Activity) : BaseRecyclerAdapter<SearchFeedAdapter.SearchFeedDataViewHolder, FeedData>() {
     private val _feedData = MutableLiveData<FeedData>().apply {
     }
     val feedData : LiveData<FeedData> = _feedData

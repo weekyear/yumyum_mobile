@@ -25,10 +25,10 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
     }
     val recommendedFeeds : LiveData<List<FeedData>> = _recommendedFeeds
 
-    private val _searchFeedResults = MutableLiveData<List<SearchFeedData>>().apply {
+    private val _searchFeedResults = MutableLiveData<List<FeedData>>().apply {
         value = arrayListOf()
     }
-    val searchFeedResults : LiveData<List<SearchFeedData>> = _searchFeedResults
+    val searchFeedResults : LiveData<List<FeedData>> = _searchFeedResults
 
     val isSearched = MutableLiveData<Boolean>().apply {
        value = false
@@ -57,15 +57,14 @@ class SearchViewModel(application: Application) : BaseViewModel(application) {
 
     fun searchFeed(searchText: String) {
         var call = retrofitService.getSearchFeedListByTitle(searchText, userId)
-        call.enqueue(object : Callback<SearchFeedListResponse> {
-            override fun onResponse(call: Call<SearchFeedListResponse>, response: Response<SearchFeedListResponse>) {
+        call.enqueue(object : Callback<FeedResponse> {
+            override fun onResponse(call: Call<FeedResponse>, response: Response<FeedResponse>) {
                 if (response.isSuccessful) {
-                    val list : List<SearchFeedData> = response.body()?.data!!
+                    val list : List<FeedData> = response.body()?.data!!.filter { feedData -> feedData.isCompleted }
                     _searchFeedResults.postValue(list)
                 }
             }
-
-            override fun onFailure(call: Call<SearchFeedListResponse>, t: Throwable) {
+            override fun onFailure(call: Call<FeedResponse>, t: Throwable) {
                 t
             }
         })
