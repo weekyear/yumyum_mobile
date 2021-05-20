@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.FragmentSearchBinding
 import com.omnyom.yumyum.databinding.FragmentSearchInnerTabBinding
+import com.omnyom.yumyum.helper.recycler.AuthorFeedAdapter
 import com.omnyom.yumyum.model.myinfo.PagerAdapters
 import com.omnyom.yumyum.ui.base.BaseBindingFragment
 
@@ -35,9 +37,32 @@ class SearchInnerTabFragment : BaseBindingFragment<FragmentSearchInnerTabBinding
         viewPager.adapter = pagerAdapters
 
         tabs.setupWithViewPager(viewPager)
+
+        binding.rvRecommendFeed.apply {
+            adapter = AuthorFeedAdapter(context, false)
+            layoutManager = GridLayoutManager(context, 3)
+        }
     }
 
-    override fun onSubscribe() { }
+    override fun onSubscribe() {
+        searchVM.recommendedFeeds.observe(this) {
+            val adapter = binding.rvRecommendFeed.adapter as AuthorFeedAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
+            }
+        }
+
+        searchVM.isSearched.observe(this) {
+            if (it) {
+                binding.rvRecommendFeed.visibility = View.INVISIBLE
+                binding.searchGroup.visibility = View.VISIBLE
+            } else {
+                binding.rvRecommendFeed.visibility = View.VISIBLE
+                binding.searchGroup.visibility = View.INVISIBLE
+            }
+        }
+    }
 
     override fun release() { }
 

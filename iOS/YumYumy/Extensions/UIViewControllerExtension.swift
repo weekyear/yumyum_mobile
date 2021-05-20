@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIViewController {
+    
     // MARK: - 알람 에러 메서드
     func alertError(_ message: String, completion: (()-> Void)? = nil) {
         // 메인 스레드에서 실행되도록한다.
@@ -78,9 +79,11 @@ extension UIViewController {
     
     //MARK: - 이미지 뷰를 둥글게 만들기
     func imageMakeRouded(imageview:UIImageView) {
+        let yumyumYellow: ColorSet = .yumyumYellow
+        
         imageview.layer.borderWidth = 2
         imageview.layer.masksToBounds = false
-        imageview.layer.borderColor = UIColor.systemYellow.cgColor
+        imageview.layer.borderColor = yumyumYellow.toColor().cgColor
         imageview.layer.cornerRadius = imageview.frame.height/2
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleAspectFill

@@ -67,6 +67,7 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).apply {
             putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3)
             also { takeVideoIntent ->
+                Toast.makeText(baseContext, "3초간 음식을 맛있게 찍어보세요~", Toast.LENGTH_SHORT).show()
                 takeVideoIntent.resolveActivity(packageManager)?.also {
                     startActivityForResult(takeVideoIntent, REQ_CAMERA)
                 }
@@ -89,7 +90,6 @@ class CameraActivity : BaseBindingActivity<ActivityCameraBinding>(R.layout.activ
                         mp!!.isLooping = true
                         mp!!.setVolume(0f,0f)
                     }
-
                 }
             }
         } else {

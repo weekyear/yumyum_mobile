@@ -18,6 +18,7 @@ target 'YumYumy' do
   pod 'Firebase/Analytics'
   pod 'lottie-ios'
   pod 'NVActivityIndicatorView'
+  pod 'SnapKit', '~> 5.0.0'
 	
   target 'YumYumyTests' do
     inherit! :search_paths

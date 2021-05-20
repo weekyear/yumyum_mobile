@@ -846,7 +846,7 @@ DELETE ("/feed/like/{feedId}/{userId}")
 
 # AI
 
-### 1. 동영상으로 음식 식별
+### 1. 동영상으로 음식 식별 (단일 결과)
 
 ```kotlin
 POST ("/video")
@@ -860,7 +860,28 @@ POST ("/video")
 ```kotlin
 1) **성공
 {
-    "predictions": "치킨",
+    "predictions": "후라이드치킨",
+    "success": true
+}**
+```
+
+### 2. 동영상으로 음식 식별 (리스트 결과)
+
+```kotlin
+POST ("/video/list")
+
+- formData 형식으로 전송
+
+"video": 동영상 파일
+```
+
+```kotlin
+1) **성공
+{
+    "predictions": [
+			"후라이드치킨",
+			"양념치킨",
+		],
     "success": true
 }**
 ```
