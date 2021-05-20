@@ -26,6 +26,7 @@ class PeopleVC: UIViewController {
 
     @IBOutlet var userNameLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
