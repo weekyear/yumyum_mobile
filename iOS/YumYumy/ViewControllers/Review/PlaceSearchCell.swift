@@ -12,6 +12,7 @@ class PlaceSearchCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var reviewLabel: UILabel!
+    @IBOutlet var distanceLabel : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
