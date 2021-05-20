@@ -16,10 +16,21 @@ struct KakaoManager {
     func shareFeed(feed: Feed) {
         let templateId = Int64(53929)
         
+        guard let title = feed.title else {
+            return
+        }
+        guard let thumbnail = feed.thumbnailPath else {
+            return
+        }
+        guard let like = feed.likeCount else {
+            return
+        }
+        
         let templateArgs: [String : String] = [
             "title":"YUMYUM",
-            "description": String("\(feed.title) 구경하실래요?"),
-            "feedImage": String("\(feed.thumbnailPath)")
+            "description": String("\(title) 구경하실래요?"),
+            "feedImage": String("\(thumbnail)"),
+            "like": "\(like)"
         ]
         
         LinkApi.shared.customLink(templateId: templateId, templateArgs: templateArgs) {(linkResult, error) in
