@@ -763,6 +763,11 @@ See also: #456, #789
 
 1. 인공지능 모델을 이용하여 사용자 업로드 동영상을 분석하여 음식 이름을 적는 시간을 단축
 2. 정확성을 높이기 위해 식별된 결과 리스트 중 택1 가능
+- 인공지능 기술 관련
+    - 모델: Tensorflow Keras InceptionV3
+    - 데이터세트: AI Hub에서 신청하여 받았고, 저작자는 한국지능정보사회진흥원
+    - 훈련 및 사용 코드 보기: https://lab.ssafy.com/s04-final/s04p31b206/blob/dev-back/AI/food_classifier_total.ipynb
+![0](/uploads/4589a2721b7c340d6590dc0c621754cd/0.PNG)
 
 # 👀 페이지 화면
 
