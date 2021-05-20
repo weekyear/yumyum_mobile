@@ -1,11 +1,11 @@
 package com.omnyom.yumyum.helper.recycler
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.net.Uri
+import android.os.Handler
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
@@ -25,7 +25,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ListItemEurekaBinding
-import com.omnyom.yumyum.databinding.ListItemFeedBinding
 import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
 import com.omnyom.yumyum.helper.RetrofitManager
@@ -40,6 +39,7 @@ import com.omnyom.yumyum.model.userInfo.UserData
 import com.omnyom.yumyum.model.userInfo.UserResponse
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
+import com.skyfishjy.library.RippleBackground
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -94,6 +94,12 @@ class EurekaAdapter(val context: Context) : BaseRecyclerAdapter<EurekaViewHolder
             setPositiveButton("공유") { _, _ ->
                 sendMessage(userId.toString().toInt(), feed)
                 Toast.makeText(context, "피드가 공유되었습니다." , Toast.LENGTH_SHORT).show()
+                val eurekaLayout = View.inflate(context, R.layout.fragment_eureka, null)
+                val rippleBackground : RippleBackground = eurekaLayout.findViewById(R.id.eureka_circle_wave)
+                rippleBackground.startRippleAnimation()
+                Handler().postDelayed({
+                    rippleBackground.stopRippleAnimation()
+                }, 3000)
             }
             setNegativeButton("취소") { _, _ -> }
             show()
@@ -129,7 +135,7 @@ class EurekaAdapter(val context: Context) : BaseRecyclerAdapter<EurekaViewHolder
                     val docs = matchingDocs.value!!
                     for (doc in docs) {
                         if (doc.userId != userId) {
-                            sendNoti(doc.userId.toString())
+                            sendNoti(doc.userId.toString(), "피드가 공유되었습니다.")
                         }
                     }
                 }
@@ -187,9 +193,9 @@ class EurekaAdapter(val context: Context) : BaseRecyclerAdapter<EurekaViewHolder
                 }
     }
 
-    private fun sendNoti(receiverId: String) {
+    private fun sendNoti(receiverId: String, message:String) {
         val apiService = Client.Client.getClient("https://fcm.googleapis.com/")!!.create(APISerivce::class.java)
-        val eurekaData = EurekaData()
+        val eurekaData = EurekaData(message, "YUM? YUM!")
         val sender = Sender(eurekaData, "/topics/$receiverId")
         apiService.sendNotification(sender)
                 .enqueue(object : Callback<EurekaResponse> {

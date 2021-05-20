@@ -37,6 +37,7 @@ class UserFeedActivity : BaseBindingActivity<ActivityUserFeedBinding>(R.layout.a
         userFeedVM.foodData.observe(this) {
             val adapter = binding.rvAuthorFeed.adapter as AuthorFeedAdapter
             adapter.run {
+                binding.tvAllFeedAuthor.text = "유저피드 (${userFeedVM.foodData.value!!.size})"
                 setItems(it)
                 notifyDataSetChanged()
             }

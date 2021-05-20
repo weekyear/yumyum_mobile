@@ -113,7 +113,7 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
                     val docs = matchingDocs.value!!
                     for (doc in docs) {
                         if (doc.userId != userId) {
-                            sendNoti(doc.userId.toString())
+                            sendNoti(doc.userId.toString(), message)
                         }
                     }
                 }
@@ -166,9 +166,9 @@ class EurekaViewModel(application: Application) : BaseViewModel(application) {
 
     }
 
-    private fun sendNoti(receiverId: String) {
+    private fun sendNoti(receiverId: String, message:String) {
         val apiService = Client.Client.getClient("https://fcm.googleapis.com/")!!.create(APISerivce::class.java)
-        val eurekaData = EurekaData()
+        val eurekaData = EurekaData(message, "YUM? YUM!")
         val sender = Sender(eurekaData, "/topics/$receiverId")
         apiService.sendNotification(sender)
                 .enqueue(object : Callback<EurekaResponse> {
