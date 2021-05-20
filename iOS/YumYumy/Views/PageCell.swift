@@ -15,6 +15,7 @@ class PageCell: UICollectionViewCell {
     
     var feedResult: [Feed]?
     var placeResult: [Place]?
+    var delegate: pageCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +61,11 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PageCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("you tap \(indexPath.item)")
+        self.delegate?.sendToSearchFeed(itemId: indexPath.item, feedList: feedResult!)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return feedResult?.count ?? 0
     }
@@ -103,18 +109,6 @@ extension PageCell: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
         
-//        DispatchQueue.global().async {
-//            let data = try? Data(contentsOf: imageUrl)
-//            let profileData = try? Data(contentsOf: profileUrl!)
-//            DispatchQueue.main.async {
-//                let beforeimage = UIImage(data: data!)
-//                image = beforeimage?.fixedOrientation().imageRotatedByDegrees(degrees: 90.0)
-//                profileImg = UIImage(data: profileData!)
-//                cell.thumbnailView.image = image
-//                cell.userProfileView.image = profileImg
-//            }
-//        }
-        
         return cell
     }
 }
@@ -127,4 +121,8 @@ extension PageCell: UICollectionViewDelegateFlowLayout {
                       height: (CvRect.width/1.25)-3)
     }
     
+}
+
+protocol pageCellDelegate{
+    func sendToSearchFeed(itemId:Int, feedList:[Feed])
 }

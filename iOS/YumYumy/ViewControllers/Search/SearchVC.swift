@@ -15,6 +15,8 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
 
     var feedResult: [Feed]?
     var placeResult: [Place]?
+    var itemId : Int?
+
     
     var pageCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -96,7 +98,9 @@ extension SearchVC: UISearchBarDelegate {
         guard let searchKey = searchBar.text else { return }
         WebApiManager.shared.searchStore(searchKey: searchKey) { (result) in
             print(result["data"])
-            self.placeResult = result["data"].arrayValue.compactMap{Place(json: $0)}
+            self.placeResult = result["data"].arrayValue.compactMap{Place(searchJson: $0)}
+            print("나와뇽?")
+            print(self.placeResult)
             self.pageCollectionView.reloadData()
         } failure: { (error) in
             print(#function, error)
@@ -123,11 +127,12 @@ extension SearchVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.feedResult = self.feedResult
         
         cell.collectionView.reloadData()
-        
+        cell.delegate = self
         switch indexPath.row {
         case 0:
             cell.tableView.isHidden = true
             cell.collectionView.isHidden = false
+            cell.collectionView.reloadData()
         case 1:
             cell.tableView.isHidden = false
             cell.collectionView.isHidden = true
@@ -159,5 +164,15 @@ extension SearchVC: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension SearchVC: pageCellDelegate {
+    func sendToSearchFeed(itemId: Int, feedList:[Feed]) {
+        let searchFeedVC = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(identifier: "SearchFeedVC") as! SearchFeedVC
+        searchFeedVC.itemId = itemId
+        searchFeedVC.feedList = feedList
+        searchFeedVC.modalPresentationStyle = .fullScreen
+        self.present(searchFeedVC, animated: true)
     }
 }
