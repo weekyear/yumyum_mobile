@@ -75,7 +75,9 @@ class EurekaVC: UIViewController {
 
         FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) { neighbor in
             self.neighbor = neighbor
-            self.showOtherMessage(chat: self.neighbor?[0] ?? Chat(userId: 24, message: "gg", geohash: "1234", lat: 1, lng: 2, profilePath: "", nickname: ""))
+            self.neighbor?.forEach({ chat in
+                self.showOtherMessage(chat: chat)
+            })
         }
         
     }
@@ -117,12 +119,20 @@ class EurekaVC: UIViewController {
     }
     
     func showOtherMessage(chat: Chat) {
+        let width = Int(self.view.frame.size.width)
+        let height  = Int(self.view.frame.size.height)
+        
+        let topOffset = Int.random(in: 0..<height)
+        let leadingOffset = Int.random(in: 0..<width)
+        print(width, height)
+        
         // container
         let container = UIView()
         self.view.addSubview(container)
         container.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(50)
-            make.top.leading.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(topOffset)
+            make.leading.equalToSuperview().offset(leadingOffset)
         }
         
         // profileImage
