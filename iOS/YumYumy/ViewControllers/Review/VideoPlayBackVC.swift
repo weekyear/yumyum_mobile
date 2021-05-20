@@ -21,8 +21,11 @@ class VideoPlayBackVC: UIViewController {
 
     var videoUrl: URL!
     
+    @IBOutlet var retryBtn: UIButton!
+    @IBOutlet var nextBtn: UIButton!
     @IBOutlet weak var videoView: UIView!
 
+    
     @IBAction func didTapPrevButton(_ sender: Any) {
         print("돌아가~")
 //        self.navigationController?.popViewController(animated: true)
@@ -35,7 +38,14 @@ class VideoPlayBackVC: UIViewController {
         setLayout()
         playBackVideo()
         print("PlayVC URL 확인: ", videoUrl)
-        
+        let retryImage = UIImage(named: "ic_retry")
+        let nextImage = UIImage(named: "ic_next")
+        let stencil = retryImage!.withRenderingMode(.alwaysTemplate)
+        let next = nextImage!.withRenderingMode(.alwaysTemplate)
+        retryBtn.setImage(stencil, for: .normal)
+        retryBtn.tintColor = .systemYellow
+        nextBtn.setImage(next, for: .normal)
+        nextBtn.tintColor = .systemYellow
     }
     func setLayout() {
         self.navigationController?.navigationBar.isHidden = true

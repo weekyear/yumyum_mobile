@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import CoreLocation
 
 protocol PlaceDelegate {
     func setPlace(_ viewController: PlaceSearchVC, place: Place)
 }
 
-class PlaceSearchVC: UIViewController {
+class PlaceSearchVC: UIViewController, CLLocationManagerDelegate {
     
     static func instance() -> PlaceSearchVC {
         let vc = UIStoryboard.init(name: "Review", bundle: nil).instantiateViewController(withIdentifier: "PlaceSearchVC") as! PlaceSearchVC
@@ -20,6 +21,10 @@ class PlaceSearchVC: UIViewController {
     
     var results: [Place] = []
     var delegate: PlaceDelegate?
+    var locationManager = CLLocationManager()
+    
+    var latitude : Double?
+    var longitude  : Double?
 
     @IBOutlet var resultTableView: UITableView!
     
@@ -32,6 +37,27 @@ class PlaceSearchVC: UIViewController {
 //        self.navigationItem.hidesBackButton = true
 //        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(leftBarButtonAction))
 //
+        
+        //locationManager 인스턴스 생성 및 델리게이트 생성
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+        //포그라운드 상태에서 위치 추적 권한 요청
+        locationManager.requestWhenInUseAuthorization()
+        
+        //배터리에 맞게 권장되는 최적의 정확도
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        //위치업데이트
+        locationManager.startUpdatingLocation()
+        
+        //위도 경도 가져오기
+        let coor = locationManager.location?.coordinate
+        latitude = coor?.latitude
+        longitude = coor?.longitude
+        
+        print(latitude)
+        print(longitude)
         setSearchBar()
     }
     
@@ -54,7 +80,7 @@ class PlaceSearchVC: UIViewController {
 extension PlaceSearchVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchKey = searchBar.text!
-        WebApiManager.shared.searchPlace(searchKey: searchKey) { (result) in
+        WebApiManager.shared.searchPlace(searchKey: searchKey, logitudeX: longitude!, latitudeY: latitude!) { (result) in
             dump(result["documents"])
             self.results = result["documents"].arrayValue.compactMap({Place(json: $0)})
             self.resultTableView.reloadData()

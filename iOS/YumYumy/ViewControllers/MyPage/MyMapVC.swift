@@ -33,6 +33,7 @@ class MyMapVC: UIViewController, MTMapViewDelegate {
         myMapView.showCurrentLocationMarker = true
         myMapView.addPOIItems(poitItems)
         // 모든 지도 마커 기준으로 레벨 및 위치 정렬
+        myMapView.fitAreaToShowAllPOIItems()
     }
     
     //마커 저장해서 넣기
