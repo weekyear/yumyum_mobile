@@ -163,8 +163,11 @@ extension MyFeedVC: myFeedCellDelegate {
             self.navigationController?.pushViewController(reviewVC, animated: true)
             return
         } failure: {
+            print("취소했어요!")
+            
             return
         }
     }
+    
     
 }

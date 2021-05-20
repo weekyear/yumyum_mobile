@@ -29,7 +29,6 @@ class SearchVC: UIViewController , CustomMenuBarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setLayout()
     }
     
@@ -105,7 +104,7 @@ extension SearchVC: UISearchBarDelegate {
         
         WebApiManager.shared.searchFeed(userId: 24, searchKey: searchKey) { (result) in
             print("feed", result["data"])
-            self.feedResult = result["data"].arrayValue.compactMap{ Feed(json: $0) }
+            self.feedResult = result["data"].arrayValue.compactMap{ Feed(feedJson: $0) }
             self.pageCollectionView.reloadData()
         } failure: { (error) in
             print(#function, error)

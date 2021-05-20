@@ -108,6 +108,7 @@ extension HomeVC:  UICollectionViewDelegate, UICollectionViewDataSource, UIColle
         }
         
         let cell: VideoCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! VideoCollectionViewCell
+
         
         cell.index = indexPath.item
         cell.delegate = self
