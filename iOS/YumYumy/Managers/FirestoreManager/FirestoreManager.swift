@@ -50,7 +50,7 @@ struct FirestoreManager {
     func getNeighbors(latitude: Double, longitude: Double , completionHandler: @escaping ([Chat])-> Void) {
         // Find cities within 50km of London
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let radiusInKilometers: Double = 500
+        let radiusInKilometers: Double = 5000
         
         // Each item in 'bounds' represents a startAt/endAt pair. We have to issue
         // a separate query for each pair. There can be up to 9 pairs of bounds

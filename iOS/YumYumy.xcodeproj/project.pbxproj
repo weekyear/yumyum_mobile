@@ -121,6 +121,7 @@
 		E5C2B062264B0031008BB747 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B061264B0031008BB747 /* Search.storyboard */; };
 		E5C2B067264B0095008BB747 /* Eureka.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5C2B066264B0095008BB747 /* Eureka.storyboard */; };
 		E5C2B073264BA178008BB747 /* WebApiManagerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */; };
+		E5CDA51A2655876E00DD951F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDA5192655876E00DD951F /* ChatView.swift */; };
 		E5EA3EEF2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */; };
 		E5EA3EF126551D020011321C /* FCM-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5EA3EF026551D020011321C /* FCM-Info.plist */; };
 		E5FBC2BE264C69B40026CB82 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FBC2BD264C69B40026CB82 /* SearchVC.swift */; };
@@ -285,6 +286,7 @@
 		E5C2B061264B0031008BB747 /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		E5C2B066264B0095008BB747 /* Eureka.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Eureka.storyboard; sourceTree = "<group>"; };
 		E5C2B072264BA178008BB747 /* WebApiManagerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebApiManagerSearch.swift; sourceTree = "<group>"; };
+		E5CDA5192655876E00DD951F /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		E5EA3EED265394860011321C /* YumYumy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YumYumy.entitlements; sourceTree = "<group>"; };
 		E5EA3EEE2654B1980011321C /* yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "yumyum-52542-firebase-adminsdk-po6dv-4c381505b9.json"; sourceTree = "<group>"; };
 		E5EA3EF026551D020011321C /* FCM-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FCM-Info.plist"; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				E5969678264BD4B7009B64A3 /* PlaceTableViewCell.swift */,
 				E5969679264BD4B7009B64A3 /* PlaceTableViewCell.xib */,
 				E5969682264BD831009B64A3 /* CustomCell.xib */,
+				E5CDA5192655876E00DD951F /* ChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				E548AAFA26388B6E0049AA0B /* VideoPlayBackVC.swift in Sources */,
 				548F40E2262EB7A20008B612 /* VideoCollectionViewCell.swift in Sources */,
 				E51291AB26502A1A002B064C /* ChatModel.swift in Sources */,
+				E5CDA51A2655876E00DD951F /* ChatView.swift in Sources */,
 				E548AAF5263887C10049AA0B /* WebApiManagerFeed.swift in Sources */,
 				E52F57F82625B746002C2637 /* ViewController.swift in Sources */,
 				E5B112F1262EBD0E00ACB7C8 /* MainTabBarVC.swift in Sources */,
