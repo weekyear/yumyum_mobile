@@ -42,13 +42,8 @@ struct FirestoreManager {
         }
     }
     
-//    func deleteChat(userId: String) {
-//        let ref = db.document(userId)
-//    }
-    
     
     func getNeighbors(latitude: Double, longitude: Double , completionHandler: @escaping ([Chat])-> Void) {
-        // Find cities within 50km of London
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let radiusInKilometers: Double = 5000
         

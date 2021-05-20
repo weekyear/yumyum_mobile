@@ -74,6 +74,7 @@ class EurekaVC: UIViewController {
         
 
         FirestoreManager.shared.getNeighbors(latitude: latitude!, longitude: longitude!) { neighbor in
+            self.neighbor = []
             self.neighbor = neighbor
             self.neighbor?.forEach({ chat in
                 self.showOtherMessage(chat: chat)
@@ -119,12 +120,13 @@ class EurekaVC: UIViewController {
     }
     
     func showOtherMessage(chat: Chat) {
-        let width = Int(self.view.frame.size.width)
-        let height  = Int(self.view.frame.size.height)
+        print(chat)
+        print("whyrano")
+        let width = Int(self.view.frame.size.width) - 100
+        let height  = Int(self.view.frame.size.height) - Int(self.tabBarController?.tabBar.frame.size.height ?? 0) - 100
         
-        let topOffset = Int.random(in: 0..<height)
-        let leadingOffset = Int.random(in: 0..<width)
-        print(width, height)
+        let topOffset = Int.random(in: 20..<height)
+        let leadingOffset = Int.random(in: 20..<width)
         
         // container
         let container = UIView()
