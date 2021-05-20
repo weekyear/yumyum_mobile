@@ -108,202 +108,603 @@
 <br>
 
 <details>
-  <summary>프론트 엔드 코딩 컨벤션 [접기/펼치기]</summary>
+  <summary>안드로이드 코딩 컨벤션 [접기/펼치기]</summary>
 
-  ### 👩‍💻프론트 엔드 코딩 컨벤션
+  ### 👩‍💻1. Android Project Guideline
 
-#### 1. File 구조
+## 1.1 Basic Rules
 
--  컴포넌트는 `함수형` 으로 구성합니다.
+- kotlin coding convention은 다음의 글을 따른다.
 
--  하나의 파일에는 하나의 React 컴포넌트를 사용합니다.
--  그러나, 다중 [스테이트가 없는(Stateless) 또는 순수한 함수나 컴포넌트](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions)는 허용됩니다. 
+  https://kotlinlang.org/docs/coding-conventions.html
 
--  스타일링은 `Prettier-Code formatter` 플러그인을 통해 통일합니다.
+## 1.2 File naming
 
-```
-// 구성요소는 더 찾아보고 합의해봅시당
+### 1.2.1 Resources files
 
-{
-  "useTabs": false,
-  "printWidth": 100,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "semi": true,
-  "singleQuote": true
-}
-```
+#### 1.2.1.1 Layout files
 
-#### 2. 폴더 구조
+{component name}_{name}
 
-- 기능과 역할에 따라서 폴더를 구성합니다.
-- 화면 구성요소가 아닌 `기능요소`는 폴더명 앞에 언더바(`_`)을 붙여서 구분합니다.
+| Component      | Class Name                     | Layout Name                           |
+| -------------- | ------------------------------ | ------------------------------------- |
+| Activity       | `UserProfileActivity`          | `activity_user_profile.xml`           |
+| Fragment       | `SignUpFragment`               | `fragment_sign_up.xml`                |
+| FragmentDialog | `ChangePasswordFragmentDialog` | `fragment_dialog_change_password.xml` |
+| Dialog         | `ChangePasswordDialog`         | `dialog_change_password.xml`          |
+| Viewholder     | `HomeMainViewHolder`           | `viewholder_home_main.xml`            |
+| CustomView     | `TitleBar`                     | `view_title_bar.xml`                  |
 
-#### 3. 변수
+#### 1.2.1.2 Layout resources
 
-- 변수는 가능하면 불변변수는 `const`사용합니다.
+| Component        | Resource ID             		
+| ---------------- | ---------------------------|
+| CustomView       | `ct_`  			|
+| View		   | `v_`       		|
+| ImageView	   | `iv_`       		|
+| TextView	   | `tv_`       		|
+| RecyclerView	   | `rc_`       		|
+| NestedScrollView	   | `nsv_`       		|
 
+#### 1.2.1.3 String resources
 
-#### 4. Naming
+String resource는 사용되는 View의 이름과 동일하게 한다. 
 
-- 파일명은 `PascalCase`를 사용합니다. ex) LoginPage.jsx
-- 파일이름과 컴포넌트이름은 통일합니다.
-
-- 구성요소의 확장자는 `.jsx`를 사용합니다.
-
-#### 5. 프로퍼티
-
-- prop의 이름은 항상 `camelCase`를 사용합니다.
-
-- props는 `읽기전용`을 기본으로 한다. 수정되면 안된다. (수정이 필요한 정보는 state!)
-
-- React 컴포넌트는 props를 다룰 때 반드시 `순수함수`처럼 사용해야한다.
-
-  - 순수함수?
-
-  > 기본적으로 입력 데이터를 변경하지 않고 외부 상태 (데이터베이스, DOM 또는 전역 변수와 같은)에 의존하지 않으며 동일한 입력값에 대해 동일한 출력값을 일관되게 제공하는 함수를 “순수(pure)” 함수라고 한다.
-
-- 프로퍼티(`props`)로 값을 전달할 때에는 문자열은 큰따옴표(`""`) , 이외의 값은 중괄호(`{}`)를 사용합니다.
-
-```jsx
-// 예시
-
-class App extends React.Component {
-  render() {
-     // 전달할 때 지저분한 요소들은 변수에 할당 후 넘겨줍니당
-    const array = [1,2,3];
-    const obj = {name: "YUM", age:"3000"}
-    const node = <h1>안녕하세요</h1>;
-    const func = () => {console.log('안녕하세요'); };
-    return (
-      <ChildComponent
-        stringValue="string"
-        boolValue //boolean의 경우 보내면 true 안보내면 false가 알아서 할당됩니당.
-        numValue={1}
-        arrayValue={array}
-        objValue={obj}
-        nodeValue={node}
-        funcValue={func}
-        />
-    );
-  }
-}
-export default App;
-```
-
-- 프로퍼티를 받아온 경우, 자료형을 하단에 선언해 줍니다.
-
-```jsx
-// 해당 내용이 함수형에도 적용되는지 몰겠!
-
-import PropTypes from 'prop-types'
-
-...
-
-PropsComponent.propTypes = {
-    stringValue: PropTypes.string,
-    boolValue: PropTypes.bool,
-    numValue: PropTypes.number,
-    arrayValue: PropTypes.arrayOf(PropTypes.number),
-    objValue: PropTypes.shape({
-        name: PropTypes.string,
-        age: PropTypes.number,
-    }),
-    nodeValue: PropTypes.node,
-    funcValue: PropTypes.func,
-} 
-```
-
-#### 6. 태그
-
-- 자식을 가지지 않으면, 항상 자신을 닫는(`self-close`) 태그를 사용합니다.
-- self-closing에는 한칸의 공백만 사용합니다.
-
-```jsx
-// DO NOT
-<sample className="sample"></sample>
-
-// DO
-// self-closing에는 한칸의 공백만 사용합니다.
-<sample className="sample" />
-```
-
-- 멀티라인의 경우, 여는 태그와 닫는 태그를 다른 줄에 위치한다.
-
-```jsx
-// DO NOT
-<sample className="sample"
-    type="YUM" />
-
-// DO
-<sample 
-  className="sample"
-  type="YUM" 
-/>
-```
-
-#### 7. Redux
-
-- 액션
-
-  - `Type`은 어떤 작업을 위한 것인지 명확하게 명명합니다.
-  - `Type`은 `대문자`와 `언더바`로 구성합니다.
-
-- 리듀서
-
-  - 리듀서가 반환하는 값의 `자료형`은 이전 데이터와 동일해야 합니다. 
-
-    (~~콩심은데 콩나고 팥심은 데 팥난다~~)
+| View ID        | String Resource ID             		
+| ---------------- | ---------------------------|
+| `ct_title`       | `ct_title`  			|
+| `tv_title`		   | `tv_title`       		|
 
 
-#### 8. 인라인 표현
+## 1.3 Architecture
 
-- `If문`
+아키텍처는 MVVM구조를 따르며, 자세한 내용은 다음과 같다.
 
-  - 중괄호 내에 논리연산자 `&&`을 사용해 표현합니다.
+https://developer.android.com/jetpack/guide?hl=ko
 
-  ```jsx
-  // 예시
-  
-  <div>
-      <h1>Hello!</h1>
-      {unreadMessages.length > 0 &&
-          <h2>You have {unreadMessages.length} unread messages.</h2>
-      }
-  </div>
-  ```
+<img width="705" alt="스크린샷 2021-04-09 오후 10 18 11" src="README.assets/114186421-ccc18e80-9981-11eb-999e-d9a8134bc4da.png">
 
-
-
-- `If-else문`
-
-  -  [`condition ? true: false`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)형태를 사용해 표현합니다.
-
-  ```jsx
-  render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    return (
-      <div>
-        The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
-      </div>
-    );
-  }
-  ```
-
-
-#### 9. 프로젝트 설계의 흐름
-
-- 동일하진 않더라도, 프로젝트의 흐름은 다음과 같습니다. [이 페이지를 참고해 구성했습니다.](https://ko.reactjs.org/docs/thinking-in-react.html)
-  1. 페이지의 전체 구조를 생각하고, UI를 컴포넌트 `계층 구조`로 나누기
-  2. UI는 있지만 기능은 없는 `정적인 버전` 만들기
-  3. 최소한의 state 파악 및 설계
-  4. 역방향 데이터 이동 설계
-
-#### 10. 디자인 
-
-- 디자인 라이브러리를 사용할 경우, [Material-UI](https://material-ui.com/) 로 통일한다.
 </details>
 
+<details>
+  <summary>iOS 코딩 컨벤션 [접기/펼치기]</summary>
+
+  ### 👩‍💻1. Swift Style Guide
+
+=================
+
+YumYum iOS 팀 내 협업을 위해 정의한 스위프트 코딩 스타일/규칙 문서입니다.
+
+[스타일쉐어 팀의 스타일 가이드](https://github.com/StyleShare/swift-style-guide)를 참고했고 추가하거나 수정사항을 개발해 나가면서 편집하는 방향으로 진행하기로 했습니다.
+
+본 문서에 나와있지 않은 규칙은 아래 문서를 따릅니다.
+
+- [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines)
+
+
+
+## 목차
+
+- [코드 레이아웃](#코드-레이아웃)
+    - [들여쓰기 및 띄어쓰기](#들여쓰기-및-띄어쓰기)
+    - [줄바꿈](#줄바꿈)
+    - [최대 줄 길이](#최대-줄-길이)
+    - [빈 줄](#빈-줄)
+    - [임포트](#임포트)
+- [네이밍](#네이밍)
+    - [클래스](#클래스)
+    - [함수](#함수)
+    - [변수](#변수)
+    - [상수](#상수)
+    - [약어](#약어)
+    - [Delegate](#delegate)
+- [클로저](#클로저)
+- [클래스와 구조체](#클래스와-구조체)
+- [타입](#타입)
+- [주석](#주석)
+- [프로그래밍 권장사항](#프로그래밍-권장사항)
+
+## 코드 레이아웃
+
+### 띄어쓰기
+
+- 콜론(`:`)을 쓸 때에는 콜론의 오른쪽에만 공백을 둡니다.
+
+    ```swift
+    let names: [String: String]?
+    ```
+
+- 연산자 오버로딩 함수 정의에서는 연산자와 괄호 사이에 한 칸 띄어씁니다.
+
+    ```swift
+    func ** (lhs: Int, rhs: Int)
+    ```
+
+### 줄바꿈
+
+- 함수 정의가 최대 길이를 초과하는 경우에는 아래와 같이 줄바꿈합니다.
+
+    ```swift
+    func collectionView(
+      _ collectionView: UICollectionView,
+      cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+      // doSomething()
+    }
+
+    func animationController(
+      forPresented presented: UIViewController,
+      presenting: UIViewController,
+      source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+      // doSomething()
+    }
+    ```
+
+- 함수를 호출하는 코드가 최대 길이를 초과하는 경우에는 파라미터 이름을 기준으로 줄바꿈합니다.
+
+    ```swift
+    let actionSheet = UIActionSheet(
+      title: "정말 계정을 삭제하실 건가요?",
+      delegate: self,
+      cancelButtonTitle: "취소",
+      destructiveButtonTitle: "삭제해주세요"
+    )
+    ```
+
+    단, 파라미터에 클로저가 2개 이상 존재하는 경우에는 무조건 내려쓰기합니다.
+
+    ```swift
+    UIView.animate(
+      withDuration: 0.25,
+      animations: {
+        // doSomething()
+      },
+      completion: { finished in
+        // doSomething()
+      }
+    )
+    ```
+
+- `if let` 구문이 길 경우에는 줄바꿈하고 한 칸 들여씁니다.
+
+    ```swift
+    if let user = self.veryLongFunctionNameWhichReturnsOptionalUser(),
+        let name = user.veryLongFunctionNameWhichReturnsOptionalName(),
+        user.gender == .female {
+        // ...
+    }
+    ```
+    
+- `guard let` 구문이 길 경우에는 줄바꿈하고 한 칸 들여씁니다. `else`는 `guard`와 같은 들여쓰기를 적용합니다.
+
+    ```swift
+    guard let user = self.veryLongFunctionNameWhichReturnsOptionalUser(),
+        let name = user.veryLongFunctionNameWhichReturnsOptionalName(),
+        user.gender == .female
+    else {
+      return
+    }
+    ```
+
+### 최대 줄 길이
+
+- 한 줄은 최대 99자를 넘지 않아야 합니다.
+
+    Xcode의 **Preferences → Text Editing → Display**의 'Page guide at column' 옵션을 활성화하고 99자로 설정하면 편리합니다.
+
+### 빈 줄
+
+- 빈 줄에는 공백이 포함되지 않도록 합니다.
+- 모든 파일은 빈 줄로 끝나도록 합니다.
+- MARK 구문 위와 아래에는 공백이 필요합니다.
+
+    ```swift
+    // MARK: Layout
+    
+    override func layoutSubviews() {
+      // doSomething()
+    }
+    
+    // MARK: Actions
+    
+    override func menuButtonDidTap() {
+      // doSomething()
+    }
+    ```
+### 임포트
+
+모듈 임포트는 알파벳 순으로 정렬합니다. 내장 프레임워크를 먼저 임포트하고, 빈 줄로 구분하여 서드파티 프레임워크를 임포트합니다.
+
+```swift
+import UIKit
+
+import SwiftyColor
+import SwiftyImage
+import Then
+import URLNavigator
+```
+
+## 네이밍
+
+ 정리
+
+- UpperCamelCase : Class, Structure, Enumeration, Extension, Protocol
+
+- lowerCamelCase : Variable, Constant, Function, Property, Parameter
+
+
+
+### 클래스
+
+- UpperCamelCase를 사용합니다.
+- 클래스 이름에는 접두사<sup>Prefix</sup>를 붙이지 않습니다.
+
+### 함수
+
+- lowerCamelCase를 사용합니다.
+- 함수 이름 앞에는 되도록이면 `get`을 붙이지 않습니다.
+
+    **좋은 예:**
+
+    ```swift
+    func name(for user: User) -> String?
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    func getName(for user: User) -> String?
+    ```
+
+- Action 함수의 네이밍은 '주어 + 동사 + 목적어' 형태를 사용합니다.
+
+    - *Tap(눌렀다 뗌)*은 `UIControlEvents`의 `.touchUpInside`에 대응하고, *Press(누름)*는 `.touchDown`에 대응합니다.
+    - *will~*은 특정 행위가 일어나기 직전이고, *did~*는 특정 행위가 일어난 직후입니다.
+    - *should~*는 일반적으로 `Bool`을 반환하는 함수에 사용됩니다.
+
+    **좋은 예:**
+
+    ```swift
+    func backButtonDidTap() {
+      // ...
+    }
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    func back() {
+      // ...
+    }
+    
+    func pressBack() {
+      // ...
+    }
+    ```
+
+### 변수
+
+- 변수 이름에는 lowerCamelCase를 사용합니다.
+
+### 상수
+
+- 상수 이름에는 lowerCamelCase를 사용합니다.
+
+    **좋은 예:**
+
+    ```swift
+    let maximumNumberOfLines = 3
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    let kMaximumNumberOfLines = 3
+    let MAX_LINES = 3
+    ```
+### 열거형
+
+- enum의 각 case에는 lowerCamelCase를 사용합니다.
+
+    **좋은 예:**
+
+    ```swift
+    enum Result {
+      case .success
+      case .failure
+    }
+    ```
+    
+    **나쁜 예:**
+
+    ```swift
+    enum Result {
+      case .Success
+      case .Failure
+    }
+    ```
+
+### 약어
+
+- 약어로 시작하는 경우 소문자로 표기하고, 그 외의 경우에는 항상 대문자로 표기합니다.
+
+    **좋은 예:**
+
+    <pre>
+    let user<strong>ID</strong>: Int?
+    let <strong>html</strong>: String?
+    let website<strong>URL</strong>: URL?
+    let <strong>url</strong>String: String?
+    </pre>
+
+    **나쁜 예:**
+
+    <pre>
+    let user<strong>Id</strong>: Int?
+    let <strong>HTML</strong>: String?
+    let website<strong>Url</strong>: NSURL?
+    let <strong>URL</strong>String: String?
+    </pre>
+
+### Delegate
+
+- Delegate 메서드는 프로토콜명으로 네임스페이스를 구분합니다.
+
+    **좋은 예:**
+
+    ```swift
+    protocol UserCellDelegate {
+      func userCellDidSetProfileImage(_ cell: UserCell)
+      func userCell(_ cell: UserCell, didTapFollowButtonWith user: User)
+    }
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    protocol UserCellDelegate {
+      func didSetProfileImage()
+      func followPressed(user: User)
+    
+      // `UserCell`이라는 클래스가 존재할 경우 컴파일 에러 발생
+      func UserCell(_ cell: UserCell, didTapFollowButtonWith user: User)
+    }
+    ```
+
+## 클로저
+
+- 파라미터와 리턴 타입이 없는 Closure 정의시에는 `() -> Void`를 사용합니다.
+
+    **좋은 예:**
+
+    ```swift
+    let completionBlock: (() -> Void)?
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    let completionBlock: (() -> ())?
+    let completionBlock: ((Void) -> (Void))?
+    ```
+
+- Closure 정의시 파라미터에는 괄호를 사용하지 않습니다.
+
+    **좋은 예:**
+
+    ```swift
+    { operation, responseObject in
+      // doSomething()
+    }
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    { (operation, responseObject) in
+      // doSomething()
+    }
+    ```
+
+- Closure 정의시 가능한 경우 타입 정의를 생략합니다.
+
+    **좋은 예:**
+
+    ```swift
+    ...,
+    completion: { finished in
+      // doSomething()
+    }
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    ...,
+    completion: { (finished: Bool) -> Void in
+      // doSomething()
+    }
+    ```
+
+- Closure 호출시 또다른 유일한 Closure를 마지막 파라미터로 받는 경우, 파라미터 이름을 생략합니다.
+
+    **좋은 예:**
+
+    ```swift
+    UIView.animate(withDuration: 0.5) {
+      // doSomething()
+    }
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    UIView.animate(withDuration: 0.5, animations: { () -> Void in
+      // doSomething()
+    })
+    ```
+
+## 클래스와 구조체
+
+- 클래스와 구조체 내부에서는 `self`를 명시적으로 사용합니다.
+- 구조체를 생성할 때에는 Swift 구조체 생성자를 사용합니다.
+
+    **좋은 예:**
+
+    ```swift
+    let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    let frame = CGRectMake(0, 0, 100, 100)
+    ```
+
+## 타입
+
+- `Array<T>`와 `Dictionary<T: U>` 보다는 `[T]`, `[T: U]`를 사용합니다.
+
+    **좋은 예:**
+
+    ```swift
+    var messages: [String]?
+    var names: [Int: String]?
+    ```
+
+    **나쁜 예:**
+
+    ```swift
+    var messages: Array<String>?
+    var names: Dictionary<Int, String>?
+    ```
+
+## 주석
+
+- `///`를 사용해서 문서화에 사용되는 주석을 남깁니다.
+
+    ```swift
+    /// 사용자 프로필을 그려주는 뷰
+    class ProfileView: UIView {
+    
+      /// 사용자 닉네임을 그려주는 라벨
+      var nameLabel: UILabel!
+    }
+    ```
+
+
+- `// MARK:`를 사용해서 연관된 코드를 구분짓습니다.
+
+    Objective-C에서 제공하는 `#pragma mark`와 같은 기능으로, 연관된 코드와 그렇지 않은 코드를 구분할 때 사용합니다.
+
+    ```swift
+    // MARK: Init
+    
+    override init(frame: CGRect) {
+      // doSomething()
+    }
+    
+    deinit {
+      // doSomething()
+    }
+    ```
+
+
+    // MARK: Layout
+    
+    override func layoutSubviews() {
+      // doSomething()
+    }
+
+
+    // MARK: Actions
+    
+    override func menuButtonDidTap() {
+      // doSomething()
+    }
+    ```
+
+## 프로그래밍 권장사항
+
+- 가능하다면 변수를 정의할 때 함께 초기화하도록 합니다. [Then](https://github.com/devxoul/Then)을 사용하면 초기화와 함께 속성을 지정할 수 있습니다.
+
+    ```swift
+    let label = UILabel().then {
+      $0.textAlignment = .center
+      $0.textColor = .black
+      $0.text = "Hello, World!"
+    }
+    ```
+
+- 상수를 정의할 때에는 `enum`를 만들어 비슷한 상수끼리 모아둡니다. 재사용성과 유지보수 측면에서 큰 향상을 가져옵니다. `struct` 대신 `enum`을 사용하는 이유는, 생성자가 제공되지 않는 자료형을 사용하기 위해서입니다. [CGFloatLiteral](https://github.com/devxoul/CGFloatLiteral)과 [SwiftyColor](https://github.com/devxoul/SwiftyColor)를 사용해서 코드를 단순화시킵니다.
+
+    ```swift
+    final class ProfileViewController: UIViewController {
+
+      private enum Metric {
+        static let profileImageViewLeft = 10.f
+        static let profileImageViewRight = 10.f
+        static let nameLabelTopBottom = 8.f
+        static let bioLabelTop = 6.f
+      }
+
+      private enum Font {
+        static let nameLabel = UIFont.boldSystemFont(ofSize: 14)
+        static let bioLabel = UIFont.boldSystemFont(ofSize: 12)
+      }
+
+      private enum Color {
+        static let nameLabelText = 0x000000.color
+        static let bioLabelText = 0x333333.color ~ 70%
+      }
+
+    }
+    ```
+
+    이렇게 선언된 상수들은 다음과 같이 사용될 수 있습니다.
+
+    ```swift
+    self.profileImageView.frame.origin.x = Metric.profileImageViewLeft
+    self.nameLabel.font = Font.nameLabel
+    self.nameLabel.textColor = Color.nameLabelText
+    ```
+
+- 더이상 상속이 발생하지 않는 클래스는 항상 `final` 키워드로 선언합니다.
+
+- 프로토콜을 적용할 때에는 extension을 만들어서 관련된 메서드를 모아둡니다.
+
+    **좋은 예**:
+
+    ```swift
+    final class MyViewController: UIViewController {
+      // ...
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    extension MyViewController: UITableViewDataSource {
+      // ...
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    extension MyViewController: UITableViewDelegate {
+      // ...
+    }
+    ```
+
+    **나쁜 예**:
+
+    ```swift
+    final class MyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+      // ...
+    }
+    ```
+
+
+
+</details>
 <br>
 
 <details>
@@ -569,21 +970,10 @@ See also: #456, #789
 
 # ⚙️ Install and Usage
 
-### Frontend
+### Android
 
-- frontend 폴더로 들어와 필요한 패키지를 설치합니다.
-
-  ```bash
-  yarn
-  ```
-
-- frontend app을 실행합니다.
-
-  ```bash
-  yarn start
-  ```
-
-
+- 구글 플레이 스토어 공개 테스트 배포
+  - https://play.google.com/store/apps/details?id=com.omnyom.yumyum
 
 
 ### Backend
@@ -624,7 +1014,7 @@ See also: #456, #789
 - 본인이 찜한 식당들만 모아 지도에서 확인하세요.
 - 다른사람들이 다녀간 주변의 맛집들도 확인 할 수 있어요.
 
-**맛집 유레카를 외치세요!!!**
+**주변 유저들과 음식과 관련된 소통을 즐겨보세요!!**
 
 - 맛집을 발견한 기쁨을 주변 사용자들에게 전파할 수 있어요. 
 
@@ -636,19 +1026,18 @@ See also: #456, #789
 
 ### 3) 목업 (Mock-up)
 
-![image-20210120231552226](README.assets/image-20210120231552226.png)
+![image-20210520234643761](README.assets/image-20210520234643761.png)
 
-![image-20210120231604956](README.assets/image-20210120231604956.png)
+![image-20210520234658699](README.assets/image-20210520234658699.png)
 
-![image-20210120231616770](README.assets/image-20210120231616770.png)
+![image-20210520234707894](README.assets/image-20210520234707894.png)
 
 ### 4) DB 스키마
 
-<img src="https://cdn.discordapp.com/attachments/792408179072958467/801311319214522378/unknown.png" height="400px"/>
+![image-20210520234731333](README.assets/image-20210520234731333.png)
 
-> 현재 기획된 서비스 내에서 필요한 스키마는 전부 구현되어있는 상황입니다.
+> 데이터베이스 구성은 다음과 같습니다. 크게 회원, 음식점, 피드 3가지 메인 테이블이 있고, 좋아요, 파일 등 여러개 서브 테이블이 있습니다.
 >
-> 프로젝트를 진행하면서 필요한 Column이 생기게 되면 새롭게 스키마를 수정해나가면서 맞춰나갈 계획입니다.
 
 
 
@@ -767,7 +1156,7 @@ See also: #456, #789
     - 모델: Tensorflow Keras InceptionV3
     - 데이터세트: AI Hub에서 신청하여 받았고, 저작자는 한국지능정보사회진흥원
     - 훈련 및 사용 코드 보기: https://lab.ssafy.com/s04-final/s04p31b206/blob/dev-back/AI/food_classifier_total.ipynb
-![0](/uploads/4589a2721b7c340d6590dc0c621754cd/0.PNG)
+    ![0](/uploads/4589a2721b7c340d6590dc0c621754cd/0.PNG)
 
 # 👀 페이지 화면
 
