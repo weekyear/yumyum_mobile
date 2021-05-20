@@ -98,8 +98,8 @@
 
             <ImageView
                 android:id="@+id/iv_eureka_my_profile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintBottom_toTopOf="@+id/layout_message_input"
                 app:layout_constraintEnd_toEndOf="parent"
