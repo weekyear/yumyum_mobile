@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 class PeopleFeedCell: UICollectionViewCell {
     @IBOutlet weak var videoView : UIView!
@@ -18,6 +19,7 @@ class PeopleFeedCell: UICollectionViewCell {
     @IBOutlet var likeBtn: UIButton!
     @IBOutlet weak var mapIcon: UIImageView!
     @IBOutlet var backBtn: UIButton!
+    @IBOutlet var scoreOneView: AnimationView!
     
     let yumyumYellow: ColorSet = .yumyumYellow
     var player: AVPlayer?
@@ -26,8 +28,20 @@ class PeopleFeedCell: UICollectionViewCell {
     var checkLike: Bool = false
     var delegate : peopleFeedDelegate?
     
+    let animationview = AnimationView(name: "ic_vomited")
+    let animationview2 = AnimationView(name: "ic_confused")
+    let animationview3 = AnimationView(name: "ic_neutral")
+    let animationview4 = AnimationView(name: "ic_lol")
+    let animationview5 = AnimationView(name: "ic_inloveface")
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpAnimation()
+    }
+    
+    public func setUpAnimation() {
+        animationview.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        animationview.contentMode = .scaleAspectFit
     }
     
     override func prepareForReuse() {

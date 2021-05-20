@@ -19,11 +19,11 @@ class VideoCollectionViewCell: UICollectionViewCell{
     @IBOutlet var likeCountLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var mapIcon: UIImageView!
+    @IBOutlet weak var scoreOneView: UIView!
     
     var index : Int = 0
     var delegate: userProfileBtnDelegate?
 
-    @IBOutlet weak var scoreOneView: UIView!
     
     let animationview = AnimationView(name: "ic_vomited")
     let animationview2 = AnimationView(name: "ic_confused")

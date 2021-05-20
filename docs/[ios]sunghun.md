@@ -908,3 +908,9 @@ self.present(navigationController, animated: true)
 - https://developer.apple.com/design/human-interface-guidelines/glyphs/overview/ 그리고 이 가이드라인에 맞춰서 pdf파일의 크기를 줄여줘야한다. 
 - 파일  변환  URL: https://cloudconvert.com/svg-to-pdf
 - 파일 다운로드 URL : https://www.iloveimg.com/ko/download/Agf8zjr4rz728b3AmkhlztvshAmjjzl9v8ffqqnsAml88gfcvq3fnp810Aknt6qb230tlyf8mpv2j5n41ApvgjA0w5tst68s2d5wmcbmbtwyw7gAf7775dtfsbl0wydAlfA5yx4hf43prmdgxtcsflqtx8gn4fc65ph7A3A05178f8nts9n1/6
+
+
+
+## 서버로 비디오 및 이미지 요청 보낼시
+
+> 반드시 헤더랑, 바디에 뭘담아 줘야할지 생각하고 하자... 그리고 ios에서는 dump다 찍어보고 success로 오더라도 400에러로 bedrequest올수도 있으니까 꼭 확인 것

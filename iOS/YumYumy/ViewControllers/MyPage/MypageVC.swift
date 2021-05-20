@@ -25,11 +25,10 @@ class MypageVC: UIViewController {
     }
  
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var myProfileImgView: UIImageView!
-    
     @IBOutlet weak var myIntroduceLabel: UILabel!
-
+    @IBOutlet var myNameLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let flowLayout : UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -103,14 +102,14 @@ class MypageVC: UIViewController {
         nTitle.numberOfLines = 1
         nTitle.textAlignment = .center
         nTitle.font = UIFont.systemFont(ofSize: 25) // 폰트크기
-        nTitle.text = userData!["nickname"].stringValue
+//        nTitle.text = userData!["nickname"].stringValue
         self.navigationItem.titleView = nTitle
     }
     
     func presentuserData(){
         let userData  = UserDefaults.getLoginedUserInfo()
         self.myIntroduceLabel.text = userData!["introduction"].stringValue
-        
+        self.myNameLabel.text = userData!["nickname"].stringValue
         if let url = URL(string: userData!["profilePath"].stringValue) {
             var image: UIImage?
             
