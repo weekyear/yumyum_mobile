@@ -26,7 +26,7 @@ extension WebApiManager {
       }
     }
     
-    func searchPlace(searchKey: String, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
+    func searchPlace(searchKey: String, logitudeX: Double, latitudeY:Double, success: @escaping (JSON) -> Void, failure: @escaping (Error) -> Void) {
         let kakaoUrl = "https://dapi.kakao.com/v2/local/search/keyword.json"
         
         let headers: HTTPHeaders = [
@@ -36,7 +36,9 @@ extension WebApiManager {
         let parameters: [String: Any] = [
             "query": searchKey,
             "page": 1,
-            "size": 15
+            "size": 15,
+            "x": logitudeX,
+            "y": latitudeY
         ]
         
         AF.request(kakaoUrl, method: .get, parameters: parameters, headers: headers)

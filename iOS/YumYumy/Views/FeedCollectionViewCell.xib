@@ -18,30 +18,30 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h54-6J-l9P">
-                        <rect key="frame" x="0.0" y="0.0" width="199" height="204"/>
+                        <rect key="frame" x="0.0" y="0.0" width="199" height="214"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uF4-P1-l7M">
-                        <rect key="frame" x="12" y="208" width="45" height="45"/>
+                        <rect key="frame" x="12" y="218" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="5iz-cJ-HbC"/>
                             <constraint firstAttribute="height" constant="45" id="pV4-tz-veZ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유저" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heD-9P-2kU">
-                        <rect key="frame" x="13" y="256" width="44" height="21"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <rect key="frame" x="13" y="266" width="44" height="11"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="9"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y6A-oD-nc7">
-                        <rect key="frame" x="66" y="208" width="35" height="24"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                        <rect key="frame" x="66" y="218" width="30" height="20.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="리뷰내용리뷰내용리뷰내용리뷰내용" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztk-se-JRE">
-                        <rect key="frame" x="66" y="234" width="131" height="42.5"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <rect key="frame" x="66" y="243.5" width="128" height="31.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -49,20 +49,20 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="Ztk-se-JRE" firstAttribute="leading" secondItem="y6A-oD-nc7" secondAttribute="leading" id="9Ry-Fk-RNE"/>
                 <constraint firstAttribute="bottom" secondItem="heD-9P-2kU" secondAttribute="bottom" constant="1" id="C7F-eF-fbN"/>
                 <constraint firstAttribute="trailing" secondItem="h54-6J-l9P" secondAttribute="trailing" id="CjY-eL-sJT"/>
                 <constraint firstItem="heD-9P-2kU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="DcE-JJ-oa3"/>
                 <constraint firstItem="h54-6J-l9P" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EH9-Zu-DCi"/>
+                <constraint firstAttribute="trailing" secondItem="Ztk-se-JRE" secondAttribute="trailing" constant="5" id="Fh2-aB-Kgf"/>
                 <constraint firstItem="uF4-P1-l7M" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="GGX-sH-hEl"/>
                 <constraint firstItem="h54-6J-l9P" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KpH-0x-Ttn"/>
-                <constraint firstItem="Ztk-se-JRE" firstAttribute="leading" secondItem="uF4-P1-l7M" secondAttribute="trailing" constant="9" id="Kvw-nt-LGF"/>
                 <constraint firstItem="heD-9P-2kU" firstAttribute="trailing" secondItem="uF4-P1-l7M" secondAttribute="trailing" id="NUp-mh-OlK"/>
-                <constraint firstAttribute="trailing" secondItem="Ztk-se-JRE" secondAttribute="trailing" constant="2" id="Pcr-tt-X9s"/>
-                <constraint firstItem="Ztk-se-JRE" firstAttribute="top" secondItem="y6A-oD-nc7" secondAttribute="bottom" constant="2" id="QVR-VB-3l3"/>
                 <constraint firstItem="y6A-oD-nc7" firstAttribute="leading" secondItem="uF4-P1-l7M" secondAttribute="trailing" constant="9" id="T6X-eh-otc"/>
                 <constraint firstItem="uF4-P1-l7M" firstAttribute="top" secondItem="h54-6J-l9P" secondAttribute="bottom" constant="4" id="TF9-eY-Kub"/>
                 <constraint firstItem="heD-9P-2kU" firstAttribute="top" secondItem="uF4-P1-l7M" secondAttribute="bottom" constant="3" id="TVE-Fw-PQZ"/>
                 <constraint firstItem="y6A-oD-nc7" firstAttribute="top" secondItem="uF4-P1-l7M" secondAttribute="top" id="elf-UJ-GDV"/>
+                <constraint firstItem="Ztk-se-JRE" firstAttribute="top" secondItem="y6A-oD-nc7" secondAttribute="bottom" constant="5" id="h4Q-vU-yeD"/>
                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="y6A-oD-nc7" secondAttribute="trailing" constant="103" id="rVe-KE-g8s"/>
             </constraints>
             <size key="customSize" width="199" height="278"/>

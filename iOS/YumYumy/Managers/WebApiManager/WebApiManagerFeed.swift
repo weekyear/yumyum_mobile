@@ -160,5 +160,25 @@ extension WebApiManager {
         }
     }
     
+    func getPlaceFeedList(placeId: Int, userId: Int, success: @escaping (JSON) -> Void, faliure: @escaping (Error) -> Void) {
+        
+        let url = "\(domainUrl)\(feedUrl)list/place/\(placeId)/\(userId)"
+        
+        AF.request(url, method: .get).responseJSON{(response) in
+            switch response.result {
+            case .success(_):
+                let json = JSON(response.value!)
+                success(json)
+                break
+            case .failure(_):
+                let error : Error = response.error!
+                faliure(error)
+                break
+            }
+        }
+        
+    }
+    
+    
 }
 
