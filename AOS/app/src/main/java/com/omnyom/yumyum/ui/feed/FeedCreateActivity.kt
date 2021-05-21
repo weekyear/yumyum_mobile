@@ -18,13 +18,13 @@ import com.omnyom.yumyum.R
 import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.helper.changeLayersColor
 import com.omnyom.yumyum.helper.getFileName
+import com.omnyom.yumyum.helper.recycler.RecommendPlaceAdapter
 import com.omnyom.yumyum.helper.recycler.RecommendTitleAdapter
 import com.omnyom.yumyum.model.feed.FeedData
 import com.omnyom.yumyum.model.feed.Place
 import com.omnyom.yumyum.model.feed.PlaceRequest
 import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseBindingActivity
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -103,7 +103,13 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
         }
 
         binding.rvRecommendTitle.apply {
-            adapter = RecommendTitleAdapter(binding).apply {
+            adapter = RecommendTitleAdapter().apply {
+                setVM(feedCreateVM)
+            }
+            layoutManager = LinearLayoutManager(this@FeedCreateActivity, LinearLayoutManager.HORIZONTAL, false)
+        }
+        binding.rvRecommendPlace.apply {
+            adapter = RecommendPlaceAdapter().apply {
                 setVM(feedCreateVM)
             }
             layoutManager = LinearLayoutManager(this@FeedCreateActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -144,6 +150,18 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 binding.tvCalculatingVideo.text = "영상을 알아보지 못 하겠어요ㅠ_ㅠ \n 직접 입력해주세요!"
             }
         })
+
+        feedCreateVM.recommendPlaceResults.observe(this, {
+            val adapter = binding.rvRecommendPlace.adapter as RecommendPlaceAdapter
+            adapter.run {
+                setItems(it)
+                notifyDataSetChanged()
+            }
+        })
+
+        feedCreateVM.placeRequest.observe(this, {
+            binding.editTextPlace.setText(it?.name)
+        })
     }
 
     override fun release() {
@@ -158,8 +176,6 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                 PlaceRequest(placeResult.address_name, placeResult.x.toDouble(), placeResult.y.toDouble(), placeResult.place_name, placeResult.phone)?.let {
                     feedCreateVM.placeRequest.postValue(it)
                 }
-
-                binding.editTextPlace.setText(placeResult.place_name)
 
             } else if (resultCode == RESULT_CANCELED) {
                 Toast.makeText(this, "장소 선택이 취소되었습니다.", Toast.LENGTH_LONG).show()
@@ -292,7 +308,7 @@ class FeedCreateActivity : BaseBindingActivity<ActivityFeedCreateBinding>(R.layo
                         feedPlace.phone
                 ).let {
                     feedCreateVM.placeRequest.postValue(it)
-                    binding.editTextPlace.setText(it.name)
+//                    binding.editTextPlace.setText(it.name)
                 }
             }
 

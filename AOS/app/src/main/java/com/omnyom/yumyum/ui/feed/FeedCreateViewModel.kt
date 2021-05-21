@@ -1,38 +1,24 @@
 package com.omnyom.yumyum.ui.feed
 
 import android.app.Application
-import android.content.Intent
-import android.util.Log
-import android.util.Log.d
-import androidx.core.net.toUri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.google.android.gms.common.internal.FallbackServiceBroker
-import com.omnyom.yumyum.RetrofitBuilder
-import com.omnyom.yumyum.helper.PreferencesManager
+import com.omnyom.yumyum.helper.KakaoMapUtils
 import com.omnyom.yumyum.helper.PreferencesManager.Companion.userId
+import com.omnyom.yumyum.helper.RetrofitManager
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.aiService
 import com.omnyom.yumyum.helper.RetrofitManager.Companion.retrofitService
-import com.omnyom.yumyum.helper.getFileName
-import com.omnyom.yumyum.interfaces.RetrofitService
+import com.omnyom.yumyum.kakaoApi
 import com.omnyom.yumyum.model.feed.*
+import com.omnyom.yumyum.model.maps.SearchKakaoMapResponse
+import com.omnyom.yumyum.model.maps.SearchPlaceResult
 import com.omnyom.yumyum.ui.base.BaseViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Multipart
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import kotlin.concurrent.thread
 
 class FeedCreateViewModel(application: Application) : BaseViewModel(application) {
     private var videoPath: String = ""
@@ -60,9 +46,17 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
     val title = MutableLiveData<String>().apply {
         value = ""
     }
+
+    val recommendPlaceResults = MutableLiveData<List<SearchPlaceResult>>().apply {
+        value = ArrayList()
+    }
     
     // 비디오 데이터를 보냅니다!
     fun feedAi(video: MultipartBody.Part?) {
+//        GlobalScope.launch {
+//            delay(6000)
+//            recommendTitles.postValue(arrayListOf("초밥"))
+//        }
         aiService.feedAi(video!!).enqueue(object : Callback<FeedAiResponse> {
             override fun onResponse(call: Call<FeedAiResponse>, response: Response<FeedAiResponse>) {
                 isCalculated = true
@@ -125,6 +119,24 @@ class FeedCreateViewModel(application: Application) : BaseViewModel(application)
             override fun onFailure(call: Call<CreateFeedResponse>, t: Throwable) {
                 t
             }
+        })
+    }
+
+    fun searchPlace(searchText: String) {
+        val positions = KakaoMapUtils.getMyPosition(getApplication())
+        var call = RetrofitManager.kakaoApiService.placeSearch(kakaoApi.API_KEY, searchText, positions[0], positions[1], 1, 7)
+        call.enqueue(object : Callback<SearchKakaoMapResponse> {
+            override fun onResponse(call: Call<SearchKakaoMapResponse>, response: Response<SearchKakaoMapResponse>) {
+                if (response.isSuccessful) {
+                    val list : List<SearchPlaceResult> = response.body()?.documents!!
+                    recommendPlaceResults.postValue(list.sortedBy { it.distance.toLong() })
+                }
+            }
+
+            override fun onFailure(call: Call<SearchKakaoMapResponse>, t: Throwable) {
+                t
+            }
+
         })
     }
 }

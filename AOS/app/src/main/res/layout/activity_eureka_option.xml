@@ -93,7 +93,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="24dp"
-            android:text="유레카 기능에서 메세지를 받아오는 거리를 설정합니다.
+            android:text="메세지를 받아오는 거리를 설정합니다.
                 1 ~ 10 km 까지 설정이 가능합니다."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="25dp"
-            android:text="유레카 거리 설정"
+            android:text="거리 설정"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/line4" />
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="22dp"
-            android:text="TextView"
+            android:text="4km"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/tv_eureka_option_content2"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -26,8 +26,8 @@
             android:background="@drawable/btn_circle"
             android:src="@drawable/ic_map"
             android:tint="@color/white"
-            android:scaleX="0.7"
-            android:scaleY="0.7"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

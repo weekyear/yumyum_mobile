@@ -2,14 +2,12 @@ package com.omnyom.yumyum.helper.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import com.omnyom.yumyum.databinding.ActivityFeedCreateBinding
 import com.omnyom.yumyum.databinding.ListItemRecommendTitleBinding
 import com.omnyom.yumyum.ui.base.BaseRecyclerAdapter
 import com.omnyom.yumyum.ui.base.BaseViewHolder
 import com.omnyom.yumyum.ui.feed.FeedCreateViewModel
 
-class RecommendTitleAdapter(private val binding: ActivityFeedCreateBinding) : BaseRecyclerAdapter<RecommendTitleAdapter.RecommendTitleViewHolder, String>() {
+class RecommendTitleAdapter : BaseRecyclerAdapter<RecommendTitleAdapter.RecommendTitleViewHolder, String>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendTitleViewHolder {
         val itemBinding = ListItemRecommendTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RecommendTitleViewHolder(itemBinding)
@@ -26,6 +24,7 @@ class RecommendTitleAdapter(private val binding: ActivityFeedCreateBinding) : Ba
             itemBinding.btnRecommend.setOnClickListener {
                 val feedCreateVM = vm as FeedCreateViewModel
                 feedCreateVM?.title.postValue(itemBinding.btnRecommend.text.toString())
+                feedCreateVM?.searchPlace(itemBinding.btnRecommend.text.toString())
             }
         }
 
@@ -33,6 +32,4 @@ class RecommendTitleAdapter(private val binding: ActivityFeedCreateBinding) : Ba
             itemBinding.btnRecommend.text = model.toString()
         }
     }
-
-
 }

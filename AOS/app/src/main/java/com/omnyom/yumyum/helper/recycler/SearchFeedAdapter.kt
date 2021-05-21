@@ -55,7 +55,7 @@ class SearchFeedAdapter(private val activity: Activity) : BaseRecyclerAdapter<Se
         }
 
         override fun bind(model: Any) {
-            itemBinding.data = model as? SearchFeedData
+            itemBinding.data = model as? FeedData
         }
     }
 

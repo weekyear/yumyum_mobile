@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="placeResult"
+            type="com.omnyom.yumyum.model.maps.SearchPlaceResult" />
+    </data>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_recommend"
         android:layout_width="wrap_content"
