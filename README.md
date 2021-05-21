@@ -968,7 +968,7 @@ See also: #456, #789
 
 
 
-# ⚙️ Install and Usage
+# ⚙️ Install
 
 ### Android
 
@@ -976,28 +976,6 @@ See also: #456, #789
   - https://play.google.com/store/apps/details?id=com.omnyom.yumyum
 
 
-### Backend
-
-- Java (Open JDK 14)를 설치합니다.
-- Maven을 설치합니다.
-  - VSCode에서 Maven 하단의 webcuration에서 우클릭 후 install
-- VS Code에서 Spring Boot Extension Pack 설치합니다.
-- Docker를 설치합니다.
-
-> Maria DB 컨테이너 실행
-
-- `docker run --name-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD={패스워드} -d mariddb`
-  - 패스워드를 칠 때는, 대괄호를 지우고 칩니다.
-- `docker exec -it maria-db mysql -u root -p`
-  - docker를 켜고, maria-db를 실행하기 위한 코드입니다.
-
-> DB 테이블 생성
-
-- DB 테이블을 생성합니다.
-
-> backend 앱을 실행합니다.
-
-- `./mvnw spring-boot:run`
 
 # 💡 아이디어 기획
 
@@ -1037,7 +1015,6 @@ See also: #456, #789
 ![image-20210520234731333](README.assets/image-20210520234731333.png)
 
 > 데이터베이스 구성은 다음과 같습니다. 크게 회원, 음식점, 피드 3가지 메인 테이블이 있고, 좋아요, 파일 등 여러개 서브 테이블이 있습니다.
->
 
 
 
@@ -1123,16 +1100,13 @@ See also: #456, #789
 
  
 
-### 5) 유레카
+### 5) 채팅
 
 > 새로운 맛집을 찾게 된 기쁨을 나누거나 나만 알고 있는 맛집을 주변에 공유하고 싶을 때 외치세요!
 
-1. 맛있는 식당을 주변에 실시간으로 알려주는 기능
-2. 유레카 
-   - 좋아요, 싫어요 받을 때마다 피드 게시 시간 증가, 감소
-3. 위 기능들은 하루에 정해진 충전량을 소모시키면서 수행 가능
-4. 4가지 메세지를 선택해서 다른 유저와 소통 
-5. 현재 위치를 기반으로 주변 1km의 유저와 소통 가능
+1. 주변 유저들과 채팅
+2. 피드를 주변 유저들과 공유하는 기능
+5. 현재 위치를 기반으로 원하는 거리의 유저들과 소통
 
 
 
