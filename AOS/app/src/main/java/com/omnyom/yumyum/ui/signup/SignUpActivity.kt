@@ -47,7 +47,12 @@ class SignUpActivity : BaseBindingActivity<ActivitySignUpBinding>(R.layout.activ
 
     override fun onSubscribe() {
         signUpVM.isComplete.observe(this) {
-            signUpVM.uploadProfileImage(body, getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+            if (!signUpVM.profilePath.isNullOrBlank()) {
+                signUpVM.uploadProfileImage(body, getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+            } else {
+                signUpVM.signUp(getCurrentUserEmail(this), { startMainActivity(binding.btnComplete) }, { Log.e("Result", "Failed") })
+            }
+
         }
     }
 

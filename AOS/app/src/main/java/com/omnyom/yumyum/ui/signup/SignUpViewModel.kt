@@ -58,6 +58,9 @@ class SignUpViewModel(application: Application) : BaseViewModel(application) {
     }
 
     fun signUp(email: String?, onSuccess: () -> Unit, onFailure: () -> Unit) {
+        if (profilePath.isNullOrBlank()) {
+            profilePath = "http://k4b206.p.ssafy.io/resources/profile/1620693596780my_profile.jpg"
+        }
         val call = retrofitService.signup(SignUpRequest(email?:"",
                 name.value?:"",
                 introduction.value?:"",
